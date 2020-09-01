@@ -62,7 +62,7 @@ class _TimetableFrameState extends State<TimetableFrame>
         }, orElse: () => Day()).date;
 
         _tabController.index = currentDay != null
-            ? currentDay.weekday - (6 - _timetableBuilder.week.days.length)
+            ? currentDay.weekday - (5 - _timetableBuilder.week.days.length)
             : 0;
 
         bool ready = snapshot.hasData || snapshot.hasError;

@@ -12,12 +12,11 @@ class TimetableBuilder {
     List<Day> days = [];
     List<Lesson> lessons = app.user.sync.timetable.data;
 
+    lessons.sort((a, b) => a.start.compareTo(b.start));
+
     lessons.forEach((lesson) {
       if (!days.any(
           (d) => d.lessons.any((l) => l.date.weekday == lesson.date.weekday))) {
-        if (days.length > 0)
-          days.last.tiles
-              .sort((a, b) => a.lesson.start.compareTo(b.lesson.start));
         days.add(Day(date: lesson.date, lessons: [], tiles: []));
       }
 
@@ -63,6 +62,7 @@ class TimetableBuilder {
       schoolStart = schoolStart.add(Duration(days: -schoolStart.weekday + 8));
 
     return ((now.difference(schoolStart).inDays - (now.weekday - 1)) / 7)
-        .floor();
+            .floor() +
+        1;
   }
 }

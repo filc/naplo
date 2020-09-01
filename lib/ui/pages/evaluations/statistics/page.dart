@@ -27,12 +27,16 @@ class StatisticsPage extends StatelessWidget {
 
     double allAvg = 0;
 
-    evaluations.forEach((e) {
-      allAvg += e.value.value * (e.value.weight / 100);
-    });
+    if (evaluations.length > 0) {
+      evaluations.forEach((e) {
+        allAvg += e.value.value * (e.value.weight / 100);
+      });
 
-    allAvg = allAvg /
-        evaluations.map((e) => e.value.weight / 100).reduce((a, b) => a + b);
+      allAvg = allAvg /
+          evaluations.map((e) => e.value.weight / 100).reduce((a, b) => a + b);
+    } else {
+      allAvg = 0.0;
+    }
 
     return Container(
       child: CupertinoScrollbar(
@@ -79,7 +83,7 @@ class StatisticsPage extends StatelessWidget {
                 ),
                 EvaluationBlock(
                   value: allAvg.toStringAsFixed(2),
-                  color: app.theme.evalColors[allAvg.round().clamp(0, 4) - 1],
+                  color: app.theme.evalColors[(allAvg.round() - 1).clamp(0, 4)],
                 ),
               ],
             ),

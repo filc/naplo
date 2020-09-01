@@ -12,14 +12,16 @@ class EvaluationSync {
       List<Evaluation> evaluations;
       List averages;
       evaluations = await app.user.kreta.getEvaluations();
-      averages =
-          await app.user.kreta.getAverages(app.user.sync.student.data.groupId);
+      if (app.user.sync.student.data.groupId != null)
+        averages = await app.user.kreta
+            .getAverages(app.user.sync.student.data.groupId);
 
       if (evaluations == null) {
         await app.user.kreta.refreshLogin();
         evaluations = await app.user.kreta.getEvaluations();
-        averages = await app.user.kreta
-            .getAverages(app.user.sync.student.data.groupId);
+        if (app.user.sync.student.data.groupId != null)
+          averages = await app.user.kreta
+              .getAverages(app.user.sync.student.data.groupId);
       }
 
       if (evaluations != null) {
@@ -36,7 +38,7 @@ class EvaluationSync {
           }
         });
       }
-      
+
       return evaluations != null;
     } else {
       data[0] = Dummy.evaluations;
