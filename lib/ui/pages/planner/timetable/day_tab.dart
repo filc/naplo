@@ -187,7 +187,7 @@ class TimetableTabBar extends StatelessWidget {
       curve: Curves.fastOutSlowIn,
     );
 
-    if (days.length < 2) return Container();
+    if (days.length < 1) return Container();
 
     return AnimatedBuilder(
       animation: animation,

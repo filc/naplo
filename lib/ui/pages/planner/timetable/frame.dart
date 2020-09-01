@@ -61,9 +61,14 @@ class _TimetableFrameState extends State<TimetableFrame>
           return dif > -24 && dif < 0;
         }, orElse: () => Day()).date;
 
-        _tabController.index = currentDay != null
+        int dayIndex = 0;
+
+        dayIndex = currentDay != null
             ? currentDay.weekday - (5 - _timetableBuilder.week.days.length)
             : 0;
+
+        _tabController.index =
+            dayIndex.clamp(0, _timetableBuilder.week.days.length);
 
         bool ready = snapshot.hasData || snapshot.hasError;
 
