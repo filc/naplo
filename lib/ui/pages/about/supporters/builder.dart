@@ -30,7 +30,30 @@ class SupporterBuilder {
           ],
         )));
 
-    if (supporters[0].length > 0) {
+    if (supporters["progress"]["value"] != null)
+      tiles.add(Padding(
+        padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+        child: Row(
+          children: [
+            Text("\$" + supporters["progress"]["value"].toString()),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.0),
+                child: LinearProgressIndicator(
+                  minHeight: 6.0,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).accentColor),
+                  value: supporters["progress"]["value"] /
+                      supporters["progress"]["max"],
+                ),
+              ),
+            ),
+            Text("\$" + supporters["progress"]["max"].toString()),
+          ],
+        ),
+      ));
+
+    if (supporters["top"].length > 0) {
       tiles.add(
         Padding(
           padding: EdgeInsets.only(top: 12.0, left: 12.0),
@@ -41,9 +64,10 @@ class SupporterBuilder {
         ),
       );
     }
-    supporters[0].forEach((supporter) => tiles.add(SupporterTile(supporter)));
+    supporters["top"]
+        .forEach((supporter) => tiles.add(SupporterTile(supporter)));
 
-    if (supporters[1].length > 0) {
+    if (supporters["all"].length > 0) {
       tiles.add(
         Container(
           padding: EdgeInsets.only(top: 12.0, left: 12.0),
@@ -54,7 +78,8 @@ class SupporterBuilder {
         ),
       );
     }
-    supporters[1].forEach((supporter) => tiles.add(SupporterTile(supporter)));
+    supporters["all"]
+        .forEach((supporter) => tiles.add(SupporterTile(supporter)));
 
     return tiles;
   }

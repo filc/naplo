@@ -59,8 +59,8 @@ class LessonTile extends StatelessWidget {
                 lesson.lessonIndex,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontFamily: "Sans",
                   fontSize: 24.0,
+                  height: 1.15,
                   color: lesson.status.name == "Elmaradt"
                       ? Colors.red[400]
                       : lesson.substituteTeacher != ""

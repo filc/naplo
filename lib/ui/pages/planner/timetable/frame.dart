@@ -106,6 +106,7 @@ class _TimetableFrameState extends State<TimetableFrame>
                       icon: Icon(FeatherIcons.chevronRight),
                       onPressed: () {
                         if (selectedWeek < 51) setState(() => selectedWeek++);
+                        
                       },
                     ),
                   ],

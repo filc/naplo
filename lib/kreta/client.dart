@@ -84,7 +84,7 @@ class KretaClient {
     }
   }
 
-  Future<List<List<Supporter>>> getSupporters() async {
+  Future<Map> getSupporters() async {
     try {
       var response = await http.get(
         BaseURL.FILC + FilcEndpoints.supporters,
@@ -94,17 +94,25 @@ class KretaClient {
       checkResponse(response);
 
       Map responseJson = jsonDecode(response.body);
-      List<List<Supporter>> supporters = [[], []];
+      Map supporters = {};
 
+      supporters["top"] = [];
       responseJson["top"].forEach(
-          (supporter) => supporters[0].add(Supporter.fromJson(supporter)));
+          (supporter) => supporters["top"].add(Supporter.fromJson(supporter)));
+      supporters["all"] = [];
       responseJson["all"].forEach(
-          (supporter) => supporters[1].add(Supporter.fromJson(supporter)));
+          (supporter) => supporters["all"].add(Supporter.fromJson(supporter)));
+
+      supporters["progress"] = responseJson["progress"];
 
       return supporters;
     } catch (error) {
       print("ERROR: KretaAPI.getSupporters: " + error.toString());
-      return [[], []];
+      return {
+        "top": [],
+        "all": [],
+        "progress": {"value": 0, "max": 100}
+      };
     }
   }
 

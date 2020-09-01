@@ -26,7 +26,6 @@ class CustomTabButton extends StatelessWidget {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,
-                  fontFamily: "Roboto",
                   color: color),
             ),
           ),
