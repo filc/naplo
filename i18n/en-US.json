@@ -1,0 +1,395 @@
+{
+  "app": {
+    "title": "Filc Napló",
+    "version": "version"
+  },
+  "drawer": {
+    "home": "Home",
+    "evaluations": "Evaluations",
+    "timetable": "Timetable",
+    "homework": "Homework",
+    "notes": "Notes",
+    "messages": "Messages",
+    "exams": "Exams",
+    "absences": "Absences",
+    "settings": "Settings"
+  },
+  "exam": {
+    "": "Exam",
+    "title": "Exams",
+    "past": "Past exams"
+  },
+  "grade": {
+    "": "grade",
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5"
+  },
+  "account": {
+    "title": "Accounts",
+    "add": "add account",
+    "delete": "Delete user",
+    "deleteConfirm": "Are you sure you want to delete {name}?",
+    "profileIconEdit": "Edit profile picture"
+  },
+  "action": {
+    "delete": "delete",
+    "change": "change",
+    "edit": "edit"
+  },
+  "dialog": {
+    "ok": "OK",
+    "yes": "YES",
+    "no": "NO",
+    "done": "DONE",
+    "undo": "Undo",
+    "cancel": "CANCEL",
+    "skip": "SKIP",
+    "next": "NEXT"
+  },
+  "time": {
+    "": "time",
+    "hour": "hour(s)",
+    "minute": "minute(s)",
+    "later": "later"
+  },
+  "date": {
+    "": "date",
+    "tomorrow": "tomorrow",
+    "yesterday": "yesterday",
+    "today": "today",
+    "monday": "monday",
+    "tuesday": "tuesday",
+    "wednesday": "wednesday",
+    "thursday": "thursday",
+    "friday": "friday",
+    "saturday": "saturday",
+    "sunday": "sunday",
+    "mondayShort": "M",
+    "tuesdayShort": "Tu",
+    "wednesdayShort": "W",
+    "thursdayShort": "Th",
+    "fridayShort": "F",
+    "saturdayShort": "Sa",
+    "sundayShort": "Su",
+    "day": "day",
+    "week": "week",
+    "month": "month",
+    "month2": "two months",
+    "weekPrev": "last week",
+    "weekNext": "next week"
+  },
+  "delay": {
+    "": "delay",
+    "amount": "delay amount",
+    "state": "state",
+    "mode": "mode of delay",
+    "lesson": "lesson",
+    "interval": "delay interval"
+  },
+  "administration": {
+    "time": "uploaded on"
+  },
+  "justification": {
+    "state": "state",
+    "mode": "mode",
+    "justified": "justified",
+    "unjustified": "unjustified",
+    "tojustify": "to be justified",
+    "mixed": "mixed"
+  },
+  "lesson": {
+    "": "lesson",
+    "count": "{count} lesson",
+    "next": "next lesson",
+    "have": "lessons",
+    "room": "room",
+    "teacher": "teacher",
+    "class": "class",
+    "group": "group",
+    "start": "lesson starts at",
+    "end": "lesson ends at",
+    "theme": "theme",
+    "subject": "subject",
+    "tomorrow": "Tomorrow there will be",
+    "tomorrowTitle": "Lessons tomorrow"
+  },
+  "homework": {
+    "": "homework",
+    "add": "add homework",
+    "title": "Homework",
+    "deadline": "deadline",
+    "subject": "subject",
+    "uploadUser": "uploader",
+    "uploadTime": "uploaded at",
+    "past": "Past homework"
+  },
+  "planner": {
+    "title": "Planner",
+    "timetable": "Timetable",
+    "homework": "Homework",
+    "exams": "Exams"
+  },
+  "substitute": {
+    "teacher": "Substitute teacher"
+  },
+  "substitution": {
+    "": "substitution",
+    "missed": "not held"
+  },
+  "state": {
+    "": "state"
+  },
+  "note": {
+    "": "note",
+    "title": "Notes"
+  },
+  "event": {
+    "": "event",
+    "title": "Events"
+  },
+  "message": {
+    "": "message",
+    "title": "Messages",
+    "subject": "subject",
+    "recipients": "recipients",
+    "attachments": "attachments",
+    "send": "send",
+    "reply": "reply",
+    "share": "share",
+    "shareFooter": "{sender}, {date}",
+    "deleted": "Message archived",
+    "drawer": {
+      "inbox": "inbox",
+      "sent": "sent",
+      "drafts": "drafts",
+      "trash": "trash"
+    },
+    "toMe": "to me",
+    "to": "to {name}",
+    "showQuoted": "Show quoted message",
+    "hideQuoted": "Hide quoted message"
+  },
+  "statistics": {
+    "": "statistics"
+  },
+  "absence": {
+    "": "absence",
+    "title": "Absences",
+    "time": "date",
+    "mode": "mode",
+    "all": "all absences: {count} hour(s)",
+    "parental": "parental excuse(s): {count}",
+    "delays": "delays",
+    "absences": "absences",
+    "misses": "missing",
+    "justification": "justification mode"
+  },
+  "timetable": {
+    "": "Timetable",
+    "empty": "You have no lessons on this week",
+    "yearly": "Yearly lesson no."
+  },
+  "sort": {
+    "": "Sort",
+    "time": "date",
+    "eval": "grade",
+    "timeReal": "exam date"
+  },
+  "evaluation": {
+    "title": "Grades",
+    "average": "average",
+    "averageClass": "class average",
+    "value": "value",
+    "subject": "subject",
+    "description": "description",
+    "type": "type",
+    "valueType": "grade form",
+    "form": "range",
+    "writeDate": "exam date",
+    "date": "date"
+  },
+  "evaluations": {
+    "": "Your grades",
+    "midYear": "Mid-year",
+    "qYear": "1. Quarter",
+    "2qYear": "2. Quarter",
+    "halfYear": "Midterm",
+    "3qYear": "3. Quarter",
+    "4qYear": "4. Quarter",
+    "endYear": "Report",
+    "subjects": "subjects",
+    "statistics": "statistics"
+  },
+  "student": {
+    "school": "School",
+    "birth": "Date of birth",
+    "address": "Address",
+    "parents": "Parents",
+    "realName": "Real name"
+  },
+  "lessonCard": {
+    "previous": "Previous",
+    "now": "Current • {min} minutes left",
+    "next": "Next • Starts in {min} minutes",
+    "minutes": "minutes"
+  },
+  "login": {
+    "": "login",
+    "username": "Username",
+    "password": "Password",
+    "usernameHint": "usually your education ID (11 numbers)",
+    "passwordHint": "usually your date of birth (1970-01-01)",
+    "usernameError": "You must enter a username!",
+    "passwordError": "You must enter a password!",
+    "schoolError": "Please select a school!",
+    "school": "School",
+    "choose": "choose",
+    "chooseSchool": "Select a school",
+    "wrongCredentials": "Wrong password or username",
+    "error": "Failed to log in"
+  },
+  "export": {
+    "": "Export",
+    "grades": "grades and everything else",
+    "lessons": "classes",
+    "accounts": "accounts",
+    "choose": "choose an interval",
+    "success": "Success!"
+  },
+  "close": {
+    "title": "Close the application",
+    "confirm": "Are you sure you want to exit?"
+  },
+  "color": {
+    "": "Color",
+    "green": "green",
+    "red": "red",
+    "blue": "blue",
+    "lime": "lime",
+    "yellow": "yellow",
+    "orange": "orange",
+    "gray": "gray",
+    "pink": "pink",
+    "purple": "purple",
+    "teal": "teal"
+  },
+  "settings": {
+    "title": "Settings",
+    "appearance": {
+      "title": "Appearance",
+      "theme": "theme",
+      "color": "Secondary color",
+      "evalColors": "Grade colors",
+      "pickColor": "Pick a color"
+    },
+    "general": {
+      "title": "General",
+      "language": "Language"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "seen": "Send seen state"
+    },
+    "notifications": {
+      "title": "Notifications"
+    },
+    "behavior": {
+      "title": "Behavior",
+      "renderHTML": "Render content in HTML"
+    },
+    "debug": {
+      "title": "Developer settings",
+      "delete": "Delete app data",
+      "deleteSuccess": "Deleted app data"
+    }
+  },
+  "success": {
+    "": "Success",
+    "homework": "Homework uploaded successfully",
+    "homeworkDelete": "Homework deleted successfully",
+    "homeworkCopy": "Homework successfully copied to Clipboard"
+  },
+  "error": {
+    "": "Error",
+    "network": "Network error",
+    "readAccount": "Error while reading user",
+    "messages": "Failed to get messages",
+    "messageSend": "Failed to send message",
+    "evaluations": "Failed to get evaluations"
+  },
+  "download": {
+    "": "download",
+    "latest": "Download the latest version now"
+  },
+  "update": {
+    "available": "A new version is available!"
+  },
+  "rateLimit": {
+    "alert": "You can only refresh every {minutes} minute(s)!"
+  },
+  "search": "search",
+  "sync": {
+    "message": "Syncing messages...",
+    "student": "Syncing student...",
+    "event": "Syncing events...",
+    "note": "Syncing notes...",
+    "evaluation": "Syncing evaluations...",
+    "absence": "Syncing absences...",
+    "exam": "Syncing exams...",
+    "homework": "Syncing homework...",
+    "timetable": "Syncing timetable..."
+  },
+  "about": {
+    "": "about",
+    "title": "About",
+    "privacy": "Privacy Policy",
+    "licenses": "Licenses",
+    "supporters": "Supporters",
+    "links": "Links"
+  },
+  "empty": {
+    "": "Wow, such empty!",
+    "messages": "You have no messages",
+    "notes": "You have no notes",
+    "events": "You have no events",
+    "absences": "You have no absences",
+    "delays": "You have no delays",
+    "misses": "You have never forgotten anything at home, and always diligently made your homework.",
+    "grades": "You have no grades",
+    "subjectGrades": "You have no grades from this subject",
+    "exams": "You have no exams",
+    "pastExams": "You have no past exams",
+    "homework": "You have no homework",
+    "pastHomework": "You have no past homework"
+  },
+  "notImplemented": "This function is not done yet. Please check back later!",
+  "menu": {
+    "view": "view",
+    "edit": "edit",
+    "delete": "delete"
+  },
+  "supporters": {
+    "all": "All",
+    "top": "Top"
+  },
+  "welcome": "Welcome to the new",
+  "begin": "Begin",
+  "features": {
+    "1": "Modern, user-friendly interface",
+    "2": "Plan your day",
+    "3": "Get notified quickly",
+    "4": "Fully customizable"
+  },
+    "tutorial": {
+      "1": "On the main page you'll see all the data from the other ones.\nYou can search with the searchbar at the top, you can find anything from any associated data. Almost.",
+      "2": "On the evaluations page you can order the evaluations according to multiple aspects,\nat the top you can switch between the every-day evaluations, and your final grades.\nYou can also see the averages for each subject, and the corresponding evaluations (ghosh, how many times do I have to type that word?)",
+      "3": "The planner page is the page of pages. You can see all the stuff you'll never have time for.\nYou have the timetable/calendar here, as well as the homeworks, and scheduled exams.",
+      "4": "This is the page of text. You get your personal messages here, and you can write a new one on the bottom-right. You can switch between folders on the top-left.\nOn the second tab are notices, and system messages.\nOn the third one, you have the events - although we have never seen that feature in use either. ¯\\\\_(ツ)_/¯",
+      "5": "Someone's been a bad boy. That is, if this page is not empty.\nYou can see all your class-misses, delays, when the homework wasn't done or when you didn't have all the equipment for class.",
+      "6": "Here you can switch between accounts. What, you only have one? You can fix that here too. And you can remove them after. Nifty, right? No. This is what's nifty: You can set a custom display name and profile picture for each account. Not impressed? Too bad.\nAlmost forgot, you can find the settings, and some more info about the app here as well.",
+      "7": "Hope, you'll enjoy the new app!\nAre you missing your favourite feature from the new version?\nFear not, this will change soon, as we have just begin the developement."
+    }
+}

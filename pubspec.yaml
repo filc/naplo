@@ -1,0 +1,56 @@
+name: filcnaplo
+description: 'Nem hivatalos e-napló alkalmazás az e-Kréta rendszerhez'
+version: 2.0.0+34
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  http: ^0.12.1
+  google_fonts: ^1.0.0
+  cupertino_icons: ^0.1.2
+  dynamic_theme: ^1.0.0
+  feather_icons_flutter: ^4.7.4
+  flutter_typeahead: ^1.8.1
+  file_picker: ^1.9.0
+  package_info: ^0.4.0
+  intl: ^0.16.0
+  flutter_linkify: ^3.1.3
+  url_launcher: ^5.4.10
+  flutter_html: ^1.0.0
+  share: ^0.6.4+3
+  sqflite: ^1.3.0
+  permission_handler: ^5.0.0
+  path_provider: ^1.6.9
+  tinycolor: ^1.0.2
+  open_file: ^3.0.1
+  background_fetch: ^0.5.6
+  circular_reveal_animation: ^1.1.5
+  flutter_speed_dial: ^1.2.5
+  image_cropper: ^1.2.3
+  charts_flutter: ^0.9.0
+  flutter_material_color_picker: ^1.0.5
+  flutter_swiper: ^1.1.6
+  in_app_review: ^0.2.0+3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icon.png
+    - assets/logo.png
+    - assets/page1.png
+    - assets/page2.png
+    - assets/page3.png
+    - assets/page4.png
+    - assets/wave1.png
+    - assets/wave2.png
+    - assets/wave3.png
+    - assets/wave4.png

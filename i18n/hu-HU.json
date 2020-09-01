@@ -1,0 +1,395 @@
+{
+  "app": {
+    "title": "Filc Napló",
+    "version": "verzió"
+  },
+  "drawer": {
+    "home": "Főoldal",
+    "evaluations": "Jegyek",
+    "timetable": "Órarend",
+    "homework": "Házi feladatok",
+    "notes": "Feljegyzések",
+    "messages": "Üzenetek",
+    "exams": "Számonkérések",
+    "absences": "Mulasztások",
+    "settings": "Beállítások"
+  },
+  "exam": {
+    "": "Dolgozat",
+    "title": "Számonkérések",
+    "past": "Korábbi dolgozatok"
+  },
+  "grade": {
+    "": "osztályzat",
+    "1": "1-es",
+    "2": "2-es",
+    "3": "3-as",
+    "4": "4-es",
+    "5": "5-ös"
+  },
+  "account": {
+    "title": "Fiókok",
+    "add": "fiók hozzáadása",
+    "delete": "Felhasználó törlése",
+    "deleteConfirm": "Biztosan törölni szeretnéd {name} felhasználót?",
+    "profileIconEdit": "Profilkép szerkesztése"
+  },
+  "action": {
+    "delete": "törlés",
+    "change": "szerkesztés",
+    "edit": "szerkesztés"
+  },
+  "dialog": {
+    "ok": "OK",
+    "yes": "IGEN",
+    "no": "NEM",
+    "done": "KÉSZ",
+    "undo": "visszavonás",
+    "cancel": "MÉGSEM",
+    "skip": "ÁTUGRÁS",
+    "next": "TOVÁBB"
+  },
+  "time": {
+    "": "idő",
+    "hour": "óra",
+    "minute": "perc",
+    "later": "múlva"
+  },
+  "date": {
+    "": "dátum",
+    "tomorrow": "holnap",
+    "yesterday": "tegnap",
+    "today": "ma",
+    "monday": "hétfő",
+    "tuesday": "kedd",
+    "wednesday": "szerda",
+    "thursday": "csütörtök",
+    "friday": "péntek",
+    "saturday": "szombat",
+    "sunday": "vasárnap",
+    "mondayShort": "H",
+    "tuesdayShort": "K",
+    "wednesdayShort": "Sz",
+    "thursdayShort": "Cs",
+    "fridayShort": "P",
+    "saturdayShort": "Sz",
+    "sundayShort": "V",
+    "day": "nap",
+    "week": "hét",
+    "month": "hónap",
+    "month2": "két hónap",
+    "weekPrev": "előző hét",
+    "weekNext": "következő hét"
+  },
+  "delay": {
+    "": "késés",
+    "amount": "késés mértéke",
+    "state": "állapot",
+    "mode": "késés módja",
+    "lesson": "óra",
+    "interval": "késés intervalluma"
+  },
+  "administration": {
+    "time": "naplózás ideje"
+  },
+  "justification": {
+    "state": "állapota",
+    "mode": "módja",
+    "justified": "igazolt",
+    "unjustified": "igazolatlan",
+    "tojustify": "igazolandó",
+    "mixed": "vegyes"
+  },
+  "lesson": {
+    "": "óra",
+    "count": "{count} óra",
+    "next": "következő óra",
+    "have": "óra lesz",
+    "room": "terem",
+    "teacher": "tanár",
+    "class": "osztály",
+    "group": "csoport",
+    "start": "óra kezdete",
+    "end": "óra vége",
+    "theme": "téma",
+    "subject": "tárgy",
+    "tomorrow": "Holnap",
+    "tomorrowTitle": "Holnapi órák"
+  },
+  "homework": {
+    "": "házi feladat",
+    "add": "házi hozzáadása",
+    "title": "Házi feladatok",
+    "deadline": "határidő",
+    "subject": "tantárgy",
+    "uploadUser": "feltöltő",
+    "uploadTime": "feltöltés ideje",
+    "past": "Korábbi házik"
+  },
+  "planner": {
+    "title": "Tervező",
+    "timetable": "órarend",
+    "homework": "Házik",
+    "exams": "Dolgozatok"
+  },
+  "substitute": {
+    "teacher": "Helyettesítő tanár"
+  },
+  "substitution": {
+    "": "helyettesítés",
+    "missed": "elmarad"
+  },
+  "state": {
+    "": "állapot"
+  },
+  "note": {
+    "": "feljegyzés",
+    "title": "Feljegyzések"
+  },
+  "event": {
+    "": "esemény",
+    "title": "Események"
+  },
+  "message": {
+    "": "üzenet",
+    "title": "Üzenetek",
+    "subject": "tárgy",
+    "recipients": "címzettek",
+    "attachments": "csatolmányok",
+    "send": "küldés",
+    "reply": "válasz",
+    "share": "megosztás",
+    "shareFooter": "{sender}, {date}",
+    "deleted": "Üzenet archiválva",
+    "drawer": {
+      "inbox": "beérkezett",
+      "sent": "elküldött",
+      "drafts": "piszkozatok",
+      "trash": "kuka"
+    },
+    "toMe": "nekem",
+    "to": "címzettek: {name}",
+    "showQuoted": "Idézett szöveg mutatása",
+    "hideQuoted": "Idézett szöveg elrejtése"
+  },
+  "statistics": {
+    "": "statisztikák"
+  },
+  "absence": {
+    "": "hiányzás",
+    "title": "Mulasztások",
+    "time": "hiányzás ideje",
+    "mode": "hiányzás módja",
+    "all": "Összes hiányzás: {count} óra",
+    "parental": "Szülői igazolás: {count} db",
+    "delays": "késések",
+    "absences": "hiányzások",
+    "misses": "hiányok",
+    "justification": "igazolás módja"
+  },
+  "timetable": {
+    "": "órarend",
+    "empty": "Ezen a héten nincsenek óráid",
+    "yearly": "Éves óraszám"
+  },
+  "sort": {
+    "": "Rendezés",
+    "time": "beírás ideje",
+    "eval": "jegyérték",
+    "timeReal": "értékelés ideje"
+  },
+  "evaluation": {
+    "title": "Jegyek",
+    "average": "átlag",
+    "averageClass": "osztályátlag",
+    "value": "érték",
+    "subject": "tantárgy",
+    "description": "leírás",
+    "type": "típus",
+    "valueType": "jelleg",
+    "form": "értékelés formja",
+    "writeDate": "írás ideje",
+    "date": "dátum"
+  },
+  "evaluations": {
+    "": "Jegyeid",
+    "midYear": "Évközi",
+    "qYear": "1. Negyedév",
+    "2qYear": "2. Negyedév",
+    "halfYear": "Félévi",
+    "3qYear": "3. Negyedév",
+    "4qYear": "4. Negyedév",
+    "endYear": "Év végi",
+    "subjects": "Tárgyak",
+    "statistics": "Statisztikák"
+  },
+  "student": {
+    "school": "Iskola",
+    "birth": "Születési dátum",
+    "address": "Lakcím",
+    "parents": "Szülők",
+    "realName": "Igazi név"
+  },
+  "lessonCard": {
+    "previous": "Előző",
+    "now": "Jelenleg • {min} perc van hátra",
+    "next": "Következő • {min} perc múlva",
+    "minutes": "perc"
+  },
+  "login": {
+    "": "bejelentkezés",
+    "username": "Felhasználónév",
+    "password": "Jelszó",
+    "usernameHint": "11 jegyű, 7-tel kezdődő diákigazolványszám",
+    "passwordHint": "általában a születési dátum (pl.: 2000-01-02)",
+    "usernameError": "Kérlek add meg a felhasználónevedet!",
+    "passwordError": "Kérlek add meg a jelszavadat!",
+    "schoolError": "Kérlek válassz egy iskolát!",
+    "school": "Iskola",
+    "choose": "választás",
+    "chooseSchool": "Válassz iskolát",
+    "wrongCredentials": "Helytelen jelszó vagy felhasználónév",
+    "error": "Sikertelen bejelentkezés"
+  },
+  "export": {
+    "": "Exportálás",
+    "grades": "jegyek és minden más",
+    "lessons": "órák",
+    "accounts": "fiókok",
+    "choose": "válassz intervallumot",
+    "success": "sikeresen exportálva"
+  },
+  "close": {
+    "title": "Alkalmazás bezárása",
+    "confirm": "Biztosan be akarod zárni az alkalmazást?"
+  },
+  "color": {
+    "": "szín",
+    "green": "zöld",
+    "red": "piros",
+    "blue": "kék",
+    "lime": "lime",
+    "yellow": "sárga",
+    "orange": "narancs",
+    "gray": "szürke",
+    "pink": "rózsaszín",
+    "purple": "lila",
+    "teal": "kékeszöld"
+  },
+  "settings": {
+    "title": "Beállítások",
+    "appearance": {
+      "title": "Kinézet",
+      "theme": "téma",
+      "color": "Másodlagos szín",
+      "evalColors": "Jegyek színe",
+      "pickColor": "Válassz egy színt"
+    },
+    "general": {
+      "title": "Általános",
+      "language": "Nyelv"
+    },
+    "privacy": {
+      "title": "Adatvédelem",
+      "seen": "\"Láttam\" küldése"
+    },
+    "notifications": {
+      "title": "Értesítések"
+    },
+    "behavior": {
+      "title": "Működés",
+      "renderHTML": "Tartalom renderelése HTML-ben"
+    },
+    "debug": {
+      "title": "Fejlesztői beállítások",
+      "delete": "Adatok törlése",
+      "deleteSuccess": "Adatok törölve"
+    }
+  },
+  "success": {
+    "": "Siker",
+    "homework": "Házi feladat feltöltve",
+    "homeworkDelete": "Házi feladat törölve",
+    "homeworkCopy": "Házi feladat sikeresen vágólapra másolva"
+  },
+  "error": {
+    "": "Hiba",
+    "network": "Hálózati hiba",
+    "readAccount": "Hiba a felhasználó olvasása közben",
+    "messages": "Nem sikerült lekérni az üzeneteket",
+    "messageSend": "Nem sikerült elküldeni az üzenetet",
+    "evaluations": "Nem sikerült lekérni a jegyeket"
+  },
+  "download": {
+    "": "letöltés",
+    "latest": "Töltsd le most a legújabb verziót"
+  },
+  "update": {
+    "available": "Frissítés elérhető!"
+  },
+  "rateLimit": {
+    "alert": "{minutes} percenként egyszer frissíthetsz!"
+  },
+  "search": "keresés",
+  "sync": {
+    "message": "Üzenetek szinkronizálása ...",
+    "student": "Adatok szinkronizálása...",
+    "event": "Események szinkronizálása...",
+    "note": "Feljegyzések szinkronizálása...",
+    "evaluation": "Jegyek szinkronizálása...",
+    "absence": "Hiányok szinkronizálása...",
+    "exam": "Dolgozatok szinkronizálása...",
+    "homework": "Házi feladatok szinkronizálása...",
+    "timetable": "Órarend szinkronizálása..."
+  },
+  "about": {
+    "": "információk",
+    "title": "Információk",
+    "privacy": "Adatvédelmi irányelvek",
+    "licenses": "Licenszek",
+    "supporters": "Támogatók",
+    "links": "Linkek"
+  },
+  "empty": {
+    "": "Micsoda üresség!",
+    "messages": "Nincsenek üzeneteid",
+    "notes": "Nincsenek feljegyzéseid",
+    "events": "Nincsenek eseményeid",
+    "absences": "Nincsenek mulasztásaid",
+    "delays": "Nincsenek késéseid",
+    "misses": "Még semmit sem felejtettél otthon, és a házikat is szorgalmasan elkészítetted.",
+    "grades": "Nincsenek jegyeid",
+    "subjectGrades": "Ebből a tantárgyból nincsenek jegyeid",
+    "exams": "Nincsenek dolgozatok",
+    "pastExams": "Nincsenek korábbi dolgozatok",
+    "homework": "Nincsenek házik",
+    "pastHomework": "Nincsenek korábbi házik"
+  },
+  "notImplemented": "Ez a funkció még nincs kész. Nézz vissza később!",
+  "menu": {
+    "view": "Megtekintés",
+    "edit": "Szerkesztés",
+    "delete": "Törlés"
+  },
+  "supporters": {
+    "all": "Összes",
+    "top": "Kiemelt"
+  },
+  "welcome": "Üdvözöl az új",
+  "begin": "Kezdés",
+  "features": {
+    "1": "Modern, könnyen kezelhető felület",
+    "2": "Tervezd meg a napod",
+    "3": "Értesülj mindenről gyorsan",
+    "4": "Maximálisan testreszabható"
+  },
+  "tutorial": {
+    "1": "A főoldalon minden egyéb oldal adatait egy helyre összegyűjtve láthatod.\nA felső sávba gépelve minden adat között kereshetsz, legyen az akár egy jegy címe, vagy a nevelőtestületi megrovás szövege.",
+    "2": "Itt találod az összes jegyet.\nTöbb szempont alapján rendezheted őket a bal alsó sarokban.\nFelül válthatsz az évközi jegyek és lezárt eredmények között,\nvalamint megnézheted a tárgyi átlagokat, és a hozzájuk tartozó jegyeket.",
+    "3": "A tervezőben találod az órarendet, ami egyben a naptár is.\nItt vannak a házik és a dolgozatok, számon tarthatod, mennyi mindenre nem lesz idő készülni.",
+    "4": "Ezen az oldalon találod a személyes üzeneteidet, jobb alul tudsz új üzenetet írni, bal felül pedig a mappák között váltani.\nA következő fülön a feljegyzéseket, faliújságot, rendszerüzeneteket,\naz utolsón pedig az eseményeket láthatod. Ezt a funkciót még sosem láttuk működés közben, de a hivatalos appban is benne van ¯\\\\_(ツ)_/¯",
+    "5": "Itt láthatod minden huncutság eredményét.\nFigyelheted, mikor vonják meg tőletek a családi pótlékot a hiányzások miatt,\nláthatod a késéseket, el nem készített házi feladatokat és felszereléshiányokat.\nHa nem látsz itt semmit, kiérdemelsz egy vállveregetést.",
+    "6": "Itt válthatsz bejelentkezett fiókok között.\nEgy fióknak beállíthatsz egyéni nevet, és profilképet.\nFelvehetsz és törölhetsz fiókokat.\nItt találod az app beállításait és néhány további információt is.",
+    "7": "Reméljük, elégedett leszel az új appal!\nNem találod a kedvenc régi funkciódat?\nNe aggódj, az app még kezdeti fázisban van, sok funkcióval fog gyarapodni."
+  }
+}

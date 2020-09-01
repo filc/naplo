@@ -1,0 +1,395 @@
+{
+  "app": {
+    "title": "Filc Napló",
+    "version": "Ausgabe"
+  },
+  "drawer": {
+    "home": "Hauptbildschirm",
+    "evaluations": "Noten",
+    "timetable": "Stundenplan",
+    "homework": "Hausaufgaben",
+    "notes": "Hinweise",
+    "messages": "Benachrichtigungen",
+    "exams": "Prüfungen",
+    "absences": "Abwesenheiten",
+    "settings": "Einstellungen"
+  },
+  "exam": {
+    "": "Prüfung",
+    "title": "Prüfungen",
+    "past": "Vorherige Prüfungen"
+  },
+  "grade": {
+    "": "Note",
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5"
+  },
+  "account": {
+    "title": "Konten",
+    "add": "Konto hinzufügen",
+    "delete": "Konto löschen",
+    "deleteConfirm": "Möchtest du {name} wirklich löschen?",
+    "profileIconEdit": "Profilbild editieren"
+  },
+  "action": {
+    "delete": "löschen",
+    "change": "wechseln",
+    "edit": "Bearbeiten"
+  },
+  "dialog": {
+    "ok": "OK",
+    "yes": "JA",
+    "no": "NEIN",
+    "done": "FERTIG",
+    "undo": "Rückgängig",
+    "cancel": "ABBRECHEN",
+    "skip": "SKIP",
+    "next": "NEXT"
+  },
+  "time": {
+    "": "zeit",
+    "hour": "Stunde(n)",
+    "minute": "Minute(n)",
+    "later": "später"
+  },
+  "date": {
+    "": "Datum",
+    "tomorrow": "morgen",
+    "yesterday": "gestern",
+    "today": "heute",
+    "monday": "Montag",
+    "tuesday": "Dienstag",
+    "wednesday": "Mittwoch",
+    "thursday": "Donnerstag",
+    "friday": "Freitag",
+    "saturday": "Samstag",
+    "sunday": "Sonntag",
+    "mondayShort": "Mo",
+    "tuesdayShort": "Di",
+    "wednesdayShort": "Mi",
+    "thursdayShort": "Do",
+    "fridayShort": "Fr",
+    "saturdayShort": "Sa",
+    "sundayShort": "So",
+    "day": "Tag",
+    "week": "Woche",
+    "month": "Monat",
+    "month2": "Zwei Monaten",
+    "weekPrev": "letzte Woche",
+    "weekNext": "nächste Woche"
+  },
+  "delay": {
+    "": "Verspätung",
+    "amount": "Verspätungszeit",
+    "state": "Status",
+    "mode": "Verspätungsart",
+    "lesson": "Stunde",
+    "interval": "Vespätet von-bis"
+  },
+  "administration": {
+    "time": "Hochgeladen am"
+  },
+  "justification": {
+    "state": "Status",
+    "mode": "Art",
+    "justified": "anerkannt",
+    "unjustified": "unanerkannt",
+    "tojustify": "zu anerkennen",
+    "mixed": "gemischt"
+  },
+  "lesson": {
+    "": "Stunde",
+    "count": "{count} Stunde",
+    "next": "Nächste Stunde",
+    "have": "Stunden",
+    "room": "Ort",
+    "teacher": "Lehrer(in)",
+    "class": "Klasse",
+    "group": "Gruppe",
+    "start": "Stunde beginnt um",
+    "end": "Stunde endet um",
+    "theme": "Thema",
+    "subject": "Fach",
+    "tomorrow": "Morgen gibt es",
+    "tomorrowTitle": "Stunden morgen"
+  },
+  "homework": {
+    "": "Hausaufgabe",
+    "add": "Hausaufgabe hochladen",
+    "title": "Hausaufgaben",
+    "deadline": "bis",
+    "subject": "Fach",
+    "uploadUser": "Hochgeladen von",
+    "uploadTime": "Hochladezeit",
+    "past": "Vorherige Hausaufgaben"
+  },
+  "planner": {
+    "title": "Planer",
+    "timetable": "Stundenplan",
+    "homework": "Hausaufgaben",
+    "exams": "Prüfungen"
+  },
+  "substitute": {
+    "teacher": "Vertretung"
+  },
+  "substitution": {
+    "": "vertretung",
+    "missed": "verpasst"
+  },
+  "state": {
+    "": "Status"
+  },
+  "note": {
+    "": "Durchsage",
+    "title": "Durchsagen"
+  },
+  "event": {
+    "": "Ereignis",
+    "title": "Ereignisse"
+  },
+  "message": {
+    "": "Benachrichtigung",
+    "title": "Benachrichtigungen",
+    "subject": "Gegenstand",
+    "recipients": "Empfänger",
+    "attachments": "Anhänge",
+    "send": "schicken",
+    "reply": "antworten",
+    "share": "mitteilen",
+    "shareFooter": "{sender}, {date}",
+    "deleted": "Mitteilung archiviert",
+    "drawer": {
+      "inbox": "eingang",
+      "sent": "gesendet",
+      "drafts": "entwürfe",
+      "trash": "müllkorb"
+    },
+    "toMe": "an mich",
+    "to": "an: {name}",
+    "showQuoted": "Vollständigen Inhalt anzeigen",
+    "hideQuoted": "Maximierten Inhalt ausblenden"
+  },
+  "statistics": {
+    "": "Statistik"
+  },
+  "absence": {
+    "": "Ausschreitung",
+    "title": "Ausschreitungen",
+    "time": "Zeit der Abwesenheit",
+    "mode": "Art der Abwesenheit",
+    "all": "Menge aller Verspätungen: {count} Stunden",
+    "parental": "Bescheinigungen durch den Eltern: {count}",
+    "delays": "verspätung",
+    "absences": "abwesenheit",
+    "misses": "fehlendes",
+    "justification": "Art der Bescheinigung"
+  },
+  "timetable": {
+    "": "stundenplan",
+    "empty": "Dieser Woche hast du keine Stunden",
+    "yearly": "Laufende Nummer im Jahr"
+  },
+  "sort": {
+    "": "Sortiere nach",
+    "time": "Hochladezeit",
+    "eval": "Notenwert",
+    "timeReal": "Prüfungszeit"
+  },
+  "evaluation": {
+    "title": "Noten",
+    "average": "durchschnitt",
+    "averageClass": "klassendurchschnitt",
+    "value": "Notenwert",
+    "subject": "fach",
+    "description": "bezeichnung",
+    "type": "typ",
+    "valueType": "art",
+    "form": "Skala",
+    "writeDate": "Prüfungszeit",
+    "date": "Hochladezeit"
+  },
+  "evaluations": {
+    "": "Deine Noten",
+    "midYear": "Noten",
+    "qYear": "1. Quartal",
+    "2qYear": "2. Quartal",
+    "halfYear": "Halbjährlich",
+    "3qYear": "3. Quartal",
+    "4qYear": "4. Quartal",
+    "endYear": "Zeugnis",
+    "subjects": "Fächer",
+    "statistics": "Statistiken"
+  },
+  "student": {
+    "school": "Schule",
+    "birth": "Geburtsdatum",
+    "address": "Anschrift",
+    "parents": "Eltern",
+    "realName": "Wirkliche Name"
+  },
+  "lessonCard": {
+    "previous": "Letzte",
+    "now": "Läuft • {min} Minuten noch",
+    "next": "Nächste • In {min} Minuten",
+    "minutes": "Minuten"
+  },
+  "login": {
+    "": "Anmeldung",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "usernameHint": "Studenten ID: 11-stelliger Nummer (beginnt mit 7)",
+    "passwordHint": "meistens deine Geburtsdatum (zB.: 1970-01-01)",
+    "usernameError": "Bitte Benutzername eingeben!",
+    "passwordError": "Bitte Passwort eingeben!",
+    "schoolError": "Bitte Schule wählen!",
+    "school": "Schule",
+    "choose": "wähle",
+    "chooseSchool": "Wähle deine Schule",
+    "wrongCredentials": "Falsches Passwort oder Benutzername",
+    "error": "Login fehlgeschlagen"
+  },
+  "export": {
+    "": "Ausführen",
+    "grades": "Noten und alle andere",
+    "lessons": "Stunden",
+    "accounts": "Konten",
+    "choose": "wähle eine Zeitabstand",
+    "success": "Ausführung fertig"
+  },
+  "close": {
+    "title": "App schließen",
+    "confirm": "Möchtest du den App wirklich schließen?"
+  },
+  "color": {
+    "": "Farbe",
+    "green": "grün",
+    "red": "rot",
+    "blue": "blau",
+    "lime": "lime",
+    "yellow": "gelb",
+    "orange": "orange",
+    "gray": "grau",
+    "pink": "rosa",
+    "purple": "lila",
+    "teal": "blaugrün"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "appearance": {
+      "title": "Aussehen",
+      "theme": "Thema",
+      "color": "Sekundäre Farbe",
+      "evalColors": "Notenfarben",
+      "pickColor": "Wähle eine Farbe"
+    },
+    "general": {
+      "title": "Allgemein",
+      "language": "Sprache"
+    },
+    "privacy": {
+      "title": "Datenschutz",
+      "seen": "Gesehenstatus melden"
+    },
+    "notifications": {
+      "title": "Benachrichtigungen"
+    },
+    "behavior": {
+      "title": "Optionen",
+      "renderHTML": "Inhalt ins HTML rendern"
+    },
+    "debug": {
+      "title": "Entwichlereinstellungen",
+      "delete": "Appdaten löschen",
+      "deleteSuccess": "Appdaten gelöscht"
+    }
+  },
+  "success": {
+    "": "Erfolg",
+    "homework": "Hausaufgabe ist hochgeladen worden",
+    "homeworkDelete": "Hausaufgabe gelöscht",
+    "homeworkCopy": "Hausaufgabe kopiert"
+  },
+  "error": {
+    "": "Fehler",
+    "network": "Netzwerkfehler",
+    "readAccount": "Konto konnte nicht abgerufen werden",
+    "messages": "Mitteilungen konnten nicht abgerufen werden",
+    "messageSend": "Mitteilung wurde nicht geschickt",
+    "evaluations": "Noten konnten nicht abgerufen werden"
+  },
+  "download": {
+    "": "Herunterladen",
+    "latest": "Bitte die neueste Ausgabe jetzt herunterladen!"
+  },
+  "update": {
+    "available": "Neue Ausgabe steht zu verfügung!"
+  },
+  "rateLimit": {
+    "alert": "Neue Daten können erst jede {minutes} Minuten abgerufen werden!"
+  },
+  "search": "Suchen",
+  "sync": {
+    "message": "Mitteilungen werden abgerufen...",
+    "student": "Konto wird abgerufen...",
+    "event": "Ereignisse werden abgerufen...",
+    "note": "Durchsagen werden abgerufen...",
+    "evaluation": "Noten werden abgerufen...",
+    "absence": "Ausschreitungen werden abgerufen...",
+    "exam": "Prüfungen werden abgerufen...",
+    "homework": "Hausaufgaben werden abgerufen...",
+    "timetable": "Stundenplan wird abgerufen..."
+  },
+  "about": {
+    "": "Info",
+    "title": "Info",
+    "privacy": "Datenschutz-Bestimmungen",
+    "licenses": "Lizenzen",
+    "supporters": "Spendern",
+    "links": "Linken"
+  },
+  "empty": {
+    "": "Wow, so leer!",
+    "messages": "Du hast keine Mitteilungen",
+    "notes": "Du hast keine Durchsagen",
+    "events": "Du hast keine Ereignisse",
+    "absences": "Du hast keine Abwesenheiten",
+    "delays": "Du hast keine Verspätungen",
+    "misses": "Du hast noch nichts zu Hause vergessen und immer alle Hausaufgaben tüchtig gemacht.",
+    "grades": "Du hast keine Noten",
+    "subjectGrades": "Du hast keine Noten in dieser Fach",
+    "exams": "Du hast keine Prüfungen",
+    "pastExams": "Du hast keine vorherigen Prüfungen",
+    "homework": "Du hast keine Hausaufgaben",
+    "pastHomework": "Du hast keine vorherigen Hausaufgaben"
+  },
+  "notImplemented": "Diese Funktion ist noch nicht fertig. Komm wieder später!",
+  "menu": {
+    "view": "Sehen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen"
+  },
+  "supporters": {
+    "all": "Alle",
+    "top": "Top"
+  },
+  "welcome": "Welcome to the new",
+  "begin": "Beginnen",
+  "features": {
+    "1": "Modern, user-friendly interface",
+    "2": "Plan your day",
+    "3": "Get notified quickly",
+    "4": "Fully customizable"
+  },
+  "tutorial": {
+    "1": "Hier kannst du alles sehen und oben kannst du nach allem suchen.",
+    "2": "Hier kannst du die Noten sortieren, und die durchschnitte und Noten für einem Fach sehen. Du bekommst deine Halbjahres und Jahresende Noten auch hier.",
+    "3": "Hier siehst du die Stundenplan/Kalender, die Hausaufgaben und Klassenarbeiten.",
+    "4": "Hier siehst du deine personalle Mitteilungen, und Hinweise die alle empfängt. Es gibt hier auch die Ereignisse, aber wir wissen auch nicht, was das sein soll ¯\\\\_(ツ)_/¯",
+    "5": "Hier siehst du alle Auslassungen, so die Abwesenheiten, Verspätungen und wenn du keine Hausaufgabe gemacht hast oder wenn du etwas nicht zum Stunde gebracht hast.",
+    "6": "Hier kannst du die Konten bearbeiten, neue Konten hinzufügen oder anderen löschen. Es gibt auch die Einstellungen und ein Bisschen Info über den app hier.",
+    "7": "Wir hoffen, dass dir die neuem App gefallen wird!\nBitte sei nicht stört, wenn du deine Lieblingsfunktion nicht findest. Wir werden viele Funktionen noch addieren."
+  }
+}
