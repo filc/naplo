@@ -231,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
                           setState(() => loading = false);
 
                           if (success) {
-                            Navigator.of(context).push(MaterialPageRoute(
+                            Navigator.of(context).pushReplacement(MaterialPageRoute(
                                 builder: (context) => PageFrame()));
 
                             // save login details & reset
