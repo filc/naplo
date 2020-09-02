@@ -29,7 +29,7 @@ class StorageController {
 
         // Create Settings
         await db.execute(
-            "create table settings (language TEXT, app_color TEXT, theme TEXT, background_color INTIGER, notifications INTIGER, selected_user INTIGER, render_html INTIGER, debug_mode INTIGER)");
+             "create table settings (language TEXT, app_color TEXT, theme TEXT, background_color INTIGER, notifications INTIGER, selected_user INTIGER, render_html INTIGER, debug_mode INTIGER, default_page INTIGER)");
         await db.insert("settings", {
           "language": "auto",
           "app_color": "default",
@@ -39,6 +39,7 @@ class StorageController {
           "selected_user": 0,
           "render_html": 1,
           "debug_mode": 0,
+          "default_page": 0
         });
 
         // Create Eval Colors

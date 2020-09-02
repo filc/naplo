@@ -26,6 +26,8 @@ class SettingsController {
   bool enableNotifications;
   bool renderHtml;
 
+  int defaultPage;
+
   get locale {
     List<String> lang = (language == "auto"
             ? deviceLanguage != null ? deviceLanguage : "hu_HU"
@@ -47,6 +49,8 @@ class SettingsController {
     language = settingsInstance[0]["language"];
     appColor = ThemeContext.colors[settingsInstance[0]["app_color"]];
     backgroundColor = settingsInstance[0]["background_color"];
+
+    defaultPage = settingsInstance[0]["default_page"];
     theme = {
       "light": ThemeContext().light(app.settings.appColor),
       "tinted": ThemeContext().tinted(),

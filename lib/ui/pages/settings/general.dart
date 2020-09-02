@@ -15,6 +15,13 @@ class _GeneralSettingsState extends State<GeneralSettings> {
     "hu_HU": "Magyar",
   };
 
+  List<String> pages = [
+    "Főoldal",
+    "Jegyek",
+    "Tervező",
+    "Üzenetek",
+    "Hiányzások"
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +34,27 @@ class _GeneralSettingsState extends State<GeneralSettings> {
               title: Text(I18n.of(context).settingsGeneralTitle),
               shadowColor: Colors.transparent,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            ),
+                        ListTile(
+              leading: Icon(FeatherIcons.globe),
+              title: Text("Kezdőoldal"),
+              trailing: DropdownButton(
+                underline: Container(),
+                value: app.settings.defaultPage,
+                items: [0, 1, 2, 3, 4].map((int value) {
+                  return DropdownMenuItem(
+                    value: value,
+                    child: Text(pages[value]),
+                  );
+                }).toList(),
+                onChanged: (int newDefaultPage) {
+                  setState(() {
+                    app.settings.defaultPage = newDefaultPage;
+                  });
+                  app.storage.storage
+                      .update("settings", {"default_page": newDefaultPage});
+                },
+              ),
             ),
             ListTile(
               leading: Icon(FeatherIcons.globe),
