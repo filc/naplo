@@ -287,7 +287,8 @@
     },
     "general": {
       "title": "Allgemein",
-      "language": "Sprache"
+      "language": "Sprache",
+      "startPage": "Startseite"
     },
     "privacy": {
       "title": "Datenschutz",

@@ -287,7 +287,8 @@
     },
     "general": {
       "title": "Általános",
-      "language": "Nyelv"
+      "language": "Nyelv",
+      "startPage": "Kezdőoldal"
     },
     "privacy": {
       "title": "Adatvédelem",

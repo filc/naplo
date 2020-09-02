@@ -287,7 +287,8 @@
     },
     "general": {
       "title": "General",
-      "language": "Language"
+      "language": "Language",
+      "startPage": "Start page"
     },
     "privacy": {
       "title": "Privacy",
