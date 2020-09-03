@@ -22,12 +22,18 @@ void main() async {
   await app.storage.init();
 
   try {
-    await app.storage.storage.query("settings");
+    List<Map<String, dynamic>> settings =
+        await app.storage.storage.query("settings");
+    if (!settings[0].containsKey("default_page")) {
+      await app.storage.storage
+          .rawQuery("ALTER TABLE settings ADD COLUMN default_page INTIGER;");
+      await app.storage.storage.update("settings", {"default_page": 0});
+    }
   } catch (_) {
     await app.storage.create();
     app.firstStart = true;
   }
-
+  
   await app.settings.update(login: false);
   app.selectedPage = app.settings.defaultPage;
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
