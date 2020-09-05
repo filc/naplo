@@ -136,13 +136,11 @@ class _SubjectViewState extends State<SubjectView> {
             backgroundColor: Colors.transparent,
             builder: (BuildContext context) =>
                 AverageCalculator(widget.subject),
-          ).whenComplete(() => () {
-                setState(() {});
-              });
+          ).then((_) {
+            setState(() {});
+          });
         },
       ),
     );
   }
-
-  _showAverageCalculator(Subject subject) {}
 }
