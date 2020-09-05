@@ -1,9 +1,16 @@
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/ui/cards/evaluation/view.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/data/context/app.dart';
+import 'package:filcnaplo/data/models/type.dart';
+import 'package:filcnaplo/data/models/subject.dart';
 
 class AverageCalculator extends StatefulWidget {
+  final Subject subject;
+
+  AverageCalculator(this.subject);
+
   @override
   AverageCalculatorState createState() => AverageCalculatorState();
 }
@@ -90,6 +97,25 @@ class AverageCalculatorState extends State<AverageCalculator> {
         evaluation.toString() +
         ", and weight was " +
         weight.toString());
+    Evaluation newEval = Evaluation(
+        "123", //TODO
+        DateTime.now(),
+        EvaluationValue(evaluation, " ", " ", weight.toInt()),
+        " ",
+        "Ha kapnék egy... description", //TODO i18n
+        Type(
+            "Type type id", //TODO
+            "Ha kapnék egy... Type type",
+            "Ha kapnék egy... Type name"),
+        "group id", //TODO
+        widget.subject,
+        Type("Type evaltype id", "Type evaltype description",
+            "Type evaltype name"),
+        Type("Type mode id", "Type mode description", "Type mode name"),
+        DateTime.now(),
+        DateTime.now(),
+        "Form");
+    app.user.sync.evaluation.data[0].add(newEval);
     Navigator.of(context).pop();
   }
 

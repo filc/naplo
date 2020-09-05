@@ -134,10 +134,15 @@ class _SubjectViewState extends State<SubjectView> {
           showModalBottomSheet(
             context: context,
             backgroundColor: Colors.transparent,
-            builder: (BuildContext context) => AverageCalculator(),
-          );
+            builder: (BuildContext context) =>
+                AverageCalculator(widget.subject),
+          ).whenComplete(() => () {
+                setState(() {});
+              });
         },
       ),
     );
   }
+
+  _showAverageCalculator(Subject subject) {}
 }
