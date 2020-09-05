@@ -11,6 +11,7 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/ui/pages/evaluations/subjects/average_calc.dart';
+import 'package:filcnaplo/ui/pages/evaluations/page.dart';
 
 class SubjectView extends StatefulWidget {
   final Subject subject;
@@ -137,6 +138,7 @@ class _SubjectViewState extends State<SubjectView> {
             builder: (BuildContext context) =>
                 AverageCalculator(widget.subject),
           ).then((_) {
+            //EvaluationsPage.updateplswhy //TODO
             setState(() {});
           });
         },

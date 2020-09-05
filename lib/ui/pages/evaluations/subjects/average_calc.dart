@@ -92,29 +92,20 @@ class AverageCalculatorState extends State<AverageCalculator> {
   }
 
   void addEvalToAverage() {
-    print("debug add eval button pressed");
-    print("eval value was " +
-        evaluation.toString() +
-        ", and weight was " +
-        weight.toString());
     Evaluation newEval = Evaluation(
-        "123", //TODO
+        "123",
         DateTime.now(),
-        EvaluationValue(evaluation, " ", " ", weight.toInt()),
-        " ",
-        "Ha kapnék egy... description", //TODO i18n
-        Type(
-            "Type type id", //TODO
-            "Ha kapnék egy... Type type",
-            "Ha kapnék egy... Type name"),
-        "group id", //TODO
+        EvaluationValue(evaluation, "", "", weight.toInt()),
+        "",
+        "Ha kapnék egy...",
+        Type("", "", "evkozi_jegy_ertekeles"),
+        "",
         widget.subject,
-        Type("Type evaltype id", "Type evaltype description",
-            "Type evaltype name"),
-        Type("Type mode id", "Type mode description", "Type mode name"),
+        Type("", "", ""),
+        Type("", "", ""),
         DateTime.now(),
         DateTime.now(),
-        "Form");
+        "");
     app.user.sync.evaluation.data[0].add(newEval);
     Navigator.of(context).pop();
   }
