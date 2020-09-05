@@ -9,6 +9,10 @@ class StorageController {
   String appPath;
   Database storage;
   Map<String, Database> users = {};
+  Future createSettingsTable(Database db) async {
+    await db.execute(
+        "create table settings (language TEXT, app_color TEXT, theme TEXT, background_color INTIGER, notifications INTIGER, selected_user INTIGER, render_html INTIGER, debug_mode INTIGER, default_page INTIGER)");
+  }
 
   Future init() async {
     String databasesPath = await getDatabasesPath();
@@ -28,8 +32,7 @@ class StorageController {
         await db.execute("create table users (id TEXT, name TEXT)");
 
         // Create Settings
-        await db.execute(
-             "create table settings (language TEXT, app_color TEXT, theme TEXT, background_color INTIGER, notifications INTIGER, selected_user INTIGER, render_html INTIGER, debug_mode INTIGER, default_page INTIGER)");
+        createSettingsTable(db);
         await db.insert("settings", {
           "language": "auto",
           "app_color": "default",

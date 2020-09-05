@@ -44,8 +44,8 @@ class SettingsController {
     return Color(int.parse(hexColor, radix: 16));
   }
 
-  Future update({bool login = true}) async {
-    List settingsInstance = await app.storage.storage.query("settings");
+  Future update({bool login = true, List settings}) async {
+    List settingsInstance = settings ?? await app.storage.storage.query("settings");
     language = settingsInstance[0]["language"];
     appColor = ThemeContext.colors[settingsInstance[0]["app_color"]];
     backgroundColor = settingsInstance[0]["background_color"];

@@ -20,21 +20,21 @@ void main() async {
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
   app.currentAppVersion = packageInfo.version;
   await app.storage.init();
-
+  List<Map<String, dynamic>> settings;
   try {
-    List<Map<String, dynamic>> settings =
-        await app.storage.storage.query("settings");
+    settings = await app.storage.storage.query("settings");
     if (!settings[0].containsKey("default_page")) {
-      await app.storage.storage
-          .rawQuery("ALTER TABLE settings ADD COLUMN default_page INTIGER;");
-      await app.storage.storage.update("settings", {"default_page": 0});
+      await app.storage.storage.execute("drop table settings");
+      settings[0]["default_page"] = 0;
+      await app.storage.createSettingsTable(app.storage.storage);
+      await app.storage.storage.update("settings", settings[0]);
     }
   } catch (_) {
     await app.storage.create();
     app.firstStart = true;
   }
-  
-  await app.settings.update(login: false);
+
+  await app.settings.update(login: false, settings: settings);
   app.selectedPage = app.settings.defaultPage;
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
