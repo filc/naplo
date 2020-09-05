@@ -93,19 +93,20 @@ class AverageCalculatorState extends State<AverageCalculator> {
 
   void addEvalToAverage() {
     Evaluation newEval = Evaluation(
-        "123",
-        DateTime.now(),
-        EvaluationValue(evaluation, "", "", weight.toInt()),
-        "",
-        "Ha kapnék egy...",
-        Type("", "", "evkozi_jegy_ertekeles"),
-        "",
-        widget.subject,
-        Type("", "", ""),
-        Type("", "", ""),
-        DateTime.now(),
-        DateTime.now(),
-        "");
+      "temp_ + random number", //TODO
+      DateTime.now(),
+      EvaluationValue(evaluation, " ", " ", weight.toInt()),
+      null,
+      "Ha kapnék egy... description", //TODO i18n
+      Type("", "", "evkozi_jegy_ertekeles"),
+      "group id", //TODO
+      widget.subject,
+      null,
+      null,
+      DateTime.now(),
+      DateTime.now(),
+      null,
+    );
     app.user.sync.evaluation.data[0].add(newEval);
     Navigator.of(context).pop();
   }
