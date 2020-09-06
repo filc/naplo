@@ -9,9 +9,8 @@ class SubjectTile extends StatelessWidget {
   final Subject subject;
   final double studentAvg;
   final double classAvg;
-  final Function callback;
 
-  SubjectTile(this.subject, this.studentAvg, this.classAvg, {this.callback});
+  SubjectTile(this.subject, this.studentAvg, this.classAvg);
 
   @override
   Widget build(BuildContext context) {
@@ -79,12 +78,8 @@ class SubjectTile extends StatelessWidget {
         ),
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => SubjectView(
-                    subject,
-                    studentAvg,
-                    classAvg,
-                    callback: callback,
-                  )));
+              builder: (context) =>
+                  SubjectView(subject, studentAvg, classAvg)));
         },
       ),
     );

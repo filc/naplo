@@ -12,11 +12,11 @@ import 'package:filcnaplo/generated/i18n.dart';
 class EvaluationTabs extends StatefulWidget {
   final Function callback;
   final _gradeTiles;
-  final _subjectBuilder;
+  final _subjectTiles;
   final _scaffoldKey;
 
   EvaluationTabs(
-      this._scaffoldKey, this._gradeTiles, this._subjectBuilder, this.callback);
+      this._scaffoldKey, this._gradeTiles, this._subjectTiles, this.callback);
 
   @override
   _EvaluationTabsState createState() => _EvaluationTabsState();
@@ -207,9 +207,7 @@ class _EvaluationTabsState extends State<EvaluationTabs>
                         padding: EdgeInsets.symmetric(horizontal: 10.0),
                         physics: BouncingScrollPhysics(
                             parent: AlwaysScrollableScrollPhysics()),
-                        children: () {
-                          return widget._subjectBuilder.subjectTiles;
-                        }(),
+                        children: widget._subjectTiles,
                       ),
                     ),
                   ),
@@ -223,9 +221,5 @@ class _EvaluationTabsState extends State<EvaluationTabs>
         ),
       ),
     );
-  }
-
-  void updateCallback() {
-    widget._subjectBuilder.build();
   }
 }

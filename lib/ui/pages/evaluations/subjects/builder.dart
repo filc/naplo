@@ -3,10 +3,6 @@ import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/ui/pages/evaluations/subjects/tile.dart';
 
 class SubjectBuilder {
-  final Function callback;
-
-  SubjectBuilder({this.callback});
-
   List<SubjectTile> subjectTiles = [];
 
   void build() {
@@ -43,8 +39,8 @@ class SubjectBuilder {
 
         if (average.isNaN) average = 0.0;
 
-        subjectTiles.add(SubjectTile(evaluation.subject, average, classAverage,
-            callback: callback));
+        subjectTiles
+            .add(SubjectTile(evaluation.subject, average, classAverage));
       }
     });
 

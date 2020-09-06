@@ -1,4 +1,3 @@
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
@@ -7,9 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EvaluationTile extends StatelessWidget {
   final Evaluation evaluation;
-  final Function callback;
 
-  EvaluationTile(this.evaluation, {this.callback});
+  EvaluationTile(this.evaluation);
 
   @override
   Widget build(BuildContext context) {
@@ -84,16 +82,6 @@ class EvaluationTile extends StatelessWidget {
         maxLines: evaluation.mode != null ? 2 : 1,
         overflow: TextOverflow.ellipsis,
       ),
-      trailing: callback != null && evaluation.id.startsWith("temp_")
-          ? IconButton(
-              icon: Icon(FeatherIcons.x),
-              onPressed: () {
-                app.user.sync.evaluation.data[0]
-                    .removeWhere((e) => e.id == evaluation.id);
-                callback();
-              },
-            )
-          : null,
     );
   }
 }
