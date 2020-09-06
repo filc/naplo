@@ -153,14 +153,16 @@ class _SubjectViewState extends State<SubjectView> {
             builder: (BuildContext context) =>
                 AverageCalculator(widget.subject),
           );
-          setState(() {
-            widget.tempEvals.add(tempEval);
-          });
-          for (Evaluation e in widget.tempEvals) print(e.value.value);
-          print("debug returned eval with value " +
-              tempEval.value.value.toString() +
-              " with weight " +
-              tempEval.value.weight.toString());
+          if (tempEval != null) {
+            setState(() {
+              widget.tempEvals.add(tempEval);
+            });
+            for (Evaluation e in widget.tempEvals) print(e.value.value);
+            print("debug returned eval with value " +
+                tempEval.value.value.toString() +
+                " with weight " +
+                tempEval.value.weight.toString());
+          }
         },
       ),
     );
