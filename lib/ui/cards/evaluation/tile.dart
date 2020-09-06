@@ -1,5 +1,6 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/data/context/app.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/utils/format.dart';
@@ -38,10 +39,12 @@ class EvaluationTile extends StatelessWidget {
                 fontSize: 38.0,
                 height: 1.2,
                 fontWeight: FontWeight.w500,
-                color: evaluation.value.value != 0
-                    ? app.theme
-                        .evalColors[(evaluation.value.value - 1).clamp(0, 4)]
-                    : null,
+                color: isTemp
+                    ? Theme.of(context).accentColor
+                    : evaluation.value.value != 0
+                        ? app.theme.evalColors[
+                            (evaluation.value.value - 1).clamp(0, 4)]
+                        : null,
               ),
             ),
           ),
@@ -51,7 +54,7 @@ class EvaluationTile extends StatelessWidget {
             Expanded(
               child: isTemp
                   ? Text(
-                      "SZELLEMJEGY",
+                      I18n.of(context).evaluationsGhost,
                       style: TextStyle(
                           color: Theme.of(context).accentColor,
                           fontWeight: FontWeight.bold),
@@ -112,6 +115,7 @@ class EvaluationTile extends StatelessWidget {
             ? IconButton(
                 icon: Icon(FeatherIcons.trash),
                 color: Colors.red,
+                tooltip: I18n.of(context).evaluationsGhostTooltip,
                 onPressed: () {
                   deleteCallback(evaluation);
                 })

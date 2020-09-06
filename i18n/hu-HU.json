@@ -47,7 +47,8 @@
     "undo": "visszavonás",
     "cancel": "MÉGSEM",
     "skip": "ÁTUGRÁS",
-    "next": "TOVÁBB"
+    "next": "TOVÁBB",
+    "add": "Hozzáadás"
   },
   "time": {
     "": "idő",
@@ -209,7 +210,8 @@
     "valueType": "jelleg",
     "form": "értékelés formja",
     "writeDate": "írás ideje",
-    "date": "dátum"
+    "date": "dátum",
+    "weight": "súly"
   },
   "evaluations": {
     "": "Jegyeid",
@@ -221,7 +223,12 @@
     "4qYear": "4. Negyedév",
     "endYear": "Év végi",
     "subjects": "Tárgyak",
-    "statistics": "Statisztikák"
+    "statistics": "Statisztikák",
+    "ghost": {
+      "": "SZELLEMJEGY",
+      "title": "Szellemjegy hozzáadása",
+      "tooltip": "Szellemjegy eltávolítása"
+    }
   },
   "student": {
     "school": "Iskola",

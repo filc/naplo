@@ -47,8 +47,9 @@
     "undo": "Rückgängig",
     "cancel": "ABBRECHEN",
     "skip": "SKIP",
-    "next": "NEXT"
-  },
+    "next": "NEXT",
+    "add": "Addieren"
+    },
   "time": {
     "": "zeit",
     "hour": "Stunde(n)",
@@ -209,7 +210,8 @@
     "valueType": "art",
     "form": "Skala",
     "writeDate": "Prüfungszeit",
-    "date": "Hochladezeit"
+    "date": "Hochladezeit",
+    "weight": "Gewicht"
   },
   "evaluations": {
     "": "Deine Noten",
@@ -221,7 +223,12 @@
     "4qYear": "4. Quartal",
     "endYear": "Zeugnis",
     "subjects": "Fächer",
-    "statistics": "Statistiken"
+    "statistics": "Statistiken",
+    "ghost": {
+      "": "SCHATTENNOTE",
+      "title": "Schattennote addieren",
+      "tooltip": "Schattennote löschen"
+    }
   },
   "student": {
     "school": "Schule",

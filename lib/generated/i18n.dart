@@ -104,6 +104,8 @@ class I18n implements WidgetsLocalizations {
   String get dialogSkip => "ÁTUGRÁS";
   /// "TOVÁBB"
   String get dialogNext => "TOVÁBB";
+  /// "Hozzáadás"
+  String get dialogAdd => "Hozzáadás";
   /// "idő"
   String get time => "idő";
   /// "óra"
@@ -348,6 +350,8 @@ class I18n implements WidgetsLocalizations {
   String get evaluationWriteDate => "írás ideje";
   /// "dátum"
   String get evaluationDate => "dátum";
+  /// "súly"
+  String get evaluationWeight => "súly";
   /// "Jegyeid"
   String get evaluations => "Jegyeid";
   /// "Évközi"
@@ -368,6 +372,12 @@ class I18n implements WidgetsLocalizations {
   String get evaluationsSubjects => "Tárgyak";
   /// "Statisztikák"
   String get evaluationsStatistics => "Statisztikák";
+  /// "SZELLEMJEGY"
+  String get evaluationsGhost => "SZELLEMJEGY";
+  /// "Szellemjegy hozzáadása"
+  String get evaluationsGhostTitle => "Szellemjegy hozzáadása";
+  /// "Szellemjegy eltávolítása"
+  String get evaluationsGhostTooltip => "Szellemjegy eltávolítása";
   /// "Iskola"
   String get studentSchool => "Iskola";
   /// "Születési dátum"
@@ -728,6 +738,9 @@ class _I18n_en_US extends I18n {
   /// "NEXT"
   @override
   String get dialogNext => "NEXT";
+  /// "Add"
+  @override
+  String get dialogAdd => "Add";
   /// "time"
   @override
   String get time => "time";
@@ -1094,6 +1107,9 @@ class _I18n_en_US extends I18n {
   /// "date"
   @override
   String get evaluationDate => "date";
+  /// "weight"
+  @override
+  String get evaluationWeight => "weight";
   /// "Your grades"
   @override
   String get evaluations => "Your grades";
@@ -1124,6 +1140,15 @@ class _I18n_en_US extends I18n {
   /// "statistics"
   @override
   String get evaluationsStatistics => "statistics";
+  /// "GHOST GRADE"
+  @override
+  String get evaluationsGhost => "GHOST GRADE";
+  /// "Add new Ghost Grade"
+  @override
+  String get evaluationsGhostTitle => "Add new Ghost Grade";
+  /// "Remove this Ghost Grade"
+  @override
+  String get evaluationsGhostTooltip => "Remove this Ghost Grade";
   /// "School"
   @override
   String get studentSchool => "School";
@@ -1600,6 +1625,9 @@ class _I18n_de_DE extends I18n {
   /// "NEXT"
   @override
   String get dialogNext => "NEXT";
+  /// "Addieren"
+  @override
+  String get dialogAdd => "Addieren";
   /// "zeit"
   @override
   String get time => "zeit";
@@ -1966,6 +1994,9 @@ class _I18n_de_DE extends I18n {
   /// "Hochladezeit"
   @override
   String get evaluationDate => "Hochladezeit";
+  /// "Gewicht"
+  @override
+  String get evaluationWeight => "Gewicht";
   /// "Deine Noten"
   @override
   String get evaluations => "Deine Noten";
@@ -1996,6 +2027,15 @@ class _I18n_de_DE extends I18n {
   /// "Statistiken"
   @override
   String get evaluationsStatistics => "Statistiken";
+  /// "SCHATTENNOTE"
+  @override
+  String get evaluationsGhost => "SCHATTENNOTE";
+  /// "Schattennote addieren"
+  @override
+  String get evaluationsGhostTitle => "Schattennote addieren";
+  /// "Schattennote löschen"
+  @override
+  String get evaluationsGhostTooltip => "Schattennote löschen";
   /// "Schule"
   @override
   String get studentSchool => "Schule";

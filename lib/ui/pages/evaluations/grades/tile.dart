@@ -15,9 +15,7 @@ class GradeTile extends StatelessWidget {
     return GestureDetector(
       child: EvaluationTile(evaluation, deleteCallback),
       onTap: isTemp
-          ? () {
-              deleteCallback(evaluation);
-            }
+          ? () {}
           : () {
               showModalBottomSheet(
                 context: context,

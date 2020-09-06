@@ -11,7 +11,6 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/ui/pages/evaluations/subjects/average_calc.dart';
-
 import '../grades/tile.dart';
 
 //ignore: must_be_immutable
@@ -149,6 +148,7 @@ class _SubjectViewState extends State<SubjectView> {
       floatingActionButton: FloatingActionButton(
         child: Icon(FeatherIcons.plus, color: app.settings.appColor),
         backgroundColor: app.settings.theme.backgroundColor,
+        tooltip: I18n.of(context).evaluationsGhostTitle,
         onPressed: () async {
           Evaluation tempEval = await showModalBottomSheet(
             context: context,
@@ -161,10 +161,6 @@ class _SubjectViewState extends State<SubjectView> {
               widget.tempEvals.add(tempEval);
             });
             for (Evaluation e in widget.tempEvals) print(e.value.value);
-            print("debug returned eval with value " +
-                tempEval.value.value.toString() +
-                " with weight " +
-                tempEval.value.weight.toString());
           }
         },
       ),
@@ -172,9 +168,6 @@ class _SubjectViewState extends State<SubjectView> {
   }
 
   _deleteCallbackFunction(Evaluation toRemove) {
-    print("debug deleteCallbackFunction called with evaluation value " +
-        toRemove.value.value.toString());
-    //widget.tempEvals.remove((e) => e.id == toRemove.id);
     setState(() {
       widget.tempEvals.removeWhere((e) => e.id == toRemove.id);
     });

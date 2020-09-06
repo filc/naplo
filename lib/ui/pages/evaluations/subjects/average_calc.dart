@@ -1,7 +1,6 @@
 import 'dart:math';
-
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/ui/cards/evaluation/view.dart';
+import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/data/context/app.dart';
@@ -39,7 +38,7 @@ class AverageCalculatorState extends State<AverageCalculator> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Text(
-                      "Szellemjegy hozzáadása",
+                      I18n.of(context).evaluationsGhostTitle,
                       style:
                           TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
@@ -59,7 +58,10 @@ class AverageCalculatorState extends State<AverageCalculator> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: Text(
-                      "Súly: " + weight.toInt().toString() + "%",
+                      capital(I18n.of(context).evaluationWeight) +
+                          ": " +
+                          weight.toInt().toString() +
+                          "%",
                       style: TextStyle(fontSize: 18),
                     ),
                   ),
@@ -82,7 +84,7 @@ class AverageCalculatorState extends State<AverageCalculator> {
                         top: 15, bottom: 15, right: 35, left: 35),
                     shape: StadiumBorder(),
                     child: Text(
-                      "Hozzáadás",
+                      I18n.of(context).dialogAdd,
                       style:
                           TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                     ),
@@ -113,7 +115,6 @@ class AverageCalculatorState extends State<AverageCalculator> {
       DateTime.now(),
       null,
     );
-    //app.user.sync.evaluation.data[0].add(temp);
     Navigator.of(context).pop(tempEval);
   }
 

@@ -47,7 +47,8 @@
     "undo": "Undo",
     "cancel": "CANCEL",
     "skip": "SKIP",
-    "next": "NEXT"
+    "next": "NEXT",
+    "add": "Add"
   },
   "time": {
     "": "time",
@@ -209,7 +210,8 @@
     "valueType": "grade form",
     "form": "range",
     "writeDate": "exam date",
-    "date": "date"
+    "date": "date",
+    "weight": "weight"
   },
   "evaluations": {
     "": "Your grades",
@@ -221,7 +223,12 @@
     "4qYear": "4. Quarter",
     "endYear": "Report",
     "subjects": "subjects",
-    "statistics": "statistics"
+    "statistics": "statistics",
+    "ghost": {
+      "": "GHOST GRADE",
+      "title": "Add new Ghost Grade",
+      "tooltip": "Remove this Ghost Grade"
+    }
   },
   "student": {
     "school": "School",
