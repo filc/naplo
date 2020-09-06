@@ -11,12 +11,15 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/ui/pages/evaluations/subjects/average_calc.dart';
-import 'package:filcnaplo/ui/pages/evaluations/page.dart';
 
+import '../grades/tile.dart';
+
+//ignore: must_be_immutable
 class SubjectView extends StatefulWidget {
   final Subject subject;
-  final double studentAvg;
   final double classAvg;
+  double studentAvg;
+  List<Evaluation> tempEvals = List<Evaluation>();
 
   SubjectView(this.subject, this.studentAvg, this.classAvg);
 
@@ -31,15 +34,27 @@ class _SubjectViewState extends State<SubjectView> {
         .where((evaluation) => evaluation.type.name == "evkozi_jegy_ertekeles")
         .toList();
 
-    List<GradeTile> evaluationTiles = [];
-
     List<Evaluation> subjectEvals =
         evaluations.where((e) => e.subject.id == widget.subject.id).toList();
+    subjectEvals.addAll(widget.tempEvals);
+    subjectEvals.toList();
+
+    List<GradeTile> evaluationTiles = [];
 
     subjectEvals.forEach((evaluation) {
       if (evaluation.date != null && evaluation.value.value != null)
         evaluationTiles.add(GradeTile(evaluation));
     });
+
+    if (widget.tempEvals.isNotEmpty) {
+      widget.studentAvg = 0;
+      subjectEvals.forEach((e) {
+        widget.studentAvg += e.value.value * (e.value.weight / 100);
+      });
+
+      widget.studentAvg = widget.studentAvg /
+          subjectEvals.map((e) => e.value.weight / 100).reduce((a, b) => a + b);
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -131,16 +146,21 @@ class _SubjectViewState extends State<SubjectView> {
       floatingActionButton: FloatingActionButton(
         child: Icon(FeatherIcons.plus, color: app.settings.appColor),
         backgroundColor: app.settings.theme.backgroundColor,
-        onPressed: () {
-          showModalBottomSheet(
+        onPressed: () async {
+          Evaluation tempEval = await showModalBottomSheet(
             context: context,
             backgroundColor: Colors.transparent,
             builder: (BuildContext context) =>
                 AverageCalculator(widget.subject),
-          ).then((_) {
-            //EvaluationsPage.updateplswhy //TODO
-            setState(() {});
+          );
+          setState(() {
+            widget.tempEvals.add(tempEval);
           });
+          for (Evaluation e in widget.tempEvals) print(e.value.value);
+          print("debug returned eval with value " +
+              tempEval.value.value.toString() +
+              " with weight " +
+              tempEval.value.weight.toString());
         },
       ),
     );

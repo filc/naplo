@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/ui/cards/evaluation/view.dart';
 import 'package:flutter/material.dart';
@@ -92,14 +94,18 @@ class AverageCalculatorState extends State<AverageCalculator> {
   }
 
   void addEvalToAverage() {
-    Evaluation newEval = Evaluation(
-      "temp_ + random number", //TODO
+    int randId;
+    var rand = Random();
+    randId = rand.nextInt(100);
+
+    Evaluation tempEval = Evaluation(
+      "temp_" + randId.toString(),
       DateTime.now(),
       EvaluationValue(evaluation, " ", " ", weight.toInt()),
-      null,
-      "Ha kapnék egy... description", //TODO i18n
+      "",
+      "",
       Type("", "", "evkozi_jegy_ertekeles"),
-      "group id", //TODO
+      null,
       widget.subject,
       null,
       null,
@@ -107,8 +113,8 @@ class AverageCalculatorState extends State<AverageCalculator> {
       DateTime.now(),
       null,
     );
-    app.user.sync.evaluation.data[0].add(newEval);
-    Navigator.of(context).pop();
+    //app.user.sync.evaluation.data[0].add(temp);
+    Navigator.of(context).pop(tempEval);
   }
 
   Widget evalRadio(int value) {
