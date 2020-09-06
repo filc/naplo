@@ -39,7 +39,7 @@ class AverageCalculatorState extends State<AverageCalculator> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Text(
-                      "Ha kapnék egy...",
+                      "Szellemjegy hozzáadása",
                       style:
                           TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,

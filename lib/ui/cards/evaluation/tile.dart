@@ -51,7 +51,7 @@ class EvaluationTile extends StatelessWidget {
             Expanded(
               child: isTemp
                   ? Text(
-                      "HA KAPNÉK EGY...",
+                      "SZELLEMJEGY",
                       style: TextStyle(
                           color: Theme.of(context).accentColor,
                           fontWeight: FontWeight.bold),
@@ -75,7 +75,7 @@ class EvaluationTile extends StatelessWidget {
                     ),
             ),
             isTemp
-                ? Icon(FeatherIcons.trash)
+                ? Container()
                 : evaluation.date != null
                     ? Padding(
                         padding: EdgeInsets.only(left: 8.0),
@@ -108,6 +108,14 @@ class EvaluationTile extends StatelessWidget {
                 maxLines: evaluation.mode != null ? 2 : 1,
                 overflow: TextOverflow.ellipsis,
               ),
+        trailing: isTemp
+            ? IconButton(
+                icon: Icon(FeatherIcons.trash),
+                color: Colors.red,
+                onPressed: () {
+                  deleteCallback(evaluation);
+                })
+            : null,
       ),
     );
   }

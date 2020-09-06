@@ -37,12 +37,15 @@ class _SubjectViewState extends State<SubjectView> {
     List<Evaluation> subjectEvals =
         evaluations.where((e) => e.subject.id == widget.subject.id).toList();
     subjectEvals.addAll(widget.tempEvals);
-    subjectEvals.toList();
 
     List<GradeTile> evaluationTiles = [];
 
     subjectEvals.forEach((evaluation) {
-      if (evaluation.date != null && evaluation.value.value != null)
+      if (evaluation.date != null &&
+          evaluation.value.value !=
+              null) if (evaluation.id.startsWith("temp_")) {
+        evaluationTiles.add(GradeTile(evaluation, _deleteCallbackFunction));
+      } else
         evaluationTiles.add(GradeTile(evaluation));
     });
 
@@ -166,5 +169,14 @@ class _SubjectViewState extends State<SubjectView> {
         },
       ),
     );
+  }
+
+  _deleteCallbackFunction(Evaluation toRemove) {
+    print("debug deleteCallbackFunction called with evaluation value " +
+        toRemove.value.value.toString());
+    //widget.tempEvals.remove((e) => e.id == toRemove.id);
+    setState(() {
+      widget.tempEvals.removeWhere((e) => e.id == toRemove.id);
+    });
   }
 }
