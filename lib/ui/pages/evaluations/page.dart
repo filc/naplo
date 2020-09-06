@@ -20,12 +20,10 @@ class _EvaluationsPageState extends State<EvaluationsPage> {
 
   _EvaluationsPageState(_scaffoldKey) {
     this._gradeBuilder = GradeBuilder();
-    this._subjectBuilder = SubjectBuilder();
+    this._subjectBuilder = SubjectBuilder(callback: buildPage);
   }
 
-  void updateCallback() {
-    setState(() {});
-  }
+  void updateCallback() => setState(() {});
 
   void buildPage() {
     _gradeBuilder.build(sortBy: app.evalSortBy);
@@ -39,7 +37,7 @@ class _EvaluationsPageState extends State<EvaluationsPage> {
     return EvaluationTabs(
       widget._scaffoldKey,
       _gradeBuilder.gradeTiles,
-      _subjectBuilder.subjectTiles,
+      _subjectBuilder,
       updateCallback,
     );
   }

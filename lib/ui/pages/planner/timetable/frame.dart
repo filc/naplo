@@ -73,8 +73,6 @@ class _TimetableFrameState extends State<TimetableFrame>
 
         _tabController.index = dayIndex;
 
-        print(dayIndex);
-
         bool ready = snapshot.hasData || snapshot.hasError;
 
         return Container(

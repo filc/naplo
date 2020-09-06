@@ -11,14 +11,14 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/ui/pages/evaluations/subjects/average_calc.dart';
-import 'package:filcnaplo/ui/pages/evaluations/page.dart';
 
 class SubjectView extends StatefulWidget {
   final Subject subject;
   final double studentAvg;
   final double classAvg;
+  final Function callback;
 
-  SubjectView(this.subject, this.studentAvg, this.classAvg);
+  SubjectView(this.subject, this.studentAvg, this.classAvg, {this.callback});
 
   @override
   _SubjectViewState createState() => _SubjectViewState();
@@ -138,7 +138,7 @@ class _SubjectViewState extends State<SubjectView> {
             builder: (BuildContext context) =>
                 AverageCalculator(widget.subject),
           ).then((_) {
-            //EvaluationsPage.updateplswhy //TODO
+            widget.callback();
             setState(() {});
           });
         },
