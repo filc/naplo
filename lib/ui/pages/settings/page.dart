@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:filcnaplo/ui/pages/settings/debug.dart';
+import 'package:filcnaplo/ui/pages/settings/export.dart';
 import 'package:filcnaplo/ui/pages/settings/notification.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/data/context/app.dart';
@@ -57,6 +58,12 @@ class SettingsPage extends StatelessWidget {
                 title: I18n.of(context).settingsNotificationsTitle,
                 icon: FeatherIcons.bell,
                 page: NotificationSettings()),
+            SettingTile(
+                color: Colors.green[700],
+                description: capital('Export timetable'), // TODO: i18n
+                title: 'Export Data', // TODO: i18n
+                icon: FeatherIcons.share2,
+                page: ExportSettings()),
             SettingTile(
                 color: Colors.red,
                 description: capital(I18n.of(context).settingsDebugDelete),
