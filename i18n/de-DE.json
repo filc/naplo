@@ -316,7 +316,8 @@
     "export": {
       "title": "Daten exportieren",
       "exportTimetable": "Stundenplan drucken",
-      "exportTimetableSuccess": "Stundenplan gedruckt"
+      "exportTimetableSuccess": "Stundenplan gedruckt",
+      "timeTableOf": "s Stundenplan"
     }
   },
   "success": {

@@ -34,7 +34,7 @@ class _ExportSettingsState extends State<ExportSettings> {
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             ),
             ListTile(
-              leading: Icon(FeatherIcons.share),
+              leading: Icon(FeatherIcons.printer),
               title: Text(I18n.of(context).settingsExportExportTimetable),
               onTap: () async {
                 var myTheme = pw.ThemeData.withFont(
@@ -43,6 +43,8 @@ class _ExportSettingsState extends State<ExportSettings> {
                 );
                 final pdf = pw.Document(theme: myTheme);
                 var containerElements = <pw.Widget>[];
+                // sync before doing anything
+                await app.user.sync.timetable.sync();
                 List<Lesson> lessons = app.user.sync.timetable.data;
                 // process
                 for (int i = 1; i <= 5; i++) {
@@ -69,8 +71,9 @@ class _ExportSettingsState extends State<ExportSettings> {
                 var rows = pw.Column(
                     crossAxisAlignment: pw.CrossAxisAlignment.center,
                     children: <pw.Widget>[
+                      pw.Header(text: app.user.name + I18n.of(context).settingsExportTimeTableOf),
                       pw.Row(children: containerElements),
-                      pw.Footer(title: pw.Text('filcnaplo.hu'))
+                      pw.Footer(trailing: pw.Text('filcnaplo.hu'))
                     ]);
                 var container = pw.Center(child: rows);
                 pdf.addPage(pw.Page(
@@ -78,7 +81,7 @@ class _ExportSettingsState extends State<ExportSettings> {
                     build: (pw.Context context) => container)); // Page
 
                 await Printing.layoutPdf(
-                    onLayout: (PdfPageFormat format) async => pdf.save());
+                    onLayout: (format) async => pdf.save());
                 _scaffoldKey.currentState.showSnackBar(SnackBar(
                   content: Text(
                     'Printing complete',

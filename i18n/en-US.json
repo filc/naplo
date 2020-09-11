@@ -316,7 +316,8 @@
     "export": {
       "title": "Export data",
       "exportTimetable": "Print timetable",
-      "exportTimetableSuccess": "Timetable printed"
+      "exportTimetableSuccess": "Timetable printed",
+      "timeTableOf": "'s timetable"
     }
   },
   "success": {

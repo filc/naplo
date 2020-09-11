@@ -316,7 +316,8 @@
     "export": {
       "title": "Adatok exportálása",
       "exportTimetable": "Órarend nyomtatása",
-      "exportTimetableSuccess": "Órarend kinyomtatva"
+      "exportTimetableSuccess": "Órarend kinyomtatva",
+      "timeTableOf": " órarendje"
     }
   },
   "success": {

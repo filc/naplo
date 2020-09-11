@@ -500,6 +500,8 @@ class I18n implements WidgetsLocalizations {
   String get settingsExportExportTimetable => "Órarend nyomtatása";
   /// "Órarend kinyomtatva"
   String get settingsExportExportTimetableSuccess => "Órarend kinyomtatva";
+  /// "órarendje"
+  String get settingsExportTimeTableOf => "órarendje";
   /// "Siker"
   String get success => "Siker";
   /// "Házi feladat feltöltve"
@@ -1338,6 +1340,9 @@ class _I18n_en_US extends I18n {
   /// "Timetable printed"
   @override
   String get settingsExportExportTimetableSuccess => "Timetable printed";
+  /// "'s timetable"
+  @override
+  String get settingsExportTimeTableOf => "'s timetable";
   /// "Success"
   @override
   String get success => "Success";
@@ -2234,6 +2239,9 @@ class _I18n_de_DE extends I18n {
   /// "Stundenplan gedruckt"
   @override
   String get settingsExportExportTimetableSuccess => "Stundenplan gedruckt";
+  /// "s Stundenplan"
+  @override
+  String get settingsExportTimeTableOf => "s Stundenplan";
   /// "Erfolg"
   @override
   String get success => "Erfolg";
