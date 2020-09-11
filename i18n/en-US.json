@@ -312,6 +312,11 @@
       "title": "Developer settings",
       "delete": "Delete app data",
       "deleteSuccess": "Deleted app data"
+    },
+    "export": {
+      "title": "Export data",
+      "exportTimetable": "Print timetable",
+      "exportTimetableSuccess": "Timetable printed"
     }
   },
   "success": {

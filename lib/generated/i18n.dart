@@ -494,6 +494,12 @@ class I18n implements WidgetsLocalizations {
   String get settingsDebugDelete => "Adatok törlése";
   /// "Adatok törölve"
   String get settingsDebugDeleteSuccess => "Adatok törölve";
+  /// "Adatok exportálása"
+  String get settingsExportTitle => "Adatok exportálása";
+  /// "Órarend nyomtatása"
+  String get settingsExportExportTimetable => "Órarend nyomtatása";
+  /// "Órarend kinyomtatva"
+  String get settingsExportExportTimetableSuccess => "Órarend kinyomtatva";
   /// "Siker"
   String get success => "Siker";
   /// "Házi feladat feltöltve"
@@ -1323,6 +1329,15 @@ class _I18n_en_US extends I18n {
   /// "Deleted app data"
   @override
   String get settingsDebugDeleteSuccess => "Deleted app data";
+  /// "Export data"
+  @override
+  String get settingsExportTitle => "Export data";
+  /// "Print timetable"
+  @override
+  String get settingsExportExportTimetable => "Print timetable";
+  /// "Timetable printed"
+  @override
+  String get settingsExportExportTimetableSuccess => "Timetable printed";
   /// "Success"
   @override
   String get success => "Success";
@@ -2210,6 +2225,15 @@ class _I18n_de_DE extends I18n {
   /// "Appdaten gelöscht"
   @override
   String get settingsDebugDeleteSuccess => "Appdaten gelöscht";
+  /// "Daten exportieren"
+  @override
+  String get settingsExportTitle => "Daten exportieren";
+  /// "Stundenplan drucken"
+  @override
+  String get settingsExportExportTimetable => "Stundenplan drucken";
+  /// "Stundenplan gedruckt"
+  @override
+  String get settingsExportExportTimetableSuccess => "Stundenplan gedruckt";
   /// "Erfolg"
   @override
   String get success => "Erfolg";

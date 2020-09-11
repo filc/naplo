@@ -60,8 +60,8 @@ class SettingsPage extends StatelessWidget {
                 page: NotificationSettings()),
             SettingTile(
                 color: Colors.green[700],
-                description: capital('Export timetable'), // TODO: i18n
-                title: 'Export Data', // TODO: i18n
+                description: capital(I18n.of(context).settingsExportExportTimetable),
+                title: capital(I18n.of(context).settingsExportTitle),
                 icon: FeatherIcons.share2,
                 page: ExportSettings()),
             SettingTile(

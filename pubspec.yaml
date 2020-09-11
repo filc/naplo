@@ -37,7 +37,8 @@ dependencies:
   flutter_swiper: ^1.1.6
   in_app_review: ^0.2.0+3
   pdf: ^1.11.1
-  
+  printing: ^3.6.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -55,3 +56,4 @@ flutter:
     - assets/wave2.png
     - assets/wave3.png
     - assets/wave4.png
+    - assets/Roboto-Regular.ttf

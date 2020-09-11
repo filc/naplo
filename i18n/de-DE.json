@@ -312,6 +312,11 @@
       "title": "Entwichlereinstellungen",
       "delete": "Appdaten löschen",
       "deleteSuccess": "Appdaten gelöscht"
+    },
+    "export": {
+      "title": "Daten exportieren",
+      "exportTimetable": "Stundenplan drucken",
+      "exportTimetableSuccess": "Stundenplan gedruckt"
     }
   },
   "success": {
