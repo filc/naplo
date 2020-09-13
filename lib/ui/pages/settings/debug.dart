@@ -118,12 +118,11 @@ class _DebugSettingsState extends State<DebugSettings> {
                       ),
                       backgroundColor: Colors.grey,
                     ));
-                    print('sync started');
+
                     // sync before doing anything
                     await app.user.sync.timetable.sync();
                     List<Lesson> lessons = app.user.sync.timetable.data;
 
-                    print('sync finished');
                     // process
                     var totalLessonCounter = 0;
                     for (int i = 1; i <= 5; i++) {

@@ -547,7 +547,7 @@ class KretaClient {
     }
   }
 
-  Future<String> getGroups() async {
+  Future<Map<String, dynamic>> getGroups() async {
     try {
       var response = await client.get(
         BaseURL.kreta(instituteCode) + KretaEndpoints.groups,
@@ -560,9 +560,10 @@ class KretaClient {
       await checkResponse(response);
 
       List responseJson = jsonDecode(response.body);
-      String uid = responseJson[0]["OktatasNevelesiFeladat"]["Uid"];
-
-      return uid;
+      return {
+        "uid": responseJson[0]["OktatasNevelesiFeladat"]["Uid"],
+        "className": responseJson[0]["Nev"]
+      };
     } catch (error) {
       print("ERROR: KretaAPI.getGroups: " + error.toString());
       return null;

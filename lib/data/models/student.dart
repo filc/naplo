@@ -11,6 +11,7 @@ class Student {
   String address;
   String groupId;
   List<String> parents;
+  String className;
 
   Student(
     this.id,
