@@ -314,8 +314,8 @@
       "deleteSuccess": "Adatok törölve"
     },
     "export": {
-      "title": "Adatok exportálása",
       "exportTimetable": "Órarend nyomtatása",
+      "lessonCount": "óra",
       "exportTimetableSuccess": "Órarend kinyomtatva",
       "timeTableOf": " órarendje"
     }

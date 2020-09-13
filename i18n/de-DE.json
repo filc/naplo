@@ -314,7 +314,7 @@
       "deleteSuccess": "Appdaten gelöscht"
     },
     "export": {
-      "title": "Daten exportieren",
+      "lessonCount": "Stunden",
       "exportTimetable": "Stundenplan drucken",
       "exportTimetableSuccess": "Stundenplan gedruckt",
       "timeTableOf": "s Stundenplan"

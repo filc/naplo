@@ -4,6 +4,11 @@ import 'package:filcnaplo/ui/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+import 'package:filcnaplo/data/models/lesson.dart';
 
 class DebugSettings extends StatefulWidget {
   @override
@@ -87,6 +92,104 @@ class _DebugSettingsState extends State<DebugSettings> {
                 });
               },
             ),
+          ),
+          ListTile(
+            leading: Icon(FeatherIcons.printer),
+            title: Text(
+              I18n.of(context).settingsExportExportTimetable,
+              style: TextStyle(
+                color: app.debugMode ? null : Colors.grey,
+              ),
+            ),
+            onTap: app.debugMode
+                ? () async {
+                    var myTheme = pw.ThemeData.withFont(
+                      base: pw.Font.ttf(
+                          await rootBundle.load("assets/Roboto-Regular.ttf")),
+                    );
+                    final pdf = pw.Document(theme: myTheme);
+                    var containerElements = <pw.Widget>[];
+
+                    // sync indicator
+                    _scaffoldKey.currentState.showSnackBar(SnackBar(
+                      content: Text(
+                        I18n.of(context).syncTimetable,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.grey,
+                    ));
+                    print('sync started');
+                    // sync before doing anything
+                    await app.user.sync.timetable.sync();
+                    List<Lesson> lessons = app.user.sync.timetable.data;
+
+                    print('sync finished');
+                    // process
+                    var totalLessonCounter = 0;
+                    for (int i = 1; i <= 5; i++) {
+                      var lessonChildren = <pw.Widget>[];
+                      for (var lesson in lessons) {
+                        if (lesson.date.weekday == i &&
+                            lesson.subject != null) {
+                          lessonChildren.add(pw.Text(lesson.lessonIndex +
+                              ".: " +
+                              lesson.subject.name));
+                          totalLessonCounter++;
+                        }
+                      }
+
+                      var dayColumn = pw.Column(
+                          children: lessonChildren,
+                          crossAxisAlignment: pw.CrossAxisAlignment.start,
+                          mainAxisSize: pw.MainAxisSize.min,
+                          mainAxisAlignment: pw.MainAxisAlignment.end);
+                      containerElements.add(pw.Padding(
+                          padding: pw.EdgeInsets.all(5), child: dayColumn));
+                    }
+
+                    /* var debug_decor = pw.BoxDecoration(
+                        border: pw.BoxBorder(
+                            color: PdfColor.fromHex('#808080'),
+                            left: true,
+                            right: true,
+                            top: true,
+                            bottom: true)); */
+
+                    var lessonCountLocal =
+                        I18n.of(context).settingsExportLessonCount;
+                    var rows = pw.Align(
+                        alignment: pw.Alignment.topCenter,
+                        child: pw.Column(
+                            mainAxisSize: pw.MainAxisSize.min,
+                            children: <pw.Widget>[
+                              pw.Header(
+                                  text: app.user.name +
+                                      I18n.of(context)
+                                          .settingsExportTimeTableOf),
+                              pw.Row(children: containerElements),
+                              pw.Padding(
+                                  padding: pw.EdgeInsets.all(5),
+                                  child: pw.Footer(
+                                      leading: pw.Text(
+                                          "$totalLessonCounter $lessonCountLocal"),
+                                      trailing: pw.Text('filcnaplo.hu')))
+                            ]));
+
+                    pdf.addPage(pw.Page(
+                        pageFormat: PdfPageFormat.a4,
+                        build: (pw.Context context) => rows)); // Page
+
+                    await Printing.layoutPdf(
+                        onLayout: (format) async => pdf.save());
+                    _scaffoldKey.currentState.showSnackBar(SnackBar(
+                      content: Text(
+                        'Printing complete',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.green[700],
+                    ));
+                  }
+                : null,
           ),
         ]),
       ),

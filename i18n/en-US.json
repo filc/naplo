@@ -314,7 +314,7 @@
       "deleteSuccess": "Deleted app data"
     },
     "export": {
-      "title": "Export data",
+      "lessonCount": "lessons",
       "exportTimetable": "Print timetable",
       "exportTimetableSuccess": "Timetable printed",
       "timeTableOf": "'s timetable"
