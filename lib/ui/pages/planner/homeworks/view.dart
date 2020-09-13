@@ -1,4 +1,4 @@
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+//import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/homework.dart';
 import 'package:filcnaplo/generated/i18n.dart';
@@ -44,7 +44,9 @@ class _HomeworkViewState extends State<HomeworkView> {
                     children: <Widget>[
                       Expanded(
                         child: Text(
-                          capitalize(widget.homework.teacher),
+                          widget.homework.teacher != null
+                              ? capitalize(widget.homework.teacher)
+                              : I18n.of(context).unknown,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
@@ -55,33 +57,34 @@ class _HomeworkViewState extends State<HomeworkView> {
                   subtitle: Text(capital(widget.homework.subjectName)),
                 ),
               ),
-              Container(
-                width: 42.0,
-                margin: EdgeInsets.only(right: 12.0),
-                child: Column(
-                  children: <Widget>[
-                    FlatButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6.0)),
-                      padding: EdgeInsets.zero,
-                      onPressed: () =>
-                          setState(() => widget.onSolved(widget.homework)),
-                      child: Icon(
-                        widget.homework.isSolved
-                            ? FeatherIcons.checkSquare
-                            : FeatherIcons.square,
-                        color: widget.homework.isSolved
-                            ? app.settings.appColor
-                            : null,
-                      ),
-                    ),
-                    Text(
-                      capital(I18n.of(context).dialogDone),
-                      overflow: TextOverflow.ellipsis,
-                    )
-                  ],
-                ),
-              ),
+              // Feature removed by KRETA
+              // Container(
+              //   width: 42.0,
+              //   margin: EdgeInsets.only(right: 12.0),
+              //   child: Column(
+              //     children: <Widget>[
+              //       FlatButton(
+              //         shape: RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(6.0)),
+              //         padding: EdgeInsets.zero,
+              //         onPressed: () =>
+              //             setState(() => widget.onSolved(widget.homework)),
+              //         child: Icon(
+              //           widget.homework.isSolved
+              //               ? FeatherIcons.checkSquare
+              //               : FeatherIcons.square,
+              //           color: widget.homework.isSolved
+              //               ? app.settings.appColor
+              //               : null,
+              //         ),
+              //       ),
+              //       Text(
+              //         capital(I18n.of(context).dialogDone),
+              //         overflow: TextOverflow.ellipsis,
+              //       )
+              //     ],
+              //   ),
+              // ),
             ],
           ),
 
@@ -109,7 +112,7 @@ class _HomeworkViewState extends State<HomeworkView> {
                               if (await canLaunch(url))
                                 await launch(url);
                               else
-                                throw 'Invalid URL';
+                                throw '[ERROR] HomeworkView.build: Invalid URL';
                             },
                           )
                         : SelectableLinkify(
@@ -118,7 +121,7 @@ class _HomeworkViewState extends State<HomeworkView> {
                               if (await canLaunch(url.url))
                                 await launch(url.url);
                               else
-                                throw 'Invalid URL';
+                                throw '[ERROR] HomeworkView.build: Invalid URL';
                             },
                           ),
                   ],

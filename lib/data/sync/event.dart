@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:filcnaplo/data/context/app.dart';
+import 'package:filcnaplo/data/models/dummy.dart';
 import 'package:filcnaplo/data/models/event.dart';
 
 class EventSync {
@@ -32,6 +33,7 @@ class EventSync {
 
       return events != null;
     } else {
+      data = Dummy.events;
       return true;
     }
   }

@@ -33,7 +33,6 @@ class ExamSync {
 
       return exams != null;
     } else {
-      //data = Dummy.exams;
       return true;
     }
   }

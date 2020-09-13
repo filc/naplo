@@ -17,18 +17,21 @@ import '../grades/tile.dart';
 class SubjectView extends StatefulWidget {
   final Subject subject;
   final double classAvg;
-  double studentAvg;
   List<Evaluation> tempEvals = List<Evaluation>();
 
-  SubjectView(this.subject, this.studentAvg, this.classAvg);
+  SubjectView(this.subject, this.classAvg);
 
   @override
   _SubjectViewState createState() => _SubjectViewState();
 }
 
 class _SubjectViewState extends State<SubjectView> {
+  double studentAvg;
+
   @override
   Widget build(BuildContext context) {
+    studentAvg = 0;
+
     List<Evaluation> evaluations = app.user.sync.evaluation.data[0]
         .where((evaluation) => evaluation.type.name == "evkozi_jegy_ertekeles")
         .toList();
@@ -43,20 +46,18 @@ class _SubjectViewState extends State<SubjectView> {
       if (evaluation.date != null &&
           evaluation.value.value !=
               null) if (evaluation.id.startsWith("temp_")) {
-        evaluationTiles.add(GradeTile(evaluation, _deleteCallbackFunction));
+        evaluationTiles.add(
+            GradeTile(evaluation, deleteCallback: _deleteCallbackFunction));
       } else
         evaluationTiles.add(GradeTile(evaluation));
     });
 
-    if (widget.tempEvals.isNotEmpty) {
-      widget.studentAvg = 0;
-      subjectEvals.forEach((e) {
-        widget.studentAvg += e.value.value * (e.value.weight / 100);
-      });
+    subjectEvals.forEach((e) {
+      studentAvg += e.value.value * (e.value.weight / 100);
+    });
 
-      widget.studentAvg = widget.studentAvg /
-          subjectEvals.map((e) => e.value.weight / 100).reduce((a, b) => a + b);
-    }
+    studentAvg = studentAvg /
+        subjectEvals.map((e) => e.value.weight / 100).reduce((a, b) => a + b);
 
     return Scaffold(
       appBar: AppBar(
@@ -68,20 +69,19 @@ class _SubjectViewState extends State<SubjectView> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(45.0)),
-                color: app.theme
-                    .evalColors[(widget.studentAvg.round() - 1).clamp(0, 4)],
+                color:
+                    app.theme.evalColors[(studentAvg.round() - 1).clamp(0, 4)],
               ),
               padding: EdgeInsets.all(8.0),
               child: Text(
                 app.settings.language == "en"
-                    ? widget.studentAvg.toStringAsFixed(2)
-                    : widget.studentAvg.toStringAsFixed(2).split(".").join(","),
+                    ? studentAvg.toStringAsFixed(2)
+                    : studentAvg.toStringAsFixed(2).split(".").join(","),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   height: 1.2,
                   color: textColor(
-                    app.theme.evalColors[
-                        (widget.studentAvg.round() - 1).clamp(0, 4)],
+                    app.theme.evalColors[(studentAvg.round() - 1).clamp(0, 4)],
                   ),
                 ),
               ),

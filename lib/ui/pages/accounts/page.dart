@@ -197,7 +197,7 @@ class _AccountTileState extends State<AccountTile> {
               image: widget.user.customProfileIcon),
           //cannot reuse the default profile icon because of size differences
           title: Text(
-            widget.user.name ?? "?",
+            widget.user.name ?? I18n.of(context).unknown,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

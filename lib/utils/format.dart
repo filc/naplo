@@ -14,9 +14,8 @@ Map<String, Locale> languages = {
   "hu_HU": hu_HU
 };
 
-String capital(String s) => s != null
-    ? s.length > 0 ? s[0].toUpperCase() + s.substring(1).toLowerCase() : ""
-    : null;
+String capital(String s) =>
+    s != null ? s.length > 0 ? s[0].toUpperCase() + s.substring(1) : "" : null;
 
 String capitalize(String s) =>
     s != null ? s.split(" ").map((w) => capital(w)).join(" ") : null;

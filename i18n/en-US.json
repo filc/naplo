@@ -397,13 +397,14 @@
     "3": "Get notified quickly",
     "4": "Fully customizable"
   },
-    "tutorial": {
-      "1": "On the main page you'll see all the data from the other ones.\nYou can search with the searchbar at the top, you can find anything from any associated data. Almost.",
-      "2": "On the evaluations page you can order the evaluations according to multiple aspects,\nat the top you can switch between the every-day evaluations, and your final grades.\nYou can also see the averages for each subject, and the corresponding evaluations (ghosh, how many times do I have to type that word?)",
-      "3": "The planner page is the page of pages. You can see all the stuff you'll never have time for.\nYou have the timetable/calendar here, as well as the homeworks, and scheduled exams.",
-      "4": "This is the page of text. You get your personal messages here, and you can write a new one on the bottom-right. You can switch between folders on the top-left.\nOn the second tab are notices, and system messages.\nOn the third one, you have the events - although we have never seen that feature in use either. ¯\\\\_(ツ)_/¯",
-      "5": "Someone's been a bad boy. That is, if this page is not empty.\nYou can see all your class-misses, delays, when the homework wasn't done or when you didn't have all the equipment for class.",
-      "6": "Here you can switch between accounts. What, you only have one? You can fix that here too. And you can remove them after. Nifty, right? No. This is what's nifty: You can set a custom display name and profile picture for each account. Not impressed? Too bad.\nAlmost forgot, you can find the settings, and some more info about the app here as well.",
-      "7": "Hope, you'll enjoy the new app!\nAre you missing your favourite feature from the new version?\nFear not, this will change soon, as we have just begin the developement."
-    }
+  "tutorial": {
+    "1": "On the main page you'll see all the data from the other ones.\nYou can search with the searchbar at the top, you can find anything from any associated data. Almost.",
+    "2": "On the evaluations page you can order the evaluations according to multiple aspects,\nat the top you can switch between the every-day evaluations, and your final grades.\nYou can also see the averages for each subject, and the corresponding evaluations (ghosh, how many times do I have to type that word?)",
+    "3": "The planner page is the page of pages. You can see all the stuff you'll never have time for.\nYou have the timetable/calendar here, as well as the homeworks, and scheduled exams.",
+    "4": "This is the page of text. You get your personal messages here, and you can write a new one on the bottom-right. You can switch between folders on the top-left.\nOn the second tab are notices, and system messages.\nOn the third one, you have the events - although we have never seen that feature in use either. ¯\\\\_(ツ)_/¯",
+    "5": "Someone's been a bad boy. That is, if this page is not empty.\nYou can see all your class-misses, delays, when the homework wasn't done or when you didn't have all the equipment for class.",
+    "6": "Here you can switch between accounts. What, you only have one? You can fix that here too. And you can remove them after. Nifty, right? No. This is what's nifty: You can set a custom display name and profile picture for each account. Not impressed? Too bad.\nAlmost forgot, you can find the settings, and some more info about the app here as well.",
+    "7": "Hope, you'll enjoy the new app!\nAre you missing your favourite feature from the new version?\nFear not, this will change soon, as we have just begin the developement."
+  },
+  "unknown": "unknown"
 }

@@ -626,6 +626,8 @@ class I18n implements WidgetsLocalizations {
   String get tutorial6 => "Itt válthatsz bejelentkezett fiókok között.\nEgy fióknak beállíthatsz egyéni nevet, és profilképet.\nFelvehetsz és törölhetsz fiókokat.\nItt találod az app beállításait és néhány további információt is.";
   /// "Reméljük, elégedett leszel az új appal!\nNem találod a kedvenc régi funkciódat?\nNe aggódj, az app még kezdeti fázisban van, sok funkcióval fog gyarapodni."
   String get tutorial7 => "Reméljük, elégedett leszel az új appal!\nNem találod a kedvenc régi funkciódat?\nNe aggódj, az app még kezdeti fázisban van, sok funkcióval fog gyarapodni.";
+  /// "ismeretlen"
+  String get unknown => "ismeretlen";
 }
 
 class _I18n_hu_HU extends I18n {
@@ -1529,6 +1531,9 @@ class _I18n_en_US extends I18n {
   /// "Hope, you'll enjoy the new app!\nAre you missing your favourite feature from the new version?\nFear not, this will change soon, as we have just begin the developement."
   @override
   String get tutorial7 => "Hope, you'll enjoy the new app!\nAre you missing your favourite feature from the new version?\nFear not, this will change soon, as we have just begin the developement.";
+  /// "unknown"
+  @override
+  String get unknown => "unknown";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -2428,6 +2433,9 @@ class _I18n_de_DE extends I18n {
   /// "Wir hoffen, dass dir die neuem App gefallen wird!\nBitte sei nicht stört, wenn du deine Lieblingsfunktion nicht findest. Wir werden viele Funktionen noch addieren."
   @override
   String get tutorial7 => "Wir hoffen, dass dir die neuem App gefallen wird!\nBitte sei nicht stört, wenn du deine Lieblingsfunktion nicht findest. Wir werden viele Funktionen noch addieren.";
+  /// "unknown"
+  @override
+  String get unknown => "unknown";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;

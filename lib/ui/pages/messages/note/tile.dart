@@ -48,9 +48,7 @@ class NoteTile extends StatelessWidget {
             context: context,
             backgroundColor: Colors.transparent,
             isScrollControlled: true,
-            builder: (context) {
-              return NoteView(note);
-            },
+            builder: (context) => NoteView(note),
           );
         },
       ),
