@@ -48,7 +48,9 @@ class TimetableView extends StatelessWidget {
                   DateFormat("HH:mm").format(lesson.end)),
             ]),
             subtitle: Text(
-              lesson.subject != null ? capital(lesson.subject.name) : "?",
+              lesson.subject != null
+                  ? capital(lesson.subject.name)
+                  : I18n.of(context).unknown,
               overflow: TextOverflow.ellipsis,
             ),
           ),

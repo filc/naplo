@@ -20,7 +20,8 @@ class TimetableBuilder {
         days.add(Day(date: lesson.date, lessons: [], tiles: []));
       }
 
-      days.last.lessons.add(lesson);
+      if (!days.last.lessons.map((l) => l.id).contains(lesson.id))
+        days.last.lessons.add(lesson);
       if (lesson.subject != null) days.last.tiles.add(LessonTile(lesson));
     });
 

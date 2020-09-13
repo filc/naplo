@@ -30,7 +30,9 @@ class ExamView extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: Text(
-                    capitalize(exam.teacher),
+                    exam.teacher != null
+                        ? capitalize(exam.teacher)
+                        : I18n.of(context).unknown,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),

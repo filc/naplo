@@ -118,10 +118,9 @@ class AboutPage extends StatelessWidget {
                       },
                     ),
                     SocialButton(
-                      icon: Icon(
-                        FeatherIcons.messageSquare,
-                        color: Colors.white,
-                        size: 32.0,
+                      icon: Padding(
+                        padding: const EdgeInsets.all(7.0),
+                        child: Image.asset("assets/discord.png"),
                       ),
                       color: Color(0xFF7289DA),
                       label: "Discord",

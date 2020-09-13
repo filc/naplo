@@ -7,13 +7,13 @@ class GradeTile extends StatelessWidget {
   final Evaluation evaluation;
   final Function deleteCallback;
 
-  GradeTile(this.evaluation, [this.deleteCallback]);
+  GradeTile(this.evaluation, {this.deleteCallback});
 
   @override
   Widget build(BuildContext context) {
     final bool isTemp = evaluation.id.startsWith("temp_");
     return GestureDetector(
-      child: EvaluationTile(evaluation, deleteCallback),
+      child: EvaluationTile(evaluation, deleteCallback: deleteCallback),
       onTap: isTemp
           ? () {}
           : () {

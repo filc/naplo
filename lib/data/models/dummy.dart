@@ -1,3 +1,4 @@
+import 'package:filcnaplo/data/models/event.dart';
 import 'package:filcnaplo/data/models/school.dart';
 import 'package:filcnaplo/data/models/student.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
@@ -103,7 +104,10 @@ class Dummy {
       "Test User",
       "This is another test message.",
       "Test 2",
-      [Recipient(0, '0', "Test Teacher", 0, null), Recipient(1, '1', "Albert", 1, null)],
+      [
+        Recipient(0, '0', "Test Teacher", 0, null),
+        Recipient(1, '1', "Albert", 1, null)
+      ],
       [],
     ),
   ];
@@ -119,6 +123,16 @@ class Dummy {
       null,
       "This is a test note.",
       Type("", "", "ElektronikusUzenet"),
+    ),
+  ];
+
+  static List<Event> events = [
+    Event(
+      "2378123",
+      DateTime.now(),
+      DateTime.now(),
+      "Test Event",
+      "This is a test event.",
     ),
   ];
 

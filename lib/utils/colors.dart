@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:tinycolor/tinycolor.dart';
+import 'package:crypto/crypto.dart';
 //import 'package:filcnaplo/ui/theme.dart';
 
 Color textColor(Color color) {
@@ -10,6 +13,8 @@ Color textColor(Color color) {
 Color stringToColor(String str) {
   if (str == null) return null;
   int hash = 0;
+
+  str = md5.convert(utf8.encode(str)).toString();
 
   for (int i = 0; i < str.length; i++) {
     hash = str.codeUnitAt(i) + ((hash << 5) - hash);

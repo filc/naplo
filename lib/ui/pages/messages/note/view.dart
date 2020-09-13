@@ -65,7 +65,7 @@ class NoteView extends StatelessWidget {
                         if (await canLaunch(url.url))
                           await launch(url.url);
                         else
-                          throw 'Invalid URL';
+                          throw '[ERROR] NoteView.build: Invalid URL';
                       },
                     ),
                   ),

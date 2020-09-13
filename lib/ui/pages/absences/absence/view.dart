@@ -60,11 +60,11 @@ class AbsenceView extends StatelessWidget {
                             (absence.lessonStart != null
                                 ? DateFormat("HH:mm")
                                     .format(absence.lessonStart)
-                                : "?") +
+                                : I18n.of(context).unknown) +
                             " - " +
                             (absence.lessonEnd != null
                                 ? DateFormat("HH:mm").format(absence.lessonEnd)
-                                : "?") +
+                                : I18n.of(context).unknown) +
                             ")",
                       )
                     : Container(),

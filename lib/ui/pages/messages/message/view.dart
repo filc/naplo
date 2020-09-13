@@ -267,7 +267,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                             if (await canLaunch(url))
                               await launch(url);
                             else
-                              throw 'Invalid URL';
+                              throw '[ERROR] MessageView.build: Invalid URL';
                           },
                         )
                       : SelectableLinkify(
@@ -276,7 +276,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                             if (await canLaunch(url.url))
                               await launch(url.url);
                             else
-                              throw 'Invalid URL';
+                              throw '[ERROR] MessageView.build: nvalid URL';
                           },
                         ),
                 )
@@ -302,7 +302,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                             if (await canLaunch(url))
                               await launch(url);
                             else
-                              throw 'Invalid URL';
+                              throw '[ERROR] MessageView.build: Invalid URL';
                           },
                         )
                       : SelectableLinkify(
@@ -311,7 +311,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                             if (await canLaunch(url.url))
                               await launch(url.url);
                             else
-                              throw 'Invalid URL';
+                              throw '[ERROR] MessageView.build: Invalid URL';
                           },
                         ),
                 )

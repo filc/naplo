@@ -53,9 +53,8 @@ class _AccountViewState extends State<AccountView> {
           onTap: () {
             AccountHelper(user: widget.user).deleteAccount(context);
           },
-          child: SizedBox(
-            width: 75,
-            height: 60,
+          child: Container(
+            padding: EdgeInsets.only(top: 4, bottom: 4, right: 15, left: 15),
             child: Column(
               children: <Widget>[
                 Padding(
@@ -85,9 +84,8 @@ class _AccountViewState extends State<AccountView> {
               nameChanged = false;
             });
           },
-          child: SizedBox(
-            width: 75,
-            height: 60,
+          child: Container(
+            padding: EdgeInsets.only(top: 4, bottom: 4, right: 15, left: 15),
             child: Column(
               children: <Widget>[
                 Padding(
@@ -99,7 +97,6 @@ class _AccountViewState extends State<AccountView> {
                 ),
                 Text(
                   capital(I18n.of(context).actionEdit),
-                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: edit ? app.settings.appColor : null,
                   ),
@@ -158,8 +155,24 @@ class _AccountViewState extends State<AccountView> {
           Padding(
             padding: EdgeInsets.all(12.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: actionButtons,
+              mainAxisAlignment: edit
+                  ? MainAxisAlignment.start
+                  : MainAxisAlignment.spaceEvenly,
+              children: edit
+                  ? <Widget>[
+                      IconButton(
+                        icon: Icon(FeatherIcons.arrowLeft),
+                        onPressed: () {
+                          setState(() {
+                            edit = false;
+                            editName = false;
+                            editProfileI = false;
+                            nameChanged = false;
+                          });
+                        },
+                      )
+                    ]
+                  : actionButtons,
             ),
           ),
 

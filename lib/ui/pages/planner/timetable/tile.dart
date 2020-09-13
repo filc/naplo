@@ -3,6 +3,7 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/homework.dart';
 import 'package:filcnaplo/data/models/lesson.dart';
 import 'package:filcnaplo/data/models/exam.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/view.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
@@ -72,8 +73,9 @@ class LessonTile extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: Text(
-                      capital(
-                          lesson.subject != null ? lesson.subject.name : "?"),
+                      capital(lesson.subject != null
+                          ? lesson.subject.name
+                          : I18n.of(context).unknown),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
