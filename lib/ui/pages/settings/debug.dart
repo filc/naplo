@@ -121,7 +121,7 @@ class _DebugSettingsState extends State<DebugSettings> {
                     ));
 
                     // sync before doing anything
-                    await app.user.sync.timetable.sync();
+                    //await app.user.sync.timetable.sync();
                     // get a builder and build current week
                     var timetableBuilder = TimetableBuilder();
                     timetableBuilder.build(timetableBuilder.getCurrentWeek());
@@ -129,7 +129,6 @@ class _DebugSettingsState extends State<DebugSettings> {
                     var minLessonIndex = 1;
                     var maxLessonIndex = 1;
                     var days = timetableBuilder.week.days;
-
                     days.forEach((day) {
                       var lessonIntMin = int.parse(day.lessons[0].lessonIndex);
                       if (lessonIntMin < minLessonIndex) {
@@ -141,6 +140,25 @@ class _DebugSettingsState extends State<DebugSettings> {
                     });
 
                     print('min: $minLessonIndex, max: $maxLessonIndex');
+                    var rows = <pw.TableRow>[];
+                    for (var i = minLessonIndex; i <= maxLessonIndex; i++) {
+                      List<pw.Widget> thisChildren = <pw.Widget>[];
+                      days.forEach((day) {
+                        day.lessons.forEach((lesson) {
+                          if (int.parse(lesson.lessonIndex) == i) {
+                            print('hello! true');
+                            print(lesson.subject.name);
+                            String name = lesson.subject.name;
+                            thisChildren.add(pw.Text('$name'));
+                          }
+                          thisChildren.add(pw.Text(
+                              '')); // ha ezt kikommentelem nem megy, de miééééééééééééééért????????
+                        });
+                      });
+                      pw.TableRow thisRow = pw.TableRow(children: thisChildren);
+                      rows.add(thisRow);
+                    }
+                    /* 
                     var rows = <pw.TableRow>[];
 
                     for (var i = minLessonIndex; i <= maxLessonIndex; i++) {
@@ -157,14 +175,14 @@ class _DebugSettingsState extends State<DebugSettings> {
 
                       rows.add(thisRow);
                     }
-                    var table = pw.Table(children: rows);
-
+                    var table = pw.Table(children: rows); */
+                    pw.Table table = pw.Table(children: rows);
                     print(table);
                     print(rows);
                     pdf.addPage(pw.Page(
                         pageFormat: PdfPageFormat.a4,
-                        build: (pw.Context context) => pw.Center(
-                            child: pw.Table(children: rows)))); // Page
+                        build: (pw.Context context) =>
+                            pw.Center(child: table)));
 
                     await Printing.layoutPdf(
                         onLayout: (format) async => pdf.save());
