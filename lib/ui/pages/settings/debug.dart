@@ -146,9 +146,9 @@ class _DebugSettingsState extends State<DebugSettings> {
                       days.forEach((day) {
                         day.lessons.forEach((lesson) {
                           if (int.parse(lesson.lessonIndex) == i) {
-                            print('hello! true');
                             print(lesson.subject.name);
                             String name = lesson.subject.name;
+
                             thisChildren.add(pw.Text('$name'));
                           }
                           thisChildren.add(pw.Text(
@@ -158,24 +158,7 @@ class _DebugSettingsState extends State<DebugSettings> {
                       pw.TableRow thisRow = pw.TableRow(children: thisChildren);
                       rows.add(thisRow);
                     }
-                    /* 
-                    var rows = <pw.TableRow>[];
 
-                    for (var i = minLessonIndex; i <= maxLessonIndex; i++) {
-                      var thisChildren = <pw.Widget>[];
-                      days.forEach((day) {
-                        day.lessons.forEach((lesson) {
-                          if (int.parse(lesson.lessonIndex) == i) {
-                            thisChildren.add(pw.Text(lesson.subject.name));
-                            print(lesson.subject.name);
-                          }
-                        });
-                      });
-                      var thisRow = pw.TableRow(children: thisChildren);
-
-                      rows.add(thisRow);
-                    }
-                    var table = pw.Table(children: rows); */
                     pw.Table table = pw.Table(children: rows);
                     print(table);
                     print(rows);
