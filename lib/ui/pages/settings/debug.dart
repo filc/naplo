@@ -147,7 +147,7 @@ class _DebugSettingsState extends State<DebugSettings> {
                         day.lessons.forEach((lesson) {
                           if (int.parse(lesson.lessonIndex) == i) {
                             print(lesson.subject.name);
-                            String name = lesson.subject.name;
+                            String name = lesson.subject.name ?? 'o/';
 
                             thisChildren.add(pw.Text('$name'));
                           }
