@@ -8,7 +8,9 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
-import 'package:filcnaplo/data/models/lesson.dart';
+import 'package:filcnaplo/ui/pages/planner/timetable/day.dart';
+import 'package:filcnaplo/ui/pages/planner/timetable/tile.dart';
+import 'package:filcnaplo/ui/pages/planner/timetable/builder.dart';
 
 class DebugSettings extends StatefulWidget {
   @override
@@ -108,7 +110,6 @@ class _DebugSettingsState extends State<DebugSettings> {
                           await rootBundle.load("assets/Roboto-Regular.ttf")),
                     );
                     final pdf = pw.Document(theme: myTheme);
-                    var containerElements = <pw.Widget>[];
 
                     // sync indicator
                     _scaffoldKey.currentState.showSnackBar(SnackBar(
@@ -121,65 +122,53 @@ class _DebugSettingsState extends State<DebugSettings> {
 
                     // sync before doing anything
                     await app.user.sync.timetable.sync();
-                    List<Lesson> lessons = app.user.sync.timetable.data;
+                    // get a builder and build current week
+                    var timetableBuilder = TimetableBuilder();
+                    timetableBuilder.build(timetableBuilder.getCurrentWeek());
 
-                    // process
-                    var totalLessonCounter = 0;
-                    for (int i = 1; i <= 5; i++) {
-                      var lessonChildren = <pw.Widget>[];
-                      for (var lesson in lessons) {
-                        if (lesson.date.weekday == i &&
-                            lesson.subject != null) {
-                          lessonChildren.add(pw.Text(lesson.lessonIndex +
-                              ".: " +
-                              lesson.subject.name));
-                          totalLessonCounter++;
-                        }
+                    var minLessonIndex = 1;
+                    var maxLessonIndex = 1;
+                    var days = timetableBuilder.week.days;
+
+                    days.forEach((day) {
+                      var lessonIntMin = int.parse(day.lessons[0].lessonIndex);
+                      if (lessonIntMin < minLessonIndex) {
+                        minLessonIndex = lessonIntMin;
                       }
+                      if (day.lessons.length + 1 > maxLessonIndex) {
+                        maxLessonIndex = day.lessons.length + 1;
+                      }
+                    });
 
-                      var dayColumn = pw.Column(
-                          children: lessonChildren,
-                          crossAxisAlignment: pw.CrossAxisAlignment.start,
-                          mainAxisSize: pw.MainAxisSize.min,
-                          mainAxisAlignment: pw.MainAxisAlignment.end);
-                      containerElements.add(pw.Padding(
-                          padding: pw.EdgeInsets.all(5), child: dayColumn));
+                    print('min: $minLessonIndex, max: $maxLessonIndex');
+                    var rows = <pw.TableRow>[];
+
+                    for (var i = minLessonIndex; i <= maxLessonIndex; i++) {
+                      var thisChildren = <pw.Widget>[];
+                      days.forEach((day) {
+                        day.lessons.forEach((lesson) {
+                          if (int.parse(lesson.lessonIndex) == i) {
+                            thisChildren.add(pw.Text(lesson.subject.name));
+                            print(lesson.subject.name);
+                          }
+                        });
+                      });
+                      var thisRow = pw.TableRow(children: thisChildren);
+
+                      rows.add(thisRow);
                     }
+                    var table = pw.Table(children: rows);
 
-                    /* var debug_decor = pw.BoxDecoration(
-                        border: pw.BoxBorder(
-                            color: PdfColor.fromHex('#808080'),
-                            left: true,
-                            right: true,
-                            top: true,
-                            bottom: true)); */
-
-                    var lessonCountLocal =
-                        I18n.of(context).settingsExportLessonCount;
-                    var rows = pw.Align(
-                        alignment: pw.Alignment.topCenter,
-                        child: pw.Column(
-                            mainAxisSize: pw.MainAxisSize.min,
-                            children: <pw.Widget>[
-                              pw.Header(
-                                  text: app.user.name +
-                                      I18n.of(context)
-                                          .settingsExportTimeTableOf),
-                              pw.Row(children: containerElements),
-                              pw.Padding(
-                                  padding: pw.EdgeInsets.all(5),
-                                  child: pw.Footer(
-                                      leading: pw.Text(
-                                          "$totalLessonCounter $lessonCountLocal"),
-                                      trailing: pw.Text('filcnaplo.hu')))
-                            ]));
-
+                    print(table);
+                    print(rows);
                     pdf.addPage(pw.Page(
                         pageFormat: PdfPageFormat.a4,
-                        build: (pw.Context context) => rows)); // Page
+                        build: (pw.Context context) => pw.Center(
+                            child: pw.Table(children: rows)))); // Page
 
                     await Printing.layoutPdf(
                         onLayout: (format) async => pdf.save());
+
                     _scaffoldKey.currentState.showSnackBar(SnackBar(
                       content: Text(
                         'Printing complete',
