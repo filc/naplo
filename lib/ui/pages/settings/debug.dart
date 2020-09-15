@@ -151,8 +151,9 @@ class _DebugSettingsState extends State<DebugSettings> {
 
                             thisChildren.add(pw.Text('$name'));
                           }
-                          thisChildren.add(pw.Text(
-                              '')); // ha ezt kikommentelem nem megy, de miééééééééééééééért????????
+                          if (thisChildren.isEmpty) {
+                            thisChildren.add(pw.Text(''));
+                          }
                         });
                       });
                       pw.TableRow thisRow = pw.TableRow(children: thisChildren);
