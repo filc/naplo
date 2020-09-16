@@ -8,8 +8,6 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
-import 'package:filcnaplo/ui/pages/planner/timetable/day.dart';
-import 'package:filcnaplo/ui/pages/planner/timetable/tile.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/builder.dart';
 
 class DebugSettings extends StatefulWidget {
@@ -105,6 +103,15 @@ class _DebugSettingsState extends State<DebugSettings> {
             ),
             onTap: app.debugMode
                 ? () async {
+                    String nameFormatter(String input) {
+                      var newString = '';
+                      input.split(' ').forEach((element) {
+                        newString += element[0];
+                      });
+                      return newString;
+                    }
+
+                    // pdf theme (for unicode support)
                     var myTheme = pw.ThemeData.withFont(
                       base: pw.Font.ttf(
                           await rootBundle.load("assets/Roboto-Regular.ttf")),
@@ -121,15 +128,17 @@ class _DebugSettingsState extends State<DebugSettings> {
                     ));
 
                     // sync before doing anything
-                    //await app.user.sync.timetable.sync();
+                    await app.user.sync.timetable.sync();
+
                     // get a builder and build current week
                     var timetableBuilder = TimetableBuilder();
                     timetableBuilder.build(timetableBuilder.getCurrentWeek());
 
                     var minLessonIndex = 1;
                     var maxLessonIndex = 1;
-                    var days = timetableBuilder.week.days;
-                    days.forEach((day) {
+                    var weekDays = timetableBuilder.week.days;
+
+                    weekDays.forEach((day) {
                       var lessonIntMin = int.parse(day.lessons[0].lessonIndex);
                       if (lessonIntMin < minLessonIndex) {
                         minLessonIndex = lessonIntMin;
@@ -139,41 +148,109 @@ class _DebugSettingsState extends State<DebugSettings> {
                       }
                     });
 
-                    print('min: $minLessonIndex, max: $maxLessonIndex');
+                    String days(BuildContext context, int i) => [
+                          I18n.of(context).dateMondayShort,
+                          I18n.of(context).dateTuesdayShort,
+                          I18n.of(context).dateWednesdayShort,
+                          I18n.of(context).dateThursdayShort,
+                          I18n.of(context).dateFridayShort,
+                          I18n.of(context).dateSaturdayShort,
+                          I18n.of(context).dateSundayShort
+                        ][i - 1];
+
                     var rows = <pw.TableRow>[];
+
+                    // build header row
+                    List<pw.Widget> headerChildren = <pw.Widget>[pw.Text('')];
+                    weekDays.forEach((day) {
+                      headerChildren.add(pw.Padding(
+                          padding: pw.EdgeInsets.all(5),
+                          child: pw.Center(
+                              child:
+                                  pw.Text(days(context, day.date.weekday)))));
+                    });
+                    pw.TableRow headerRow = pw.TableRow(
+                        children: headerChildren,
+                        verticalAlignment:
+                            pw.TableCellVerticalAlignment.middle);
+                    rows.add(headerRow);
+
+                    // build timetable
                     for (var i = minLessonIndex; i <= maxLessonIndex; i++) {
                       List<pw.Widget> thisChildren = <pw.Widget>[];
-                      days.forEach((day) {
+
+                      // lesson index at the start of the row
+                      thisChildren.add(pw.Padding(
+                          padding: pw.EdgeInsets.all(5),
+                          child: pw.Center(child: pw.Text('$i. '))));
+
+                      weekDays.forEach((day) {
                         day.lessons.forEach((lesson) {
                           if (int.parse(lesson.lessonIndex) == i) {
-                            print(lesson.subject.name);
-                            String name = lesson.subject.name ?? 'o/';
-
-                            thisChildren.add(pw.Text('$name'));
+                            String name = lesson.subject.name ?? '';
+                            String room = lesson.room ?? '';
+                            thisChildren.add(pw.Padding(
+                                padding: pw.EdgeInsets.fromLTRB(5, 10, 5, 5),
+                                child: pw.Column(children: <pw.Widget>[
+                                  pw.Align(
+                                      child: pw.Text('$name'),
+                                      alignment: pw.Alignment.center),
+                                  pw.Footer(
+                                      leading: pw.Text('$room'),
+                                      trailing: pw.Text(
+                                          nameFormatter(lesson.teacher))),
+                                ])));
                           }
+
                           if (thisChildren.isEmpty) {
                             thisChildren.add(pw.Text(''));
                           }
                         });
                       });
-                      pw.TableRow thisRow = pw.TableRow(children: thisChildren);
+                      pw.TableRow thisRow = pw.TableRow(
+                          children: thisChildren,
+                          verticalAlignment:
+                              pw.TableCellVerticalAlignment.middle);
                       rows.add(thisRow);
                     }
 
-                    pw.Table table = pw.Table(children: rows);
-                    print(table);
-                    print(rows);
-                    pdf.addPage(pw.Page(
-                        pageFormat: PdfPageFormat.a4,
-                        build: (pw.Context context) =>
-                            pw.Center(child: table)));
+                    // add timetable to pdf
+                    pw.Table table = pw.Table(
+                        children: rows,
+                        border: pw.TableBorder(
+                            bottom: true, top: true, left: true, right: true),
+                        defaultVerticalAlignment:
+                            pw.TableCellVerticalAlignment.middle);
 
+                    // header and footer
+                    pw.Footer footer =
+                        pw.Footer(trailing: pw.Text('filcnaplo.hu'));
+                    String className = app.user.sync.student.data.className;
+
+                    pw.Footer header = pw.Footer(
+                        margin: pw.EdgeInsets.only(bottom: 5),
+                        leading: pw.Center(child: pw.Text(app.user.name)),
+                        title: pw.Align(
+                            alignment: pw.Alignment.topCenter,
+                            child: pw.Text(className,
+                                style: pw.TextStyle(fontSize: 30))),
+                        trailing: pw.Center(
+                            child: pw.Text(
+                                app.user.sync.student.data.school.name)));
+                    pdf.addPage(pw.Page(
+                        pageFormat: PdfPageFormat.a4
+                            .landscape, // so the page looks normal both in portrait and landscape
+                        orientation: pw.PageOrientation.landscape,
+                        build: (pw.Context context) => pw.Column(
+                            children: <pw.Widget>[header, table, footer])));
+
+                    // print pdf
                     await Printing.layoutPdf(
                         onLayout: (format) async => pdf.save());
 
                     _scaffoldKey.currentState.showSnackBar(SnackBar(
                       content: Text(
-                        'Printing complete',
+                        I18n.of(context).settingsExportExportTimetableSuccess,
                         style: TextStyle(color: Colors.white),
                       ),
                       backgroundColor: Colors.green[700],
