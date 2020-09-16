@@ -228,7 +228,7 @@ class _DebugSettingsState extends State<DebugSettings> {
                     String className = app.user.sync.student.data.className;
 
                     pw.Footer header = pw.Footer(
-                        margin: pw.EdgeInsets.only(bottom: 5),
+                        margin: pw.EdgeInsets.all(5),
                         leading: pw.Center(child: pw.Text(app.user.name)),
                         title: pw.Align(
                             alignment: pw.Alignment.topCenter,
