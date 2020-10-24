@@ -3,6 +3,7 @@ import 'package:filcnaplo/data/models/lesson.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/day.dart';
 import 'package:filcnaplo/utils/format.dart';
+import 'package:filcnaplo/modules/printing/printerDebugScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:pdf/pdf.dart';
@@ -33,62 +34,42 @@ class TimetablePrinter {
     List rows = <pw.TableRow>[];
 
     // build header row
-    List<pw.Widget> headerChildren = <pw.Widget>[pw.Text('')];
-    days.forEach((day) {
-      headerChildren.add(pw.Padding(
-          padding: pw.EdgeInsets.all(5),
-          child:
-              pw.Center(child: pw.Text(dayNames(context, day.date.weekday)))));
-    });
+    List<pw.Widget> headerChildren = <pw.Widget>[pw.Container()];
+    days.forEach((day) => headerChildren.add(pw.Padding(
+        padding: pw.EdgeInsets.all(5),
+        child:
+            pw.Center(child: pw.Text(dayNames(context, day.date.weekday))))));
     pw.TableRow headerRow = pw.TableRow(
         children: headerChildren,
         verticalAlignment: pw.TableCellVerticalAlignment.middle);
     rows.add(headerRow);
 
-    // build timetable
-    for (int i = min; i <= max; i++) {
-      List<pw.Widget> thisChildren = <pw.Widget>[];
+    // for each row
+    for (int i = min; i < max; i++) {
+      var children = <pw.Widget>[];
+      var row = pw.TableRow(children: children);
 
-      // lesson index at the start of the row
-      thisChildren.add(pw.Padding(
-        padding: pw.EdgeInsets.all(5),
-        child: pw.Center(child: pw.Text('$i. ')),
-      ));
-
+      children.add(pw.Padding(
+          padding: pw.EdgeInsets.all(5),
+          child: pw.Center(child: pw.Text('$i. '))));
       days.forEach((Day day) {
-        var isNotEmpty = day.lessons.any((element) =>
-            element.lessonIndex != '+' && int.parse(element.lessonIndex) == i);
-
-        for (Lesson lesson in day.lessons) {
-          if (lesson.lessonIndex == '+') {
-            continue;
-          }
-          if (isNotEmpty) {
-            if (int.parse(lesson.lessonIndex) == i) {
-              String name = lesson.subject.name ?? lesson.name;
-              String room = lesson.room ?? '';
-
-              thisChildren.add(pw.Padding(
-                  padding: pw.EdgeInsets.fromLTRB(5, 10, 5, 5),
-                  child: pw.Column(children: <pw.Widget>[
-                    pw.Align(
-                        child: pw.Text(name), alignment: pw.Alignment.center),
-                    pw.Footer(
-                        leading: pw.Text(room),
-                        trailing: pw.Text(monogram(lesson.teacher))),
-                  ])));
-            }
-          } else {
-            thisChildren.add(pw.Container());
-            break;
-          }
-        }
+        var lesson = day.lessons.firstWhere(
+            (element) => element.lessonIndex != '+'
+                ? int.parse(element.lessonIndex) == i
+                : false,
+            orElse: () => null);
+        children.add(lesson != null
+            ? pw.Padding(
+                padding: pw.EdgeInsets.fromLTRB(5, 10, 5, 5),
+                child: pw.Column(children: [
+                  pw.Text(lesson.name ?? lesson.subject.name),
+                  pw.Footer(
+                      leading: pw.Text(lesson.room),
+                      trailing: pw.Text(monogram(lesson.teacher))),
+                ]))
+            : pw.Padding(padding: pw.EdgeInsets.all(5)));
       });
-      pw.TableRow thisRow = pw.TableRow(
-        children: thisChildren,
-        verticalAlignment: pw.TableCellVerticalAlignment.middle,
-      );
-      rows.add(thisRow);
+      rows.add(row);
     }
 
     // add timetable to pdf
@@ -109,6 +90,7 @@ class TimetablePrinter {
       margin: pw.EdgeInsets.all(5),
       title: pw.Text(className, style: pw.TextStyle(fontSize: 30)),
     );
+
     pdf.addPage(pw.Page(
         pageFormat: PdfPageFormat.a4
             .landscape, // so the page looks normal both in portrait and landscape
@@ -158,16 +140,24 @@ class TimetablePrinter {
       pdf = build(context, pdf, weekDays, minLessonIndex, maxLessonIndex);
 
       // print pdf
-      Printing.layoutPdf(onLayout: (format) => pdf.save()).then((success) {
-        if (success)
-          _scaffoldKey.currentState.showSnackBar(SnackBar(
-            content: Text(
-              I18n.of(context).settingsExportExportTimetableSuccess,
-              style: TextStyle(color: Colors.white),
-            ),
-            backgroundColor: Colors.green[700],
-          ));
-      });
+      if (!app.debugMode) {
+        Printing.layoutPdf(onLayout: (format) => pdf.save()).then((success) {
+          if (success)
+            _scaffoldKey.currentState.showSnackBar(SnackBar(
+              content: Text(
+                I18n.of(context).settingsExportExportTimetableSuccess,
+                style: TextStyle(color: Colors.white),
+              ),
+              backgroundColor: Colors.green[700],
+            ));
+        });
+      } else {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (c) =>
+                    PrintingDebugScreen((format) => Future.value(pdf.save()))));
+      }
     });
   }
 }
