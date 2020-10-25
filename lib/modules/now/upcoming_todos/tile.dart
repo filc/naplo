@@ -19,7 +19,7 @@ class ToDoTile extends StatelessWidget {
       I18n.of(context).dateSunday
     ];
     String details =
-        capital(subject) + " (" + days[writeDate.weekday] + ")";
+        capital(subject) + " (" + days[writeDate.weekday - 1] + ")";
     TextPainter painter = TextPainter(
         text: TextSpan(text: details), textDirection: TextDirection.ltr);
     painter.layout();

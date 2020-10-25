@@ -72,6 +72,7 @@ class LessonTile extends StatelessWidget {
               title: Row(
                 children: <Widget>[
                   Expanded(
+                    flex: 2,
                     child: Text(
                       capital(lesson.subject != null
                           ? lesson.subject.name
@@ -80,10 +81,16 @@ class LessonTile extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  Text(
-                    lesson.room,
-                    style: TextStyle(color: Colors.grey),
-                  )
+                  Expanded(
+                    flex: 1,
+                    child: Text(
+                      lesson.room,
+                      textAlign: TextAlign.right,
+                      style: TextStyle(color: Colors.grey),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                 ],
               ),
               trailing: Column(
