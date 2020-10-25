@@ -58,6 +58,7 @@ class TimetablePrinter {
                 ? int.parse(element.lessonIndex) == i
                 : false,
             orElse: () => null);
+
         children.add(lesson != null
             ? pw.Padding(
                 padding: pw.EdgeInsets.fromLTRB(5, 10, 5, 5),
