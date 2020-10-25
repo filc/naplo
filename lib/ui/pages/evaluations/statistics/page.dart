@@ -1,11 +1,87 @@
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/helpers/averages.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tinycolor/tinycolor.dart';
+
+class StatsBlock extends StatelessWidget {
+  StatsBlock(this.values, this.average, this.title);
+
+  final List<String> values;
+  final double average;
+  final String title;
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12.0),
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: 14.0, bottom: 4.0),
+            child: Row(
+              children: [
+                Container(
+                  /* color: Colors.red, */
+                  child: Text(title,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(fontSize: 18.0)),
+                ),
+              ],
+            ),
+          ),
+          FittedBox(
+            fit: BoxFit.fitWidth,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                EvaluationBlock(
+                  title: "5",
+                  value: values[4],
+                  color: app.theme.evalColors[4],
+                ),
+                EvaluationBlock(
+                  title: "4",
+                  value: values[3],
+                  color: app.theme.evalColors[3],
+                ),
+                EvaluationBlock(
+                  title: "3",
+                  value: values[2],
+                  color: app.theme.evalColors[2],
+                ),
+              ],
+            ),
+          ),
+          FittedBox(
+            fit: BoxFit.fitWidth,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  EvaluationBlock(
+                    title: "2",
+                    value: values[1],
+                    color: app.theme.evalColors[1],
+                  ),
+                  EvaluationBlock(
+                    title: "1",
+                    value: values[0],
+                    color: app.theme.evalColors[0],
+                  ),
+                  EvaluationBlock(
+                    value: average.toStringAsFixed(2),
+                    color:
+                        app.theme.evalColors[(average.round() - 1).clamp(0, 4)],
+                  ),
+                ]),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class StatisticsPage extends StatelessWidget {
   @override
@@ -14,16 +90,39 @@ class StatisticsPage extends StatelessWidget {
         .where((evaluation) => evaluation.type.name == "evkozi_jegy_ertekeles")
         .toList();
 
-    String count5 =
-        evaluations.where((e) => e.value.value == 5).length.toString();
-    String count4 =
-        evaluations.where((e) => e.value.value == 4).length.toString();
-    String count3 =
-        evaluations.where((e) => e.value.value == 3).length.toString();
-    String count2 =
-        evaluations.where((e) => e.value.value == 2).length.toString();
-    String count1 =
-        evaluations.where((e) => e.value.value == 1).length.toString();
+    List<String> grades = [
+      evaluations.where((e) => e.value.value == 1).length.toString(),
+      evaluations.where((e) => e.value.value == 2).length.toString(),
+      evaluations.where((e) => e.value.value == 3).length.toString(),
+      evaluations.where((e) => e.value.value == 4).length.toString(),
+      evaluations.where((e) => e.value.value == 5).length.toString(),
+    ];
+    var subjects = calculateSubjectsAverage().where((e) =>
+        !e.subject.category.id.contains("Magatartas") &&
+        !e.subject.category.id.contains("Szorgalom"));
+
+    count(int grade) {
+      return subjects
+          .where((e) => roundSubjectAverage(e.subject, e.average) == grade)
+          .length;
+    }
+
+    List<int> subjectGrades = [
+      count(1),
+      count(2),
+      count(3),
+      count(4),
+      count(5),
+    ];
+
+    double subjectsAvgSum = 0;
+    double subjectsAvgCount = 0;
+    for (int i = 0; i < subjectGrades.length; i++) {
+      var grade = i + 1;
+      subjectsAvgSum += grade * subjectGrades[i];
+      subjectsAvgCount += subjectGrades[i];
+    }
+    double subjectsAvg = subjectsAvgSum / subjectsAvgCount;
 
     double allAvg = 0;
 
@@ -43,61 +142,9 @@ class StatisticsPage extends StatelessWidget {
         child: ListView(
           physics: BouncingScrollPhysics(),
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(left: 14.0, bottom: 12.0),
-              child: Text(I18n.of(context).evaluations,
-                  style: TextStyle(fontSize: 18.0)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
-              child: FittedBox(
-                fit: BoxFit.fitWidth,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        EvaluationBlock(
-                          title: "5",
-                          value: count5,
-                          color: app.theme.evalColors[4],
-                        ),
-                        EvaluationBlock(
-                          title: "4",
-                          value: count4,
-                          color: app.theme.evalColors[3],
-                        ),
-                        EvaluationBlock(
-                          title: "3",
-                          value: count3,
-                          color: app.theme.evalColors[2],
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        EvaluationBlock(
-                          title: "2",
-                          value: count2,
-                          color: app.theme.evalColors[1],
-                        ),
-                        EvaluationBlock(
-                          title: "1",
-                          value: count1,
-                          color: app.theme.evalColors[0],
-                        ),
-                        EvaluationBlock(
-                          value: allAvg.toStringAsFixed(2),
-                          color: app.theme
-                              .evalColors[(allAvg.round() - 1).clamp(0, 4)],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            StatsBlock(grades, allAvg, I18n.of(context).evaluations),
+            StatsBlock(subjectGrades.map((e) => e.toString()).toList(),
+                subjectsAvg, I18n.of(context).evaluationsSubjectsAverage),
           ],
         ),
       ),

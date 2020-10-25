@@ -87,7 +87,7 @@ class _PageFrameState extends State<PageFrame> {
 
     switch (app.selectedPage) {
       case 0:
-        pageContent = HomePage();
+        pageContent = HomePage(_navItemSelected);
         break;
       case 1:
         pageContent = EvaluationsPage(_homeKey);
@@ -102,7 +102,7 @@ class _PageFrameState extends State<PageFrame> {
         pageContent = AbsencesPage(_homeKey);
         break;
       default:
-        pageContent = HomePage();
+        pageContent = HomePage(_navItemSelected);
         break;
     }
 

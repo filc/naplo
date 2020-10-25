@@ -17,8 +17,6 @@ class EvaluationTile extends StatelessWidget {
     final bool isTemp = evaluation.id.startsWith("temp_");
 
     return Container(
-      padding: EdgeInsets.all(3),
-      margin: EdgeInsets.all(3),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         color: isTemp ? Theme.of(context).highlightColor : null,

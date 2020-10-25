@@ -226,6 +226,7 @@
     "endYear": "Report",
     "subjects": "subjects",
     "statistics": "statistics",
+    "subjectsAverage":"Your subjects",
     "ghost": {
       "": "GHOST GRADE",
       "title": "Add new Ghost Grade",
@@ -410,5 +411,7 @@
     "6": "Here you can switch between accounts. What, you only have one? You can fix that here too. And you can remove them after. Nifty, right? No. This is what's nifty: You can set a custom display name and profile picture for each account. Not impressed? Too bad.\nAlmost forgot, you can find the settings, and some more info about the app here as well.",
     "7": "Hope, you'll enjoy the new app!\nAre you missing your favourite feature from the new version?\nFear not, this will change soon, as we have just begin the developement."
   },
-  "unknown": "unknown"
+  "unknown": "unknown",
+  "showOthers": "Show {count} more",
+  "collapseList": "Collapse list"
 }

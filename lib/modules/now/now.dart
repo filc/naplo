@@ -5,6 +5,8 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/ui/card.dart';
 import 'package:filcnaplo/modules/now/upcoming_todos/view.dart';
 class Now extends StatefulWidget {
+  Function jumpToPage;
+  Now(this.jumpToPage);
   @override
   NowState createState() => NowState();
 }
@@ -12,6 +14,6 @@ class Now extends StatefulWidget {
 class NowState extends State<Now> {
   @override
   Widget build(BuildContext context) {
-    return UpcomingToDoList();
+    return UpcomingToDoList(widget.jumpToPage);
   }
 }

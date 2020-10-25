@@ -1,12 +1,13 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
-import 'package:filcnaplo/data/models/absence.dart';
+import 'package:filcnaplo/data/context/app.dart';
+import 'package:filcnaplo/data/models/exam.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 
-class AbsenceTile extends StatelessWidget {
-  final Absence absence;
+class ExamTile extends StatelessWidget {
+  final Exam exam;
 
-  AbsenceTile(this.absence);
+  ExamTile(this.exam);
 
   @override
   Widget build(BuildContext context) {
@@ -17,28 +18,28 @@ class AbsenceTile extends StatelessWidget {
           height: 46.0,
           alignment: Alignment.center,
           child: Icon(
-              absence.state == "Igazolando"
-                  ? FeatherIcons.slash
-                  : FeatherIcons.check,
-              color: absence.state == "Igazolando"
-                  ? Colors.yellow[600]
+              exam.writeDate.isAfter(DateTime.now())
+                  ? FeatherIcons.edit
+                  : FeatherIcons.checkSquare,
+              color: exam.writeDate.isAfter(DateTime.now())
+                  ? app.settings.appColor
                   : Colors.green)),
       title: Row(
         children: <Widget>[
           Expanded(
             child: Text(
-              absence.type.description,
+              exam.mode.description,
               overflow: TextOverflow.ellipsis,
             ),
           ),
           Padding(
             padding: EdgeInsets.only(left: 8.0),
-            child: Text(formatDate(context, absence.submitDate)),
+            child: Text(formatDate(context, exam.date)),
           ),
         ],
       ),
       subtitle: Text(
-        absence.mode.description + '\n' + absence.subject.name,
+        exam.subjectName + "\n" + exam.description,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
       ),
