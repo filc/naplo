@@ -1,4 +1,6 @@
 import 'package:filcnaplo/data/context/app.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'dart:io';
@@ -23,7 +25,7 @@ class StorageController {
 
   Future create() async {
     await destroy(appPath);
-    
+
     storage = await openDatabase(
       appPath,
       version: 1,
@@ -36,15 +38,20 @@ class StorageController {
         await db.insert("settings", {
           "language": "auto",
           "app_color": "default",
-          "theme": "light",
-          "background_color": 0,
+          "theme": SchedulerBinding.instance.window.platformBrightness ==
+                  Brightness.dark
+              ? 'dark'
+              : 'light',
+          "background_color": 1,
           "notifications": 1,
           "selected_user": 0,
           "render_html": 1,
           "debug_mode": 0,
           "default_page": 0,
           "evening_start_hour": 18,
-          "studying_periods_bitfield": 1 << 3 | 1 << 4 | 1 << 5 //Weekend, evening, and afternoon by default
+          "studying_periods_bitfield": 1 << 3 |
+              1 << 4 |
+              1 << 5 //Weekend, evening, and afternoon by default
         });
 
         // Create Eval Colors

@@ -24,9 +24,7 @@ class CustomTabButton extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                  color: color),
+                  fontWeight: FontWeight.bold, fontSize: 18.0, color: color),
             ),
           ),
           dropdown
@@ -73,6 +71,20 @@ class CustomTabIndicator extends StatelessWidget {
   final int index;
   final onTap;
 
+  List<PopupMenuItem> get items {
+    List<PopupMenuItem> items = [];
+
+    for (int i = 0; i < label.dropdown.values.keys.length; i++) {
+      dynamic type = label.dropdown.values.keys.toList()[i];
+      if (label.dropdown.check != null && !label.dropdown.check(type)) continue;
+      items.add(PopupMenuItem(
+        value: i,
+        child: Text(label.dropdown.values[type]),
+      ));
+    }
+    return items;
+  }
+
   @override
   Widget build(BuildContext context) {
     final _menuKey = GlobalKey();
@@ -86,39 +98,19 @@ class CustomTabIndicator extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
           padding: EdgeInsets.symmetric(horizontal: 4.0),
           onPressed: () {
-            if (label.dropdown == null) {
-              onTap(index);
-            } else {
-              if (controller.index == index) {
+            onTap(index);
+            if (label.dropdown != null && controller.index == index) {
+              if (items.length > 1)
                 showMenu(
                   context: context,
                   position: () {
                     Offset pos = _getPosition(_menuKey);
                     return RelativeRect.fromLTRB(0, pos.dy, pos.dx, 0);
                   }(),
-                  items: () {
-                    List<PopupMenuItem> items = [];
-
-                    for (int i = 0;
-                        i < label.dropdown.values.keys.length;
-                        i++) {
-                      dynamic type = label.dropdown.values.keys.toList()[i];
-                      if (label.dropdown.check != null &&
-                          !label.dropdown.check(type)) continue;
-                      items.add(PopupMenuItem(
-                        value: i,
-                        child: Text(label.dropdown.values[type]),
-                      ));
-                    }
-
-                    return items;
-                  }(),
+                  items: items,
                 ).then((value) {
                   if (value != null) label.dropdown.callback(value);
                 });
-              } else {
-                onTap(index);
-              }
             }
           },
           child: Center(
@@ -129,7 +121,7 @@ class CustomTabIndicator extends StatelessWidget {
                             0.clamp(0, label.dropdown.values.values.length))
                         .replaceAll(". ", ".")
                     : label.title,
-                dropdown: label.dropdown != null,
+                dropdown: label.dropdown != null && items.length > 1,
                 color: backgroundColor),
           ),
         ),

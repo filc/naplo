@@ -462,6 +462,7 @@ class _AttachmentTileState extends State<AttachmentTile> {
 }
 
 // todo: error handling (snackbar)
+// ignore: missing_return
 Future<String> saveAttachment(
   Attachment attachment,
   Uint8List data,

@@ -86,8 +86,11 @@ class _HomePageState extends State<HomePage> {
                 GestureDetector(
                   child: app.user.profileIcon,
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AccountPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AccountPage(),
+                            fullscreenDialog: true));
                   },
                 ),
               ],
@@ -109,10 +112,10 @@ class _HomePageState extends State<HomePage> {
           compare: message.date,
         )));
     app.user.sync.note.data.forEach((note) => cards.add(NoteCard(
-      note,
-      key: Key(note.id),
-      compare: note.date,
-    )));
+          note,
+          key: Key(note.id),
+          compare: note.date,
+        )));
     app.user.sync.evaluation.data[0]
         .forEach((evaluation) => cards.add(EvaluationCard(
               evaluation,
@@ -120,20 +123,20 @@ class _HomePageState extends State<HomePage> {
               compare: evaluation.date,
             )));
     app.user.sync.absence.data.forEach((absence) => cards.add(AbsenceCard(
-      absence,
-      key: Key(absence.id.toString()),
-      compare: absence.submitDate,
-    )));
+          absence,
+          key: Key(absence.id.toString()),
+          compare: absence.submitDate,
+        )));
     app.user.sync.homework.data.forEach((homework) => cards.add(HomeworkCard(
-      homework,
-      key: Key(homework.id.toString()),
-      compare: homework.date,
-    )));
+          homework,
+          key: Key(homework.id.toString()),
+          compare: homework.date,
+        )));
     app.user.sync.exam.data.forEach((exam) => cards.add(ExamCard(
-      exam,
-      key: Key(exam.id.toString()),
-      compare: exam.date,
-    )));
+          exam,
+          key: Key(exam.id.toString()),
+          compare: exam.date,
+        )));
 
     cards.sort((a, b) => -a.compare.compareTo(b.compare));
 

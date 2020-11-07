@@ -49,14 +49,6 @@ class _EvaluationTabsState extends State<EvaluationTabs>
 
   @override
   Widget build(BuildContext context) {
-    List<String> types = [];
-
-    app.user.sync.evaluation.data[0].forEach((evaluation) {
-      if (!types.contains(evaluation.type.name)) {
-        types.add(evaluation.type.name);
-      }
-    });
-
     return Container(
       child: NestedScrollView(
         headerSliverBuilder: (context, _) {
@@ -78,7 +70,8 @@ class _EvaluationTabsState extends State<EvaluationTabs>
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => AccountPage()));
+                              builder: (context) => AccountPage(),
+                              fullscreenDialog: true));
                     },
                   ),
                 ),
@@ -94,8 +87,7 @@ class _EvaluationTabsState extends State<EvaluationTabs>
                 },
                 labels: [
                   CustomLabel(
-                    title: types.length == 1 ? capital(I18n.of(context).evaluationsMidYear) : null,
-                    dropdown: types.length > 1 ? CustomDropdown(
+                    dropdown: CustomDropdown(
                       values: {
                         "evkozi_jegy_ertekeles":
                             I18n.of(context).evaluationsMidYear,
@@ -113,6 +105,14 @@ class _EvaluationTabsState extends State<EvaluationTabs>
                             I18n.of(context).evaluationsEndYear,
                       },
                       check: (String type) {
+                        List<String> types = [];
+
+                        app.user.sync.evaluation.data[0].forEach((evaluation) {
+                          if (!types.contains(evaluation.type.name)) {
+                            types.add(evaluation.type.name);
+                          }
+                        });
+
                         return types.contains(type);
                       },
                       callback: (value) {
@@ -120,7 +120,7 @@ class _EvaluationTabsState extends State<EvaluationTabs>
                         widget.callback();
                       },
                       initialValue: app.selectedEvalPage,
-                    ) : null,
+                    ),
                   ),
                   CustomLabel(
                       title: capital(I18n.of(context).evaluationsSubjects)),
@@ -133,37 +133,32 @@ class _EvaluationTabsState extends State<EvaluationTabs>
         },
         body: TabBarView(
           controller: _tabController,
-          physics: NeverScrollableScrollPhysics(),
           children: [
             // Grades
             RefreshIndicator(
-              key: _refreshKeyGrades,
-              onRefresh: () async {
-                if (!await app.user.sync.evaluation.sync()) {
-                  widget._scaffoldKey.currentState.showSnackBar(SnackBar(
-                    content: Text(
-                      I18n.of(context).errorEvaluations,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.red,
-                  ));
-                } else {
-                  if (mounted) setState(() {});
-                }
-              },
-              child: CupertinoScrollbar(
-                child: ListView(
-                  padding: EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 64.0),
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  children: widget._gradeTiles.length > 0
-                      ? widget._gradeTiles
-                      : <Widget>[
-                          Empty(title: I18n.of(context).emptyGrades),
-                        ],
-                ),
-              ),
-            ),
+                key: _refreshKeyGrades,
+                onRefresh: () async {
+                  if (!await app.user.sync.evaluation.sync()) {
+                    widget._scaffoldKey.currentState.showSnackBar(SnackBar(
+                      content: Text(
+                        I18n.of(context).errorEvaluations,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.red,
+                    ));
+                  } else {
+                    if (mounted) setState(() {});
+                  }
+                },
+                child: widget._gradeTiles.length > 0
+                    ? CupertinoScrollbar(
+                        child: ListView(
+                            padding: EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 64.0),
+                            physics: BouncingScrollPhysics(
+                                parent: AlwaysScrollableScrollPhysics()),
+                            children: widget._gradeTiles),
+                      )
+                    : Empty(title: I18n.of(context).emptyGrades)),
 
             // Subjects
             RefreshIndicator(

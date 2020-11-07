@@ -1,4 +1,5 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/data/models/absence.dart';
 import 'package:filcnaplo/ui/pages/absences/absence/view.dart';
 import 'package:filcnaplo/utils/format.dart';
@@ -66,7 +67,7 @@ class AbsenceTile extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(left: 12.0),
-              child: Text(formatDate(context, absence.date)),
+              child: Text("${absence.lessonIndex}. ${I18n.of(context).lesson}"),
             ),
           ],
         ),

@@ -95,7 +95,7 @@ class TutorialPage1 extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 margin: EdgeInsets.symmetric(horizontal: 6.0),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: app.settings.theme.backgroundColor,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(FeatherIcons.search, color: app.settings.appColor),
@@ -145,7 +145,7 @@ class TutorialPage2 extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 margin: EdgeInsets.symmetric(horizontal: 6.0),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: app.settings.theme.backgroundColor,
                   shape: BoxShape.circle,
                 ),
                 child:
@@ -194,7 +194,7 @@ class TutorialPage3 extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 margin: EdgeInsets.symmetric(horizontal: 6.0),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: app.settings.theme.backgroundColor,
                   shape: BoxShape.circle,
                 ),
                 child:
@@ -243,7 +243,7 @@ class TutorialPage4 extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 margin: EdgeInsets.symmetric(horizontal: 6.0),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: app.settings.theme.backgroundColor,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(FeatherIcons.messageSquare,
@@ -294,7 +294,7 @@ class TutorialPage5 extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 margin: EdgeInsets.symmetric(horizontal: 6.0),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: app.settings.theme.backgroundColor,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(FeatherIcons.slash, color: app.settings.appColor),
@@ -318,7 +318,7 @@ class TutorialPage6 extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: app.settings.theme.backgroundColor,
               shape: BoxShape.circle,
             ),
             child: app.user.profileIcon,

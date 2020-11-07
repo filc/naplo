@@ -1,6 +1,3 @@
-import 'package:filcnaplo/data/context/app.dart';
-import 'package:filcnaplo/data/models/evaluation.dart';
-import 'package:filcnaplo/data/models/subject.dart';
 import 'package:filcnaplo/ui/pages/evaluations/subjects/tile.dart';
 import 'package:filcnaplo/helpers/averages.dart';
 

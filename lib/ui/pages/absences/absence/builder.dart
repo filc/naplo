@@ -25,7 +25,9 @@ class AbsenceBuilder {
     });
 
     absenceDays.keys.forEach((day) {
-      absenceTiles.add(AbsenceTileGroup(absenceDays[day]));
+      List<Absence> absences = absenceDays[day];
+      absences.sort((a, b) => a.lessonIndex.compareTo(b.lessonIndex));
+      absenceTiles.add(AbsenceTileGroup(absences));
     });
   }
 }

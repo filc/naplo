@@ -1,12 +1,12 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:filcnaplo/data/context/app.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/ui/custom_tabs.dart';
 import 'package:filcnaplo/ui/empty.dart';
 import 'package:filcnaplo/ui/pages/accounts/page.dart';
+import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/utils/format.dart';
-import 'package:filcnaplo/data/context/app.dart';
 
 class MessageTabs extends StatefulWidget {
   final _scaffoldKey;
@@ -75,7 +75,8 @@ class _MessageTabsState extends State<MessageTabs>
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => AccountPage()));
+                              builder: (context) => AccountPage(),
+                              fullscreenDialog: true));
                     },
                   ),
                 ),
@@ -113,7 +114,6 @@ class _MessageTabsState extends State<MessageTabs>
         },
         body: TabBarView(
           controller: _tabController,
-          physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             // Messages
             RefreshIndicator(
@@ -134,29 +134,25 @@ class _MessageTabsState extends State<MessageTabs>
               },
 
               // Message Tiles
-              child: CupertinoScrollbar(
-                child: ListView(
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  padding: EdgeInsets.only(top: 12.0),
-                  children: [
-                    Column(
-                      children:
-                          widget.messageTiles[app.selectedMessagePage].length >
-                                  0
-                              ? widget.messageTiles[app.selectedMessagePage]
-                              : <Widget>[
-                                  Empty(
-                                    title: app.selectedMessagePage == 3
-                                        ? I18n.of(context).notImplemented
-                                        : I18n.of(context).emptyMessages,
-                                  ),
-                                ],
+              child: widget.messageTiles[app.selectedMessagePage].length > 0
+                  ? CupertinoScrollbar(
+                      child: ListView(
+                        physics: BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
+                        padding: EdgeInsets.only(top: 12.0),
+                        children: [
+                          Column(
+                              children:
+                                  widget.messageTiles[app.selectedMessagePage]),
+                          SizedBox(height: 100.0),
+                        ],
+                      ),
+                    )
+                  : Empty(
+                      title: app.selectedMessagePage == 3
+                          ? I18n.of(context).notImplemented
+                          : I18n.of(context).emptyMessages,
                     ),
-                    SizedBox(height: 100.0),
-                  ],
-                ),
-              ),
             ),
 
             // Notes
@@ -175,49 +171,42 @@ class _MessageTabsState extends State<MessageTabs>
                   widget.callback();
                 }
               },
-              child: CupertinoScrollbar(
-                child: ListView(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  children: widget.noteTiles.length > 0
-                      ? widget.noteTiles
-                      : <Widget>[
-                          Empty(title: I18n.of(context).emptyNotes),
-                        ],
-                ),
-              ),
+              child: widget.noteTiles.length > 0
+                  ? CupertinoScrollbar(
+                      child: ListView(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          physics: BouncingScrollPhysics(
+                              parent: AlwaysScrollableScrollPhysics()),
+                          children: widget.noteTiles),
+                    )
+                  : Empty(title: I18n.of(context).emptyNotes),
             ),
 
             // Events
             RefreshIndicator(
-              key: _refreshKeyEvents,
-              onRefresh: () async {
-                if (!await app.user.sync.event.sync()) {
-                  widget._scaffoldKey.currentState.showSnackBar(SnackBar(
-                    content: Text(
-                      I18n.of(context).errorMessages,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.red,
-                  ));
-                } else {
-                  widget.callback();
-                }
-              },
-              child: CupertinoScrollbar(
-                child: ListView(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  children: widget.eventTiles.length > 0
-                      ? widget.eventTiles
-                      : <Widget>[
-                          Empty(title: I18n.of(context).emptyEvents),
-                        ],
-                ),
-              ),
-            ),
+                key: _refreshKeyEvents,
+                onRefresh: () async {
+                  if (!await app.user.sync.event.sync()) {
+                    widget._scaffoldKey.currentState.showSnackBar(SnackBar(
+                      content: Text(
+                        I18n.of(context).errorMessages,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.red,
+                    ));
+                  } else {
+                    widget.callback();
+                  }
+                },
+                child: widget.eventTiles.length > 0
+                    ? CupertinoScrollbar(
+                        child: ListView(
+                            padding: EdgeInsets.symmetric(vertical: 8.0),
+                            physics: BouncingScrollPhysics(
+                                parent: AlwaysScrollableScrollPhysics()),
+                            children: widget.eventTiles),
+                      )
+                    : Empty(title: I18n.of(context).emptyEvents)),
           ],
         ),
       ),

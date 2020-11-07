@@ -29,7 +29,7 @@ class PlannerTabs extends StatefulWidget {
 }
 
 class _PlannerTabsState extends State<PlannerTabs>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   final _refreshKeyTimetable = GlobalKey<RefreshIndicatorState>();
   final _refreshKeyHomeworks = GlobalKey<RefreshIndicatorState>();
   final _refreshKeyExams = GlobalKey<RefreshIndicatorState>();
@@ -79,7 +79,8 @@ class _PlannerTabsState extends State<PlannerTabs>
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => AccountPage()));
+                              builder: (context) => AccountPage(),
+                              fullscreenDialog: true));
                     },
                   ),
                 ),
@@ -105,7 +106,6 @@ class _PlannerTabsState extends State<PlannerTabs>
         },
         body: TabBarView(
           controller: _tabController,
-          physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             // Timetable
             RefreshIndicator(
