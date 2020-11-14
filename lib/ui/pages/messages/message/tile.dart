@@ -4,6 +4,7 @@ import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/ui/profile_icon.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:filcnaplo/ui/pages/messages/message/view.dart';
+import 'package:filcnaplo/data/context/app.dart';
 
 class MessageTile extends StatelessWidget {
   final Message message;
@@ -19,7 +20,7 @@ class MessageTile extends StatelessWidget {
       key: key,
       onDismissed: (direction) {
         callback(context, message);
-
+        app.user.kreta.trashMessage(true ,message.id);
         // setState(() {
         //   app.sync.messages.data[app.selectedMessagePage]
         //       .removeWhere((msg) => msg.id == message.id);
