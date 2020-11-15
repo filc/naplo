@@ -8,7 +8,7 @@
 .buildlog/
 .history
 .svn/
-
+.gitignore
 # IntelliJ related
 *.iml
 *.ipr
@@ -39,3 +39,6 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+
+#egyeb
+*.lock
