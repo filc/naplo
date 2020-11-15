@@ -274,7 +274,6 @@ class KretaClient {
   }
 
   Future<void> trashMessage(bool put, int id) async {
-
     try {
       var response = await client.post(BaseURL.KRETA_ADMIN + AdminEndpoints.trashMessage,
         headers: {

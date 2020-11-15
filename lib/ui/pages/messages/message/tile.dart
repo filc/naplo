@@ -1,3 +1,4 @@
+import 'package:filcnaplo/helpers/archivemessage.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/models/message.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
@@ -9,23 +10,17 @@ import 'package:filcnaplo/data/context/app.dart';
 class MessageTile extends StatelessWidget {
   final Message message;
   final List<Message> children;
-  final Function(BuildContext, Message) callback;
+  final _builderScaffold;
+  final callback;
   final Key key;
 
-  MessageTile(this.message, this.children, this.callback, {this.key});
+  MessageTile(this.message, this.children, this._builderScaffold, this.callback, {this.key});
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
       key: key,
-      onDismissed: (direction) {
-        callback(context, message);
-        app.user.kreta.trashMessage(true ,message.id);
-        // setState(() {
-        //   app.sync.messages.data[app.selectedMessagePage]
-        //       .removeWhere((msg) => msg.id == message.id);
-        // });
-      },
+        onDismissed: (direction) => archiveMessage(key, context, message, true, callback),
       secondaryBackground: Container(
         color: Colors.green[600],
         alignment: Alignment.centerRight,
@@ -76,7 +71,7 @@ class MessageTile extends StatelessWidget {
         ),
         onTap: () {
           Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => MessageView(children)));
+              MaterialPageRoute(builder: (context) => MessageView(children, this._builderScaffold, this.callback)));
         },
       ),
     );
