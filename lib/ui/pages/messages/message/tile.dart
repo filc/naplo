@@ -20,22 +20,22 @@ class MessageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: key,
-        onDismissed: (direction) => archiveMessage(key, context, message, true, callback),
+        onDismissed: (direction) => archiveMessage(_builderScaffold, context, message, !message.deleted, callback),
       secondaryBackground: Container(
-        color: Colors.green[600],
+        color: message.deleted ? Colors.green[600] : Colors.blue[600],
         alignment: Alignment.centerRight,
         padding: EdgeInsets.only(right: 24.0),
         child: Icon(
-          FeatherIcons.archive,
+          message.deleted ? FeatherIcons.externalLink : FeatherIcons.archive,
           color: Colors.white,
         ),
       ),
       background: Container(
-        color: Colors.green[600],
+        color: message.deleted ? Colors.green[600] : Colors.blue[600],
         alignment: Alignment.centerLeft,
         padding: EdgeInsets.only(left: 24.0),
         child: Icon(
-          FeatherIcons.archive,
+          message.deleted ? FeatherIcons.externalLink : FeatherIcons.archive,
           color: Colors.white,
         ),
       ),
