@@ -54,7 +54,6 @@ class Message {
     message["cimzettLista"].forEach((recipient) {
       recipients.add(Recipient.fromJson(recipient));
     });
-
     message["csatolmanyok"].forEach((attachment) {
       attachments.add(Attachment.fromJson(attachment));
     });

@@ -1,3 +1,5 @@
+import 'package:filcnaplo/data/models/attachment.dart';
+
 class Homework {
   Map json;
   DateTime date;
@@ -10,7 +12,7 @@ class Homework {
   String content;
   String subjectName;
   String group;
-  List attachments;
+  List<Attachment> attachments;
   String id;
 
   Homework(
@@ -46,7 +48,12 @@ class Homework {
     String subjectName = json["TantargyNeve"] ?? "";
     String group =
         json["OsztalyCsoport"] != null ? json["OsztalyCsoport"]["Uid"] : null;
-    List attachments = json["Csatolmanyok"];
+    List<Attachment> attachments = [];
+    if (json["Csatolmanyok"] == null) {} else {
+      json["Csatolmanyok"].forEach((attachment) {
+      attachments.add(Attachment.fromJson(attachment));
+     });
+    }
     String id = json["Uid"];
     bool isSolved = json["IsMegoldva"] ?? false;
 
