@@ -49,8 +49,8 @@ class Homework {
     String group =
         json["OsztalyCsoport"] != null ? json["OsztalyCsoport"]["Uid"] : null;
     List<Attachment> attachments = [];
-    if (json["Csatolmanyok"] == null) {} else {
-      json["Csatolmanyok"].forEach((attachment) {
+    if (json["csatolmanyok"] == null) {} else {
+      json["csatolmanyok"].forEach((attachment) {
       attachments.add(Attachment.fromJson(attachment));
      });
     }
