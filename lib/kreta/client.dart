@@ -272,6 +272,27 @@ class KretaClient {
       return null;
     }
   }
+   Future<void> trashMessage(bool put, int id) async {
+
+    try {
+      var response = await client.post(BaseURL.KRETA_ADMIN + AdminEndpoints.trashMessage,
+        headers: {
+          "Authorization": "Bearer $accessToken",
+          "User-Agent": userAgent,
+          "Content-Type": "application/json"
+        },
+        body: jsonEncode({
+          "isKuka": put,
+          "postaladaElemAzonositoLista": [id]
+        })
+      );
+      await checkResponse(response);
+      //return
+    } catch (error) {
+      print("ERROR: KretaAPI.deleteMessage: " + error.toString());
+      return null;
+    }
+  }
 
   Future<List<Recipient>> getRecipients() async {
     try {
@@ -642,9 +663,23 @@ class KretaClient {
 
       List responseJson = jsonDecode(response.body);
       List<Homework> homeworks = [];
-
       responseJson
-          .forEach((homework) => homeworks.add(Homework.fromJson(homework)));
+          .forEach((homework) async {//homeworks.add(Homework.fromJson(homework)
+          var response2 = await client.get(
+                  BaseURL.kreta(instituteCode) +
+                      KretaEndpoints.homeworks + "/" +
+                      homework["Uid"],
+                  headers: {
+                    "Authorization": "Bearer $accessToken",
+                    "User-Agent": userAgent
+                  },
+                );
+
+          await checkResponse(response2);
+      
+          Map responseJson2 = jsonDecode(response2.body);
+          homeworks.add(Homework.fromJson(responseJson2));
+           });
 
       return homeworks;
     } catch (error) {
@@ -652,6 +687,29 @@ class KretaClient {
       return null;
     }
   }
+    
+  // Client method template
+  
+    Future<Uint8List> downloadHomeworkAttachment(HomeworkAttachment attachment) async {
+      try {
+        var response = await client.get(BaseURL.kreta(instituteCode) + KretaEndpoints.downloadHomeworkAttachments(attachment.id.toString(),attachment.type),
+          headers: {
+            "Authorization": "Bearer $accessToken",
+            "User-Agent": userAgent
+          },
+        );
+
+        await checkResponse(response);
+        
+        return response.bodyBytes;
+      } catch (error) {
+        print("ERROR: KretaAPI.downloadHomeworkAttachment: " + error.toString());
+        return null;
+      }
+    }
+  
+
+
 
   Future<List<Lesson>> getLessons(DateTime from, DateTime to) async {
     if (from == null || to == null) return [];

@@ -90,7 +90,7 @@ class SearchController {
     return results;
   }
 
-  List<Searchable> getSearchables(BuildContext context) {
+  List<Searchable> getSearchables(BuildContext context, _scaffoldKey, callback) {
     List<Searchable> searchables = [];
 
     List<Message> messages = <List<Message>>[
@@ -105,9 +105,9 @@ class SearchController {
           child: MessageTile(message),
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => MessageView([message])));
+                builder: (context) => MessageView([message], _scaffoldKey, callback)));
           },
-        ),
+        ),  
     )));
 
     // Notes

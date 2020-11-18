@@ -8,8 +8,10 @@ class MessageCard extends BaseCard {
   final Message message;
   final Key key;
   final DateTime compare;
+  final _scaffoldKey;
+  final callback;
 
-  MessageCard(this.message, {this.compare, this.key});
+  MessageCard(this.message, this._scaffoldKey, this.callback, {this.compare, this.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class MessageCard extends BaseCard {
         ),
         onTap: () {
           Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => MessageView([message])));
+              MaterialPageRoute(builder: (context) => MessageView([message], this._scaffoldKey, this.callback)));
         },
       ),
     );

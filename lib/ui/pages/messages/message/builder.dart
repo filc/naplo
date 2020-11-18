@@ -6,8 +6,9 @@ import 'package:filcnaplo/generated/i18n.dart';
 
 class MessageBuilder {
   final _scaffoldKey;
+  final callback;
 
-  MessageBuilder(this._scaffoldKey);
+  MessageBuilder(this._scaffoldKey, this.callback);
 
   List<List<MessageTile>> messageTiles = [[], [], [], []];
 
@@ -16,7 +17,7 @@ class MessageBuilder {
       messageTiles[i] = [];
       app.user.sync.messages.data[i].reversed.forEach((Message message) {
         messageTiles[i].add(
-          MessageTile(message, [message], archiveMessage,
+          MessageTile(message, [message], this._scaffoldKey,this.callback,
               key: Key(message.id.toString())),
         );
       });
@@ -32,7 +33,7 @@ class MessageBuilder {
 
     messages.forEach((Message message) {
       if (message.conversationId == null) {
-        messageTiles[0].add(MessageTile(message, [message], archiveMessage,
+        messageTiles[0].add(MessageTile(message, [message], this._scaffoldKey,this.callback,
             key: Key(message.id.toString())));
       } else {
         if (conversations[message.conversationId] == null)
@@ -55,24 +56,12 @@ class MessageBuilder {
       messageTiles[0].add(MessageTile(
         conversations[conversationId].first,
         conversations[conversationId],
-        archiveMessage,
+        this._scaffoldKey,
+        this.callback,
         key: Key(conversations[conversationId][0].id.toString()),
       ));
     });
 
     messageTiles[0].sort((a, b) => -a.message.date.compareTo(b.message.date));
-  }
-
-  Future archiveMessage(BuildContext context, Message message) async {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text(I18n.of(context).messageDeleted),
-      duration: Duration(seconds: 5),
-      action: SnackBarAction(
-        label: I18n.of(context).dialogUndo,
-        onPressed: () {
-          // magic
-        },
-      ),
-    ));
   }
 }
