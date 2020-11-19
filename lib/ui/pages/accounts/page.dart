@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/pages/settings/page.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/ui/pages/accounts/view.dart';
+import 'package:filcnaplo/ui/pages/accounts/dkt.dart';
 
 class AccountPage extends StatefulWidget {
   @override
@@ -149,6 +151,102 @@ class _AccountPageState extends State<AccountPage> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class AccountTile extends StatefulWidget {
+  final User user;
+  final Function onSelect;
+  final Function onDelete;
+
+  AccountTile(this.user, {this.onSelect, this.onDelete});
+
+  @override
+  _AccountTileState createState() => _AccountTileState();
+}
+
+class _AccountTileState extends State<AccountTile> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 14.0),
+      child: FlatButton(
+        padding: EdgeInsets.zero,
+        onPressed: () {
+          widget.onSelect(app.users.indexOf(widget.user));
+        },
+        onLongPress: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => AccountView(widget.user, callback: setState),
+            backgroundColor: Colors.transparent,
+          ).then((deleted) {
+            if (deleted == true) widget.onDelete();
+          });
+        },
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
+        child: ListTile(
+          leading: ProfileIcon(
+              name: widget.user.name,
+              size: 0.85,
+              image: widget.user.customProfileIcon),
+          //cannot reuse the default profile icon because of size differences
+          title: Text(
+            widget.user.name ?? I18n.of(context).unknown,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RaisedButton(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Icon(FeatherIcons.grid),
+                    ),
+                    Text("DKT"),
+                  ],
+                ),
+                color: app.settings.theme.backgroundColor,
+                colorBrightness: app.settings.theme.brightness,
+                shape: StadiumBorder(),
+                onPressed: () {
+                  app.kretaApi.users[widget.user.id]
+                      .refreshLogin()
+                      .then((success) {
+                    if (success) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => DKTPage(widget.user)));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(I18n.of(context).loginError),
+                        duration: Duration(seconds: 5),
+                      ));
+                    }
+                  });
+                },
+              ),
+              IconButton(
+                icon: Icon(FeatherIcons.moreVertical),
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) =>
+                        AccountView(widget.user, callback: setState),
+                    backgroundColor: Colors.transparent,
+                  ).then((deleted) {
+                    if (deleted == true) widget.onDelete();
+                  });
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
