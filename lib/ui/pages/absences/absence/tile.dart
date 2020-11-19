@@ -42,7 +42,7 @@ class AbsenceTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+        padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 8.0),
         child: Row(
           children: <Widget>[
             Icon(
@@ -55,18 +55,21 @@ class AbsenceTile extends StatelessWidget {
                       ? Colors.yellow[600]
                       : Colors.red,
             ),
+            Padding(
+              padding: EdgeInsets.only(left: 12.0),
+              child: absence.lessonIndex != null ? Text(
+                absence.lessonIndex.toString() + ".",
+                style: TextStyle(color: Colors.grey),
+              ) : Container(),
+            ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.only(left: 12.0),
+                padding: EdgeInsets.only(left: 6.0),
                 child: Text(
                   capital(absence.subject.name),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 12.0),
-              child: Text(formatDate(context, absence.date)),
             ),
           ],
         ),

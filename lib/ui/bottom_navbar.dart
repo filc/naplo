@@ -59,7 +59,7 @@ class BottomNavbar extends StatelessWidget {
           icon: Padding(
             padding: EdgeInsets.all(14.0),
             child: Icon(
-              FeatherIcons.slash,
+              FeatherIcons.clock,
             ),
           ),
           label: I18n.of(context).absenceTitle,

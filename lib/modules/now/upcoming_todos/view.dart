@@ -1,6 +1,5 @@
 import 'package:filcnaplo/modules/now/upcoming_todos/tile.dart';
 import 'package:flutter/material.dart';
-import 'package:filcnaplo/data/context/app.dart';
 import 'builder.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
@@ -94,10 +93,7 @@ class UpcomingToDoList extends BaseCard {
           ? ToDoList(
               FeatherIcons.calendar,
               I18n.of(context).examUpcoming,
-              () {
-                app.tabState.timetable.index = 2;
-                jumpToPage(2);
-              },
+              () => jumpToPage(2),
               builder.examTiles,
             )
           : Container(),
@@ -105,10 +101,7 @@ class UpcomingToDoList extends BaseCard {
           ? ToDoList(
               FeatherIcons.home,
               I18n.of(context).homeworkUpcoming,
-              () {
-                app.tabState.timetable.index = 1;
-                jumpToPage(2);
-              },
+              () => jumpToPage(2),
               builder.homeworkTiles,
             )
           : Container()

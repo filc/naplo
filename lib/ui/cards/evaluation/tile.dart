@@ -4,7 +4,6 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/utils/format.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class EvaluationTile extends StatelessWidget {
   final Evaluation evaluation;
@@ -15,6 +14,36 @@ class EvaluationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isTemp = evaluation.id.startsWith("temp_");
+
+    String title = evaluation.type.name == "evkozi_jegy_ertekeles"
+        ? evaluation.description != ""
+            ? capital(evaluation.description)
+            : capital(evaluation.mode != null
+                    ? evaluation.mode.description
+                    : evaluation.value.valueName.split("(")[0]) +
+                " " +
+                (evaluation.value.weight != 100
+                    ? evaluation.value.weight.toString() + "%"
+                    : "")
+        : capital(evaluation.subject != null
+            ? evaluation.subject.name
+            : I18n.of(context).unknown);
+
+    String subtitle = evaluation.type.name == "evkozi_jegy_ertekeles"
+        ? capital(evaluation.subject != null
+                ? evaluation.subject.name
+                : I18n.of(context).unknown) +
+            (evaluation.description != ""
+                ? (evaluation.mode != null
+                    ? "\n" +
+                        evaluation.mode.description +
+                        " " +
+                        (evaluation.value.weight != 100
+                            ? evaluation.value.weight.toString() + "%"
+                            : "")
+                    : evaluation.form != null ? "\n" + evaluation.form : "")
+                : "")
+        : evaluation.value.valueName.split("(")[0];
 
     return Container(
       decoration: BoxDecoration(
@@ -37,25 +66,29 @@ class EvaluationTile extends StatelessWidget {
                         ? evaluation.value.value.toString()
                         : evaluation.value.shortName ?? "?",
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.quicksand(
+                    style: TextStyle(
                       fontSize: 38.0,
                       height: 1.2,
                       fontWeight: FontWeight.w500,
                       color: isTemp
                           ? Theme.of(context).accentColor
                           : evaluation.value.value != 0 &&
-                                  evaluation.evaluationType.name != "Szazalekos"
-                              ? app.theme.evalColors[
-                                  (evaluation.value.value - 1).clamp(0, 4)]
-                              : null,
+                                  evaluation.evaluationType != null &&
+                                  evaluation.evaluationType.name == "Szazalekos"
+                              ? null
+                              : app.theme.evalColors[
+                                  (evaluation.value.value - 1).clamp(0, 4)],
                     ),
                   ),
-                  evaluation.evaluationType.name == "Szazalekos"
+                  evaluation.evaluationType != null &&
+                          evaluation.evaluationType.name == "Szazalekos"
                       ? Text("%",
-                          style: GoogleFonts.quicksand(
-                              fontSize: 20,
-                              height: 0.8,
-                              fontWeight: FontWeight.w700))
+                          style: TextStyle(
+                            fontFamily: "GoogleSans",
+                            fontSize: 20,
+                            height: 0.8,
+                            fontWeight: FontWeight.w700,
+                          ))
                       : Container()
                 ],
               ),
@@ -73,20 +106,7 @@ class EvaluationTile extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     )
                   : Text(
-                      evaluation.type.name == "evkozi_jegy_ertekeles"
-                          ? evaluation.description != ""
-                              ? capital(evaluation.description)
-                              : capital(evaluation.mode != null
-                                      ? evaluation.mode.description
-                                      : evaluation.value.valueName
-                                          .split("(")[0]) +
-                                  " " +
-                                  (evaluation.value.weight != 100
-                                      ? evaluation.value.weight.toString() + "%"
-                                      : "")
-                          : capital(evaluation.subject != null
-                              ? evaluation.subject.name
-                              : I18n.of(context).unknown),
+                      title,
                       overflow: TextOverflow.ellipsis,
                     ),
             ),
@@ -103,24 +123,7 @@ class EvaluationTile extends StatelessWidget {
         subtitle: isTemp
             ? Text(evaluation.value.weight.toString() + "%")
             : Text(
-                evaluation.type.name == "evkozi_jegy_ertekeles"
-                    ? capital(evaluation.subject != null
-                            ? evaluation.subject.name
-                            : I18n.of(context).unknown) +
-                        (evaluation.description != ""
-                            ? (evaluation.mode != null
-                                ? "\n" +
-                                    evaluation.mode.description +
-                                    " " +
-                                    (evaluation.value.weight != 100
-                                        ? evaluation.value.weight.toString() +
-                                            "%"
-                                        : "")
-                                : evaluation.form != null
-                                    ? "\n" + evaluation.form
-                                    : "")
-                            : "")
-                    : evaluation.value.valueName.split("(")[0],
+                subtitle,
                 maxLines: evaluation.mode != null ? 2 : 1,
                 overflow: TextOverflow.ellipsis,
               ),

@@ -1,15 +1,15 @@
-//import 'package:flutter/gestures.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:filcnaplo/ui/account_button.dart';
 import 'package:filcnaplo/ui/custom_tabs.dart';
 import 'package:filcnaplo/ui/empty.dart';
-import 'package:filcnaplo/ui/pages/accounts/page.dart';
+import 'package:filcnaplo/ui/pages/debug/button.dart';
+import 'package:filcnaplo/ui/pages/debug/view.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/frame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:filcnaplo/data/context/app.dart';
-//import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 
 class PlannerTabs extends StatefulWidget {
   final _scaffoldKey;
@@ -36,7 +36,7 @@ class _PlannerTabsState extends State<PlannerTabs>
   TabController _tabController;
 
   bool showPastExams = false;
-  bool showPastHomeworks = false;
+  bool showPastHomework = false;
 
   @override
   void initState() {
@@ -44,7 +44,6 @@ class _PlannerTabsState extends State<PlannerTabs>
     _tabController = TabController(
       vsync: this,
       length: 3,
-      initialIndex: app.tabState.timetable.index,
     );
   }
 
@@ -65,33 +64,21 @@ class _PlannerTabsState extends State<PlannerTabs>
             SliverAppBar(
               floating: true,
               pinned: true,
-              snap: true,
               forceElevated: true,
-              leading: Icon(FeatherIcons.calendar),
-              title: Text(I18n.of(context).plannerTitle),
-              centerTitle: true,
+              title: Text(
+                I18n.of(context).plannerTitle,
+                style: TextStyle(fontSize: 22.0),
+              ),
               actions: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(right: 8.0),
-                  child: IconButton(
-                    icon: app.user.profileIcon,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AccountPage()));
-                    },
-                  ),
-                ),
+                DebugButton(DebugViewClass.planner),
+                AccountButton()
               ],
               bottom: CustomTabBar(
                 controller: _tabController,
                 color: app.settings.theme.textTheme.bodyText1.color,
                 onTap: (value) {
-                  app.tabState.timetable.index = value;
                   _tabController.animateTo(value);
                   app.sync.updateCallback();
-                  app.storage.storage.update("tabs", {"timetable": value});
                 },
                 labels: [
                   CustomLabel(
@@ -105,7 +92,6 @@ class _PlannerTabsState extends State<PlannerTabs>
         },
         body: TabBarView(
           controller: _tabController,
-          physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             // Timetable
             RefreshIndicator(
@@ -142,41 +128,57 @@ class _PlannerTabsState extends State<PlannerTabs>
                   widget.callback();
                 }
               },
-              child: CupertinoScrollbar(
-                child: ListView(
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  children: <Widget>[
-                    widget.homeworkTiles[0].length > 0
-                        ? Column(children: widget.homeworkTiles[0])
-                        : Empty(title: I18n.of(context).emptyHomework),
-                    FlatButton(
-                      onPressed: () => setState(
-                          () => showPastHomeworks = !showPastHomeworks),
-                      child: Row(
+              child: widget.homeworkTiles[0].length > 0 ||
+                      widget.homeworkTiles[1].length > 0
+                  ? CupertinoScrollbar(
+                      child: ListView(
+                        padding: EdgeInsets.only(top: 12.0),
+                        physics: BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
                         children: <Widget>[
-                          Expanded(child: Text(I18n.of(context).homeworkPast)),
-                          Icon(
-                            showPastHomeworks
-                                ? FeatherIcons.chevronUp
-                                : FeatherIcons.chevronDown,
-                          ),
+                          Column(children: widget.homeworkTiles[0]),
+                          widget.homeworkTiles[0].length == 0
+                              ? Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 12.0, top: 12.0),
+                                  child: Text(
+                                    I18n.of(context).homeworkPast.toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      letterSpacing: .7,
+                                    ),
+                                  ),
+                                )
+                              : widget.homeworkTiles[1].length > 0
+                                  ? FlatButton(
+                                      onPressed: () => setState(() =>
+                                          showPastHomework = !showPastHomework),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                              child: Text(I18n.of(context)
+                                                  .homeworkPast)),
+                                          Icon(
+                                            showPastHomework
+                                                ? FeatherIcons.chevronUp
+                                                : FeatherIcons.chevronDown,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Container(),
+                          showPastHomework ||
+                                  widget.homeworkTiles[0].length == 0
+                              ? Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 8.0, vertical: 4.0),
+                                  child:
+                                      Column(children: widget.homeworkTiles[1]))
+                              : Container(),
                         ],
                       ),
-                    ),
-                    showPastHomeworks
-                        ? Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: widget.homeworkTiles[1].length > 0
-                                ? Column(children: widget.homeworkTiles[1])
-                                : Empty(
-                                    title: I18n.of(context).emptyPastHomework,
-                                  ),
-                          )
-                        : Container(),
-                  ],
-                ),
-              ),
+                    )
+                  : Empty(title: I18n.of(context).emptyHomework),
             ),
 
             // Exams
@@ -195,39 +197,55 @@ class _PlannerTabsState extends State<PlannerTabs>
                   widget.callback();
                 }
               },
-              child: CupertinoScrollbar(
-                child: ListView(
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  children: <Widget>[
-                    widget.examTiles[0].length > 0
-                        ? Column(children: widget.examTiles[0])
-                        : Empty(title: I18n.of(context).emptyExams),
-                    FlatButton(
-                      onPressed: () =>
-                          setState(() => showPastExams = !showPastExams),
-                      child: Row(
+              child: widget.examTiles[0].length > 0 ||
+                      widget.examTiles[1].length > 0
+                  ? CupertinoScrollbar(
+                      child: ListView(
+                        padding: EdgeInsets.only(top: 12.0),
+                        physics: BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
                         children: <Widget>[
-                          Expanded(child: Text(I18n.of(context).examPast)),
-                          Icon(
-                            showPastExams
-                                ? FeatherIcons.chevronUp
-                                : FeatherIcons.chevronDown,
-                          ),
+                          Column(children: widget.examTiles[0]),
+                          widget.examTiles[0].length == 0
+                              ? Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 12.0, top: 12.0),
+                                  child: Text(
+                                    I18n.of(context).examPast.toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      letterSpacing: .7,
+                                    ),
+                                  ),
+                                )
+                              : widget.examTiles[1].length > 0
+                                  ? FlatButton(
+                                      onPressed: () => setState(
+                                          () => showPastExams = !showPastExams),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                              child: Text(
+                                                  I18n.of(context).examPast)),
+                                          Icon(
+                                            showPastExams
+                                                ? FeatherIcons.chevronUp
+                                                : FeatherIcons.chevronDown,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Container(),
+                          showPastExams || widget.examTiles[0].length == 0
+                              ? Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 8.0, vertical: 4.0),
+                                  child: Column(children: widget.examTiles[1]))
+                              : Container(),
                         ],
                       ),
-                    ),
-                    showPastExams
-                        ? Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: widget.examTiles[1].length > 0
-                                ? Column(children: widget.examTiles[1])
-                                : Empty(title: I18n.of(context).emptyPastExams),
-                          )
-                        : Container(),
-                  ],
-                ),
-              ),
+                    )
+                  : Empty(title: I18n.of(context).emptyExams),
             ),
           ],
         ),

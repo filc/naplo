@@ -38,7 +38,7 @@ class AbsenceTile extends StatelessWidget {
         ],
       ),
       subtitle: Text(
-        absence.mode.description + '\n' + absence.subject.name,
+        absence.mode.description + '\n' + capital(absence.subject.name),
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
       ),

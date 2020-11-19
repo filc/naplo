@@ -2,6 +2,7 @@
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/homework.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/ui/bottom_card.dart';
 import 'package:filcnaplo/ui/profile_icon.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,9 +22,8 @@ import 'package:share/share.dart';
 
 class HomeworkView extends StatefulWidget {
   final Homework homework;
-  final Function onSolved;
 
-  HomeworkView(this.homework, this.onSolved);
+  HomeworkView(this.homework);
 
   @override
   _HomeworkViewState createState() => _HomeworkViewState();
@@ -32,22 +32,16 @@ class HomeworkView extends StatefulWidget {
 class _HomeworkViewState extends State<HomeworkView> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: 12.0),
-      decoration: BoxDecoration(
-        color: app.settings.theme.backgroundColor,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24.0),
-          topRight: Radius.circular(24.0),
-        ),
-      ),
+    return BottomCard(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
             children: <Widget>[
               Expanded(
                 child: ListTile(
+                  contentPadding: EdgeInsets.zero,
                   leading: ProfileIcon(name: widget.homework.teacher),
                   title: Row(
                     children: <Widget>[
@@ -66,85 +60,49 @@ class _HomeworkViewState extends State<HomeworkView> {
                   subtitle: Text(capital(widget.homework.subjectName)),
                 ),
               ),
-              // Feature removed by KRETA
-              // Container(
-              //   width: 42.0,
-              //   margin: EdgeInsets.only(right: 12.0),
-              //   child: Column(
-              //     children: <Widget>[
-              //       FlatButton(
-              //         shape: RoundedRectangleBorder(
-              //             borderRadius: BorderRadius.circular(6.0)),
-              //         padding: EdgeInsets.zero,
-              //         onPressed: () =>
-              //             setState(() => widget.onSolved(widget.homework)),
-              //         child: Icon(
-              //           widget.homework.isSolved
-              //               ? FeatherIcons.checkSquare
-              //               : FeatherIcons.square,
-              //           color: widget.homework.isSolved
-              //               ? app.settings.appColor
-              //               : null,
-              //         ),
-              //       ),
-              //       Text(
-              //         capital(I18n.of(context).dialogDone),
-              //         overflow: TextOverflow.ellipsis,
-              //       )
-              //     ],
-              //   ),
-              // ),
             ],
           ),
 
           // Homework details
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(14.0),
-              child: CupertinoScrollbar(
-                child: ListView(
-                  physics: BouncingScrollPhysics(),
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 8.0),
-                      child: HomeworkDetail(
-                        I18n.of(context).homeworkDeadline,
-                        formatDate(context, widget.homework.deadline),
-                      ),
-                    ),
 
-                    // Message content
-                    app.settings.renderHtml
-                        ? Html(
-                            data: widget.homework.content,
-                            onLinkTap: (url) async {
-                              if (await canLaunch(url))
-                                await launch(url);
-                              else
-                                throw '[ERROR] HomeworkView.build: Invalid URL';
-                            },
-                          )
-                        : SelectableLinkify(
-                            text: escapeHtml(widget.homework.content),
-                            onOpen: (url) async {
-                              if (await canLaunch(url.url))
-                                await launch(url.url);
-                              else
-                                throw '[ERROR] HomeworkView.build: Invalid URL';
-                            },
-                          ),
-                    widget.homework.attachments == [] 
+          HomeworkDetail(
+            I18n.of(context).homeworkDeadline,
+            formatDate(context, widget.homework.deadline),
+          ),
+
+          SizedBox(height: 12.0),
+
+          // Message content
+          Expanded(
+            child: SingleChildScrollView(
+              child: app.settings.renderHtml
+                  ? Html(
+                      data: widget.homework.content,
+                      onLinkTap: (url) async {
+                        if (await canLaunch(url))
+                          await launch(url);
+                        else
+                          throw '[ERROR] HomeworkView.build: Invalid URL';
+                      },
+                    )
+                  : SelectableLinkify(
+                      text: escapeHtml(widget.homework.content),
+                      onOpen: (url) async {
+                        if (await canLaunch(url.url))
+                          await launch(url.url);
+                        else
+                          throw '[ERROR] HomeworkView.build: Invalid URL';
+                      },
+                    ),
+            ),
+          ),
+          widget.homework.attachments == [] 
                         ? Container()
                         : Column(
                             children: widget.homework.attachments
                               .map((attachment) => AttachmentTile(attachment))
                               .toList()
                           )
-                  ],
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );

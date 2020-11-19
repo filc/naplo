@@ -30,7 +30,6 @@ class SubjectTile extends StatelessWidget {
             children: [
               classAvg != null && classAvg.round() != 0
                   ? Container(
-                      width: 45,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(45.0)),
                         border: Border.all(
@@ -45,13 +44,11 @@ class SubjectTile extends StatelessWidget {
                             ? classAvg.toStringAsFixed(2)
                             : classAvg.toStringAsFixed(2).split(".").join(","),
                         style: TextStyle(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
                       ),
                     )
                   : Container(),
               studentAvg > 0 && studentAvg <= 5.0
                   ? Container(
-                      width: 45,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(45.0)),
                         color: app.theme
@@ -73,7 +70,6 @@ class SubjectTile extends StatelessWidget {
                                 (studentAvg.round() - 1).clamp(0, 4)],
                           ),
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     )
                   : Container(),

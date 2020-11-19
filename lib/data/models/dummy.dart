@@ -1,4 +1,5 @@
 import 'package:filcnaplo/data/models/event.dart';
+import 'package:filcnaplo/data/models/homework.dart';
 import 'package:filcnaplo/data/models/school.dart';
 import 'package:filcnaplo/data/models/student.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
@@ -166,8 +167,7 @@ class Dummy {
     Lesson(
       Type("122455", "", ""),
       DateTime.now(),
-      Subject("1231651", null,
-          "Szolfézs"),
+      Subject("1231651", null, "Szolfézs"),
       "3",
       12,
       "Jozsa Neni legjobb spanja",
@@ -175,12 +175,11 @@ class Dummy {
       true,
       DateTime.now(),
       DateTime.now().add(Duration(minutes: 45)),
-      Type("51654537", "student presence type desc",
-          "student presence type name"),
-      null, 
+      Type("51654537", "", ""),
+      null,
       <Exam>[],
       "6153131",
-      Type("51561", "lesson type desc", "lesson type name"),
+      Type("51561", "", ""),
       "Le van irva",
       "Kisterem",
       "9. C",
@@ -193,6 +192,33 @@ class Dummy {
       date: DateTime.now(),
     )
   ]);
+
+  static List<Homework> homework = [
+    Homework(
+        DateTime.now(),
+        DateTime.now(),
+        DateTime.now().add(Duration(days: 1)),
+        true,
+        false,
+        "Lajosne Fekete Andras",
+        "Pihend ki az iskolai faradalmakat",
+        "Kvantumfizika",
+        "",
+        [],
+        "24672456"),
+    Homework(
+        DateTime.now().subtract(Duration(days: 1)),
+        DateTime.now().subtract(Duration(days: 1)),
+        DateTime.now().subtract(Duration(days: 1)),
+        true,
+        false,
+        "Fekete Geza",
+        "Vagj ki egy fat otthon, lakhelyedhez kozeli erdoben, a videot kuldd el TIMSZEN",
+        "Faipari ismeretek",
+        "",
+        [],
+        "24672456"),
+  ];
 
   // k0sz boa
 }

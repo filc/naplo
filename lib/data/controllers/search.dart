@@ -6,7 +6,7 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/ui/cards/absence/tile.dart';
 import 'package:filcnaplo/ui/pages/absences/absence/view.dart';
 import 'package:filcnaplo/ui/cards/evaluation/tile.dart';
-import 'package:filcnaplo/ui/cards/evaluation/view.dart';
+import 'package:filcnaplo/ui/pages/evaluations/grades/view.dart';
 import 'package:filcnaplo/ui/cards/homework/tile.dart';
 import 'package:filcnaplo/ui/pages/planner/homeworks/view.dart';
 import 'package:filcnaplo/ui/cards/exam/tile.dart';
@@ -150,7 +150,7 @@ class SearchController {
           showModalBottomSheet(
             context: context,
             backgroundColor: Colors.transparent,
-            builder: (BuildContext context) => HomeworkView(homework, () => {}),
+            builder: (BuildContext context) => HomeworkView(homework),
           );
         },
       ),

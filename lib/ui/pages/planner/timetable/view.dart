@@ -4,9 +4,9 @@ import 'package:filcnaplo/data/models/homework.dart';
 import 'package:filcnaplo/data/models/lesson.dart';
 import 'package:filcnaplo/data/models/exam.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/ui/bottom_card.dart';
 import 'package:filcnaplo/ui/pages/planner/homeworks/view.dart';
 import 'package:filcnaplo/ui/pages/planner/exams/view.dart';
-import 'package:filcnaplo/ui/profile_icon.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -20,88 +20,91 @@ class TimetableView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: 12.0),
-      decoration: BoxDecoration(
-        color: app.settings.theme.backgroundColor,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24.0),
-          topRight: Radius.circular(24.0),
-        ),
-      ),
+    return BottomCard(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           ListTile(
-            leading: ProfileIcon(
-                name: lesson.substituteTeacher != ""
-                    ? lesson.substituteTeacher
-                    : lesson.teacher),
-            title: Row(children: [
-              Expanded(
-                child: Text(capitalize(lesson.substituteTeacher != ""
-                    ? lesson.substituteTeacher
-                    : lesson.teacher)),
+            contentPadding: EdgeInsets.only(left: 4.0),
+            leading: Container(
+              child: Text(
+                lesson.lessonIndex + (lesson.lessonIndex != "+" ? "." : ""),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 42.0,
+                  height: 1.15,
+                ),
               ),
-              Text(DateFormat("HH:mm").format(lesson.start) +
-                  " - " +
-                  DateFormat("HH:mm").format(lesson.end)),
-            ]),
-            subtitle: Text(
+            ),
+            title: Text(
               lesson.subject != null
                   ? capital(lesson.subject.name)
                   : I18n.of(context).unknown,
+            ),
+            subtitle: Text(
+              capitalize(lesson.substituteTeacher != ""
+                  ? lesson.substituteTeacher
+                  : lesson.teacher),
               overflow: TextOverflow.ellipsis,
+            ),
+            trailing: Padding(
+              padding: EdgeInsets.only(left: 8.0),
+              child: Text(
+                DateFormat("HH:mm").format(lesson.start) +
+                    "\n" +
+                    DateFormat("HH:mm").format(lesson.end),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
 
           // Lesson Details
-          Padding(
-            padding: EdgeInsets.all(14.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                lesson.room != ""
-                    ? TimetableDetail(I18n.of(context).lessonRoom, lesson.room)
-                    : Container(),
-                lesson.groupName != null
-                    ? TimetableDetail(
-                        I18n.of(context).lessonGroup, lesson.groupName)
-                    : Container(),
-                lesson.description != ""
-                    ? TimetableDetail(
-                        I18n.of(context).evaluationDescription,
-                        lesson.description,
-                      )
-                    : Container(),
-                lesson.lessonYearIndex != null
-                    ? TimetableDetail(
-                        I18n.of(context).timetableYearly,
-                        lesson.lessonYearIndex.toString() + ".",
-                      )
-                    : Container(),
-                lesson.status.name != "Naplozott"
-                    ? TimetableDetail(
-                        I18n.of(context).state,
-                        lesson.status.description,
-                      )
-                    : Container(),
-                lesson.substituteTeacher != ""
-                    ? TimetableDetail(
-                        I18n.of(context).substituteTeacher,
-                        lesson.substituteTeacher,
-                      )
-                    : Container(),
-                homework != null ? homeworkButton(context) : Container(),
-                exams.length > 0
-                    ? Column(
-                        children: exams
-                            .map((exam) => examButton(context, exam))
-                            .toList(),
-                      )
-                    : Container(),
-              ],
-            ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              lesson.room != ""
+                  ? TimetableDetail(I18n.of(context).lessonRoom, lesson.room)
+                  : Container(),
+              lesson.groupName != null
+                  ? TimetableDetail(
+                      I18n.of(context).lessonGroup, lesson.groupName)
+                  : Container(),
+              lesson.description != ""
+                  ? TimetableDetail(
+                      I18n.of(context).evaluationDescription,
+                      lesson.description,
+                    )
+                  : Container(),
+              lesson.lessonYearIndex != null
+                  ? TimetableDetail(
+                      I18n.of(context).timetableYearly,
+                      lesson.lessonYearIndex.toString() + ".",
+                    )
+                  : Container(),
+              lesson.status.name != "Naplozott"
+                  ? TimetableDetail(
+                      I18n.of(context).state,
+                      lesson.status.description,
+                    )
+                  : Container(),
+              lesson.substituteTeacher != ""
+                  ? TimetableDetail(
+                      I18n.of(context).substituteTeacher,
+                      lesson.substituteTeacher,
+                    )
+                  : Container(),
+              homework != null ? homeworkButton(context) : Container(),
+              exams.length > 0
+                  ? Column(
+                      children: exams
+                          .map((exam) => examButton(context, exam))
+                          .toList(),
+                    )
+                  : Container(),
+            ],
           ),
         ],
       ),
@@ -113,7 +116,7 @@ class TimetableView extends StatelessWidget {
       onPressed: () => showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
-        builder: (context) => HomeworkView(homework, onSolved),
+        builder: (context) => HomeworkView(homework),
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
       padding: EdgeInsets.symmetric(horizontal: 6.0),
@@ -156,14 +159,6 @@ class TimetableView extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  void onSolved(homework) {
-    app.user.sync.homework.data
-        .firstWhere((h) => h.id == homework.id)
-        .isSolved = !homework.isSolved;
-
-    app.user.kreta.homeworkSolved(homework, homework.isSolved);
   }
 }
 

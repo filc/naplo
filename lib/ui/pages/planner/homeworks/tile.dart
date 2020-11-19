@@ -1,4 +1,5 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/homework.dart';
 import 'package:filcnaplo/ui/pages/planner/homeworks/view.dart';
 import 'package:filcnaplo/utils/format.dart';
@@ -13,65 +14,38 @@ class HomeworkTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Dismissible(
-        key: Key(homework.isSolved ? "s" : "u" + homework.id),
-        secondaryBackground: Container(
-          color: homework.isSolved ? Colors.red : Colors.green[600],
-          alignment: Alignment.centerRight,
-          padding: EdgeInsets.only(right: 24.0),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12.0),
+      child: ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: Padding(
+          padding: EdgeInsets.all(8.0),
           child: Icon(
-            homework.isSolved ? FeatherIcons.x : FeatherIcons.check,
-            color: Colors.white,
+            isPast ? FeatherIcons.check : FeatherIcons.home,
+            color: isPast ? Colors.green : app.settings.appColor,
           ),
         ),
-        background: Container(
-          color: homework.isSolved ? Colors.red : Colors.green[600],
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: 24.0),
-          child: Icon(
-            homework.isSolved ? FeatherIcons.x : FeatherIcons.check,
-            color: Colors.white,
-          ),
-        ),
-        onDismissed: (_) => onDismissed(homework),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.0),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                isPast
-                    ? homework.isSolved ? FeatherIcons.check : FeatherIcons.x
-                    : FeatherIcons.home,
-                color: isPast
-                    ? homework.isSolved ? Colors.green : Colors.red
-                    : homework.isSolved ? Colors.green : Colors.yellow,
-              ),
+        title: Row(
+          children: <Widget>[
+            Expanded(
+              child: Text(capital(homework.subjectName)),
             ),
-            title: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Text(capital(homework.subjectName)),
-                ),
-                Text(formatDate(context, homework.deadline ?? homework.lessonDate ?? homework.date)),
-              ],
-            ),
-            subtitle: homework.content != ""
-                ? Text(
-                    escapeHtml(homework.content),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  )
-                : null,
-          ),
+            Text(formatDate(context,
+                homework.deadline ?? homework.lessonDate ?? homework.date)),
+          ],
         ),
-      ),
-      onTap: () => showModalBottomSheet(
-        context: context,
-        backgroundColor: Colors.transparent,
-        builder: (context) => HomeworkView(homework, onDismissed),
+        subtitle: homework.content != ""
+            ? Text(
+                escapeHtml(homework.content),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              )
+            : null,
+        onTap: () => showModalBottomSheet(
+          context: context,
+          backgroundColor: Colors.transparent,
+          builder: (context) => HomeworkView(homework),
+        ),
       ),
     );
   }

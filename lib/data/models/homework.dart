@@ -7,7 +7,6 @@ class Homework {
   DateTime deadline;
   bool byTeacher;
   bool homeworkEnabled;
-  bool isSolved;
   String teacher;
   String content;
   String subjectName;
@@ -26,8 +25,7 @@ class Homework {
     this.subjectName,
     this.group,
     this.attachments,
-    this.id,
-    this.isSolved, {
+    this.id, {
     this.json,
   });
 
@@ -56,7 +54,6 @@ class Homework {
       });
     }
     String id = json["Uid"];
-    bool isSolved = json["IsMegoldva"] ?? false;
     return Homework(
       date,
       lessonDate,
@@ -69,7 +66,6 @@ class Homework {
       group,
       attachments,
       id,
-      isSolved,
       json: json,
     );
   }

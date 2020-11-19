@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ThemeContext {
   static final Map<String, Color> colors = {
@@ -24,9 +23,20 @@ class ThemeContext {
 
   static Color lightTextColor = Colors.grey[700];
   static TextTheme lightText = TextTheme(
-      headline6: GoogleFonts.openSans(color: lightTextColor, fontSize: 20.0),
-      bodyText1: GoogleFonts.openSans(color: lightTextColor),
-      bodyText2: GoogleFonts.openSans(color: lightTextColor));
+    headline6: TextStyle(
+      fontFamily: "GoogleSans",
+      color: lightTextColor,
+      fontSize: 20.0,
+    ),
+    bodyText1: TextStyle(
+      fontFamily: "GoogleSans",
+      color: lightTextColor,
+    ),
+    bodyText2: TextStyle(
+      fontFamily: "GoogleSans",
+      color: lightTextColor,
+    ),
+  );
 
   static Color lightBackground = Colors.white;
 
@@ -37,7 +47,7 @@ class ThemeContext {
         textTheme: lightText,
         primaryTextTheme: lightText,
         iconTheme: IconThemeData(color: lightTextColor),
-        fontFamily: GoogleFonts.openSans().fontFamily,
+        fontFamily: "GoogleSans",
         snackBarTheme: SnackBarThemeData(
           backgroundColor: Colors.grey[200],
           actionTextColor: appColor,
@@ -57,7 +67,7 @@ class ThemeContext {
         scaffoldBackgroundColor: Color(0xFF1c2d2a),
         textTheme: darkText,
         iconTheme: IconThemeData(color: darkTextColor),
-        fontFamily: GoogleFonts.openSans().fontFamily,
+        fontFamily: "GoogleSans",
         snackBarTheme: SnackBarThemeData(
           backgroundColor: Color(0xFF273d38),
           actionTextColor: Colors.teal[600],
@@ -72,9 +82,10 @@ class ThemeContext {
 
   static Color darkTextColor = Colors.grey[100];
   static TextTheme darkText = TextTheme(
-      headline6: GoogleFonts.openSans(color: darkTextColor, fontSize: 20.0),
-      bodyText1: GoogleFonts.openSans(color: darkTextColor),
-      bodyText2: GoogleFonts.openSans(color: darkTextColor));
+      headline6: TextStyle(
+          fontFamily: "GoogleSans", color: darkTextColor, fontSize: 20.0),
+      bodyText1: TextStyle(fontFamily: "GoogleSans", color: darkTextColor),
+      bodyText2: TextStyle(fontFamily: "GoogleSans", color: darkTextColor));
 
   static Color darkBackground = Color(0xff36393f);
   static Color blackBackground = Color(0xff18191c);
@@ -87,7 +98,7 @@ class ThemeContext {
         textTheme: darkText,
         primaryTextTheme: darkText,
         iconTheme: IconThemeData(color: Colors.grey[100]),
-        fontFamily: GoogleFonts.openSans().fontFamily,
+        fontFamily: "GoogleSans",
         scaffoldBackgroundColor:
             backgroundColor == 0 ? Colors.black : Color(0xff292b2f),
         snackBarTheme: SnackBarThemeData(

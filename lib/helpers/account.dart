@@ -4,7 +4,6 @@ import 'package:filcnaplo/helpers/debug.dart';
 import 'package:filcnaplo/utils/tools.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
 import 'package:path/path.dart' as path;
@@ -41,9 +40,10 @@ class AccountHelper {
                       padding: EdgeInsets.all(12.0),
                       child: Text(
                         "ERROR",
-                        style: GoogleFonts.spaceMono(
+                        style: TextStyle(
+                          fontFamily: "SpaceMono",
                           fontSize: 64.0,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -53,7 +53,8 @@ class AccountHelper {
                         children: <Widget>[
                           Text(
                             "Hiba történt. Kérjük próbálja újra!",
-                            style: GoogleFonts.spaceMono(
+                            style: TextStyle(
+                              fontFamily: "SpaceMono",
                               color: Colors.white,
                               fontSize: 15.0,
                             ),
@@ -73,7 +74,8 @@ class AccountHelper {
                       padding: EdgeInsets.all(8.0),
                       child: Text(
                         "VISSZA",
-                        style: GoogleFonts.spaceMono(
+                        style: TextStyle(
+                          fontFamily: "SpaceMono",
                           color: Colors.white,
                           fontSize: 18.0,
                         ),

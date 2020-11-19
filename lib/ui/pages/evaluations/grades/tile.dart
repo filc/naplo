@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/ui/cards/evaluation/tile.dart';
-import 'package:filcnaplo/ui/cards/evaluation/view.dart';
+import 'package:filcnaplo/ui/pages/evaluations/grades/view.dart';
 
 class GradeTile extends StatelessWidget {
   final Evaluation evaluation;

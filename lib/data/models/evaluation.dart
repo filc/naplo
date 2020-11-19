@@ -61,7 +61,7 @@ class Evaluation {
     DateTime seenDate = json["LattamozasDatuma"] != null
         ? DateTime.parse(json["LattamozasDatuma"]).toLocal()
         : null;
-    String form = json["Jelleg"] ?? "";
+    String form = json["Jelleg"] != "Na" ? json["Jelleg"] : null;
 
     return Evaluation(
       id,

@@ -1,6 +1,7 @@
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:filcnaplo/ui/account_button.dart';
 import 'package:filcnaplo/ui/custom_tabs.dart';
-import 'package:filcnaplo/ui/pages/accounts/page.dart';
+import 'package:filcnaplo/ui/pages/debug/button.dart';
+import 'package:filcnaplo/ui/pages/debug/view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/context/app.dart';
@@ -41,7 +42,6 @@ class _AbsenceTabsState extends State<AbsenceTabs>
     _tabController = TabController(
       vsync: this,
       length: 3,
-      initialIndex: app.tabState.absences.index,
     );
   }
 
@@ -62,32 +62,18 @@ class _AbsenceTabsState extends State<AbsenceTabs>
             SliverAppBar(
               floating: true,
               pinned: true,
-              snap: true,
               forceElevated: true,
-              centerTitle: true,
-              leading: Icon(FeatherIcons.slash),
-              title: Text(I18n.of(context).absenceTitle),
+              title: Text(
+                I18n.of(context).absenceTitle,
+                style: TextStyle(fontSize: 22.0),
+              ),
               actions: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(right: 8.0),
-                  child: IconButton(
-                    icon: app.user.profileIcon,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AccountPage()));
-                    },
-                  ),
-                ),
+                DebugButton(DebugViewClass.absences),
+                AccountButton()
               ],
               bottom: CustomTabBar(
                 controller: _tabController,
-                onTap: (value) {
-                  app.tabState.absences.index = value;
-                  _tabController.animateTo(value);
-                  app.storage.storage.update("tabs", {"absences": value});
-                },
+                onTap: (value) => _tabController.animateTo(value),
                 color: app.settings.theme.textTheme.bodyText1.color,
                 labels: [
                   CustomLabel(title: capital(I18n.of(context).absenceAbsences)),
@@ -100,8 +86,6 @@ class _AbsenceTabsState extends State<AbsenceTabs>
         },
         body: TabBarView(
           controller: _tabController,
-          physics:
-              BouncingScrollPhysics(parent: NeverScrollableScrollPhysics()),
           children: [
             // Absences
             RefreshIndicator(
@@ -119,18 +103,15 @@ class _AbsenceTabsState extends State<AbsenceTabs>
                   widget.callback();
                 }
               },
-              child: CupertinoScrollbar(
-                child: ListView(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  children: widget._absenceTiles.length > 0
-                      ? widget._absenceTiles
-                      : <Widget>[
-                          Empty(title: I18n.of(context).emptyAbsences),
-                        ],
-                ),
-              ),
+              child: widget._absenceTiles.length > 0
+                  ? CupertinoScrollbar(
+                      child: ListView(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          physics: BouncingScrollPhysics(
+                              parent: AlwaysScrollableScrollPhysics()),
+                          children: widget._absenceTiles),
+                    )
+                  : Empty(title: I18n.of(context).emptyAbsences),
             ),
 
             // Delays
@@ -149,49 +130,43 @@ class _AbsenceTabsState extends State<AbsenceTabs>
                   widget.callback();
                 }
               },
-              child: CupertinoScrollbar(
-                child: ListView(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  children: widget._delayTiles.length > 0
-                      ? widget._delayTiles
-                      : <Widget>[
-                          Empty(title: I18n.of(context).emptyDelays),
-                        ],
-                ),
-              ),
+              child: widget._delayTiles.length > 0
+                  ? CupertinoScrollbar(
+                      child: ListView(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          physics: BouncingScrollPhysics(
+                              parent: AlwaysScrollableScrollPhysics()),
+                          children: widget._delayTiles),
+                    )
+                  : Empty(title: I18n.of(context).emptyDelays),
             ),
 
             // Misses
             RefreshIndicator(
-              key: _refreshKeyMisses,
-              onRefresh: () async {
-                if (!await app.user.sync.note.sync()) {
-                  widget._scaffoldKey.currentState.showSnackBar(SnackBar(
-                    content: Text(
-                      I18n.of(context).errorMessages,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.red,
-                  ));
-                } else {
-                  widget.callback();
-                }
-              },
-              child: CupertinoScrollbar(
-                child: ListView(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  children: widget._missTiles.length > 0
-                      ? widget._missTiles
-                      : <Widget>[
-                          Empty(title: I18n.of(context).emptyMisses),
-                        ],
-                ),
-              ),
-            ), // get from notes
+                key: _refreshKeyMisses,
+                onRefresh: () async {
+                  if (!await app.user.sync.note.sync()) {
+                    widget._scaffoldKey.currentState.showSnackBar(SnackBar(
+                      content: Text(
+                        I18n.of(context).errorMessages,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.red,
+                    ));
+                  } else {
+                    widget.callback();
+                  }
+                },
+                child: widget._missTiles.length > 0
+                    ? CupertinoScrollbar(
+                        child: ListView(
+                            padding: EdgeInsets.symmetric(vertical: 8.0),
+                            physics: BouncingScrollPhysics(
+                                parent: AlwaysScrollableScrollPhysics()),
+                            children: widget._missTiles),
+                      )
+                    : Empty(
+                        title: I18n.of(context).emptyMisses)), // get from notes
           ],
         ),
       ),

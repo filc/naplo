@@ -1,7 +1,10 @@
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:filcnaplo/data/context/message.dart';
+import 'package:filcnaplo/ui/account_button.dart';
 import 'package:filcnaplo/ui/custom_tabs.dart';
 import 'package:filcnaplo/ui/empty.dart';
-import 'package:filcnaplo/ui/pages/accounts/page.dart';
+import 'package:filcnaplo/ui/pages/debug/button.dart';
+import 'package:filcnaplo/ui/pages/debug/view.dart';
+import 'package:filcnaplo/ui/pages/messages/compose.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/generated/i18n.dart';
@@ -36,12 +39,12 @@ class _MessageTabsState extends State<MessageTabs>
 
   @override
   void initState() {
-    super.initState();
     _tabController = TabController(
       vsync: this,
       length: 3,
-      initialIndex: app.tabState.messages.index,
     );
+    _tabController.addListener(() => widget.callback());
+    super.initState();
   }
 
   @override
@@ -54,40 +57,40 @@ class _MessageTabsState extends State<MessageTabs>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: NestedScrollView(
+    return Scaffold(
+      floatingActionButton: _tabController.index == 0
+          ? FloatingActionButton(
+              child: Icon(Icons.edit, color: app.settings.appColor),
+              backgroundColor: app.settings.theme.backgroundColor,
+              onPressed: () {
+                messageContext = MessageContext();
+
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => NewMessagePage()));
+              },
+            )
+          : null,
+      body: NestedScrollView(
         headerSliverBuilder: (context, _) {
           return <Widget>[
             SliverAppBar(
               floating: true,
               pinned: true,
-              snap: true,
               forceElevated: true,
-              centerTitle: true,
-              leading: Icon(FeatherIcons.messageSquare),
-              title: Text(I18n.of(context).messageTitle),
+              title: Text(
+                I18n.of(context).messageTitle,
+                style: TextStyle(fontSize: 22.0),
+              ),
               actions: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(right: 8.0),
-                  child: IconButton(
-                    icon: app.user.profileIcon,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AccountPage()));
-                    },
-                  ),
-                ),
+                DebugButton(DebugViewClass.messages),
+                AccountButton()
               ],
               bottom: CustomTabBar(
                 controller: _tabController,
                 color: app.settings.theme.textTheme.bodyText1.color,
                 onTap: (value) {
-                  app.tabState.messages.index = value;
                   _tabController.animateTo(value);
-                  app.sync.updateCallback();
-                  app.storage.storage.update("tabs", {"messages": value});
+                  widget.callback();
                 },
                 labels: [
                   CustomLabel(
@@ -113,7 +116,6 @@ class _MessageTabsState extends State<MessageTabs>
         },
         body: TabBarView(
           controller: _tabController,
-          physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             // Messages
             RefreshIndicator(
@@ -205,18 +207,15 @@ class _MessageTabsState extends State<MessageTabs>
                   widget.callback();
                 }
               },
-              child: CupertinoScrollbar(
-                child: ListView(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  children: widget.eventTiles.length > 0
-                      ? widget.eventTiles
-                      : <Widget>[
-                          Empty(title: I18n.of(context).emptyEvents),
-                        ],
-                ),
-              ),
+              child: widget.eventTiles.length > 0
+                  ? CupertinoScrollbar(
+                      child: ListView(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          physics: BouncingScrollPhysics(
+                              parent: AlwaysScrollableScrollPhysics()),
+                          children: widget.eventTiles),
+                    )
+                  : Empty(title: I18n.of(context).emptyEvents),
             ),
           ],
         ),

@@ -1,10 +1,7 @@
-import 'package:filcnaplo/data/context/message.dart';
 import 'package:filcnaplo/data/state/sync.dart';
 import 'package:filcnaplo/data/sync/ui/indicator.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/ui/pages/absences/page.dart';
-import 'package:filcnaplo/ui/pages/messages/compose.dart';
-import 'package:filcnaplo/ui/pages/evaluations/dial.dart';
 import 'package:filcnaplo/ui/pages/evaluations/page.dart';
 import 'package:filcnaplo/ui/pages/home/page.dart';
 import 'package:filcnaplo/ui/pages/messages/page.dart';
@@ -147,32 +144,6 @@ class _PageFrameState extends State<PageFrame> {
           ],
         ),
       ),
-      floatingActionButton: (app.selectedPage == 3 &&
-              app.tabState.messages.index == 0)
-          ? FloatingActionButton(
-              child: Icon(Icons.edit, color: app.settings.appColor),
-              backgroundColor: app.settings.theme.backgroundColor,
-              onPressed: () {
-                messageContext = MessageContext();
-
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => NewMessagePage()));
-              },
-            )
-          : (app.selectedPage == 1 && app.tabState.evaluations.index == 0)
-              ? EvaluationsDial(
-                  (app.evalSortBy / 2).floor(),
-                  app.evalSortBy % 2 == 1,
-                  onSelect: (int selected) {
-                    int newVal = 4 - selected * 2;
-                    bool changed = newVal != app.evalSortBy;
-
-                    setState(
-                      () => app.evalSortBy = newVal + (changed ? 0 : 1),
-                    );
-                  },
-                )
-              : null,
       bottomNavigationBar: BottomNavbar(this._navItemSelected),
     );
   }

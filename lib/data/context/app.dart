@@ -1,5 +1,4 @@
 import 'package:filcnaplo/data/context/theme.dart';
-import 'package:filcnaplo/data/state/tab.dart';
 import 'package:filcnaplo/kreta/api.dart';
 import 'package:filcnaplo/data/models/user.dart';
 import 'package:filcnaplo/data/controllers/settings.dart';
@@ -26,7 +25,6 @@ class AppContext {
   int selectedPage = 0;
   int evalSortBy = 0;
 
-  TabState tabState = TabState();
   ThemeContext theme = ThemeContext();
 
   // Users

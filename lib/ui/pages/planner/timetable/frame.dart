@@ -19,7 +19,6 @@ class _TimetableFrameState extends State<TimetableFrame>
   TabController _tabController;
 
   int selectedWeek = 0;
-  int dayIndex;
   TimetableBuilder _timetableBuilder;
   Week currentWeek;
 
@@ -50,24 +49,29 @@ class _TimetableFrameState extends State<TimetableFrame>
       builder: (context, snapshot) {
         _timetableBuilder.build(selectedWeek);
 
-        if (dayIndex == null) {
-          dayIndex = 0;
-          _timetableBuilder.week.days.asMap().forEach((index, day) {
-            int dif = day.date.difference(DateTime.now()).inHours;
-
-            if (dif > -24 && dif < 0) {
-              dayIndex = index;
-            }
-          });
-        } else {
-          dayIndex = _tabController.index.clamp(0, _timetableBuilder.week.days.length.clamp(1, 7) - 1);
-        }
-
         _tabController = TabController(
           vsync: this,
           length: _timetableBuilder.week.days.length.clamp(1, 7),
-          initialIndex: dayIndex
+          initialIndex: 0,
         );
+
+        DateTime currentDay = _timetableBuilder.week.days.firstWhere((day) {
+          int dif = day.date.difference(DateTime.now()).inHours;
+
+          return dif > -24 && dif < 0;
+        }, orElse: () => Day()).date;
+
+        int dayIndex = 0;
+
+        dayIndex = currentDay != null
+            ? currentDay.weekday - (6 - _timetableBuilder.week.days.length)
+            : 0;
+
+        if (_timetableBuilder.week.days.length > 1) {
+          dayIndex = dayIndex.clamp(0, _timetableBuilder.week.days.length - 1);
+        }
+
+        _tabController.index = dayIndex;
 
         bool ready = snapshot.hasData || snapshot.hasError;
 

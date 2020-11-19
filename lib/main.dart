@@ -34,11 +34,15 @@ void main() async {
     ];
     migrationRequired = addedDBKeys.any((item) => !settings.containsKey(item));
     if (migrationRequired) {
-      settingsCopy = Map<String, dynamic>.from(settings); //settings is immutable, see https://github.com/tekartik/sqflite/issues/140
+      settingsCopy = Map<String, dynamic>.from(
+          settings); //settings is immutable, see https://github.com/tekartik/sqflite/issues/140
       settingsCopy["default_page"] = settingsCopy["default_page"] ?? 0;
-      settingsCopy["evening_start_hour"] = settingsCopy["evening_start_hour"] ?? 18;
-      settingsCopy["studying_periods_bitfield"] = settingsCopy["studying_periods_bitfield"] ?? 1 << 3 | 1 << 4 | 1 << 5 ;
+      settingsCopy["evening_start_hour"] =
+          settingsCopy["evening_start_hour"] ?? 18;
+      settingsCopy["studying_periods_bitfield"] =
+          settingsCopy["studying_periods_bitfield"] ?? 1 << 3 | 1 << 4 | 1 << 5;
       await app.storage.storage.execute("drop table settings");
+      await app.storage.storage.execute("drop table tabs");
       await app.storage.createSettingsTable(app.storage.storage);
       await app.storage.storage.insert("settings", settingsCopy);
     }
@@ -46,7 +50,8 @@ void main() async {
     await app.storage.create();
     app.firstStart = true;
   }
-  await app.settings.update(login: false, settings: migrationRequired ? settingsCopy : settings);
+  await app.settings.update(
+      login: false, settings: migrationRequired ? settingsCopy : settings);
   // Set current page to default page
   app.selectedPage = app.settings.defaultPage;
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -80,26 +85,18 @@ class _AppState extends State<App> {
         systemNavigationBarColor: Color(0xFF101C19),
         systemNavigationBarIconBrightness: Brightness.light,
       ));
-    }
-
-    if (app.settings.theme.backgroundColor.value !=
-            ThemeContext().tinted().backgroundColor.value &&
-        app.settings.theme.brightness == Brightness.dark &&
-        app.settings.backgroundColor == 1) {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        systemNavigationBarColor: Color(0xff18191c),
-        systemNavigationBarIconBrightness: Brightness.light,
-      ));
-    }
-
-    if (app.settings.theme.backgroundColor.value !=
-            ThemeContext().tinted().backgroundColor.value &&
-        app.settings.theme.brightness == Brightness.dark &&
-        app.settings.backgroundColor == 0) {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.black,
-        systemNavigationBarIconBrightness: Brightness.light,
-      ));
+    } else if (app.settings.theme.brightness == Brightness.dark) {
+      if (app.settings.backgroundColor == 1) {
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          systemNavigationBarColor: Color(0xff18191c),
+          systemNavigationBarIconBrightness: Brightness.light,
+        ));
+      } else {
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          systemNavigationBarColor: Colors.black,
+          systemNavigationBarIconBrightness: Brightness.light,
+        ));
+      }
     }
   }
 
@@ -145,9 +142,7 @@ class _AppState extends State<App> {
           theme: theme,
           home: app.firstStart
               ? WelcomePage()
-              : app.users.length > 0
-                  ? PageFrame()
-                  : LoginPage(),
+              : app.users.length > 0 ? PageFrame() : LoginPage(),
         );
       },
     );

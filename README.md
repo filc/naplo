@@ -29,6 +29,6 @@ Nem, a Filc Napló nem gyűjt se bejelentkezési, se egyéb (például statiszti
 ### Hogyan segíthetek?
 * Először is a Filc terjesztésével. Oszd meg az osztálytársaiddal, barátaiddal. Ezzel jót teszel nekik és nekünk is.
 * Csatlakozhatsz a bétaprogramhoz, így a szokásosnál előbb kapod meg az új funkciókat. Az esetlegesen felmerülő hibákat GitHub-on vagy Discordon jelentheted.
-* Programozással. [Itt találod a hozzájárulási útmutatót.](/.github/CONTRIBUTING.md) Forkold a repót, javíts ki egy hibát, vagy valósíts meg egy új funkciót, és küldj egy pull requestet. Kérjük, mindezt ne a master, hanem a legfrissebb állapotot tükröző dev branchen tedd.
+* Programozással. Forkold a repót, javíts ki egy hibát, vagy valósíts meg egy új funkciót, és küldj egy pull requestet. Kérjük, mindezt ne a master, hanem a legfrissebb állapotot tükröző dev branchen tedd.
 * Új ötletekkel. Ha eszedbe jut valami, amitől a Filc jobb lesz, ne habozz megosztani velünk Discordon, vagy Issue formájában.
 * Adománnyal, ahogy fentebb említettük.

@@ -17,16 +17,17 @@ class _GeneralSettingsState extends State<GeneralSettings> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> pages = [
-      I18n.of(context).drawerHome,
-      I18n.of(context).drawerEvaluations,
-      I18n.of(context).drawerTimetable,
-      I18n.of(context).drawerMessages,
-      I18n.of(context).drawerAbsences
+    List<IconData> pages = [
+      FeatherIcons.search,
+      FeatherIcons.bookmark,
+      FeatherIcons.calendar,
+      FeatherIcons.messageSquare,
+      FeatherIcons.clock,
     ];
     return Scaffold(
       body: Container(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             AppBar(
               centerTitle: true,
@@ -44,12 +45,13 @@ class _GeneralSettingsState extends State<GeneralSettings> {
                     ['hu_HU', 'en_US', 'de_DE'].contains(app.settings.language)
                         ? app.settings.language
                         : app.settings.deviceLanguage,
-                items: ['hu_HU', 'en_US', 'de_DE'].map((String value) {
-                  return DropdownMenuItem(
-                    value: value,
-                    child: Text(languages[value]),
-                  );
-                }).toList(),
+                items: ['hu_HU', 'en_US', 'de_DE']
+                    .map((String value) => DropdownMenuItem(
+                          value: value,
+                          child: Text(languages[value],
+                              textAlign: TextAlign.right),
+                        ))
+                    .toList(),
                 onChanged: (String language) {
                   setState(() {
                     app.settings.language = language;
@@ -65,30 +67,49 @@ class _GeneralSettingsState extends State<GeneralSettings> {
                 },
               ),
             ),
-            ListTile(
-              leading: Icon(FeatherIcons.file),
-              title: Text(I18n.of(context).settingsGeneralStartPage),
-              trailing: DropdownButton(
-                underline: Container(),
-                value: app.settings.defaultPage,
-                items: [0, 1, 2, 3, 4].map((int value) {
-                  return DropdownMenuItem(
-                    value: value,
-                    child: Text(pages[value]),
-                  );
-                }).toList(),
-                onChanged: (int newDefaultPage) {
-                  setState(() {
-                    app.settings.defaultPage = newDefaultPage;
-                  });
-                  app.storage.storage
-                      .update("settings", {"default_page": newDefaultPage});
-                },
+
+            // Default Page
+            Padding(
+              padding: EdgeInsets.all(12.0),
+              child: Text(
+                I18n.of(context).settingsGeneralStartPage.toUpperCase(),
+                style: TextStyle(
+                  fontSize: 15.0,
+                  letterSpacing: .7,
+                ),
               ),
+            ),
+
+            Row(
+              children: () {
+                List<Widget> items = [];
+
+                for (int i = 0; i < pages.length; i++) {
+                  items.add(
+                    IconButton(
+                      color: app.settings.defaultPage == i
+                          ? app.settings.appColor
+                          : null,
+                      icon: Icon(pages[i]),
+                      onPressed: () => _defaultPage(i),
+                    ),
+                  );
+                }
+
+                return items;
+              }(),
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _defaultPage(int newDefaultPage) {
+    setState(() {
+      app.settings.defaultPage = newDefaultPage;
+    });
+    app.storage.storage.update("settings", {"default_page": newDefaultPage});
   }
 }

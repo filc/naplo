@@ -1,4 +1,5 @@
 import 'package:filcnaplo/ui/cards/message/tile.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/card.dart';
 import 'package:filcnaplo/data/models/message.dart';
@@ -24,7 +25,7 @@ class MessageCard extends BaseCard {
         ),
         onTap: () {
           Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => MessageView([message], this._scaffoldKey, this.callback)));
+              CupertinoPageRoute(builder: (context) => MessageView([message], this._scaffoldKey, this.callback)));
         },
       ),
     );

@@ -3,6 +3,7 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/ui/pages/about/privacy.dart';
 import 'package:filcnaplo/ui/pages/about/supporters/page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -15,8 +16,8 @@ class AboutPage extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              alignment: Alignment.topRight,
-              padding: EdgeInsets.only(top: 32.0, right: 12.0),
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.only(top: 36.0, left: 12.0),
               child: IconButton(
                 icon: Icon(FeatherIcons.x, color: Colors.white),
                 onPressed: () => Navigator.pop(context),
@@ -28,31 +29,29 @@ class AboutPage extends StatelessWidget {
               children: [
                 // Hero Logo
                 Container(
-                  padding: EdgeInsets.only(bottom: 12.0),
                   child: Image.asset("assets/icon.png"),
                   width: 164,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text("Filc Napló",
-                        style: TextStyle(fontSize: 32.0, color: Colors.white)),
-                    Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        app.currentAppVersion,
-                        style: TextStyle(
-                          color: Colors.grey[300],
-                          fontSize: 20.0,
-                        ),
-                      ),
-                    ),
-                  ],
+                Text(
+                  "Filc Napló",
+                  style: TextStyle(
+                    fontSize: 32.0,
+                    color: Colors.white,
+                    fontFamily: "RedHatDisplay",
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-
+                Padding(
+                  padding: EdgeInsets.only(left: 8.0),
+                  child: Text(
+                    app.currentAppVersion,
+                    style: TextStyle(
+                      color: Colors.grey[300],
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
                 SizedBox(height: 32.0),
-
                 AboutButton(
                   icon: FeatherIcons.lock,
                   text: I18n.of(context).aboutPrivacy,
@@ -66,15 +65,17 @@ class AboutPage extends StatelessWidget {
                   icon: FeatherIcons.award,
                   text: I18n.of(context).aboutLicenses,
                   onPressed: () {
-                    showLicensePage(
-                      context: context,
-                      applicationName: "Filc Napló",
-                      applicationVersion: app.currentAppVersion,
-                      applicationIcon: SizedBox(
+                    Navigator.of(context).push(CupertinoPageRoute(
+                      builder: (context) => LicensePage(
+                        applicationName: "Filc Napló",
+                        applicationVersion: app.currentAppVersion,
+                        applicationIcon: SizedBox(
                           width: 100.0,
                           height: 100.0,
-                          child: Image.asset("assets/icon.png")),
-                    );
+                          child: Image.asset("assets/icon.png"),
+                        ),
+                      ),
+                    ));
                   },
                 ),
                 AboutButton(
@@ -82,14 +83,12 @@ class AboutPage extends StatelessWidget {
                   text: I18n.of(context).aboutSupporters,
                   onPressed: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(
+                      CupertinoPageRoute(
                           builder: (BuildContext context) => AboutSupporters()),
                     );
                   },
                 ),
-
                 SizedBox(height: 32.0),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -118,9 +117,10 @@ class AboutPage extends StatelessWidget {
                       },
                     ),
                     SocialButton(
-                      icon: Padding(
-                        padding: const EdgeInsets.all(7.0),
-                        child: Image.asset("assets/discord.png"),
+                      icon: Icon(
+                        FeatherIcons.atSign,
+                        color: Colors.white,
+                        size: 32.0,
                       ),
                       color: Color(0xFF7289DA),
                       label: "Discord",
@@ -181,11 +181,22 @@ class SocialButton extends StatelessWidget {
       child: SizedBox(
         width: 100.0,
         height: 64.0,
-        child: FlatButton(
-          shape: CircleBorder(),
-          child: icon,
-          color: color,
-          onPressed: onPressed,
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 2.0,
+              )
+            ],
+          ),
+          child: FlatButton(
+            shape: CircleBorder(),
+            child: icon,
+            color: color,
+            onPressed: onPressed,
+          ),
         ),
       ),
     );

@@ -2,16 +2,16 @@
 ## Flutter telepítése
 ### Windows
 
-1. **Git telepítése**\
+1. **Git telepítése**
 Ha nem csináltál még ilyet, a legegyszerűbb, ha egyszerűen feltelepíted a **[GitHub Desktopot](https://desktop.github.com/)**, ez a telepítő mindent elintéz.
-2. **Visual Studio Code telepítése**\
+2. **Visual Studio Code telepítése**
 Mást, akár Android Studiót is használhatsz a szerkesztéshez, mi azonban egyszerűsége miatt ezt ajánljuk, valamint ebben fogunk tudni segíteni. **[Innen töltheted le.](https://code.visualstudio.com/)**
-3. **Flutter környezet telepítése**\
-*Pár instrukció az angol leírás linkje előtt:*\
-A második oldalon válaszd majd a **Visual Studio Code fül**et.\
-Igazából a harmadik oldaltól nincs a Filchez rá szükséged, de bártan csináld végig, bevezet a Flutter használatába.\
-**[Itt találod a leírást.](https://flutter.dev/docs/get-started/install/windows)** \
-Légy különös tekintettel az SDK helyes telepítésére, és a környezeti változók helyes beállítására.\
+3. **Flutter környezet telepítése**
+*Pár instrukció az angol leírás linkje előtt:*
+A második oldalon válaszd majd a **Visual Studio Code fül**et.
+Igazából a harmadik oldaltól nincs a Filchez rá szükséged, de bártan csináld végig, bevezet a Flutter használatába.
+**[Itt találod a leírást.](https://flutter.dev/docs/get-started/install/windows)** 
+Légy különös tekintettel az SDK helyes telepítésére, és a környezeti változók helyes beállítására.
 *Tipp:* Az angol `Edit environment variables for your account` Start menü elemet magyarul `A fiók környezeti változóinak szerkesztése`-ként fogod megtalálni.
 
 ### Linux

@@ -39,7 +39,7 @@ class ExamTile extends StatelessWidget {
         ],
       ),
       subtitle: Text(
-        exam.subjectName + "\n" + exam.description,
+        capital(exam.subjectName) + "\n" + exam.description,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
       ),

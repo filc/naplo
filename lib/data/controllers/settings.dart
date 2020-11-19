@@ -154,7 +154,6 @@ Future loadData(User user) async {
 
   List student = await userStorage.query("student");
   List settings = await userStorage.query("settings");
-  List tabs = await app.storage.storage.query("tabs");
 
   if (settings[0]["nickname"] != "") globalUser.name = settings[0]["nickname"];
 
@@ -173,11 +172,6 @@ Future loadData(User user) async {
   if (student.length > 0) {
     globalSync.student.data = Student.fromJson(jsonDecode(student[0]["json"]));
   }
-
-  app.tabState.messages.index = tabs[0]["messages"];
-  app.tabState.evaluations.index = tabs[0]["evaluations"];
-  app.tabState.absences.index = tabs[0]["absences"];
-  app.tabState.timetable.index = tabs[0]["timetable"];
 
   List evaluations = await userStorage.query("evaluations");
 

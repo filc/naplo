@@ -1,5 +1,6 @@
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/modules/now/now.dart';
+import 'package:filcnaplo/ui/account_button.dart';
 import 'package:filcnaplo/ui/card.dart';
 import 'package:filcnaplo/ui/cards/absence/card.dart';
 import 'package:filcnaplo/ui/cards/evaluation/card.dart';
@@ -11,7 +12,6 @@ import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
-import 'package:filcnaplo/ui/pages/accounts/page.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/ui/pages/search.dart';
 
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-            padding: EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
+            padding: EdgeInsets.only(left: 12.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -84,13 +84,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
-                GestureDetector(
-                  child: app.user.profileIcon,
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AccountPage()));
-                  },
-                ),
+                AccountButton(),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
@@ -112,10 +106,10 @@ class _HomePageState extends State<HomePage> {
           compare: message.date,
         )));
     app.user.sync.note.data.forEach((note) => cards.add(NoteCard(
-      note,
-      key: Key(note.id),
-      compare: note.date,
-    )));
+          note,
+          key: Key(note.id),
+          compare: note.date,
+        )));
     app.user.sync.evaluation.data[0]
         .forEach((evaluation) => cards.add(EvaluationCard(
               evaluation,
@@ -123,20 +117,20 @@ class _HomePageState extends State<HomePage> {
               compare: evaluation.date,
             )));
     app.user.sync.absence.data.forEach((absence) => cards.add(AbsenceCard(
-      absence,
-      key: Key(absence.id.toString()),
-      compare: absence.submitDate,
-    )));
+          absence,
+          key: Key(absence.id.toString()),
+          compare: absence.submitDate,
+        )));
     app.user.sync.homework.data.forEach((homework) => cards.add(HomeworkCard(
-      homework,
-      key: Key(homework.id.toString()),
-      compare: homework.date,
-    )));
+          homework,
+          key: Key(homework.id.toString()),
+          compare: homework.date,
+        )));
     app.user.sync.exam.data.forEach((exam) => cards.add(ExamCard(
-      exam,
-      key: Key(exam.id.toString()),
-      compare: exam.date,
-    )));
+          exam,
+          key: Key(exam.id.toString()),
+          compare: exam.date,
+        )));
 
     cards.sort((a, b) => -a.compare.compareTo(b.compare));
 

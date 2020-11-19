@@ -744,21 +744,25 @@ class KretaClient {
     }
   }
 
-  Future homeworkSolved(Homework homework, bool state) async {
-    try {
-      var response = await client.post(
-        BaseURL.kreta(instituteCode) + KretaEndpoints.homeworkDone,
-        body: '[{"IsMegoldva":$state,"TanarHaziFeladatUid":"${homework.id}"}]',
-        headers: {
-          "Authorization": "Bearer $accessToken",
-          "User-Agent": userAgent,
-          "Content-Type": "application/json"
-        },
-      );
+  Future<void> trashMessage(bool deleted, int id) async {
+    Map data = {
+      "isKuka": deleted,
+      "postaladaElemAzonositoLista": [id]
+    };
 
+    try {
+      var response =
+          await client.post(BaseURL.KRETA_ADMIN + AdminEndpoints.trashMessage,
+              headers: {
+                "Authorization": "Bearer $accessToken",
+                "User-Agent": userAgent,
+                "Content-Type": "application/json"
+              },
+              body: jsonEncode(data));
       await checkResponse(response);
     } catch (error) {
-      print("ERROR: KretaAPI.homeworkSolved: " + error.toString());
+      print("ERROR: KretaAPI.deleteMessage: " + error.toString());
+      return null;
     }
   }
 

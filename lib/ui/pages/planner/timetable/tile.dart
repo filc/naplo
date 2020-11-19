@@ -33,7 +33,7 @@ class LessonTile extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
         decoration: BoxDecoration(
           color: app.settings.theme.backgroundColor,
-          borderRadius: BorderRadius.all(Radius.circular(12.0)),
+          borderRadius: BorderRadius.all(Radius.circular(14.0)),
           boxShadow: app.settings.theme.brightness == Brightness.light
               ? [
                   BoxShadow(

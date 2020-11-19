@@ -1,4 +1,4 @@
-import 'package:filcnaplo/data/context/app.dart';
+import 'package:filcnaplo/ui/bottom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/ui/profile_icon.dart';
@@ -14,19 +14,13 @@ class AbsenceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // todo: Justify button in parental mode
-    return Container(
-      padding: EdgeInsets.only(top: 14.0),
-      decoration: BoxDecoration(
-        color: app.settings.theme.backgroundColor,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24.0),
-          topRight: Radius.circular(24.0),
-        ),
-      ),
+    return BottomCard(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           ListTile(
+            contentPadding: EdgeInsets.zero,
             leading: ProfileIcon(name: absence.teacher),
             title: Row(
               children: [
@@ -47,53 +41,49 @@ class AbsenceView extends StatelessWidget {
           ),
 
           // Absence Details
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                absence.lessonIndex != null
-                    ? AbsenceDetail(
-                        I18n.of(context).delayLesson,
-                        absence.lessonIndex.toString() +
-                            ". (" +
-                            (absence.lessonStart != null
-                                ? DateFormat("HH:mm")
-                                    .format(absence.lessonStart)
-                                : I18n.of(context).unknown) +
-                            " - " +
-                            (absence.lessonEnd != null
-                                ? DateFormat("HH:mm").format(absence.lessonEnd)
-                                : I18n.of(context).unknown) +
-                            ")",
-                      )
-                    : Container(),
-                absence.mode != null
-                    ? AbsenceDetail(
-                        I18n.of(context).delayMode,
-                        absence.mode.description,
-                      )
-                    : Container(),
-                absence.justification != null
-                    ? AbsenceDetail(
-                        I18n.of(context).absenceJustification,
-                        absence.justification.description,
-                      )
-                    : Container(),
-                absence.state != null
-                    ? AbsenceDetail(
-                        I18n.of(context).delayState,
-                        absence.state,
-                      )
-                    : Container(),
-                absence.submitDate != null
-                    ? AbsenceDetail(
-                        I18n.of(context).administrationTime,
-                        formatDate(context, absence.submitDate, showTime: true),
-                      )
-                    : Container(),
-              ],
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              absence.lessonIndex != null
+                  ? AbsenceDetail(
+                      I18n.of(context).delayLesson,
+                      absence.lessonIndex.toString() +
+                          ". (" +
+                          (absence.lessonStart != null
+                              ? DateFormat("HH:mm").format(absence.lessonStart)
+                              : I18n.of(context).unknown) +
+                          " - " +
+                          (absence.lessonEnd != null
+                              ? DateFormat("HH:mm").format(absence.lessonEnd)
+                              : I18n.of(context).unknown) +
+                          ")",
+                    )
+                  : Container(),
+              absence.mode != null
+                  ? AbsenceDetail(
+                      I18n.of(context).delayMode,
+                      absence.mode.description,
+                    )
+                  : Container(),
+              absence.justification != null
+                  ? AbsenceDetail(
+                      I18n.of(context).absenceJustification,
+                      absence.justification.description,
+                    )
+                  : Container(),
+              absence.state != null
+                  ? AbsenceDetail(
+                      I18n.of(context).delayState,
+                      absence.state,
+                    )
+                  : Container(),
+              absence.submitDate != null
+                  ? AbsenceDetail(
+                      I18n.of(context).administrationTime,
+                      formatDate(context, absence.submitDate, showTime: true),
+                    )
+                  : Container(),
+            ],
           ),
         ],
       ),

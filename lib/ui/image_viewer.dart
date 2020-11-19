@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
 class ImageViewer extends StatelessWidget {
-  const ImageViewer(
-      {Key key, this.imageProvider, this.downloadHandler, this.shareHandler})
-      : super(key: key);
+  const ImageViewer({
+    Key key,
+    this.imageProvider,
+    this.downloadHandler,
+    this.shareHandler,
+  }) : super(key: key);
 
   final ImageProvider<Object> imageProvider;
   final Function downloadHandler;

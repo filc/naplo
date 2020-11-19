@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/models/message.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
@@ -37,41 +38,39 @@ class MessageTile extends StatelessWidget {
           message.deleted ? FeatherIcons.externalLink : FeatherIcons.archive,
           color: Colors.white,
         ),
-      ),
-      child: GestureDetector(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 4.0),
-          child: ListTile(
-            leading: ProfileIcon(name: message.sender),
-            title: Row(children: <Widget>[
-              Expanded(
-                child: Text(
-                  message.sender,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 16.0),
-                ),
+      ), 
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 4.0),
+        child: ListTile(
+          leading: ProfileIcon(name: message.sender),
+          title: Row(children: <Widget>[
+            Expanded(
+              child: Text(
+                message.sender,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 16.0),
               ),
-              Row(children: <Widget>[
-                (message.attachments.length > 0)
-                    ? Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Icon(FeatherIcons.paperclip, size: 20.0))
-                    : Container(),
-                Text(formatDate(context, message.date),
-                    textAlign: TextAlign.right)
-              ]),
-            ]),
-            subtitle: Text(
-              message.subject + "\n" + escapeHtml(message.content),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
             ),
+            Row(children: <Widget>[
+              (message.attachments.length > 0)
+                  ? Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Icon(FeatherIcons.paperclip, size: 20.0))
+                  : Container(),
+              Text(formatDate(context, message.date),
+                  textAlign: TextAlign.right)
+            ]),
+          ]),
+          subtitle: Text(
+            message.subject + "\n" + escapeHtml(message.content),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
+          onTap: () {
+            Navigator.of(context).push(CupertinoPageRoute(
+                builder: (context) => MessageView(children, this._builderScaffold, this.callback)));
+          },
         ),
-        onTap: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => MessageView(children, this._builderScaffold, this.callback)));
-        },
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:filcnaplo/data/context/app.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'dart:io';
@@ -35,9 +37,11 @@ class StorageController {
         createSettingsTable(db);
         await db.insert("settings", {
           "language": "auto",
-          "app_color": "default",
-          "theme": "light",
-          "background_color": 0,
+          "app_color": "default","theme": SchedulerBinding.instance.window.platformBrightness ==
+                  Brightness.dark
+              ? 'dark'
+              : 'light',
+          "background_color": 1,
           "notifications": 1,
           "selected_user": 0,
           "render_html": 1,
@@ -56,16 +60,6 @@ class StorageController {
           "color3": "#fdd835",
           "color4": "#8bc34a",
           "color5": "#43a047",
-        });
-
-        // Tab States
-        await db.execute(
-            "create table tabs (messages INTIGER, evaluations INTIGER, absences INTIGER, timetable INTIGER)");
-        await db.insert("tabs", {
-          "messages": 0,
-          "evaluations": 0,
-          "absences": 0,
-          "timetable": 0,
         });
       },
     );

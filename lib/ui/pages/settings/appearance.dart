@@ -8,7 +8,6 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppearanceSettings extends StatefulWidget {
   @override
@@ -429,7 +428,8 @@ class EvaluationColor extends StatelessWidget {
           child: Text(
             value.toString(),
             textAlign: TextAlign.center,
-            style: GoogleFonts.quicksand(
+            style: TextStyle(
+              fontFamily: "GoogleSans",
               fontSize: 32.0,
               height: 1.2,
               fontWeight: FontWeight.w500,

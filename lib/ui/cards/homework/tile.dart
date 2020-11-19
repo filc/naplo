@@ -22,7 +22,7 @@ class HomeworkTile extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Text(
-              homework.subjectName,
+              capital(homework.subjectName),
               overflow: TextOverflow.ellipsis,
             ),
           ),

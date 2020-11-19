@@ -48,7 +48,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
               ),
               controller: _swiper,
               loop: false,
-              physics: NeverScrollableScrollPhysics(),
+              onIndexChanged: (int n) => index = n,
             ),
             Container(
               alignment: Alignment.bottomLeft,

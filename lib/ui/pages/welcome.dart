@@ -1,8 +1,8 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/ui/page_transition.dart';
 import 'package:filcnaplo/ui/pages/features.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
@@ -59,7 +59,8 @@ class WelcomePage extends StatelessWidget {
                       Text(
                         I18n.of(context).appTitle,
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.redHatDisplay(
+                        style: TextStyle(
+                          fontFamily: "RedHatDisplay",
                           fontWeight: FontWeight.bold,
                           fontSize: 48.0,
                           color: Color(0xFF292929),
@@ -87,7 +88,7 @@ class WelcomePage extends StatelessWidget {
                             ],
                           ),
                           onPressed: () => Navigator.of(context)
-                              .pushReplacement(_createRoute()),
+                              .pushReplacement(PageTransition.horizontal(FeaturesPage())),
                         ),
                       ),
                       SizedBox(height: 32.0),
@@ -103,27 +104,6 @@ class WelcomePage extends StatelessWidget {
   }
 }
 
-Route _createRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => FeaturesPage(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      var begin = Offset(1.0, 0.0);
-      var end = Offset.zero;
-      var curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end);
-      var curvedAnimation = CurvedAnimation(
-        parent: animation,
-        curve: curve,
-      );
-
-      return SlideTransition(
-        position: tween.animate(curvedAnimation),
-        child: child,
-      );
-    },
-  );
-}
 
 class WaveClipper extends CustomClipper<Path> {
   @override

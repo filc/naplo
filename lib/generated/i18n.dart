@@ -1143,9 +1143,9 @@ class _I18n_en_US extends I18n {
   /// "Your grades"
   @override
   String get evaluations => "Your grades";
-  /// "Mid-year"
+  /// "Mid year"
   @override
-  String get evaluationsMidYear => "Mid-year";
+  String get evaluationsMidYear => "Mid year";
   /// "1. Quarter"
   @override
   String get evaluationsQYear => "1. Quarter";

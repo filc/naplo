@@ -5,7 +5,6 @@ import 'package:filcnaplo/helpers/averages.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tinycolor/tinycolor.dart';
 
 class StatsBlock extends StatelessWidget {
@@ -188,7 +187,8 @@ class EvaluationBlock extends StatelessWidget {
                   child: Text(
                     title,
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.quicksand(
+                    style: TextStyle(
+                      fontFamily: "GoogleSans",
                       color: textColor(color),
                       fontSize: 28.0,
                       height: 1.2,

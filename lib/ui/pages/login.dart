@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Color(0xFF236A5B),
-      body: Container(
+      body: AutofillGroup(
         child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.fromLTRB(16.0, 42.0, 16.0, 0),
@@ -140,6 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(color: Color(0xE0FFFFFF)),
                         decoration: inputDecoration(type: 0),
                         controller: loginUsernameController,
+                        autofillHints: [AutofillHints.username],
                       ),
                     ],
                   ),
@@ -172,6 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: !loginContext.passwordVisible,
                         decoration: inputDecoration(type: 1),
                         controller: loginPasswordController,
+                        autofillHints: [AutofillHints.password],
                       ),
                     ],
                   ),
@@ -290,7 +292,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 6.0),
                     child: Text(
-                      (app.debugMode ? "Dev Build " : "") +
+                      (app.debugMode ? "Debug " : "") +
                           "v" +
                           app.currentAppVersion,
                       style: TextStyle(color: Colors.white70),
