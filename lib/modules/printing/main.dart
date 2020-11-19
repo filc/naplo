@@ -10,7 +10,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/builder.dart';
-
+import 'package:flutter/foundation.dart';
 /*
 Author: daaniiieel
 Name: Timetable Printer (Experimental)
@@ -141,7 +141,7 @@ class TimetablePrinter {
       pdf = build(context, pdf, weekDays, minLessonIndex, maxLessonIndex);
 
       // print pdf
-      if (!app.debugMode) {
+      if (kReleaseMode) {
         Printing.layoutPdf(onLayout: (format) => pdf.save()).then((success) {
           if (success)
             _scaffoldKey.currentState.showSnackBar(SnackBar(
