@@ -8,7 +8,7 @@ enum DebugViewClass { evalutaions, planner, messages, absences }
 class DebugViewStruct {
   String title;
   List<DebugEndpoint> endpoints;
-} 
+}
 
 class DebugViewEvaluations implements DebugViewStruct {
   String title = "ui.pages.evaluations.debug.view";
@@ -83,9 +83,7 @@ class _DebugViewState extends State<DebugView> {
         shadowColor: Colors.transparent,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
-      body: Container(
-        child: ListView(children: debug.endpoints),
-      ),
+      body: Container(child: ListView(children: debug.endpoints ?? [])),
     );
   }
 }
