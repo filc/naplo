@@ -116,7 +116,8 @@
     "theme": "Thema",
     "subject": "Fach",
     "tomorrow": "Morgen gibt es",
-    "tomorrowTitle": "Stunden morgen"
+    "tomorrowTitle": "Stunden morgen",
+    "empty":"Freistunde"
   },
   "homework": {
     "": "Hausaufgabe",

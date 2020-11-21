@@ -42,16 +42,9 @@ class LessonTile extends StatelessWidget {
                       color: Colors.black26),
                 ]
               : [],
-          border:
-              lesson.status.name == "Elmaradt" || lesson.substituteTeacher != ""
-                  ? Border.all(
-                      color: lesson.status.name == "Elmaradt"
-                          ? Colors.red[400]
-                          : lesson.substituteTeacher != ""
-                              ? Colors.yellow[600]
-                              : null,
-                      width: 2)
-                  : null,
+          border: accentColor != null
+              ? Border.all(color: accentColor, width: 2)
+              : null,
         ),
         child: Column(
           children: <Widget>[
@@ -62,11 +55,7 @@ class LessonTile extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 24.0,
                   height: 1.15,
-                  color: lesson.status.name == "Elmaradt"
-                      ? Colors.red[400]
-                      : lesson.substituteTeacher != ""
-                          ? Colors.yellow[600]
-                          : null,
+                  color: accentColor,
                 ),
               ),
               title: Row(
@@ -76,9 +65,13 @@ class LessonTile extends StatelessWidget {
                     child: Text(
                       capital(lesson.subject != null
                           ? lesson.subject.name
-                          : I18n.of(context).unknown),
+                          : lesson.isEmpty
+                              ? I18n.of(context).lessonEmpty
+                              : I18n.of(context).unknown),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
+                      style:
+                          lesson.isEmpty ? TextStyle(color: Colors.grey) : null,
                     ),
                   ),
                   Expanded(
@@ -152,16 +145,26 @@ class LessonTile extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () => showModalBottomSheet(
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (context) => TimetableView(lesson, homework, exams),
-      ),
+      onTap: () => lesson.isEmpty
+          ? null
+          : showModalBottomSheet(
+              backgroundColor: Colors.transparent,
+              context: context,
+              builder: (context) => TimetableView(lesson, homework, exams),
+            ),
     );
   }
 
-  String formatTime(DateTime time) =>
-      time.hour.toString() + ":" + time.minute.toString().padLeft(2, "0");
+  get accentColor {
+    if (lesson.status?.name == "Elmaradt") return Colors.red[400];
+    if (lesson.substituteTeacher != "") return Colors.yellow[600];
+    if (lesson.isEmpty) return Colors.grey;
+    return null;
+  }
+
+  String formatTime(DateTime time) => time != null
+      ? time.hour.toString() + ":" + time.minute.toString().padLeft(2, "0")
+      : '';
 }
 
 class SpecialDateTile extends LessonTile {
