@@ -1,5 +1,6 @@
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/kreta/api.dart';
+import 'package:filcnaplo/ui/empty.dart';
 import 'package:filcnaplo/ui/pages/debug/debug.dart';
 import 'package:flutter/material.dart';
 
@@ -83,7 +84,7 @@ class _DebugViewState extends State<DebugView> {
         shadowColor: Colors.transparent,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
-      body: Container(child: ListView(children: debug.endpoints ?? [])),
+      body: Container(child: ListView(children: debug.endpoints ?? [Empty()])),
     );
   }
 }

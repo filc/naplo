@@ -86,7 +86,9 @@ class _EvaluationTabsState extends State<EvaluationTabs>
                 style: TextStyle(fontSize: 22.0),
               ),
               actions: <Widget>[
-                DebugButton(DebugViewClass.evalutaions),
+                app.debugMode
+                    ? DebugButton(DebugViewClass.evalutaions)
+                    : Container(),
                 AccountButton()
               ],
               bottom: CustomTabBar(

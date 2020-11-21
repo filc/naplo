@@ -82,7 +82,9 @@ class _MessageTabsState extends State<MessageTabs>
                 style: TextStyle(fontSize: 22.0),
               ),
               actions: <Widget>[
-                DebugButton(DebugViewClass.messages),
+                app.debugMode
+                    ? DebugButton(DebugViewClass.messages)
+                    : Container(),
                 AccountButton()
               ],
               bottom: CustomTabBar(

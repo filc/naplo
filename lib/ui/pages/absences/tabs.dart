@@ -68,7 +68,7 @@ class _AbsenceTabsState extends State<AbsenceTabs>
                 style: TextStyle(fontSize: 22.0),
               ),
               actions: <Widget>[
-                DebugButton(DebugViewClass.absences),
+                app.debugMode ? DebugViewClass.absences : Container(),
                 AccountButton()
               ],
               bottom: CustomTabBar(

@@ -70,7 +70,9 @@ class _PlannerTabsState extends State<PlannerTabs>
                 style: TextStyle(fontSize: 22.0),
               ),
               actions: <Widget>[
-                DebugButton(DebugViewClass.planner),
+                app.debugMode
+                    ? DebugButton(DebugViewClass.planner)
+                    : Container(),
                 AccountButton()
               ],
               bottom: CustomTabBar(
