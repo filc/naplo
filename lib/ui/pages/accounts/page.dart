@@ -1,6 +1,8 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:filcnaplo/data/models/user.dart';
 import 'package:filcnaplo/ui/pages/accounts/tile.dart';
 import 'package:filcnaplo/ui/pages/login.dart';
+import 'package:filcnaplo/ui/profile_icon.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:flutter/cupertino.dart';
@@ -59,6 +61,7 @@ class _AccountPageState extends State<AccountPage> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
+
                   ),
                 ),
               ],
