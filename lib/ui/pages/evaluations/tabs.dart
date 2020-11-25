@@ -192,17 +192,17 @@ class _EvaluationTabsState extends State<EvaluationTabs>
                 children: <Widget>[
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                        EdgeInsets.symmetric(vertical: 12.0, horizontal: 25.0),
                     child: Row(
                       children: <Widget>[
                         Icon(FeatherIcons.book),
                         Spacer(),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 13.0),
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Icon(FeatherIcons.users),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 13.0),
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Icon(FeatherIcons.trendingUp),
                         )
                       ],

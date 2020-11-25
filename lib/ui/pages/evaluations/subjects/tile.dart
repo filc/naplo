@@ -30,7 +30,7 @@ class SubjectTile extends StatelessWidget {
             children: [
               classAvg != null && classAvg.round() != 0
                   ? Container(
-                      width: 45,
+                      width: 55,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(45.0)),
                         border: Border.all(
@@ -51,7 +51,7 @@ class SubjectTile extends StatelessWidget {
                   : Container(),
               studentAvg > 0 && studentAvg <= 5.0
                   ? Container(
-                      width: 45,
+                      width: 55,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(45.0)),
                         color: app.theme
