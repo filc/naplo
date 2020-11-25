@@ -57,12 +57,13 @@ class DelayView extends StatelessWidget {
                 ),
                 DelayDetail(
                   I18n.of(context).delayLesson,
-                  delay.lessonIndex.toString() +
-                      ". (" +
+                  (delay.lessonIndex != 0
+                          ? (delay.lessonIndex.toString() + ". (")
+                          : ("")) +
                       DateFormat("HH:mm").format(delay.lessonStart) +
                       " - " +
                       DateFormat("HH:mm").format(delay.lessonEnd) +
-                      ")",
+                      (delay.lessonIndex != 0 ? ")" : ""),
                 ),
                 DelayDetail(
                   I18n.of(context).delayMode,
