@@ -57,10 +57,16 @@ class AbsenceTile extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(left: 12.0),
-              child: absence.lessonIndex != null ? Text(
-                absence.lessonIndex.toString() + ".",
-                style: TextStyle(color: Colors.grey),
-              ) : Container(),
+              child: absence.lessonIndex != null
+                  ? Text(
+                      (absence.lessonIndex != 0
+                          ? absence.lessonIndex.toString() + "."
+                          : formatTime(absence.lessonStart) +
+                              " - " +
+                              formatTime(absence.lessonEnd)),
+                      style: TextStyle(color: Colors.grey),
+                    )
+                  : Container(),
             ),
             Expanded(
               child: Padding(
@@ -80,4 +86,7 @@ class AbsenceTile extends StatelessWidget {
           builder: (context) => AbsenceView(absence)),
     );
   }
+
+  String formatTime(DateTime time) =>
+      time.hour.toString() + ":" + time.minute.toString().padLeft(2, "0");
 }
