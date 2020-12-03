@@ -34,7 +34,6 @@ class Message {
 
   factory Message.fromJson(Map json) {
     Map message = json["uzenet"];
-
     int id = json["azonosito"];
     int messageId = message["azonosito"];
     int replyId = message["elozoUzenetAzonosito"];

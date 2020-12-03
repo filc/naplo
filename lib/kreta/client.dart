@@ -272,27 +272,6 @@ class KretaClient {
       return null;
     }
   }
-   Future<void> trashMessage(bool put, int id) async {
-
-    try {
-      var response = await client.post(BaseURL.KRETA_ADMIN + AdminEndpoints.trashMessage,
-        headers: {
-          "Authorization": "Bearer $accessToken",
-          "User-Agent": userAgent,
-          "Content-Type": "application/json"
-        },
-        body: jsonEncode({
-          "isKuka": put,
-          "postaladaElemAzonositoLista": [id]
-        })
-      );
-      await checkResponse(response);
-      //return
-    } catch (error) {
-      print("ERROR: KretaAPI.deleteMessage: " + error.toString());
-      return null;
-    }
-  }
 
   Future<List<Recipient>> getRecipients() async {
     try {
