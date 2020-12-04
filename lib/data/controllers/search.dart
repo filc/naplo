@@ -90,7 +90,7 @@ class SearchController {
     return results;
   }
 
-  List<Searchable> getSearchables(BuildContext context) {
+  List<Searchable> getSearchables(BuildContext context, _scaffoldKey, callback) {
     List<Searchable> searchables = [];
 
     List<Message> messages = <List<Message>>[
@@ -100,15 +100,15 @@ class SearchController {
     ].expand((x) => x).toList();
 
     messages.forEach((message) => searchables.add(Searchable(
-          text: searchString([escapeHtml(message.content), message.subject]),
-          child: GestureDetector(
-            child: MessageTile(message),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => MessageView([message])));
-            },
-          ),
-        )));
+        text: searchString([escapeHtml(message.content), message.subject]),
+        child: GestureDetector(
+          child: MessageTile(message),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => MessageView([message], _scaffoldKey, callback)));
+          },
+        ),  
+    )));
 
     // Notes
     app.user.sync.note.data.forEach((note) => searchables.add(Searchable(

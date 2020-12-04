@@ -15,11 +15,22 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:filcnaplo/data/controllers/storage.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:open_file/open_file.dart';
+import 'package:downloads_path_provider/downloads_path_provider.dart';
+import 'package:filcnaplo/helpers/archivemessage.dart';
 
 class MessageView extends StatefulWidget {
   final List<Message> messages;
+  final _previousScaffold;
+  final callback;
 
-  MessageView(this.messages);
+  archiveMessages (context, put) {
+    messages.forEach((msg) {archiveMessage(_previousScaffold, context, msg, put, callback);});
+  }
+
+  MessageView(this.messages, this._previousScaffold, this.callback);
 
   @override
   _MessageViewState createState() => _MessageViewState();
@@ -40,7 +51,8 @@ class _MessageViewState extends State<MessageView> {
                 .map((message) => MessageViewTile(
                     message,
                     message == widget.messages.first,
-                    message == widget.messages.last))
+                    message == widget.messages.last,
+                    widget.archiveMessages))
                 .toList(),
           ),
         ),
@@ -69,8 +81,9 @@ class MessageViewTile extends StatefulWidget {
   final Message message;
   final bool isFirst;
   final bool isLast;
+  final callback;
 
-  MessageViewTile(this.message, this.isFirst, this.isLast);
+   MessageViewTile(this.message, this.isFirst, this.isLast, this.callback);
 
   @override
   _MessageViewTileState createState() => _MessageViewTileState();
@@ -103,10 +116,27 @@ class _MessageViewTileState extends State<MessageViewTile> {
           (widget.isFirst)
               ? AppBar(
                   centerTitle: true,
-                  leading: BackButton(),
+                  leading: Container(),
                   title: Text(widget.message.subject),
                   shadowColor: Colors.transparent,
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  actions: <Widget>[
+                    !widget.message.deleted ?
+                    IconButton(
+                        icon: Icon(FeatherIcons.archive),
+                        onPressed: () {
+                          widget.callback(context, true);
+                          Navigator.pop(context);
+                         },
+                    ) : //nem törölt
+                    IconButton(
+                    icon: Icon(FeatherIcons.externalLink),
+                        onPressed: () {
+                          widget.callback(context, false);
+                          Navigator.pop(context);
+                        }
+                    ) //törölt
+                  ]
                 )
               : Container(),
           RawMaterialButton(

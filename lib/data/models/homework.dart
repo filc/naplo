@@ -1,3 +1,5 @@
+//import '../context/app.dart';
+
 class Homework {
   Map json;
   DateTime date;
@@ -9,7 +11,7 @@ class Homework {
   String content;
   String subjectName;
   String group;
-  List attachments;
+  List<HomeworkAttachment> attachments;
   String id;
 
   Homework(
@@ -44,9 +46,14 @@ class Homework {
     String subjectName = json["TantargyNeve"] ?? "";
     String group =
         json["OsztalyCsoport"] != null ? json["OsztalyCsoport"]["Uid"] : null;
-    List attachments = json["Csatolmanyok"];
+    List<HomeworkAttachment> attachments = [];
+    // Elvileg nem kéne nullnak lennie, de just in case
+    if (json["Csatolmanyok"] == null) {} else {
+       json["Csatolmanyok"].forEach((json) {
+       attachments.add(HomeworkAttachment.fromJson(json));
+      });
+    }
     String id = json["Uid"];
-
     return Homework(
       date,
       lessonDate,
@@ -62,4 +69,27 @@ class Homework {
       json: json,
     );
   }
+}
+
+class HomeworkAttachment {
+Map json;
+int id;
+String name;
+String type;
+
+HomeworkAttachment(this.id, this.name, this.type, this.json);
+
+factory HomeworkAttachment.fromJson(Map json) {
+  int id = int.parse(json["Uid"]);
+  String name = json["Nev"];
+  String type = json["Tipus"];
+
+  return HomeworkAttachment(
+    id,
+    name,
+    type,
+    json
+  );
+}
+
 }

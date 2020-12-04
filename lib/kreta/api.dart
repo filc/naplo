@@ -33,8 +33,9 @@ class KretaEndpoints {
   static const homeworks = "/ellenorzo/V3/Sajat/HaziFeladatok";
   static const homeworkDone = "/ellenorzo/V3/Sajat/HaziFeladatok/Megoldva";
   static const capabilities = "/ellenorzo/V3/Sajat/Intezmenyek";
+  static String downloadHomeworkAttachments(String uid, String type) =>
+      "/ellenorzo/V3/Sajat/HaziFeladatok/Csatolmanyok/$uid,$type";
 }
-
 class AdminEndpoints {
   //static const messages = "/api/v1/kommunikacio/postaladaelemek/sajat";
   static const sendMessage = "/api/v1/kommunikacio/uzenetek";
