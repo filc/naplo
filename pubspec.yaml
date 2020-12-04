@@ -43,6 +43,8 @@ dependencies:
   photo_view: ^0.10.2
   downloads_path_provider: ^0.1.0
   webview_flutter: any
+dependency_overrides:
+  intl: 0.17.0-nullsafety.2
 
 dev_dependencies:
   flutter_test:
