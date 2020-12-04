@@ -227,11 +227,10 @@ class _AccountTileState extends State<AccountTile> {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => DKTPage(widget.user)));
                     } else {
-                      /*Nem buildel ezzel*/ 
-                      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      //   content: Text(I18n.of(context).loginError),
-                      //   duration: Duration(seconds: 5),
-                      // ));
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(I18n.of(context).loginError),
+                        duration: Duration(seconds: 5),
+                      ));
                     }
                   });
                 },
