@@ -9,10 +9,9 @@ class MessageCard extends BaseCard {
   final Message message;
   final Key key;
   final DateTime compare;
-  final _scaffoldKey;
-  final callback;
+  final updateCallback;
 
-  MessageCard(this.message, this._scaffoldKey, this.callback, {this.compare, this.key});
+  MessageCard(this.message, this.updateCallback, {this.compare, this.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class MessageCard extends BaseCard {
         ),
         onTap: () {
           Navigator.of(context).push(
-              CupertinoPageRoute(builder: (context) => MessageView([message], this._scaffoldKey, this.callback)));
+              CupertinoPageRoute(builder: (context) => MessageView([message], this.updateCallback)));
         },
       ),
     );

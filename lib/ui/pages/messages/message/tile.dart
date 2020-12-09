@@ -10,17 +10,16 @@ import 'package:filcnaplo/helpers/archivemessage.dart';
 class MessageTile extends StatelessWidget {
   final Message message;
   final List<Message> children;
-  final _builderScaffold;
-  final callback;
+  final updateCallback;
   final Key key;
 
-  MessageTile(this.message, this.children, this._builderScaffold, this.callback, {this.key});
+  MessageTile(this.message, this.children, this.updateCallback, {this.key});
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
       key: key,
-      onDismissed: (direction) => archiveMessage(_builderScaffold, context, message, !message.deleted, callback),
+      onDismissed: (direction) => archiveMessage(context, message, !message.deleted, updateCallback),
       secondaryBackground: Container(
         color: message.deleted ? Colors.green[600] : Colors.blue[600],
         alignment: Alignment.centerRight,
@@ -68,7 +67,7 @@ class MessageTile extends StatelessWidget {
           ),
           onTap: () {
             Navigator.of(context).push(CupertinoPageRoute(
-                builder: (context) => MessageView(children, this._builderScaffold, this.callback)));
+                builder: (context) => MessageView(children, this.updateCallback)));
           },
         ),
       ),

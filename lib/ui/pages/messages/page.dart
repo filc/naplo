@@ -19,7 +19,7 @@ class _MessagesPageState extends State<MessagesPage> {
   EventBuilder _eventBuilder;
 
   _MessagesPageState(_scaffoldKey) {
-    this._messageBuilder = MessageBuilder(_scaffoldKey, updateCallback);
+    this._messageBuilder = MessageBuilder(updateCallback);
     this._noteBuilder = NoteBuilder();
     this._eventBuilder = EventBuilder();
   }

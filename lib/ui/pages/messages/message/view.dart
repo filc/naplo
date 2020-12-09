@@ -15,22 +15,17 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:filcnaplo/data/controllers/storage.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:open_file/open_file.dart';
-import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:filcnaplo/helpers/archivemessage.dart';
 
 class MessageView extends StatefulWidget {
   final List<Message> messages;
-  final _previousScaffold;
-  final callback;
+  final updateCallback;
 
-  archiveMessages (context, put) {
-    messages.forEach((msg) {archiveMessage(_previousScaffold, context, msg, put, callback);});
+  archiveMessages (context, bool archiving) {
+    messages.forEach((msg) {archiveMessage(context, msg, archiving, updateCallback);});
   }
 
-  MessageView(this.messages, this._previousScaffold, this.callback);
+  MessageView(this.messages, this.updateCallback);
 
   @override
   _MessageViewState createState() => _MessageViewState();
@@ -59,31 +54,15 @@ class _MessageViewState extends State<MessageView> {
       ),
     );
   }
-
-  Future archiveMessage(Message message) async {
-    app.user.sync.messages.data[app.selectedMessagePage]
-        .removeWhere((msg) => msg.id == message.id);
-
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text(I18n.of(context).messageDeleted),
-      duration: Duration(seconds: 5),
-      action: SnackBarAction(
-        label: I18n.of(context).dialogUndo,
-        onPressed: () {
-          // magic
-        },
-      ),
-    ));
-  }
 }
 
 class MessageViewTile extends StatefulWidget {
   final Message message;
   final bool isFirst;
   final bool isLast;
-  final callback;
+  final archiveCallback;
 
-   MessageViewTile(this.message, this.isFirst, this.isLast, this.callback);
+   MessageViewTile(this.message, this.isFirst, this.isLast, this.archiveCallback);
 
   @override
   _MessageViewTileState createState() => _MessageViewTileState();
@@ -125,14 +104,14 @@ class _MessageViewTileState extends State<MessageViewTile> {
                     IconButton(
                         icon: Icon(FeatherIcons.archive),
                         onPressed: () {
-                          widget.callback(context, true);
+                          widget.archiveCallback(context, true);
                           Navigator.pop(context);
                          },
                     ) : //nem törölt
                     IconButton(
                     icon: Icon(FeatherIcons.externalLink),
                         onPressed: () {
-                          widget.callback(context, false);
+                          widget.archiveCallback(context, false);
                           Navigator.pop(context);
                         }
                     ) //törölt

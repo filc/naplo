@@ -6,9 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 
 class SearchPage extends StatefulWidget {
-  final _scaffoldKey;
   final callback;
-  SearchPage(this._scaffoldKey, this.callback);
+  SearchPage(this.callback);
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -70,7 +69,7 @@ class _SearchPageState extends State<SearchPage> {
                         setState(() {
                           if (text != "") {
                             results = SearchController.searchableResults(
-                              app.search.getSearchables(context, widget._scaffoldKey, widget.callback),
+                              app.search.getSearchables(context, widget.callback),
                               text,
                             );
                           } else {

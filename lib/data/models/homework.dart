@@ -48,7 +48,7 @@ class Homework {
         json["OsztalyCsoport"] != null ? json["OsztalyCsoport"]["Uid"] : null;
     List<HomeworkAttachment> attachments = [];
     // Elvileg nem kéne nullnak lennie, de just in case
-    if (json["Csatolmanyok"] == null) {} else {
+    if (json["Csatolmanyok"] != null) {
        json["Csatolmanyok"].forEach((json) {
        attachments.add(HomeworkAttachment.fromJson(json));
       });

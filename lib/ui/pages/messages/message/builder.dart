@@ -5,10 +5,9 @@ import 'package:filcnaplo/ui/pages/messages/message/tile.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 
 class MessageBuilder {
-  final _scaffoldKey;
-  final callback;
+  final updateCallback;
 
-  MessageBuilder(this._scaffoldKey, this.callback);
+  MessageBuilder(this.updateCallback);
 
   List<List<MessageTile>> messageTiles = [[], [], [], []];
 
@@ -17,7 +16,7 @@ class MessageBuilder {
       messageTiles[i] = [];
       app.user.sync.messages.data[i].reversed.forEach((Message message) {
         messageTiles[i].add(
-          MessageTile(message, [message], this._scaffoldKey,this.callback,
+          MessageTile(message, [message], this.updateCallback,
               key: Key(message.id.toString())),
         );
       });
@@ -33,7 +32,7 @@ class MessageBuilder {
 
     messages.forEach((Message message) {
       if (message.conversationId == null) {
-        messageTiles[0].add(MessageTile(message, [message], this._scaffoldKey,this.callback,
+        messageTiles[0].add(MessageTile(message, [message], this.updateCallback,
             key: Key(message.id.toString())));
       } else {
         if (conversations[message.conversationId] == null)
@@ -56,8 +55,7 @@ class MessageBuilder {
       messageTiles[0].add(MessageTile(
         conversations[conversationId].first,
         conversations[conversationId],
-        this._scaffoldKey,
-        this.callback,
+        this.updateCallback,
         key: Key(conversations[conversationId][0].id.toString()),
       ));
     });

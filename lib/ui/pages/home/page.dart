@@ -17,8 +17,7 @@ import 'package:filcnaplo/ui/pages/search.dart';
 
 class HomePage extends StatefulWidget {
   final Function jumpToPage;
-  final _scaffoldKey;
-  HomePage(this.jumpToPage, this._scaffoldKey);
+  HomePage(this.jumpToPage);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -100,7 +99,6 @@ class _HomePageState extends State<HomePage> {
 
     app.user.sync.messages.data[0].forEach((message) => cards.add(MessageCard(
           message,
-          widget._scaffoldKey,
           updateCallback,
           key: Key(message.messageId.toString()),
           compare: message.date,
@@ -145,7 +143,7 @@ class _HomePageState extends State<HomePage> {
 
   Route _searchRoute() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => SearchPage(widget._scaffoldKey, updateCallback),
+      pageBuilder: (context, animation, secondaryAnimation) => SearchPage(updateCallback),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(opacity: animation, child: child);
       },
