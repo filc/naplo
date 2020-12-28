@@ -43,7 +43,7 @@ class LessonTile extends StatelessWidget {
                 ]
               : [],
           border: accentColor != null
-              ? Border.all(color: accentColor, width: 2)
+              ? Border.all(color: accentColor, width: 2.5)
               : null,
         ),
         child: Column(
