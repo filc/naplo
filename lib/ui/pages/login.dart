@@ -28,10 +28,12 @@ class _LoginPageState extends State<LoginPage> {
 
     loginContext = LoginContext();
     app.settings.update(login: false);
-
-    app.kretaApi.client.getSchools().then((schools) {
-      loginContext.schools = schools;
-      loginContext.schoolState = true;
+    app.kretaApi.client.getConfig().then((conf) {
+      app.kretaApi.client.userAgent = conf.userAgent;
+      app.kretaApi.client.getSchools().then((schools) {
+        loginContext.schools = schools;
+        loginContext.schoolState = true;
+      });
     });
   }
 
@@ -107,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                 GestureDetector(
                   onDoubleTap: () {
                     setState(() => app.debugMode = true);
-                    _scaffoldKey.currentState.showSnackBar(SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(
                         "Debug mode enabled",
                         style: TextStyle(color: Colors.white),

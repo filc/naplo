@@ -1,6 +1,6 @@
 import 'package:filcnaplo/ui/cards/homework/tile.dart';
 import 'package:flutter/material.dart';
-import 'package:filcnaplo/ui/card.dart';
+import 'package:filcnaplo/ui/cards/card.dart';
 import 'package:filcnaplo/data/models/homework.dart';
 import 'package:filcnaplo/ui/pages/planner/homeworks/view.dart';
 

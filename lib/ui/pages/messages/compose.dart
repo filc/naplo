@@ -157,7 +157,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
         if (result != null) {
           recipientsAll = result;
         } else {
-          _scaffoldKey.currentState.showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
               I18n.of(context).error,
               style: TextStyle(color: Colors.white),
@@ -217,7 +217,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
                         } catch (error) {
                           print("ERROR: NewMessagePage.build: " +
                               error.toString());
-                          _scaffoldKey.currentState.showSnackBar(SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
                               I18n.of(context).error,
                               style: TextStyle(color: Colors.white),
@@ -239,7 +239,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
                           if (success) {
                             Navigator.pop(context);
                           } else {
-                            _scaffoldKey.currentState.showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
                                 I18n.of(context).errorMessageSend,
                                 style: TextStyle(color: Colors.white),

@@ -72,14 +72,6 @@ class BottomNavbar extends StatelessWidget {
       unselectedIconTheme:
           IconThemeData(color: app.settings.theme.textTheme.bodyText1.color),
       type: BottomNavigationBarType.fixed,
-      backgroundColor: app.settings.theme.backgroundColor.value ==
-              ThemeContext().tinted().backgroundColor.value
-          ? Color(0xFF101C19)
-          : app.settings.theme.brightness == Brightness.dark
-              ? app.settings.backgroundColor == 0
-                  ? Colors.black
-                  : Color(0xff18191c)
-              : Colors.white,
       onTap: this.onTap,
     );
   }

@@ -57,7 +57,7 @@ class _DebugSettingsState extends State<DebugSettings> {
             ),
             onTap: app.debugMode
                 ? () {
-                    _scaffoldKey.currentState.showSnackBar(SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(
                         I18n.of(context).settingsDebugDeleteSuccess,
                         style: TextStyle(color: Colors.white),

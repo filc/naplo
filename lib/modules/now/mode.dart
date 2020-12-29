@@ -1,1 +1,0 @@
-enum Mode { AtSchool, Studying, Freedom }

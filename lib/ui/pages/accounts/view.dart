@@ -153,7 +153,7 @@ class _AccountViewState extends State<AccountView> {
       child: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(12.0),
+            padding: EdgeInsets.only(top: 8.0, left: 12.0, right: 12.0),
             child: Row(
               mainAxisAlignment: edit
                   ? MainAxisAlignment.start
@@ -180,7 +180,7 @@ class _AccountViewState extends State<AccountView> {
           !edit
               ? Padding(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
+                      EdgeInsets.symmetric(horizontal: 32.0, vertical: 4.0),
                   child: ListTile(
                     leading: GestureDetector(
                       child: ProfileIcon(
@@ -190,7 +190,7 @@ class _AccountViewState extends State<AccountView> {
                       onTap: () {
                         showDialog(
                           context: context,
-                          child: Center(
+                          builder: (context) => Center(
                             child: ProfileIcon(
                                 name: widget.user.name,
                                 size: 4.2,

@@ -40,6 +40,14 @@ class ThemeContext {
 
   static Color lightBackground = Colors.white;
 
+  // ThemeContext().tinted().backgroundColor.value
+  //         ? Color(0xFF101C19)
+  //         : app.settings.theme.brightness == Brightness.dark
+  //             ? app.settings.backgroundColor == 0
+  //                 ? Colors.black
+  //                 : Color(0xff18191c)
+  //             : Colors.white,
+
   ThemeData light(Color appColor) => ThemeData(
         brightness: Brightness.light,
         accentColor: appColor,
@@ -58,6 +66,8 @@ class ThemeContext {
             color: Colors.white,
             textTheme: lightText,
             iconTheme: IconThemeData(color: lightTextColor)),
+        bottomNavigationBarTheme:
+            BottomNavigationBarThemeData(backgroundColor: Colors.white),
       );
 
   ThemeData tinted() => ThemeData(
@@ -78,6 +88,8 @@ class ThemeContext {
             color: Color(0xFF273d38),
             textTheme: darkText,
             iconTheme: IconThemeData(color: darkTextColor)),
+        bottomNavigationBarTheme:
+            BottomNavigationBarThemeData(backgroundColor: Color(0xFF101C19)),
       );
 
   static Color darkTextColor = Colors.grey[100];
@@ -112,5 +124,8 @@ class ThemeContext {
         appBarTheme: AppBarTheme(
             color: backgroundColor == 0 ? blackBackground : darkBackground,
             textTheme: darkText),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor:
+                backgroundColor == 0 ? Colors.black : Color(0xff202225)),
       );
 }

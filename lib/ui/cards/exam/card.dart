@@ -1,6 +1,6 @@
 import 'package:filcnaplo/ui/cards/exam/tile.dart';
 import 'package:flutter/material.dart';
-import 'package:filcnaplo/ui/card.dart';
+import 'package:filcnaplo/ui/cards/card.dart';
 import 'package:filcnaplo/data/models/exam.dart';
 import 'package:filcnaplo/ui/pages/planner/exams/view.dart';
 

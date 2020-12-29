@@ -71,7 +71,7 @@ class LoginHelper {
     } else {
       if (loginContext.error == null) {
         app.kretaApi.users[userID] = null;
-        key.currentState.showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
             I18n.of(context).loginError,
             style: TextStyle(color: Colors.white),

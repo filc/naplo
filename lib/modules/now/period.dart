@@ -1,1 +1,0 @@
-enum Period { Morning, Class, Break, Afternoon, Evening, Weekend }

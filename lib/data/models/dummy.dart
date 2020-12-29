@@ -185,6 +185,28 @@ class Dummy {
       "9. C",
       "Matekmatika - mi ez mi?",
     ),
+    Lesson(
+      Type("122455", "", ""),
+      DateTime.now(),
+      Subject("420", null, "Kémia"),
+      "5",
+      12,
+      "",
+      "Irma né",
+      true,
+      DateTime.now().add(Duration(minutes: 2 * 45)),
+      DateTime.now().add(Duration(minutes: 3 * 45)),
+      Type("51654537", "student presence type desc",
+          "student presence type name"),
+      null,
+      <Exam>[],
+      "6153132",
+      Type("51561", "lesson type desc", "lesson type name"),
+      "Le van irva",
+      "Khémia",
+      "9. C",
+      "Matekmatika - mi ez mi?",
+    ),
   ];
 
   static Week week = Week([

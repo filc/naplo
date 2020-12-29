@@ -25,7 +25,10 @@ class _PageFrameState extends State<PageFrame> {
 
     // Sync at startup
     app.settings.update().then((_) {
-      if (app.user.loginState) app.sync.fullSync();
+      app.user.sync.config.sync().then((_) {
+        app.user.kreta.userAgent = app.user.sync.config.data.userAgent;
+        if (app.user.loginState) app.sync.fullSync();
+      });
     });
   }
 

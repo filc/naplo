@@ -17,7 +17,7 @@ import '../grades/tile.dart';
 class SubjectView extends StatefulWidget {
   final Subject subject;
   final double classAvg;
-  List<Evaluation> tempEvals = List<Evaluation>();
+  List<Evaluation> tempEvals = [];
 
   SubjectView(this.subject, this.classAvg);
 

@@ -22,6 +22,7 @@ class Lesson {
   String room;
   String groupName;
   String name;
+  bool isEmpty;
 
   Lesson(
     this.status,
@@ -43,6 +44,7 @@ class Lesson {
     this.room,
     this.groupName,
     this.name, {
+    this.isEmpty = false,
     this.json,
   });
 
@@ -77,6 +79,8 @@ class Lesson {
     String groupName =
         json["OsztalyCsoport"] != null ? json["OsztalyCsoport"]["Nev"] : null;
     String name = json["Nev"] ?? "";
+    bool isEmpty =
+        type != null ? type.name == 'UresOra' : json['isEmpty'] ?? false;
 
     return Lesson(
       status,
@@ -98,6 +102,7 @@ class Lesson {
       room,
       groupName,
       name,
+      isEmpty: isEmpty,
       json: json,
     );
   }

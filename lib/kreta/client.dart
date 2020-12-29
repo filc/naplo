@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:filcnaplo/data/models/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:filcnaplo/kreta/api.dart';
 import 'package:filcnaplo/utils/parse_jwt.dart';
@@ -26,7 +27,7 @@ import 'package:intl/intl.dart';
 class KretaClient {
   var client = http.Client();
   final String clientId = "kreta-ellenorzo-mobile";
-  final String userAgent = "hu.ekreta.student/1.0.5/Android/0/0";
+  String userAgent;
   String accessToken;
   String refreshToken;
   String instituteCode;
@@ -114,6 +115,25 @@ class KretaClient {
         "all": [],
         "progress": {"value": 0, "max": 100}
       };
+    }
+  }
+
+  Future<Config> getConfig() async {
+    try {
+      var response = await http.get(
+        BaseURL.FILC + FilcEndpoints.config2,
+        headers: {"Content-Type": "application/json"},
+      );
+
+      checkResponse(response);
+
+      Map responseJson = jsonDecode(response.body);
+      Config config = Config.fromJson(responseJson);
+
+      return config;
+    } catch (error) {
+      print("ERROR: KretaAPI.getConfig: " + error.toString());
+      return Config.defaults;
     }
   }
 
@@ -226,6 +246,7 @@ class KretaClient {
   // }
 
   Future<List<Message>> getMessages(String type) async {
+    print(userAgent);
     try {
       var response = await client.get(
         BaseURL.KRETA_ADMIN + AdminEndpoints.messages(type),

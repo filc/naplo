@@ -218,6 +218,8 @@ class I18n implements WidgetsLocalizations {
   String get lessonTomorrow => "Holnap";
   /// "Holnapi órák"
   String get lessonTomorrowTitle => "Holnapi órák";
+  /// "Lyukas óra"
+  String get lessonEmpty => "Lyukas óra";
   /// "házi feladat"
   String get homework => "házi feladat";
   /// "házi hozzáadása"
@@ -933,6 +935,9 @@ class _I18n_en_US extends I18n {
   /// "Lessons tomorrow"
   @override
   String get lessonTomorrowTitle => "Lessons tomorrow";
+  /// "Empty lesson"
+  @override
+  String get lessonEmpty => "Empty lesson";
   /// "homework"
   @override
   String get homework => "homework";
@@ -1856,6 +1861,9 @@ class _I18n_de_DE extends I18n {
   /// "Stunden morgen"
   @override
   String get lessonTomorrowTitle => "Stunden morgen";
+  /// "Freistunde"
+  @override
+  String get lessonEmpty => "Freistunde";
   /// "Hausaufgabe"
   @override
   String get homework => "Hausaufgabe";

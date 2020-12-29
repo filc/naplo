@@ -4,10 +4,14 @@ import 'package:filcnaplo/ui/pages/accounts/page.dart';
 import 'package:flutter/material.dart';
 
 class AccountButton extends StatelessWidget {
+  final EdgeInsetsGeometry padding;
+
+  AccountButton({this.padding = const EdgeInsets.only(right: 8.0)});
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: 8.0),
+    return Container(
+      padding: padding,
       child: IconButton(
         icon: app.user.profileIcon,
         onPressed: () {

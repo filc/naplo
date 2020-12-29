@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:filcnaplo/data/context/app.dart';
+import 'package:filcnaplo/data/models/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:sqflite/sqflite.dart';
@@ -13,7 +16,7 @@ class StorageController {
   Map<String, Database> users = {};
   Future createSettingsTable(Database db) async {
     await db.execute(
-        "create table settings (language TEXT, app_color TEXT, theme TEXT, background_color INTIGER, notifications INTIGER, selected_user INTIGER, render_html INTIGER, debug_mode INTIGER, default_page INTIGER, evening_start_hour INTIGER, studying_periods_bitfield INTIGER)");
+        "create table settings (language TEXT, app_color TEXT, theme TEXT, background_color INTIGER, notifications INTIGER, selected_user INTIGER, render_html INTIGER, debug_mode INTIGER, default_page INTIGER, config TEXT)");
   }
 
   Future init() async {
@@ -47,8 +50,7 @@ class StorageController {
           "render_html": 1,
           "debug_mode": 0,
           "default_page": 0,
-          "evening_start_hour": 18,
-          "studying_periods_bitfield": 1 << 3 | 1 << 4 | 1 << 5 //Weekend, evening, and afternoon by default
+          "config": jsonEncode(Config.defaults.json),
         });
 
         // Create Eval Colors

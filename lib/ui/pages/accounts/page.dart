@@ -1,6 +1,5 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/data/models/user.dart';
-import 'package:filcnaplo/ui/pages/accounts/tile.dart';
 import 'package:filcnaplo/ui/pages/login.dart';
 import 'package:filcnaplo/ui/profile_icon.dart';
 import 'package:filcnaplo/utils/format.dart';
@@ -61,7 +60,6 @@ class _AccountPageState extends State<AccountPage> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-
                   ),
                 ),
               ],
@@ -227,7 +225,7 @@ class _AccountTileState extends State<AccountTile> {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => DKTPage(widget.user)));
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      Scaffold.of(context).showSnackBar(SnackBar(
                         content: Text(I18n.of(context).loginError),
                         duration: Duration(seconds: 5),
                       ));

@@ -10,6 +10,8 @@ class DayTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    day.buildTiles();
+
     if (day.lessons.any((l) => l.subject == null) &&
         !day.tiles
             .map((t) => t.lesson.id)
@@ -46,9 +48,7 @@ class DayTabButton extends StatelessWidget {
       child: Text(
         days(context, day.date.weekday).toUpperCase(),
         style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24.0,
-            color: color),
+            fontWeight: FontWeight.bold, fontSize: 24.0, color: color),
       ),
     );
   }

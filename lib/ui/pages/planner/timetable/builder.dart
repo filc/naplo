@@ -2,7 +2,6 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/dummy.dart';
 import 'package:filcnaplo/data/models/lesson.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/day.dart';
-import 'package:filcnaplo/ui/pages/planner/timetable/tile.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/week.dart';
 
 class TimetableBuilder {
@@ -24,12 +23,11 @@ class TimetableBuilder {
     lessons.forEach((lesson) {
       if (!days.any(
           (d) => d.lessons.any((l) => l.date.weekday == lesson.date.weekday))) {
-        days.add(Day(date: lesson.date, lessons: [], tiles: []));
+        days.add(Day(date: lesson.date, lessons: []));
       }
 
       if (!days.last.lessons.map((l) => l.id).contains(lesson.id))
         days.last.lessons.add(lesson);
-      if (lesson.subject != null) days.last.tiles.add(LessonTile(lesson));
     });
 
     days.sort((a, b) => a.date.compareTo(b.date));
@@ -53,14 +51,16 @@ class TimetableBuilder {
 
     currentWeek.start = schoolStart
         .add(Duration(days: 7 * weekOfYear - (schoolStart.weekday - 1)));
-    if (currentWeek.start.isBefore(DateTime.utc(now.year, DateTime.september, 1))) {
+    if (currentWeek.start
+        .isBefore(DateTime.utc(now.year, DateTime.september, 1))) {
       currentWeek.start = DateTime.utc(now.year, DateTime.september, 1);
     }
 
     currentWeek.end = schoolStart
         .add(Duration(days: 7 * weekOfYear + (7 - schoolStart.weekday)));
     if (DateTime.utc(now.year, DateTime.september).isAfter(now)) {
-      if (currentWeek.end.isAfter(DateTime.utc(now.year, DateTime.august, 31))) {
+      if (currentWeek.end
+          .isAfter(DateTime.utc(now.year, DateTime.august, 31))) {
         currentWeek.start = DateTime.utc(now.year, 9, 1);
       }
     }
@@ -81,6 +81,8 @@ class TimetableBuilder {
       schoolStart = schoolStart.add(Duration(days: 8 - schoolStart.weekday));
 
     return ((now.difference(schoolStart).inDays - (now.weekday - 1)) / 7)
-            .floor() + 1 + (now.weekday >= 6 ? 1 : 0);
+            .floor() +
+        1 +
+        (now.weekday >= 6 ? 1 : 0);
   }
 }

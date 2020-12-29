@@ -1,7 +1,6 @@
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/modules/now/now.dart';
 import 'package:filcnaplo/ui/account_button.dart';
-import 'package:filcnaplo/ui/card.dart';
+import 'package:filcnaplo/ui/cards/card.dart';
 import 'package:filcnaplo/ui/cards/absence/card.dart';
 import 'package:filcnaplo/ui/cards/evaluation/card.dart';
 import 'package:filcnaplo/ui/cards/message/card.dart';
@@ -50,44 +49,7 @@ class _HomePageState extends State<HomePage> {
           ),
 
           // Search bar
-          Container(
-            margin: EdgeInsets.fromLTRB(18.0, 40.0, 18.0, 0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.0),
-              color: app.settings.theme.backgroundColor,
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(0, 2.0),
-                  blurRadius: 4.0,
-                  color: Color.fromRGBO(0, 0, 0, 0.25),
-                )
-              ],
-            ),
-            padding: EdgeInsets.only(left: 12.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Icon(FeatherIcons.search),
-                Expanded(
-                  child: GestureDetector(
-                    child: Container(
-                      padding: EdgeInsets.all(11.5),
-                      child: Text(
-                        capital(I18n.of(context).search),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 18.0),
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(_searchRoute());
-                    },
-                  ),
-                ),
-                AccountButton(),
-              ],
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            ),
-          ),
+          SearchBar()
         ],
       ),
     );
@@ -132,24 +94,8 @@ class _HomePageState extends State<HomePage> {
 
     cards.sort((a, b) => -a.compare.compareTo(b.compare));
 
-    if (true /*if now module is turned on in settings*/) {
-      elements.add(Now(widget.jumpToPage));
-    }
-
     elements.addAll(cards);
 
     return elements;
-  }
-
-  Route _searchRoute() {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => SearchPage(updateCallback),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(opacity: animation, child: child);
-      },
-    );
-  }
-   void updateCallback() {
-    setState(() {});
   }
 }

@@ -1,7 +1,7 @@
 import 'package:filcnaplo/ui/cards/message/tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:filcnaplo/ui/card.dart';
+import 'package:filcnaplo/ui/cards/card.dart';
 import 'package:filcnaplo/data/models/message.dart';
 import 'package:filcnaplo/ui/pages/messages/message/view.dart';
 

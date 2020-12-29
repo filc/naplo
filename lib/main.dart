@@ -1,5 +1,9 @@
-import 'package:filcnaplo/data/context/theme.dart';
+import 'dart:convert';
+
+import 'package:filcnaplo/data/models/config.dart';
 import 'package:filcnaplo/ui/pages/welcome.dart';
+import 'package:filcnaplo/utils/colors.dart';
+import 'package:filcnaplo/utils/tools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -25,28 +29,26 @@ void main() async {
 
   bool migrationRequired = false;
   Map<String, dynamic> settingsCopy;
+
   try {
     settings = (await app.storage.storage.query("settings"))[0];
-    List<String> addedDBKeys = [
-      "default_page",
-      "evening_start_hour",
-      "studying_periods_bitfield"
-    ];
+    List<String> addedDBKeys = ["default_page", "config"];
     migrationRequired = addedDBKeys.any((item) => !settings.containsKey(item));
+
     if (migrationRequired) {
-      settingsCopy = Map<String, dynamic>.from(
-          settings); //settings is immutable, see https://github.com/tekartik/sqflite/issues/140
+      // settings is immutable, see https://github.com/tekartik/sqflite/issues/140
+      settingsCopy = Map<String, dynamic>.from(settings);
       settingsCopy["default_page"] = settingsCopy["default_page"] ?? 0;
-      settingsCopy["evening_start_hour"] =
-          settingsCopy["evening_start_hour"] ?? 18;
-      settingsCopy["studying_periods_bitfield"] =
-          settingsCopy["studying_periods_bitfield"] ?? 1 << 3 | 1 << 4 | 1 << 5;
+      settingsCopy["config"] = jsonEncode(Config.defaults.json);
       await app.storage.storage.execute("drop table settings");
-      await app.storage.storage.execute("drop table tabs");
+      try {
+        await app.storage.storage.execute("drop table tabs");
+      } catch (_) {}
       await app.storage.createSettingsTable(app.storage.storage);
       await app.storage.storage.insert("settings", settingsCopy);
     }
-  } catch (_) {
+  } catch (error) {
+    print("[WARN] main: " + error.toString());
     await app.storage.create();
     app.firstStart = true;
   }
@@ -72,32 +74,12 @@ class _AppState extends State<App> {
     super.initState();
     I18n.onLocaleChanged = onLocaleChange;
 
-    if (app.settings.theme.brightness == Brightness.light) {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.grey[200],
-        systemNavigationBarIconBrightness: Brightness.dark,
-      ));
-    }
-
-    if (app.settings.theme.backgroundColor.value ==
-        ThemeContext().tinted().backgroundColor.value) {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        systemNavigationBarColor: Color(0xFF101C19),
-        systemNavigationBarIconBrightness: Brightness.light,
-      ));
-    } else if (app.settings.theme.brightness == Brightness.dark) {
-      if (app.settings.backgroundColor == 1) {
-        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-          systemNavigationBarColor: Color(0xff18191c),
-          systemNavigationBarIconBrightness: Brightness.light,
-        ));
-      } else {
-        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-          systemNavigationBarColor: Colors.black,
-          systemNavigationBarIconBrightness: Brightness.light,
-        ));
-      }
-    }
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor:
+          app.settings.theme.bottomNavigationBarTheme.backgroundColor,
+      systemNavigationBarIconBrightness:
+          invertBrightness(app.settings.theme.brightness),
+    ));
   }
 
   void onLocaleChange(Locale locale) {
@@ -109,6 +91,8 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     I18n.onLocaleChanged(languages[app.settings.language]);
+
+    app.platform = getPlatform(context);
 
     return DynamicTheme(
       defaultBrightness: Brightness.light,
@@ -142,7 +126,9 @@ class _AppState extends State<App> {
           theme: theme,
           home: app.firstStart
               ? WelcomePage()
-              : app.users.length > 0 ? PageFrame() : LoginPage(),
+              : app.users.length > 0
+                  ? PageFrame()
+                  : LoginPage(),
         );
       },
     );

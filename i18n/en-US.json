@@ -116,7 +116,8 @@
     "theme": "theme",
     "subject": "subject",
     "tomorrow": "Tomorrow there will be",
-    "tomorrowTitle": "Lessons tomorrow"
+    "tomorrowTitle": "Lessons tomorrow",
+    "empty": "Empty lesson"
   },
   "homework": {
     "": "homework",

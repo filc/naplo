@@ -1,6 +1,6 @@
 import 'package:filcnaplo/ui/cards/note/tile.dart';
 import 'package:flutter/material.dart';
-import 'package:filcnaplo/ui/card.dart';
+import 'package:filcnaplo/ui/cards/card.dart';
 import 'package:filcnaplo/data/models/note.dart';
 import 'package:filcnaplo/ui/pages/messages/note/view.dart';
 

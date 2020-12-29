@@ -19,6 +19,8 @@ class AppContext {
   String appDataPath;
 
   String currentAppVersion = "unknown";
+  String platform = "unknown";
+
   int selectedTimetablePage = 0;
   int selectedMessagePage = 0;
   int selectedEvalPage = 0;
@@ -38,6 +40,8 @@ class AppContext {
         app.sync.users[users[selectedUser].id],
       );
     } catch (error) {
+      if (debugMode)
+        print("[ERROR] data.context.app.AppContext: " + error.toString());
       return null;
     }
   }

@@ -441,7 +441,7 @@ class EvaluationColor extends StatelessWidget {
       onTap: () {
         showDialog(
           context: context,
-          child: AlertDialog(
+          builder: (context) => AlertDialog(
             title: Text(I18n.of(context).settingsAppearancePickColor),
             content: MaterialColorPicker(
               onColorChange: (Color color) => onChanged(color, value - 1),

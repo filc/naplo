@@ -76,7 +76,7 @@ class TimetablePrinter {
     // add timetable to pdf
     pw.Table table = pw.Table(
       children: rows,
-      border: pw.TableBorder(bottom: true, top: true, left: true, right: true),
+      border: pw.TableBorder.all(),
       defaultVerticalAlignment: pw.TableCellVerticalAlignment.middle,
     );
 

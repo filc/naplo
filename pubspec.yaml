@@ -1,6 +1,7 @@
 name: filcnaplo
 description: 'Nem hivatalos e-napló alkalmazás az e-Kréta rendszerhez'
-version: 2.1.0-pre1+49
+version: 2.1.0-pre2+52
+publish_to: none
 
 environment:
   sdk: ">=2.2.0 <3.0.0"
@@ -43,11 +44,14 @@ dependencies:
   photo_view: ^0.10.2
   downloads_path_provider: ^0.1.0
   webview_flutter: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 dependency_overrides:
   intl: 0.17.0-nullsafety.2
+
 flutter:
   uses-material-design: true
   assets:

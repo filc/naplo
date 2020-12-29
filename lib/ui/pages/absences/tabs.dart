@@ -1,6 +1,5 @@
 import 'package:filcnaplo/ui/account_button.dart';
 import 'package:filcnaplo/ui/custom_tabs.dart';
-import 'package:filcnaplo/ui/pages/debug/button.dart';
 import 'package:filcnaplo/ui/pages/debug/view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -32,3 +32,7 @@ Color stringToColor(String str) {
 
   return TinyColor.fromString(color).color;
 }
+
+Brightness invertBrightness(Brightness brightness) {
+  return brightness == Brightness.light ? Brightness.dark : Brightness.light;
+}

@@ -62,6 +62,9 @@ class _PlannerTabsState extends State<PlannerTabs>
         headerSliverBuilder: (context, _) {
           return <Widget>[
             SliverAppBar(
+              backgroundColor:
+                  app.settings.theme.bottomNavigationBarTheme.backgroundColor,
+              shadowColor: Colors.transparent,
               floating: true,
               pinned: true,
               forceElevated: true,

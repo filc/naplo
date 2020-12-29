@@ -1,3 +1,11 @@
+<img src=".github/assets/banhammer.png" width="10%">
+
+### A Filc Napló és minden más jelentős alternatív Kréta kliens **letiltásra került Google Play-en**, copyright indokkal.
+
+A tiltás (legalábbis ebben a formában mindenképpen) szerintünk jogtalan, dolgozunk a megoldáson.\
+Ez annyit jelent, hogy a Playen keresztül nem tudunk nektek frissítéseket kiadni, de a már telepített appok továbbra is működnek, ahogy a GitHub-on elérhető apk-k is.\
+**[További információ](https://filcnaplo.hu/dmca)**
+
 <img src=".github/assets/banner.png" width="100%">
 
 [![discord](https://img.shields.io/discord/712698455193157643?label=Discord)](http://filcnaplo.hu/discord)
