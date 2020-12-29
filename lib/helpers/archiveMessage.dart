@@ -10,23 +10,17 @@ class MessageArchiveHelper {
     bool archiving,
     Function updateCallback,
   ) async {
-    // The type of the message (which tab it shows up on) if it's not archived.
-    MessageType typeUndeleted = (message.sender == app.user.realName)
-        ? MessageType.sent
-        : MessageType.received;
-    MessageType oldType, newType;
-
-    // We move from typeUndeleted (see above) to archived while archiving, and the opposite when unarchiving.
+    MessageType oldPlace, newPlace;
     if (archiving) {
-      newType = MessageType.archived;
-      oldType = typeUndeleted;
+      oldPlace = message.type;
+      newPlace = MessageType.archived;
     } else {
-      newType = typeUndeleted;
-      oldType = MessageType.archived;
+      oldPlace = MessageType.archived;
+      newPlace = message.type;
     }
 
     await app.user.kreta.trashMessage(archiving, message.id);
-    
+
     if (archiving) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -36,24 +30,24 @@ class MessageArchiveHelper {
           label: I18n.of(context).dialogUndo,
           onPressed: () {
             app.user.kreta.trashMessage(false, message.id);
-            moveMessage(message, newType, oldType);
-            // We move from the "newType" to the "oldType", essentially reversing the original moving action.
+            moveMessage(message, newPlace, oldPlace);
+            // We move from the "newPlace" to the "oldPlace", essentially reversing the original moving action.
             message.deleted = false;
             updateCallback();
           },
         ),
       ));
     }
-    moveMessage(message, oldType, newType);
+    moveMessage(message, oldPlace, newPlace);
     // We move the message from it's old tab to the new tab
     message.deleted = archiving;
     updateCallback();
   }
 
-  void moveMessage(message, fromType, toType) {
-    localMessages(fromType).removeWhere((msg) => msg.id == message.id);
-    localMessages(toType).add(message);
-    localMessages(toType).sort((a, b) => a.date.compareTo(b.date));
+  void moveMessage(message, fromPlace, toPlace) {
+    localMessages(fromPlace).removeWhere((msg) => msg.id == message.id);
+    localMessages(toPlace).add(message);
+    localMessages(toPlace).sort((a, b) => a.date.compareTo(b.date));
     // Removing from old tab, adding to new tab and sorting to maintain time continuity.
   }
 

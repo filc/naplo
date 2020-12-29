@@ -113,6 +113,7 @@ class Dummy {
       "Test User",
       "This is a test.",
       "Test",
+      MessageType.received,
       [Recipient(0, '0', "Test Teacher", 0, null)],
       [],
     ),
@@ -125,6 +126,7 @@ class Dummy {
       "Test User",
       "This is another test message.",
       "Test 2",
+      MessageType.received,
       [
         Recipient(0, '0', "Test Teacher", 0, null),
         Recipient(1, '1', "Albert", 1, null)

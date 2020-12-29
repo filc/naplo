@@ -101,23 +101,20 @@ class _MessageViewTileState extends State<MessageViewTile> {
                   shadowColor: Colors.transparent,
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   actions: <Widget>[
-                      !widget.message.deleted
-                          ? IconButton(
-                              icon: Icon(FeatherIcons.archive),
-                              onPressed: () {
-                                widget.archiveCallback(context, true);
-                                Navigator.pop(context);
-                              },
-                            )
-                          : Tooltip(
-                            message: capital(I18n.of(context).messageRestore),
-                            child: IconButton(
-                                icon: Icon(FeatherIcons.cornerLeftUp),
-                                onPressed: () {
-                                  widget.archiveCallback(context, false);
-                                  Navigator.pop(context);
-                                }),
-                          ) //törölt
+                      Tooltip(
+                        message: capital(widget.message.deleted
+                            ? I18n.of(context).messageRestore
+                            : I18n.of(context).messageArchive),
+                        child: IconButton(
+                            icon: Icon(widget.message.deleted
+                                ? FeatherIcons.cornerLeftUp
+                                : FeatherIcons.archive),
+                            onPressed: () {
+                              Navigator.pop(context);
+                              widget.archiveCallback(
+                                  context, !widget.message.deleted);
+                            }),
+                      ) //törölt
                     ])
               : Container(),
           widget.isFirst

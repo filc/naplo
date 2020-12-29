@@ -30,6 +30,11 @@ class MessageSync {
         getMessages();
         // refresh Login and try again in case we get null back.
       }
+      received ??= [];
+      sent ??= [];
+      archived ??= [];
+      drafted ??= [];
+      // Replace nulls with empty lists if Kreta is non-cooperative.
 
       if (success) {
         List types = ["inbox", "sent", "trash", "draft"];
@@ -41,7 +46,7 @@ class MessageSync {
         Future<void> saveLocally(List<Message> messages, String type) async {
           // Save given messages to database
           await Future.forEach(messages, (message) async {
-            if (message.json != null) {
+            if (message.json != []) {
               await app.user.storage.insert("messages_" + type, {
                 "json": jsonEncode(message.json),
               });

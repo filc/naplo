@@ -276,6 +276,8 @@ class I18n implements WidgetsLocalizations {
   String get messageAttachmentFailed => "Sikertelen letöltés!";
   /// "visszaállítás"
   String get messageRestore => "visszaállítás";
+  /// "archiválás"
+  String get messageArchive => "archiválás";
   /// "küldés"
   String get messageSend => "küldés";
   /// "válasz"
@@ -1026,6 +1028,9 @@ class _I18n_en_US extends I18n {
   /// "restore"
   @override
   String get messageRestore => "restore";
+  /// "archive"
+  @override
+  String get messageArchive => "archive";
   /// "send"
   @override
   String get messageSend => "send";
@@ -1958,6 +1963,9 @@ class _I18n_de_DE extends I18n {
   /// "wiederherstellen"
   @override
   String get messageRestore => "wiederherstellen";
+  /// "archivieren"
+  @override
+  String get messageArchive => "archivieren";
   /// "schicken"
   @override
   String get messageSend => "schicken";

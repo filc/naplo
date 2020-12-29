@@ -164,6 +164,7 @@
       "failed": "Failed to download attachment!"
     },
     "restore": "restore",
+    "archive": "archive",
     "send": "send",
     "reply": "reply",
     "share": "share",
