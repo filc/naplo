@@ -6,42 +6,39 @@ import 'package:filcnaplo/generated/i18n.dart';
 
 class MessageBuilder {
   final updateCallback;
-
   MessageBuilder(this.updateCallback);
 
-  List<List<MessageTile>> messageTiles = [[], [], [], []];
+  MessageTiles messageTiles = MessageTiles();
 
   void build() {
-    for (var i = 1; i < 3; i++) {
-      messageTiles[i] = [];
-      List<Message> messagesByTypeInt(int j) {
-        switch(j) {
-          case 1:
-            return app.user.sync.messages.sent;
-          case 2:
-            return app.user.sync.messages.archived;
-        }
-      }
+    messageTiles.clear();
+    // We have to clear our tiles every time before rebuilding them to avoid duplicates
 
-      messagesByTypeInt(i).reversed.forEach((Message message) {
-        messageTiles[i].add(
-          MessageTile(message, [message], this.updateCallback,
-              key: Key(message.id.toString())),
-        );
-      });
-    }
-
-    messageTiles[0] = [];
-    List<Message> messages = app.user.sync.messages.received;
+    app.user.sync.messages.sent.reversed.forEach((Message message) {
+      messageTiles.sent.add(
+        MessageTile(message, [message], this.updateCallback,
+            key: Key(message.id.toString())),
+      );
+    });
+    app.user.sync.messages.archived.reversed.forEach((Message message) {
+      messageTiles.archived.add(
+        MessageTile(message, [message], this.updateCallback,
+            key: Key(message.id.toString())),
+      );
+    });
+    // We don't check if sent or archived messages are part of a conversation, we always display every one of them.
+    // The next part builds single received messages, and the latest received messages of conversations.
+    List<Message> received = app.user.sync.messages.received;
     Map<int, List<Message>> conversations = {};
 
-    messages.sort(
+    received.sort(
       (a, b) => -a.date.compareTo(b.date),
     );
 
-    messages.forEach((Message message) {
+    received.forEach((Message message) {
       if (message.conversationId == null) {
-        messageTiles[0].add(MessageTile(message, [message], this.updateCallback,
+        messageTiles.received.add(MessageTile(
+            message, [message], this.updateCallback,
             key: Key(message.id.toString())));
       } else {
         if (conversations[message.conversationId] == null)
@@ -51,7 +48,7 @@ class MessageBuilder {
     });
 
     conversations.keys.forEach((conversationId) {
-      Message firstMessage = messages.firstWhere(
+      Message firstMessage = received.firstWhere(
           (message) => message.messageId == conversationId,
           orElse: () => null);
 
@@ -61,7 +58,7 @@ class MessageBuilder {
             orElse: () => null);
 
       if (firstMessage != null) conversations[conversationId].add(firstMessage);
-      messageTiles[0].add(MessageTile(
+      messageTiles.received.add(MessageTile(
         conversations[conversationId].first,
         conversations[conversationId],
         this.updateCallback,
@@ -69,6 +66,37 @@ class MessageBuilder {
       ));
     });
 
-    messageTiles[0].sort((a, b) => -a.message.date.compareTo(b.message.date));
+    messageTiles.received
+        .sort((a, b) => -a.message.date.compareTo(b.message.date));
+  }
+}
+
+class MessageTiles {
+  List<MessageTile> received = [];
+  List<MessageTile> sent = [];
+  List<MessageTile> archived = [];
+  List<MessageTile> drafted = [];
+  List<MessageTile> getSelectedMessages(int i) {
+    // The DropDown() widget that selects the specific message types only gives back an integer, so we have to include a function that returns the needed messageTiles from a numeric index.
+    switch (i) {
+      case 0:
+        return received;
+        break;
+      case 1:
+        return sent;
+        break;
+      case 2:
+        return archived;
+        break;
+      case 3:
+        return drafted;
+        break;
+    }
+  }
+  void clear() {
+    received = [];
+    sent = [];
+    archived = [];
+    drafted = [];
   }
 }

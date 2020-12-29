@@ -5,7 +5,7 @@ import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/ui/profile_icon.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:filcnaplo/ui/pages/messages/message/view.dart';
-import 'package:filcnaplo/helpers/archivemessage.dart';
+import 'package:filcnaplo/helpers/archiveMessage.dart';
 
 class MessageTile extends StatelessWidget {
   final Message message;
@@ -19,7 +19,7 @@ class MessageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: key,
-      onDismissed: (direction) => archiveMessage(context, message, !message.deleted, updateCallback),
+      onDismissed: (direction) => MessageArchiveHelper().archiveMessage(context, message, !message.deleted, updateCallback),
       secondaryBackground: Container(
         color: message.deleted ? Colors.green[600] : Colors.blue[600],
         alignment: Alignment.centerRight,

@@ -15,14 +15,14 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:filcnaplo/helpers/archivemessage.dart';
+import 'package:filcnaplo/helpers/archiveMessage.dart';
 
 class MessageView extends StatefulWidget {
   final List<Message> messages;
   final updateCallback;
 
   archiveMessages (context, bool archiving) {
-    messages.forEach((msg) {archiveMessage(context, msg, archiving, updateCallback);});
+    messages.forEach((msg) {MessageArchiveHelper().archiveMessage(context, msg, archiving, updateCallback);});
   }
 
   MessageView(this.messages, this.updateCallback);

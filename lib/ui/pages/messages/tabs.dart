@@ -146,9 +146,9 @@ class _MessageTabsState extends State<MessageTabs>
                   children: [
                     Column(
                       children:
-                          widget.messageTiles[app.selectedMessagePage].length >
+                          widget.messageTiles.getSelectedMessages(app.selectedMessagePage).length >
                                   0
-                              ? widget.messageTiles[app.selectedMessagePage]
+                              ? widget.messageTiles.getSelectedMessages(app.selectedMessagePage)
                               : <Widget>[
                                   Empty(
                                     title: app.selectedMessagePage == 3
