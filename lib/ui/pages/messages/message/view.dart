@@ -114,7 +114,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                               widget.archiveCallback(
                                   context, !widget.message.deleted);
                             }),
-                      ) //törölt
+                      )
                     ])
               : Container(),
           widget.isFirst

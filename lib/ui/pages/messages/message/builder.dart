@@ -23,40 +23,38 @@ class MessageBuilder {
         ),
       );
     });
-
-    app.user.sync.messages.archived.reversed.forEach((Message message) {
-      messageTiles.archived.add(
-        MessageTile(
-          message,
-          [message],
-          updateCallback,
-          key: Key(message.id.toString()),
-        ),
-      );
-    });
-    // We don't check if sent or archived messages are part of a conversation, we always display every one of them.
-    // The next part builds single received messages, and the latest received messages of conversations.
+    // We don't care about conversations for sent messages, so we display every one of them.
+    // The following part groups received (+ archived) messages into conversations, and only displays the newest one in every category
     List<Message> received = app.user.sync.messages.received;
+    List<Message> archived = app.user.sync.messages.archived;
     Map<int, List<Message>> conversations = {};
 
-    received.sort(
-      (a, b) => -a.date.compareTo(b.date),
-    );
+    void buildConversations(
+        // If the message is a reply to something,add it to a conversation. If not, treat it as a single message and display it like sent messages
+        List<Message> messages,
+        List<MessageTile> messageTileList) {
+      messages.sort(
+        (a, b) => -a.date.compareTo(b.date),
+      );
 
-    received.forEach((Message message) {
-      if (message.conversationId == null) {
-        messageTiles.received.add(MessageTile(
-          message,
-          [message],
-          updateCallback,
-          key: Key(message.id.toString()),
-        ));
-      } else {
-        if (conversations[message.conversationId] == null)
-          conversations[message.conversationId] = [];
-        conversations[message.conversationId].add(message);
-      }
-    });
+      messages.forEach((Message message) {
+        if (message.conversationId == null) {
+          messageTileList.add(MessageTile(
+            message,
+            [message],
+            updateCallback,
+            key: Key(message.id.toString()),
+          ));
+        } else {
+          if (conversations[message.conversationId] == null)
+            conversations[message.conversationId] = [];
+          conversations[message.conversationId].add(message);
+        }
+      });
+    }
+
+    buildConversations(received, messageTiles.received);
+    buildConversations(archived, messageTiles.archived);
 
     conversations.keys.forEach((conversationId) {
       Message firstMessage = received.firstWhere(
@@ -64,20 +62,43 @@ class MessageBuilder {
           orElse: () => null);
 
       if (firstMessage == null)
+        firstMessage = archived.firstWhere(
+            (message) => message.messageId == conversationId,
+            orElse: () => null);
+
+      if (firstMessage == null)
         firstMessage = app.user.sync.messages.sent.firstWhere(
             (message) => message.messageId == conversationId,
             orElse: () => null);
 
       if (firstMessage != null) conversations[conversationId].add(firstMessage);
-      messageTiles.received.add(MessageTile(
+      List<MessageTile> messageTileListOfFirst = () {
+        // Returns the list of messageTiles for the specific type
+        if (conversations[conversationId].first.deleted) {
+          return messageTiles.archived;
+        } else if (conversations[conversationId].first.type ==
+            MessageType.received) {
+          return messageTiles.received;
+        }
+      }();
+
+      // Display the newest message of the conversation
+      messageTileListOfFirst.add(MessageTile(
         conversations[conversationId].first,
         conversations[conversationId],
         updateCallback,
         key: Key(conversations[conversationId][0].id.toString()),
       ));
+
+      // The oldest message is not replying to anything, so it was displayed like a single message. Now we remove it from the list to make sure that only the newest message is displayed from every conversation.
+      messageTileListOfFirst.removeWhere((messageTile) =>
+          messageTile.message.id == conversations[conversationId].last.id);
     });
 
     messageTiles.received
+        .sort((a, b) => -a.message.date.compareTo(b.message.date));
+
+    messageTiles.archived
         .sort((a, b) => -a.message.date.compareTo(b.message.date));
   }
 }
