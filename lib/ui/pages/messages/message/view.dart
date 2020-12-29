@@ -22,10 +22,13 @@ class MessageView extends StatefulWidget {
   final updateCallback;
 
   archiveMessages(context, bool archiving) {
-    messages.forEach((msg) {
-      MessageArchiveHelper()
-          .archiveMessage(context, msg, archiving, updateCallback);
-    });
+    messages.forEach((msg) => MessageArchiveHelper()
+        .archiveMessage(context, msg, archiving, updateCallback));
+  }
+
+  deleteMessages(context) {
+    messages.forEach((msg) =>
+        MessageArchiveHelper().deleteMessage(context, msg, updateCallback));
   }
 
   MessageView(this.messages, this.updateCallback);
@@ -50,7 +53,8 @@ class _MessageViewState extends State<MessageView> {
                     message,
                     message == widget.messages.first,
                     message == widget.messages.last,
-                    widget.archiveMessages))
+                    widget.archiveMessages,
+                    widget.deleteMessages))
                 .toList(),
           ),
         ),
@@ -64,9 +68,10 @@ class MessageViewTile extends StatefulWidget {
   final bool isFirst;
   final bool isLast;
   final archiveCallback;
+  final deleteCallback;
 
-  MessageViewTile(
-      this.message, this.isFirst, this.isLast, this.archiveCallback);
+  MessageViewTile(this.message, this.isFirst, this.isLast, this.archiveCallback,
+      this.deleteCallback);
 
   @override
   _MessageViewTileState createState() => _MessageViewTileState();
@@ -107,14 +112,25 @@ class _MessageViewTileState extends State<MessageViewTile> {
                             : I18n.of(context).messageArchive),
                         child: IconButton(
                             icon: Icon(widget.message.deleted
-                                ? FeatherIcons.cornerLeftUp
+                                ? FeatherIcons.arrowUp
                                 : FeatherIcons.archive),
                             onPressed: () {
                               Navigator.pop(context);
                               widget.archiveCallback(
                                   context, !widget.message.deleted);
                             }),
-                      )
+                      ),
+                      widget.message.deleted
+                          ? Tooltip(
+                              message: capital(I18n.of(context).messageDelete),
+                              child: IconButton(
+                                icon: Icon(FeatherIcons.trash2),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  widget.deleteCallback(context);
+                                },
+                              ))
+                          : Container()
                     ])
               : Container(),
           widget.isFirst

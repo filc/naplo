@@ -169,7 +169,9 @@
     "reply": "antworten",
     "share": "mitteilen",
     "shareFooter": "{sender}, {date}",
-    "deleted": "Mitteilung archiviert",
+    "archived": "Mitteilung archiviert",
+    "delete": "Dauerhaft löschen",
+    "deleted": "Nachricht gelöscht",
     "drawer": {
       "inbox": "eingang",
       "sent": "gesendet",

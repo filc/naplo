@@ -287,7 +287,11 @@ class I18n implements WidgetsLocalizations {
   /// "${sender}, ${date}"
   String messageShareFooter(String sender, String date) => "${sender}, ${date}";
   /// "Üzenet archiválva"
-  String get messageDeleted => "Üzenet archiválva";
+  String get messageArchived => "Üzenet archiválva";
+  /// "Törlés véglegesen"
+  String get messageDelete => "Törlés véglegesen";
+  /// "Üzenet törölve"
+  String get messageDeleted => "Üzenet törölve";
   /// "beérkezett"
   String get messageDrawerInbox => "beérkezett";
   /// "elküldött"
@@ -1045,7 +1049,13 @@ class _I18n_en_US extends I18n {
   String messageShareFooter(String sender, String date) => "${sender}, ${date}";
   /// "Message archived"
   @override
-  String get messageDeleted => "Message archived";
+  String get messageArchived => "Message archived";
+  /// "Delete permanently"
+  @override
+  String get messageDelete => "Delete permanently";
+  /// "Message deleted"
+  @override
+  String get messageDeleted => "Message deleted";
   /// "inbox"
   @override
   String get messageDrawerInbox => "inbox";
@@ -1978,6 +1988,9 @@ class _I18n_de_DE extends I18n {
   /// "${sender}, ${date}"
   @override
   String messageShareFooter(String sender, String date) => "${sender}, ${date}";
+  /// "Dauerhaft löschen"
+  @override
+  String get messageDelete => "Dauerhaft löschen";
   /// "Mitteilung archiviert"
   @override
   String get messageDeleted => "Mitteilung archiviert";

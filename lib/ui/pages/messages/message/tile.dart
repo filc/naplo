@@ -1,3 +1,4 @@
+import 'package:filcnaplo/data/context/app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/models/message.dart';
@@ -19,23 +20,38 @@ class MessageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: key,
-      onDismissed: (direction) => MessageArchiveHelper()
-          .archiveMessage(context, message, !message.deleted, updateCallback),
+      onDismissed: (direction) => () {
+        if (message.deleted) {
+          if (direction == DismissDirection.startToEnd) {
+            // Archived, pulled from left, should delete permanently.
+            MessageArchiveHelper()
+                .deleteMessage(context, message, updateCallback);
+          } else {
+            // Archived, pulled from right, should unarchive
+            MessageArchiveHelper()
+                .archiveMessage(context, message, false, updateCallback);
+          }
+        } else {
+          // Not archived, so both directions should archive.
+          MessageArchiveHelper()
+              .archiveMessage(context, message, true, updateCallback);
+        }
+      }(),
       secondaryBackground: Container(
-        color: !message.deleted ? Colors.green[600] : Colors.blue[600],
+        color: message.deleted ? Colors.blue[600] : Colors.green[600],
         alignment: Alignment.centerRight,
         padding: EdgeInsets.only(right: 24.0),
         child: Icon(
-          message.deleted ? FeatherIcons.cornerLeftUp : FeatherIcons.archive,
+          message.deleted ? FeatherIcons.arrowUp : FeatherIcons.archive,
           color: Colors.white,
         ),
       ),
       background: Container(
-        color: !message.deleted ? Colors.green[600] : Colors.blue[600],
+        color: message.deleted ? Colors.red[600] : Colors.green[600],
         alignment: Alignment.centerLeft,
         padding: EdgeInsets.only(left: 24.0),
         child: Icon(
-          message.deleted ? FeatherIcons.cornerLeftUp : FeatherIcons.archive,
+          message.deleted ? FeatherIcons.trash2 : FeatherIcons.archive,
           color: Colors.white,
         ),
       ),

@@ -6,6 +6,19 @@ import 'package:filcnaplo/data/models/message.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 
 class MessageArchiveHelper {
+  Future deleteMessage(
+      BuildContext context, Message message, Function updateCallback) async {
+    await app.user.kreta.deleteMessage(message.id);
+    app.user.sync.messages.archived.removeWhere((msg) => msg.id == message.id);
+
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(I18n.of(context).messageDeleted),
+      duration: Duration(seconds: 5),
+    ));
+    updateCallback();
+  }
+
   Future archiveMessage(
     BuildContext context,
     Message message,
@@ -31,7 +44,7 @@ class MessageArchiveHelper {
     if (archiving) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(I18n.of(context).messageDeleted),
+        content: Text(I18n.of(context).messageArchived),
         duration: Duration(seconds: 5),
         action: SnackBarAction(
           label: I18n.of(context).dialogUndo,

@@ -169,7 +169,9 @@
     "reply": "reply",
     "share": "share",
     "shareFooter": "{sender}, {date}",
-    "deleted": "Message archived",
+    "archived": "Message archived",
+    "delete": "Delete permanently",
+    "deleted": "Message deleted",
     "drawer": {
       "inbox": "inbox",
       "sent": "sent",

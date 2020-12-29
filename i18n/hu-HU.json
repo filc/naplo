@@ -169,7 +169,9 @@
     "reply": "válasz",
     "share": "megosztás",
     "shareFooter": "{sender}, {date}",
-    "deleted": "Üzenet archiválva",
+    "archived": "Üzenet archiválva",
+    "delete": "Törlés véglegesen",
+    "deleted": "Üzenet törölve",
     "drawer": {
       "inbox": "beérkezett",
       "sent": "elküldött",
