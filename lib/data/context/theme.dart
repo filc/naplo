@@ -73,7 +73,7 @@ class ThemeContext {
   ThemeData tinted() => ThemeData(
         brightness: Brightness.dark,
         accentColor: Colors.teal[600],
-        backgroundColor: Color(0xFF273d38),
+        backgroundColor: Color(0xFF1c2d2a),
         scaffoldBackgroundColor: Color(0xFF1c2d2a),
         textTheme: darkText,
         iconTheme: IconThemeData(color: darkTextColor),
@@ -89,7 +89,7 @@ class ThemeContext {
             textTheme: darkText,
             iconTheme: IconThemeData(color: darkTextColor)),
         bottomNavigationBarTheme:
-            BottomNavigationBarThemeData(backgroundColor: Color(0xFF101C19)),
+            BottomNavigationBarThemeData(backgroundColor: Color(0xFF1c2d2a)),
       );
 
   static Color darkTextColor = Colors.grey[100];
@@ -112,7 +112,7 @@ class ThemeContext {
         iconTheme: IconThemeData(color: Colors.grey[100]),
         fontFamily: "GoogleSans",
         scaffoldBackgroundColor:
-            backgroundColor == 0 ? Colors.black : Color(0xff292b2f),
+            backgroundColor == 0 ? Colors.black : Color(0xff202225),
         snackBarTheme: SnackBarThemeData(
           backgroundColor:
               backgroundColor == 0 ? blackBackground : darkBackground,

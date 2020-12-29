@@ -23,6 +23,11 @@ class MessageArchiveHelper {
 
     await app.user.kreta.trashMessage(archiving, message.id);
 
+    moveMessage(message, oldPlace, newPlace);
+    // We move the message from it's old tab to the new tab
+    message.deleted = archiving;
+    updateCallback();
+
     if (archiving) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -40,10 +45,6 @@ class MessageArchiveHelper {
         ),
       ));
     }
-    moveMessage(message, oldPlace, newPlace);
-    // We move the message from it's old tab to the new tab
-    message.deleted = archiving;
-    updateCallback();
   }
 
   void moveMessage(message, fromPlace, toPlace) {

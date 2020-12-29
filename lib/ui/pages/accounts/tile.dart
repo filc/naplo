@@ -32,7 +32,8 @@ class _AccountTileState extends State<AccountTile> {
         onLongPress: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AccountView(widget.user, callback: setState),
+            builder: (context) =>
+                AccountView(widget.user, callback: () => setState(() {})),
             backgroundColor: Colors.transparent,
           ).then((deleted) {
             if (deleted == true) widget.onDelete();
@@ -86,7 +87,7 @@ class _AccountTileState extends State<AccountTile> {
                       showModalBottomSheet(
                         context: context,
                         builder: (context) =>
-                            AccountView(widget.user, callback: setState),
+                            AccountView(widget.user, callback: () => setState(() {})),
                         backgroundColor: Colors.transparent,
                       ).then((deleted) {
                         if (deleted == true) widget.onDelete();

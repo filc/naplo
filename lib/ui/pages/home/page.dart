@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           // Search bar
           SearchBar(
             openSearch: () =>
-                Navigator.of(context).push(_searchRoute(setState)),
+                Navigator.of(context).push(_searchRoute(() => setState(() {}))),
           )
         ],
       ),
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
 
     app.user.sync.messages.received.forEach((message) => cards.add(MessageCard(
           message,
-          () => setState((){}),
+          () => setState(() {}),
           key: Key(message.messageId.toString()),
           compare: message.date,
         )));

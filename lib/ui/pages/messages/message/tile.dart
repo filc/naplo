@@ -69,6 +69,8 @@ class MessageTile extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           onTap: () {
+            ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
             Navigator.of(context).push(CupertinoPageRoute(
                 builder: (context) => MessageView(children, updateCallback)));
           },
