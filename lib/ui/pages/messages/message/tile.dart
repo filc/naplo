@@ -71,7 +71,7 @@ class MessageTile extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(CupertinoPageRoute(
                 builder: (context) =>
-                    MessageView(children, this.updateCallback)));
+                    MessageView(children, updateCallback)));
           },
         ),
       ),

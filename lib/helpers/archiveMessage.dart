@@ -25,7 +25,8 @@ class MessageArchiveHelper {
       oldType = MessageType.archived;
     }
 
-    app.user.kreta.trashMessage(archiving, message.id);
+    await app.user.kreta.trashMessage(archiving, message.id);
+    
     if (archiving) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
