@@ -87,3 +87,21 @@ class Message {
     return false;
   }
 }
+enum messageLocalType {
+  sent,
+  received,
+  archived,
+  draft //unused atm
+}
+int messageLocalTypeInt(messageLocalType type) {
+  switch(type) {
+    case messageLocalType.received:
+      return 0;
+    case messageLocalType.sent:
+      return 1;
+    case messageLocalType.archived:
+      return 2;
+    case messageLocalType.draft:
+      return 3;
+  }
+}

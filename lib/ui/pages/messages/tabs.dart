@@ -124,7 +124,7 @@ class _MessageTabsState extends State<MessageTabs>
               key: _refreshKeyMessages,
               onRefresh: () async {
                 if (!await app.user.sync.messages
-                    .sync(app.selectedMessagePage)) {
+                    .sync()) {
                   widget._scaffoldKey.currentState.showSnackBar(SnackBar(
                     content: Text(
                       I18n.of(context).errorMessages,

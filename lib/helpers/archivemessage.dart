@@ -3,10 +3,21 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/message.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 
+
+
+
 Future archiveMessage(BuildContext context, Message message, bool archiving, Function updateCallback) async {
-  int sentByUser = (message.sender == app.user.realName) ? 1 : 0;
-  int oldPlace = archiving ? sentByUser : 2;
-  int newPlace = archiving ? 2 : sentByUser;
+  messageLocalType typeUndeleted = (message.sender == app.user.realName) ? messageLocalType.sent : messageLocalType.received; //Amennyiben nincs törölve, küldve, vagy kapva van?
+  messageLocalType oldType, newType;
+  switch(archiving) {
+    case true:
+      newType = messageLocalType.archived;
+      oldType = typeUndeleted;
+      break;
+    case false:
+      newType = typeUndeleted;
+      oldType = messageLocalType.archived;
+  }
 
   app.user.kreta.trashMessage(archiving, message.id);
   if (archiving) {
@@ -23,18 +34,35 @@ Future archiveMessage(BuildContext context, Message message, bool archiving, Fun
             .dialogUndo,
         onPressed: () {
           app.user.kreta.trashMessage(false, message.id);
-          app.user.sync.messages.data[newPlace].removeWhere((msg) => msg.id == message.id);
-          app.user.sync.messages.data[oldPlace].add(message);
-          app.user.sync.messages.data[oldPlace].sort((a, b) => a.date.compareTo(b.date));
+          messageMove(message, newType, oldType);
           message.deleted = false;
           updateCallback();
         },
       ),
     ));
   }
-  app.user.sync.messages.data[oldPlace].removeWhere((msg) => msg.id == message.id);
-  app.user.sync.messages.data[newPlace].add(message);
-  app.user.sync.messages.data[newPlace].sort((a, b) => a.date.compareTo(b.date));
+  messageMove(message, oldType, newType);
   message.deleted=archiving;
   updateCallback();
+}
+void messageMove(message, fromType, toType) {
+  messageArray(fromType).removeWhere((msg) => msg.id == message.id);
+  messageArray(toType).add(message);
+  messageArray(toType).sort((a, b) => a.date.compareTo(b.date));
+}
+List<Message> messageArray(messageLocalType type) {
+  switch(type) {
+    case messageLocalType.received:
+      return app.user.sync.messages.received;
+      break;
+    case messageLocalType.sent:
+      return app.user.sync.messages.sent;
+      break;
+    case messageLocalType.archived:
+      return app.user.sync.messages.archived;
+      break;
+    case messageLocalType.draft:
+      return app.user.sync.messages.drafted;
+      break;
+  }
 }

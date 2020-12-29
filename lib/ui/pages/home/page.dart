@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
     List<Widget> elements = [];
     List<BaseCard> cards = [];
 
-    app.user.sync.messages.data[0].forEach((message) => cards.add(MessageCard(
+    app.user.sync.messages.received.forEach((message) => cards.add(MessageCard(
           message,
           updateCallback,
           key: Key(message.messageId.toString()),

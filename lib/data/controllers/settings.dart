@@ -199,33 +199,33 @@ Future loadData(User user) async {
 
   List messagesInbox = await userStorage.query("messages_inbox");
 
-  globalSync.messages.data[0] = [];
+  globalSync.messages.received = [];
   messagesInbox.forEach((message) {
-    globalSync.messages.data[0]
+    globalSync.messages.received
         .add(Message.fromJson(jsonDecode(message["json"])));
   });
 
   List messagesSent = await userStorage.query("messages_sent");
 
-  globalSync.messages.data[1] = [];
+  globalSync.messages.sent = [];
   messagesSent.forEach((message) {
-    globalSync.messages.data[1]
+    globalSync.messages.sent
         .add(Message.fromJson(jsonDecode(message["json"])));
   });
 
   List messagesDraft = await userStorage.query("messages_draft");
 
-  globalSync.messages.data[2] = [];
+  globalSync.messages.received = [];
   messagesDraft.forEach((message) {
-    globalSync.messages.data[2]
+    globalSync.messages.received
         .add(Message.fromJson(jsonDecode(message["json"])));
   });
 
   List messagesTrash = await userStorage.query("messages_trash");
 
-  globalSync.messages.data[3] = [];
+  globalSync.messages.archived = [];
   messagesTrash.forEach((message) {
-    globalSync.messages.data[3]
+    globalSync.messages.archived
         .add(Message.fromJson(jsonDecode(message["json"])));
   });
 

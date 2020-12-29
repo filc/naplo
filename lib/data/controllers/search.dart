@@ -94,9 +94,9 @@ class SearchController {
     List<Searchable> searchables = [];
 
     List<Message> messages = <List<Message>>[
-      app.user.sync.messages.data[0],
-      app.user.sync.messages.data[1],
-      app.user.sync.messages.data[2],
+      app.user.sync.messages.received,
+      app.user.sync.messages.sent,
+      app.user.sync.messages.archived,
     ].expand((x) => x).toList();
 
     messages.forEach((message) => searchables.add(Searchable(

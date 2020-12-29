@@ -14,7 +14,16 @@ class MessageBuilder {
   void build() {
     for (var i = 1; i < 3; i++) {
       messageTiles[i] = [];
-      app.user.sync.messages.data[i].reversed.forEach((Message message) {
+      List<Message> messagesByTypeInt(int j) {
+        switch(j) {
+          case 1:
+            return app.user.sync.messages.sent;
+          case 2:
+            return app.user.sync.messages.archived;
+        }
+      }
+
+      messagesByTypeInt(i).reversed.forEach((Message message) {
         messageTiles[i].add(
           MessageTile(message, [message], this.updateCallback,
               key: Key(message.id.toString())),
@@ -23,7 +32,7 @@ class MessageBuilder {
     }
 
     messageTiles[0] = [];
-    List<Message> messages = app.user.sync.messages.data[0];
+    List<Message> messages = app.user.sync.messages.received;
     Map<int, List<Message>> conversations = {};
 
     messages.sort(
@@ -47,7 +56,7 @@ class MessageBuilder {
           orElse: () => null);
 
       if (firstMessage == null)
-        firstMessage = app.user.sync.messages.data[1].firstWhere(
+        firstMessage = app.user.sync.messages.sent.firstWhere(
             (message) => message.messageId == conversationId,
             orElse: () => null);
 

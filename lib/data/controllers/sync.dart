@@ -54,12 +54,10 @@ class SyncController {
       task: app.user.sync.exam.sync(),
     );
 
-    for (var i = 0; i < 3; i++) {
-      createTask(
-        name: "message",
-        task: app.user.sync.messages.sync(i),
-      );
-    }
+    createTask(
+      name: "message",
+      task: app.user.sync.messages.sync(),
+    );
 
     createTask(
       name: "note",
