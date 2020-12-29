@@ -117,7 +117,7 @@
     "subject": "Fach",
     "tomorrow": "Morgen gibt es",
     "tomorrowTitle": "Stunden morgen",
-    "empty":"Freistunde"
+    "empty": "Freistunde"
   },
   "homework": {
     "": "Hausaufgabe",
@@ -160,6 +160,10 @@
     "subject": "Gegenstand",
     "recipients": "Empfänger",
     "attachments": "Anhänge",
+    "attachment": {
+      "failed": "Anhang konnte nicht heruntergeladen werden!"
+    },
+    "restore": "wiederherstellen",
     "send": "schicken",
     "reply": "antworten",
     "share": "mitteilen",

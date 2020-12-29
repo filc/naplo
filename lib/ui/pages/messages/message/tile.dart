@@ -19,25 +19,26 @@ class MessageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: key,
-      onDismissed: (direction) => MessageArchiveHelper().archiveMessage(context, message, !message.deleted, updateCallback),
+      onDismissed: (direction) => MessageArchiveHelper()
+          .archiveMessage(context, message, !message.deleted, updateCallback),
       secondaryBackground: Container(
-        color: message.deleted ? Colors.green[600] : Colors.blue[600],
+        color: !message.deleted ? Colors.green[600] : Colors.blue[600],
         alignment: Alignment.centerRight,
         padding: EdgeInsets.only(right: 24.0),
         child: Icon(
-           message.deleted ? FeatherIcons.externalLink : FeatherIcons.archive,
+          message.deleted ? FeatherIcons.cornerLeftUp : FeatherIcons.archive,
           color: Colors.white,
         ),
       ),
       background: Container(
-        color: message.deleted ? Colors.green[600] : Colors.blue[600],
+        color: !message.deleted ? Colors.green[600] : Colors.blue[600],
         alignment: Alignment.centerLeft,
         padding: EdgeInsets.only(left: 24.0),
         child: Icon(
-          message.deleted ? FeatherIcons.externalLink : FeatherIcons.archive,
+          message.deleted ? FeatherIcons.cornerLeftUp : FeatherIcons.archive,
           color: Colors.white,
         ),
-      ), 
+      ),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 4.0),
         child: ListTile(
@@ -56,8 +57,10 @@ class MessageTile extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 4.0),
                       child: Icon(FeatherIcons.paperclip, size: 20.0))
                   : Container(),
-              Text(formatDate(context, message.date),
-                  textAlign: TextAlign.right)
+              Text(
+                formatDate(context, message.date),
+                textAlign: TextAlign.right,
+              )
             ]),
           ]),
           subtitle: Text(
@@ -67,7 +70,8 @@ class MessageTile extends StatelessWidget {
           ),
           onTap: () {
             Navigator.of(context).push(CupertinoPageRoute(
-                builder: (context) => MessageView(children, this.updateCallback)));
+                builder: (context) =>
+                    MessageView(children, this.updateCallback)));
           },
         ),
       ),

@@ -77,6 +77,9 @@ class _MessageTabsState extends State<MessageTabs>
               floating: true,
               pinned: true,
               forceElevated: true,
+              shadowColor: Colors.transparent,
+              backgroundColor:
+                  app.settings.theme.bottomNavigationBarTheme.backgroundColor,
               title: Text(
                 I18n.of(context).messageTitle,
                 style: TextStyle(fontSize: 22.0),
@@ -123,8 +126,7 @@ class _MessageTabsState extends State<MessageTabs>
             RefreshIndicator(
               key: _refreshKeyMessages,
               onRefresh: () async {
-                if (!await app.user.sync.messages
-                    .sync()) {
+                if (!await app.user.sync.messages.sync()) {
                   widget._scaffoldKey.currentState.showSnackBar(SnackBar(
                     content: Text(
                       I18n.of(context).errorMessages,
@@ -145,17 +147,19 @@ class _MessageTabsState extends State<MessageTabs>
                   padding: EdgeInsets.only(top: 12.0),
                   children: [
                     Column(
-                      children:
-                          widget.messageTiles.getSelectedMessages(app.selectedMessagePage).length >
-                                  0
-                              ? widget.messageTiles.getSelectedMessages(app.selectedMessagePage)
-                              : <Widget>[
-                                  Empty(
-                                    title: app.selectedMessagePage == 3
-                                        ? I18n.of(context).notImplemented
-                                        : I18n.of(context).emptyMessages,
-                                  ),
-                                ],
+                      children: widget.messageTiles
+                                  .getSelectedMessages(app.selectedMessagePage)
+                                  .length >
+                              0
+                          ? widget.messageTiles
+                              .getSelectedMessages(app.selectedMessagePage)
+                          : <Widget>[
+                              Empty(
+                                title: app.selectedMessagePage == 3
+                                    ? I18n.of(context).notImplemented
+                                    : I18n.of(context).emptyMessages,
+                              ),
+                            ],
                     ),
                     SizedBox(height: 100.0),
                   ],

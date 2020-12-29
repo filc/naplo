@@ -19,16 +19,19 @@ class ImageViewer extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
+        leading: BackButton(color: Colors.white),
         actions: [
           IconButton(
             icon: Icon(
               FeatherIcons.download,
+              color: Colors.white,
             ),
             onPressed: downloadHandler,
           ),
           IconButton(
             icon: Icon(
               FeatherIcons.share2,
+              color: Colors.white,
             ),
             onPressed: shareHandler,
           ),

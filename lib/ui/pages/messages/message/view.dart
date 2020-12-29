@@ -21,8 +21,11 @@ class MessageView extends StatefulWidget {
   final List<Message> messages;
   final updateCallback;
 
-  archiveMessages (context, bool archiving) {
-    messages.forEach((msg) {MessageArchiveHelper().archiveMessage(context, msg, archiving, updateCallback);});
+  archiveMessages(context, bool archiving) {
+    messages.forEach((msg) {
+      MessageArchiveHelper()
+          .archiveMessage(context, msg, archiving, updateCallback);
+    });
   }
 
   MessageView(this.messages, this.updateCallback);
@@ -62,7 +65,8 @@ class MessageViewTile extends StatefulWidget {
   final bool isLast;
   final archiveCallback;
 
-   MessageViewTile(this.message, this.isFirst, this.isLast, this.archiveCallback);
+  MessageViewTile(
+      this.message, this.isFirst, this.isLast, this.archiveCallback);
 
   @override
   _MessageViewTileState createState() => _MessageViewTileState();
@@ -94,28 +98,36 @@ class _MessageViewTileState extends State<MessageViewTile> {
         children: <Widget>[
           (widget.isFirst)
               ? AppBar(
-                  centerTitle: true,
-                  leading: Container(),
-                  title: Text(widget.message.subject),
                   shadowColor: Colors.transparent,
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   actions: <Widget>[
-                    !widget.message.deleted ?
-                    IconButton(
-                        icon: Icon(FeatherIcons.archive),
-                        onPressed: () {
-                          widget.archiveCallback(context, true);
-                          Navigator.pop(context);
-                         },
-                    ) : //nem törölt
-                    IconButton(
-                    icon: Icon(FeatherIcons.externalLink),
-                        onPressed: () {
-                          widget.archiveCallback(context, false);
-                          Navigator.pop(context);
-                        }
-                    ) //törölt
-                  ]
+                      !widget.message.deleted
+                          ? IconButton(
+                              icon: Icon(FeatherIcons.archive),
+                              onPressed: () {
+                                widget.archiveCallback(context, true);
+                                Navigator.pop(context);
+                              },
+                            )
+                          : Tooltip(
+                            message: capital(I18n.of(context).messageRestore),
+                            child: IconButton(
+                                icon: Icon(FeatherIcons.cornerLeftUp),
+                                onPressed: () {
+                                  widget.archiveCallback(context, false);
+                                  Navigator.pop(context);
+                                }),
+                          ) //törölt
+                    ])
+              : Container(),
+          widget.isFirst
+              ? Padding(
+                  padding:
+                      EdgeInsets.only(left: 16.0, right: 16.0, bottom: 4.0),
+                  child: Text(
+                    widget.message.subject,
+                    style: TextStyle(fontSize: 24.0),
+                  ),
                 )
               : Container(),
           RawMaterialButton(
@@ -182,39 +194,45 @@ class _MessageViewTileState extends State<MessageViewTile> {
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    IconButton(
-                      padding: EdgeInsets.zero,
-                      icon: Icon(FeatherIcons.cornerUpLeft),
-                      constraints: BoxConstraints.tight(Size(32.0, 32.0)),
-                      onPressed: () {
-                        messageContext = MessageContext();
-                        messageContext.subject =
-                            "RE: " + widget.message.subject;
-                        messageContext.recipients.add(
-                          Recipient.fromJson(
-                              {"nev": widget.message.sender, "tipus": {}}),
-                        );
-                        messageContext.replyId = widget.message.messageId;
+                    Tooltip(
+                      message: capital(I18n.of(context).messageReply),
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        icon: Icon(FeatherIcons.cornerUpLeft),
+                        constraints: BoxConstraints.tight(Size(32.0, 32.0)),
+                        onPressed: () {
+                          messageContext = MessageContext();
+                          messageContext.subject =
+                              "RE: " + widget.message.subject;
+                          messageContext.recipients.add(
+                            Recipient.fromJson(
+                                {"nev": widget.message.sender, "tipus": {}}),
+                          );
+                          messageContext.replyId = widget.message.messageId;
 
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => NewMessagePage()));
-                      },
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => NewMessagePage()));
+                        },
+                      ),
                     ),
                     SizedBox(width: 8.0),
-                    IconButton(
-                      padding: EdgeInsets.zero,
-                      icon: Icon(FeatherIcons.share2),
-                      constraints: BoxConstraints.tight(Size(32.0, 32.0)),
-                      onPressed: () {
-                        Share.share(
-                          escapeHtml(widget.message.content) +
-                              "\n\n" +
-                              I18n.of(context).messageShareFooter(
-                                  widget.message.sender,
-                                  DateFormat("yyyy. MM. dd.")
-                                      .format(widget.message.date)),
-                        );
-                      },
+                    Tooltip(
+                      message: capital(I18n.of(context).messageShare),
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        icon: Icon(FeatherIcons.share2),
+                        constraints: BoxConstraints.tight(Size(32.0, 32.0)),
+                        onPressed: () {
+                          Share.share(
+                            escapeHtml(widget.message.content) +
+                                "\n\n" +
+                                I18n.of(context).messageShareFooter(
+                                    widget.message.sender,
+                                    DateFormat("yyyy. MM. dd.")
+                                        .format(widget.message.date)),
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -309,4 +327,3 @@ class _MessageViewTileState extends State<MessageViewTile> {
     );
   }
 }
-

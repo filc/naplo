@@ -1,7 +1,6 @@
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:tinycolor/tinycolor.dart';
 
 class SyncProgressIndicator extends StatelessWidget {
   final String text;
@@ -15,7 +14,7 @@ class SyncProgressIndicator extends StatelessWidget {
     return Container(
       height: 48.0,
       decoration: BoxDecoration(
-        color: TinyColor(app.settings.theme.backgroundColor).darken(8).color,
+        color: app.settings.theme.backgroundColor,
       ),
       child: Row(
         children: <Widget>[

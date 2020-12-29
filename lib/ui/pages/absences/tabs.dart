@@ -1,5 +1,6 @@
 import 'package:filcnaplo/ui/account_button.dart';
 import 'package:filcnaplo/ui/custom_tabs.dart';
+import 'package:filcnaplo/ui/pages/debug/button.dart';
 import 'package:filcnaplo/ui/pages/debug/view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -62,12 +63,15 @@ class _AbsenceTabsState extends State<AbsenceTabs>
               floating: true,
               pinned: true,
               forceElevated: true,
+              shadowColor: Colors.transparent,
+              backgroundColor:
+                  app.settings.theme.bottomNavigationBarTheme.backgroundColor,
               title: Text(
                 I18n.of(context).absenceTitle,
                 style: TextStyle(fontSize: 22.0),
               ),
               actions: <Widget>[
-                app.debugMode 
+                app.debugMode
                     ? DebugButton(DebugViewClass.absences)
                     : Container(),
                 AccountButton()

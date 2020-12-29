@@ -1,5 +1,5 @@
 import 'package:filcnaplo/data/state/sync.dart';
-import 'package:filcnaplo/data/sync/ui/indicator.dart';
+import 'package:filcnaplo/ui/sync/indicator.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/ui/pages/absences/page.dart';
 import 'package:filcnaplo/ui/pages/evaluations/page.dart';
@@ -87,7 +87,7 @@ class _PageFrameState extends State<PageFrame> {
 
     switch (app.selectedPage) {
       case 0:
-         pageContent = HomePage(_navItemSelected);
+        pageContent = HomePage(_navItemSelected);
         break;
       case 1:
         pageContent = EvaluationsPage(_homeKey);
@@ -124,23 +124,6 @@ class _PageFrameState extends State<PageFrame> {
                       text: syncState.text,
                       current: syncState.current.toString(),
                       max: syncState.max.toString(),
-                    ),
-                  )
-                : Container(),
-
-            // Shadow
-            app.settings.theme.brightness == Brightness.light
-                ? Container(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      height: 10.0,
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey[700],
-                          blurRadius: 8.0,
-                          offset: Offset(0, 16),
-                        )
-                      ]),
                     ),
                   )
                 : Container(),

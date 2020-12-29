@@ -6,7 +6,7 @@ import 'package:filcnaplo/data/models/attachment.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:filcnaplo/ui/image_viewer.dart';
+import 'package:filcnaplo/ui/pages/messages/message/image_viewer.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
@@ -60,8 +60,8 @@ class _AttachmentTileState extends State<AttachmentTile> {
       saveAttachment(attachment, data).then((String f) => OpenFile.open(f));
     }
 
-    tapImage() {
-      Navigator.of(context).push(CupertinoPageRoute(
+    openImage() {
+      Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => ImageViewer(
               imageProvider: MemoryImage(data),
               shareHandler: handleShare,
@@ -94,25 +94,19 @@ class _AttachmentTileState extends State<AttachmentTile> {
                     children: [
                       Expanded(
                         child: Container(
-                          height: 120,
-                          padding: EdgeInsets.only(bottom: 12.0),
+                          height: 132,
+                          margin: EdgeInsets.only(bottom: 12.0),
                           child: data != null
                               ? ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(12.0),
-                                    topRight: Radius.circular(12.0),
-                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
                                   child: Material(
                                     child: InkWell(
                                       child: Ink.image(
                                         image: MemoryImage(data),
                                         fit: BoxFit.cover,
                                       ),
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(12.0),
-                                        topRight: Radius.circular(12.0),
-                                      ),
-                                      onTap: tapImage,
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      onTap: openImage,
                                     ),
                                     color: Colors.transparent,
                                   ),

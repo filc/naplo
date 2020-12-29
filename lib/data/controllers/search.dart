@@ -93,6 +93,7 @@ class SearchController {
   List<Searchable> getSearchables(BuildContext context, updateCallback) {
     List<Searchable> searchables = [];
 
+    // Messages
     List<Message> messages = <List<Message>>[
       app.user.sync.messages.received,
       app.user.sync.messages.sent,

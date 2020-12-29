@@ -1,4 +1,3 @@
-import 'package:filcnaplo/data/context/theme.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';

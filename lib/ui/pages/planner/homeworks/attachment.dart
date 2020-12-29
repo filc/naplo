@@ -1,6 +1,7 @@
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/controllers/storage.dart';
 import 'package:filcnaplo/data/models/homework.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:path_provider/path_provider.dart';
@@ -9,11 +10,10 @@ import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:filcnaplo/ui/image_viewer.dart';
+import 'package:filcnaplo/ui/pages/messages/message/image_viewer.dart';
 import 'package:share/share.dart';
 
-
-//copied from message/view, rewritten to work with homework attachments.
+// Copied from message/view, rewritten to work with homework attachments.
 class AttachmentTile extends StatefulWidget {
   AttachmentTile(this.attachment, {Key key}) : super(key: key);
 
@@ -36,7 +36,9 @@ class _AttachmentTileState extends State<AttachmentTile> {
     var attachment = widget.attachment;
     super.initState();
     if (isImage(attachment)) {
-      app.user.kreta.downloadHomeworkAttachment(this.widget.attachment).then((var d) {
+      app.user.kreta
+          .downloadHomeworkAttachment(this.widget.attachment)
+          .then((var d) {
         setState(() {
           data = d;
         });
@@ -62,20 +64,16 @@ class _AttachmentTileState extends State<AttachmentTile> {
     }
 
     tapImage() {
-      Navigator.of(context).push(MaterialPageRoute(
+      Navigator.of(context).push(
+        MaterialPageRoute(
           builder: (context) => ImageViewer(
-              imageProvider: MemoryImage(data),
-              shareHandler: handleShare,
-              downloadHandler: handleSave)));
+            imageProvider: MemoryImage(data),
+            shareHandler: handleShare,
+            downloadHandler: handleSave,
+          ),
+        ),
+      );
     }
-
-    /* String dir = (await getTemporaryDirectory()).path;
-    print(dir);
-    File temp = new File('$dir/temp.file.' + attachment.name);
-    await temp.writeAsBytes(data);
-    /*do something with temp file*/
-    await Share.shareFiles(['$dir/temp.file']);
-    temp.delete(); */
 
     return Card(
       clipBehavior: Clip.antiAlias,
@@ -128,7 +126,7 @@ class _AttachmentTileState extends State<AttachmentTile> {
                         saveAttachment(attachment, data)
                             .then((String f) => OpenFile.open(f));
                       } else {
-                        downloadAttachment(attachment);
+                        downloadAttachment(attachment, context: context);
                       }
                     },
                   ),
@@ -142,11 +140,11 @@ class _AttachmentTileState extends State<AttachmentTile> {
   }
 }
 
-// todo: error handling (snackbar)
 Future<String> saveAttachment(
   HomeworkAttachment attachment,
-  Uint8List data,
-) async {
+  Uint8List data, {
+  BuildContext context,
+}) async {
   try {
     String downloads = (await DownloadsPathProvider.downloadsDirectory).path;
 
@@ -164,10 +162,26 @@ Future<String> saveAttachment(
     }
   } catch (error) {
     print("ERROR: downloadAttachment: " + error.toString());
+    if (context != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            I18n.of(context).messageAttachmentFailed,
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+    return null;
   }
 }
 
-Future downloadAttachment(HomeworkAttachment attachment) async {
+Future downloadAttachment(
+  HomeworkAttachment attachment, {
+  @required BuildContext context,
+}) async {
   var data = await app.user.kreta.downloadHomeworkAttachment(attachment);
-  saveAttachment(attachment, data).then((String f) => OpenFile.open(f));
+  saveAttachment(attachment, data, context: context)
+      .then((String f) => OpenFile.open(f));
 }

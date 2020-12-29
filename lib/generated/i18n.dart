@@ -272,6 +272,10 @@ class I18n implements WidgetsLocalizations {
   String get messageRecipients => "címzettek";
   /// "csatolmányok"
   String get messageAttachments => "csatolmányok";
+  /// "Sikertelen letöltés!"
+  String get messageAttachmentFailed => "Sikertelen letöltés!";
+  /// "visszaállítás"
+  String get messageRestore => "visszaállítás";
   /// "küldés"
   String get messageSend => "küldés";
   /// "válasz"
@@ -1016,6 +1020,12 @@ class _I18n_en_US extends I18n {
   /// "attachments"
   @override
   String get messageAttachments => "attachments";
+  /// "Failed to download attachment!"
+  @override
+  String get messageAttachmentFailed => "Failed to download attachment!";
+  /// "restore"
+  @override
+  String get messageRestore => "restore";
   /// "send"
   @override
   String get messageSend => "send";
@@ -1942,6 +1952,12 @@ class _I18n_de_DE extends I18n {
   /// "Anhänge"
   @override
   String get messageAttachments => "Anhänge";
+  /// "Anhang konnte nicht heruntergeladen werden!"
+  @override
+  String get messageAttachmentFailed => "Anhang konnte nicht heruntergeladen werden!";
+  /// "wiederherstellen"
+  @override
+  String get messageRestore => "wiederherstellen";
   /// "schicken"
   @override
   String get messageSend => "schicken";

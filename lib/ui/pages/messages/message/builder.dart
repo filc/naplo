@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/message.dart';
 import 'package:filcnaplo/ui/pages/messages/message/tile.dart';
-import 'package:filcnaplo/generated/i18n.dart';
 
 class MessageBuilder {
   final updateCallback;
@@ -81,18 +80,17 @@ class MessageTiles {
     switch (i) {
       case 0:
         return received;
-        break;
       case 1:
         return sent;
-        break;
       case 2:
         return archived;
-        break;
       case 3:
         return drafted;
-        break;
+      default:
+        return null;
     }
   }
+
   void clear() {
     received = [];
     sent = [];

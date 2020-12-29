@@ -1,5 +1,3 @@
-import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/ui/account_button.dart';
 import 'package:filcnaplo/ui/cards/card.dart';
 import 'package:filcnaplo/ui/cards/absence/card.dart';
 import 'package:filcnaplo/ui/cards/evaluation/card.dart';
@@ -7,10 +5,8 @@ import 'package:filcnaplo/ui/cards/message/card.dart';
 import 'package:filcnaplo/ui/cards/note/card.dart';
 import 'package:filcnaplo/ui/cards/homework/card.dart';
 import 'package:filcnaplo/ui/cards/exam/card.dart';
-import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/ui/pages/search.dart';
 
@@ -49,9 +45,22 @@ class _HomePageState extends State<HomePage> {
           ),
 
           // Search bar
-          SearchBar()
+          SearchBar(
+            openSearch: () =>
+                Navigator.of(context).push(_searchRoute(setState)),
+          )
         ],
       ),
+    );
+  }
+
+  Route _searchRoute(callback) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          SearchPage(callback),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(opacity: animation, child: child);
+      },
     );
   }
 
@@ -61,7 +70,7 @@ class _HomePageState extends State<HomePage> {
 
     app.user.sync.messages.received.forEach((message) => cards.add(MessageCard(
           message,
-          updateCallback,
+          () {},
           key: Key(message.messageId.toString()),
           compare: message.date,
         )));

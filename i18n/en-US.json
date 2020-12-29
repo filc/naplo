@@ -160,6 +160,10 @@
     "subject": "subject",
     "recipients": "recipients",
     "attachments": "attachments",
+    "attachment": {
+      "failed": "Failed to download attachment!"
+    },
+    "restore": "restore",
     "send": "send",
     "reply": "reply",
     "share": "share",

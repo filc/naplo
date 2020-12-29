@@ -72,7 +72,8 @@ class _SearchPageState extends State<SearchPage> {
                         setState(() {
                           if (text != "") {
                             results = SearchController.searchableResults(
-                              app.search.getSearchables(context, widget.callback),
+                              app.search
+                                  .getSearchables(context, widget.callback),
                               text,
                             );
                           } else {
@@ -83,6 +84,8 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                 ),
+
+                // Close / Clear search
                 ClipOval(
                   child: Material(
                     color: Colors.transparent,
@@ -109,6 +112,10 @@ class _SearchPageState extends State<SearchPage> {
 }
 
 class SearchBar extends StatelessWidget {
+  final Function openSearch;
+
+  SearchBar({@required this.openSearch});
+
   @override
   Widget build(context) {
     return Container(
@@ -139,9 +146,7 @@ class SearchBar extends StatelessWidget {
                   style: TextStyle(fontSize: 18.0),
                 ),
               ),
-              onTap: () {
-                Navigator.of(context).push(_searchRoute());
-              },
+              onTap: openSearch,
             ),
           ),
           Padding(
@@ -149,24 +154,13 @@ class SearchBar extends StatelessWidget {
             child: ClipOval(
               child: Material(
                 color: Colors.transparent,
-                child: AccountButton(
-                  padding: EdgeInsets.zero
-                ),
+                child: AccountButton(padding: EdgeInsets.zero),
               ),
             ),
           )
         ],
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
       ),
-    );
-  }
-
-  Route _searchRoute() {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => SearchPage(),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(opacity: animation, child: child);
-      },
     );
   }
 }

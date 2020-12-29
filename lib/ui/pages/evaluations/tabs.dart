@@ -81,6 +81,9 @@ class _EvaluationTabsState extends State<EvaluationTabs>
               floating: true,
               pinned: true,
               forceElevated: true,
+              shadowColor: Colors.transparent,
+              backgroundColor:
+                  app.settings.theme.bottomNavigationBarTheme.backgroundColor,
               title: Text(
                 I18n.of(context).evaluationTitle,
                 style: TextStyle(fontSize: 22.0),

@@ -4,24 +4,26 @@ import 'package:filcnaplo/data/models/message.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 
 class MessageArchiveHelper {
-  Future archiveMessage(BuildContext context, Message message, bool archiving,
-      Function updateCallback) async {
+  Future archiveMessage(
+    BuildContext context,
+    Message message,
+    bool archiving,
+    Function updateCallback,
+  ) async {
+    // The type of the message (which tab it shows up on) if it's not archived.
     MessageType typeUndeleted = (message.sender == app.user.realName)
         ? MessageType.sent
         : MessageType.received;
-    // The type of the message (which tab it shows up on) if it's not archived.
-
     MessageType oldType, newType;
-    switch (archiving) {
-      case true:
-        newType = MessageType.archived;
-        oldType = typeUndeleted;
-        break;
-      case false:
-        newType = typeUndeleted;
-        oldType = MessageType.archived;
-    }
+
     // We move from typeUndeleted (see above) to archived while archiving, and the opposite when unarchiving.
+    if (archiving) {
+      newType = MessageType.archived;
+      oldType = typeUndeleted;
+    } else {
+      newType = typeUndeleted;
+      oldType = MessageType.archived;
+    }
 
     app.user.kreta.trashMessage(archiving, message.id);
     if (archiving) {
@@ -69,6 +71,8 @@ class MessageArchiveHelper {
       case MessageType.drafted:
         return app.user.sync.messages.drafted;
         break;
+      default:
+        return null;
     }
   }
 }

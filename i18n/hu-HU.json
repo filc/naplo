@@ -160,6 +160,10 @@
     "subject": "tárgy",
     "recipients": "címzettek",
     "attachments": "csatolmányok",
+    "attachment": {
+      "failed": "Sikertelen letöltés!"
+    },
+    "restore": "visszaállítás",
     "send": "küldés",
     "reply": "válasz",
     "share": "megosztás",

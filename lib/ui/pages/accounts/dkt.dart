@@ -1,4 +1,3 @@
-import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
