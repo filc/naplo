@@ -1,6 +1,8 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/ui/pages/accounts/dkt.dart';
+import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/profile_icon.dart';
 import 'package:filcnaplo/data/models/user.dart';
@@ -36,32 +38,64 @@ class _AccountTileState extends State<AccountTile> {
             if (deleted == true) widget.onDelete();
           });
         },
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         child: ListTile(
-          //cannot reuse the default profile icon because of size differences
           leading: ProfileIcon(
               name: widget.user.name,
               size: 0.85,
               image: widget.user.customProfileIcon),
+          // cannot reuse the default profile icon because of size differences
           title: Text(
             widget.user.name ?? I18n.of(context).unknown,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          trailing: IconButton(
-            icon: Icon(FeatherIcons.moreVertical),
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) =>
-                    AccountView(widget.user, callback: setState),
-                backgroundColor: Colors.transparent,
-              ).then((deleted) {
-                if (deleted == true) widget.onDelete();
-              });
-            },
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipOval(
+                child: Material(
+                  color: Colors.transparent,
+                  child: IconButton(
+                    icon: Icon(FeatherIcons.grid),
+                    color: textColor(app.settings.theme.backgroundColor),
+                    onPressed: () {
+                      app.kretaApi.users[widget.user.id]
+                          .refreshLogin()
+                          .then((success) {
+                        if (success) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => DKTPage(widget.user)));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(I18n.of(context).loginError),
+                            duration: Duration(seconds: 5),
+                          ));
+                        }
+                      });
+                    },
+                  ),
+                ),
+              ),
+              ClipOval(
+                child: Material(
+                  color: Colors.transparent,
+                  child: IconButton(
+                    icon: Icon(FeatherIcons.moreVertical),
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) =>
+                            AccountView(widget.user, callback: setState),
+                        backgroundColor: Colors.transparent,
+                      ).then((deleted) {
+                        if (deleted == true) widget.onDelete();
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

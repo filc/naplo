@@ -4,7 +4,7 @@ import 'package:filcnaplo/data/models/message.dart';
 import 'package:filcnaplo/ui/pages/messages/message/tile.dart';
 
 class MessageBuilder {
-  final updateCallback;
+  final Function updateCallback;
   MessageBuilder(this.updateCallback);
 
   MessageTiles messageTiles = MessageTiles();
@@ -15,14 +15,23 @@ class MessageBuilder {
 
     app.user.sync.messages.sent.reversed.forEach((Message message) {
       messageTiles.sent.add(
-        MessageTile(message, [message], this.updateCallback,
-            key: Key(message.id.toString())),
+        MessageTile(
+          message,
+          [message],
+          updateCallback,
+          key: Key(message.id.toString()),
+        ),
       );
     });
+
     app.user.sync.messages.archived.reversed.forEach((Message message) {
       messageTiles.archived.add(
-        MessageTile(message, [message], this.updateCallback,
-            key: Key(message.id.toString())),
+        MessageTile(
+          message,
+          [message],
+          updateCallback,
+          key: Key(message.id.toString()),
+        ),
       );
     });
     // We don't check if sent or archived messages are part of a conversation, we always display every one of them.
@@ -37,8 +46,11 @@ class MessageBuilder {
     received.forEach((Message message) {
       if (message.conversationId == null) {
         messageTiles.received.add(MessageTile(
-            message, [message], this.updateCallback,
-            key: Key(message.id.toString())));
+          message,
+          [message],
+          updateCallback,
+          key: Key(message.id.toString()),
+        ));
       } else {
         if (conversations[message.conversationId] == null)
           conversations[message.conversationId] = [];
@@ -60,7 +72,7 @@ class MessageBuilder {
       messageTiles.received.add(MessageTile(
         conversations[conversationId].first,
         conversations[conversationId],
-        this.updateCallback,
+        updateCallback,
         key: Key(conversations[conversationId][0].id.toString()),
       ));
     });
@@ -75,6 +87,7 @@ class MessageTiles {
   List<MessageTile> sent = [];
   List<MessageTile> archived = [];
   List<MessageTile> drafted = [];
+
   List<MessageTile> getSelectedMessages(int i) {
     // The DropDown() widget that selects the specific message types only gives back an integer, so we have to include a function that returns the needed messageTiles from a numeric index.
     switch (i) {

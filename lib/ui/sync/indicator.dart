@@ -16,7 +16,7 @@ class SyncProgressIndicator extends StatelessWidget {
       height: 48.0,
       decoration: BoxDecoration(
         color: app.settings.theme.backgroundColor,
-        boxShadow: [BoxShadow(blurRadius: 6.0, color: Colors.black26)],
+        boxShadow: [BoxShadow(blurRadius: 4.0, color: Colors.black26)],
         borderRadius: BorderRadius.circular(12.0)
       ),
       child: Row(

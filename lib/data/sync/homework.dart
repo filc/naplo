@@ -23,7 +23,7 @@ class HomeworkSync {
 
         await app.user.storage.delete("kreta_homeworks");
 
-        await Future.forEach(homework, (h) async {
+        await Future.forEach(data, (h) async {
           if (h.json != null) {
             await app.user.storage.insert("kreta_homeworks", {
               "json": jsonEncode(h.json),

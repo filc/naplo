@@ -19,7 +19,7 @@ class _MessagesPageState extends State<MessagesPage> {
   EventBuilder _eventBuilder;
 
   _MessagesPageState(_scaffoldKey) {
-    this._messageBuilder = MessageBuilder(updateCallback);
+    this._messageBuilder = MessageBuilder(() => setState((){}));
     this._noteBuilder = NoteBuilder();
     this._eventBuilder = EventBuilder();
   }
@@ -33,12 +33,8 @@ class _MessagesPageState extends State<MessagesPage> {
       _messageBuilder.messageTiles,
       _noteBuilder.noteTiles,
       _eventBuilder.eventTiles,
-      callback: updateCallback,
+      callback: () => setState((){}),
     );
-  }
-
-  void updateCallback() {
-    setState(() {});
   }
 
   void buildPage() {
