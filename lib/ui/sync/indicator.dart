@@ -12,9 +12,12 @@ class SyncProgressIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(12.0),
       height: 48.0,
       decoration: BoxDecoration(
         color: app.settings.theme.backgroundColor,
+        boxShadow: [BoxShadow(blurRadius: 6.0, color: Colors.black26)],
+        borderRadius: BorderRadius.circular(12.0)
       ),
       child: Row(
         children: <Widget>[

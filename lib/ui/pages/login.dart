@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
       body: AutofillGroup(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.fromLTRB(16.0, 42.0, 16.0, 0),
+            padding: EdgeInsets.fromLTRB(12.0, 32.0, 16.0, 0),
             height: MediaQuery.of(context).size.height,
             child: Column(
               children: <Widget>[
@@ -119,6 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                     ));
                   },
                   child: Container(
+                    height: 148.0,
                     padding: EdgeInsets.only(bottom: 8.0),
                     child: Image.asset("assets/icon.png"),
                     width: 164,
