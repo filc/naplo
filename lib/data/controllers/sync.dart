@@ -1,6 +1,7 @@
 import 'package:filcnaplo/data/sync/config.dart';
 import 'package:filcnaplo/data/sync/evaluation.dart';
 import 'package:filcnaplo/data/sync/message.dart';
+import 'package:filcnaplo/data/sync/news.dart';
 import 'package:filcnaplo/data/sync/note.dart';
 import 'package:filcnaplo/data/sync/event.dart';
 import 'package:filcnaplo/data/sync/student.dart';
@@ -76,6 +77,8 @@ class SyncController {
       task: app.user.sync.absence.sync(),
     );
 
+    createTask(name: "news", task: app.user.sync.news.sync());
+
     currentTask = 0;
     await Future.forEach(tasks, (task) async {
       try {
@@ -146,6 +149,7 @@ class SyncUser {
   ExamSync exam = ExamSync();
   HomeworkSync homework = HomeworkSync();
   TimetableSync timetable = TimetableSync();
+  NewSync news = NewSync();
   ConfigSync config = ConfigSync();
   SyncUser() {
     TimetableBuilder builder = TimetableBuilder();

@@ -572,6 +572,8 @@ class I18n implements WidgetsLocalizations {
   String get syncHomework => "Házi feladatok szinkronizálása...";
   /// "Órarend szinkronizálása..."
   String get syncTimetable => "Órarend szinkronizálása...";
+  /// "Hírek szinkronizálása..."
+  String get syncNews => "Hírek szinkronizálása...";
   /// "információk"
   String get about => "információk";
   /// "Információk"
@@ -584,6 +586,8 @@ class I18n implements WidgetsLocalizations {
   String get aboutSupporters => "Támogatók";
   /// "Linkek"
   String get aboutLinks => "Linkek";
+  /// "Hírek"
+  String get aboutNews => "Hírek";
   /// "Micsoda üresség!"
   String get empty => "Micsoda üresség!";
   /// "Nincsenek üzeneteid"
@@ -1476,6 +1480,9 @@ class _I18n_en_US extends I18n {
   /// "Syncing timetable..."
   @override
   String get syncTimetable => "Syncing timetable...";
+  /// "Syncing news..."
+  @override
+  String get syncNews => "Syncing news...";
   /// "about"
   @override
   String get about => "about";
@@ -1494,6 +1501,9 @@ class _I18n_en_US extends I18n {
   /// "Links"
   @override
   String get aboutLinks => "Links";
+  /// "news"
+  @override
+  String get aboutNews => "news";
   /// "Wow, such empty!"
   @override
   String get empty => "Wow, such empty!";
@@ -1988,12 +1998,15 @@ class _I18n_de_DE extends I18n {
   /// "${sender}, ${date}"
   @override
   String messageShareFooter(String sender, String date) => "${sender}, ${date}";
+  /// "Mitteilung archiviert"
+  @override
+  String get messageArchived => "Mitteilung archiviert";
   /// "Dauerhaft löschen"
   @override
   String get messageDelete => "Dauerhaft löschen";
-  /// "Mitteilung archiviert"
+  /// "Nachricht gelöscht"
   @override
-  String get messageDeleted => "Mitteilung archiviert";
+  String get messageDeleted => "Nachricht gelöscht";
   /// "eingang"
   @override
   String get messageDrawerInbox => "eingang";
@@ -2411,6 +2424,9 @@ class _I18n_de_DE extends I18n {
   /// "Stundenplan wird abgerufen..."
   @override
   String get syncTimetable => "Stundenplan wird abgerufen...";
+  /// "Nachrichten werden abgerufen..."
+  @override
+  String get syncNews => "Nachrichten werden abgerufen...";
   /// "Info"
   @override
   String get about => "Info";
@@ -2429,6 +2445,9 @@ class _I18n_de_DE extends I18n {
   /// "Linken"
   @override
   String get aboutLinks => "Linken";
+  /// "Nachrichten"
+  @override
+  String get aboutNews => "Nachrichten";
   /// "Wow, so leer!"
   @override
   String get empty => "Wow, so leer!";

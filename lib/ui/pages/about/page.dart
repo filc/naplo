@@ -3,6 +3,7 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/ui/pages/about/privacy.dart';
 import 'package:filcnaplo/ui/pages/about/supporters/page.dart';
+import 'package:filcnaplo/ui/pages/news/list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -86,6 +87,14 @@ class AboutPage extends StatelessWidget {
                       CupertinoPageRoute(
                           builder: (BuildContext context) => AboutSupporters()),
                     );
+                  },
+                ),
+                AboutButton(
+                  icon: FeatherIcons.info,
+                  text: I18n.of(context).aboutNews,
+                  onPressed: () {
+                    Navigator.of(context).push(CupertinoPageRoute(
+                        builder: (BuildContext context) => NewsList()));
                   },
                 ),
                 SizedBox(height: 32.0),

@@ -366,7 +366,8 @@
     "absence": "Ausschreitungen werden abgerufen...",
     "exam": "Prüfungen werden abgerufen...",
     "homework": "Hausaufgaben werden abgerufen...",
-    "timetable": "Stundenplan wird abgerufen..."
+    "timetable": "Stundenplan wird abgerufen...",
+    "news": "Nachrichten werden abgerufen..."
   },
   "about": {
     "": "Info",
@@ -374,7 +375,8 @@
     "privacy": "Datenschutz-Bestimmungen",
     "licenses": "Lizenzen",
     "supporters": "Spendern",
-    "links": "Linken"
+    "links": "Linken",
+    "news": "Nachrichten"
   },
   "empty": {
     "": "Wow, so leer!",
