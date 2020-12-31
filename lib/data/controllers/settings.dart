@@ -29,7 +29,9 @@ class SettingsController {
   int eveningStartHour;
   get locale {
     List<String> lang = (language == "auto"
-            ? deviceLanguage != null ? deviceLanguage : "hu_HU"
+            ? deviceLanguage != null
+                ? deviceLanguage
+                : "hu_HU"
             : language)
         .split("_");
     return Locale(lang[0], lang[1]);
@@ -50,7 +52,6 @@ class SettingsController {
     backgroundColor = settings["background_color"];
 
     eveningStartHour = settings["evening_start_hour"];
-    
     defaultPage = settings["default_page"];
     theme = {
       "light": ThemeContext().light(app.settings.appColor),
@@ -200,8 +201,7 @@ Future loadData(User user) async {
 
   globalSync.messages.sent = [];
   messagesSent.forEach((message) {
-    globalSync.messages.sent
-        .add(Message.fromJson(jsonDecode(message["json"])));
+    globalSync.messages.sent.add(Message.fromJson(jsonDecode(message["json"])));
   });
 
   List messagesDraft = await userStorage.query("messages_draft");

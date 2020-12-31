@@ -14,6 +14,11 @@ class MessageTile extends StatelessWidget {
   final updateCallback;
   final Key key;
 
+  archiveMessages(context, bool archiving) {
+    children.forEach((msg) => MessageArchiveHelper()
+        .archiveMessage(context, msg, archiving, updateCallback));
+  }
+
   MessageTile(this.message, this.children, this.updateCallback, {this.key});
 
   @override
@@ -28,13 +33,11 @@ class MessageTile extends StatelessWidget {
                 .deleteMessage(context, message, updateCallback);
           } else {
             // Archived, pulled from right, should unarchive
-            MessageArchiveHelper()
-                .archiveMessage(context, message, false, updateCallback);
+            archiveMessages(context, false);
           }
         } else {
           // Not archived, so both directions should archive.
-          MessageArchiveHelper()
-              .archiveMessage(context, message, true, updateCallback);
+          archiveMessages(context, true);
         }
       }(),
       secondaryBackground: Container(

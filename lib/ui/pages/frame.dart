@@ -1,4 +1,5 @@
 import 'package:filcnaplo/data/state/sync.dart';
+import 'package:filcnaplo/ui/pages/news/view.dart';
 import 'package:filcnaplo/ui/sync/indicator.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/ui/pages/absences/page.dart';
@@ -29,6 +30,18 @@ class _PageFrameState extends State<PageFrame> {
         app.user.kreta.userAgent = app.user.sync.config.data.userAgent;
         if (app.user.loginState) app.sync.fullSync();
       });
+    });
+
+    app.user.sync.news.sync().then((_) {
+      app.user.sync.news.fresh.reversed.forEach(
+        (news) async {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => NewsView(news),
+            ),
+          );
+        },
+      );
     });
   }
 

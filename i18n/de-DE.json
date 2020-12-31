@@ -49,7 +49,8 @@
     "cancel": "ABBRECHEN",
     "skip": "SKIP",
     "next": "NEXT",
-    "add": "Addieren"
+    "add": "Addieren",
+    "open": "öffnen"
   },
   "time": {
     "": "zeit",

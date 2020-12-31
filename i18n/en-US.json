@@ -49,7 +49,8 @@
     "cancel": "CANCEL",
     "skip": "SKIP",
     "next": "NEXT",
-    "add": "Add"
+    "add": "Add",
+    "open": "open"
   },
   "time": {
     "": "time",

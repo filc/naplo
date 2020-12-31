@@ -16,7 +16,7 @@ class StorageController {
   Map<String, Database> users = {};
   Future createSettingsTable(Database db) async {
     await db.execute(
-        "create table settings (language TEXT, app_color TEXT, theme TEXT, background_color INTIGER, notifications INTIGER, selected_user INTIGER, render_html INTIGER, debug_mode INTIGER, default_page INTIGER, config TEXT)");
+        "create table settings (language TEXT, app_color TEXT, theme TEXT, background_color INTIGER, notifications INTIGER, selected_user INTIGER, render_html INTIGER, debug_mode INTIGER, default_page INTIGER, news_show INTEGER, news_len INTEGER, config TEXT)");
   }
 
   Future init() async {
@@ -28,7 +28,7 @@ class StorageController {
 
   Future create() async {
     await destroy(appPath);
-    
+
     storage = await openDatabase(
       appPath,
       version: 1,
@@ -40,7 +40,8 @@ class StorageController {
         createSettingsTable(db);
         await db.insert("settings", {
           "language": "auto",
-          "app_color": "default","theme": SchedulerBinding.instance.window.platformBrightness ==
+          "app_color": "default",
+          "theme": SchedulerBinding.instance.window.platformBrightness ==
                   Brightness.dark
               ? 'dark'
               : 'light',
@@ -50,6 +51,8 @@ class StorageController {
           "render_html": 1,
           "debug_mode": 0,
           "default_page": 0,
+          "news_show": 1,
+          "news_len": 0,
           "config": jsonEncode(Config.defaults.json),
         });
 

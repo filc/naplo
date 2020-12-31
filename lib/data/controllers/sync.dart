@@ -77,8 +77,6 @@ class SyncController {
       task: app.user.sync.absence.sync(),
     );
 
-    createTask(name: "news", task: app.user.sync.news.sync());
-
     currentTask = 0;
     await Future.forEach(tasks, (task) async {
       try {
@@ -134,6 +132,7 @@ class SyncController {
       sync.homework.delete();
       sync.timetable.delete();
       sync.config.delete();
+      sync.news.delete();
     });
   }
 }
@@ -149,7 +148,7 @@ class SyncUser {
   ExamSync exam = ExamSync();
   HomeworkSync homework = HomeworkSync();
   TimetableSync timetable = TimetableSync();
-  NewSync news = NewSync();
+  NewsSync news = NewsSync();
   ConfigSync config = ConfigSync();
   SyncUser() {
     TimetableBuilder builder = TimetableBuilder();
