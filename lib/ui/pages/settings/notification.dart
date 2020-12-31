@@ -23,6 +23,21 @@ class _NotificationSettingsState extends State<NotificationSettings> {
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             ),
             ListTile(
+              leading: Icon(FeatherIcons.mail),
+              title: Text(I18n.of(context).settingsNotificationsNews),
+              trailing: Switch(
+                value: app.settings.enableNews,
+                onChanged: (bool value) {
+                  setState(() {
+                    app.settings.enableNews = value;
+                  });
+
+                  app.storage.storage.update("settings",
+                      {"news_show": (app.settings.enableNews ? 1 : 0)});
+                },
+              ),
+            ),
+            ListTile(
               leading: Icon(app.settings.enableNotifications
                   ? FeatherIcons.bell
                   : FeatherIcons.bellOff),

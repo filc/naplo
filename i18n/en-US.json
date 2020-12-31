@@ -314,7 +314,8 @@
       "seen": "Send seen state"
     },
     "notifications": {
-      "title": "Notifications"
+      "title": "Notifications",
+      "news": "Show Newsletter"
     },
     "behavior": {
       "title": "Behavior",

@@ -27,6 +27,7 @@ class SettingsController {
   bool renderHtml;
   int defaultPage;
   int eveningStartHour;
+  bool enableNews;
   get locale {
     List<String> lang = (language == "auto"
             ? deviceLanguage != null
@@ -70,6 +71,7 @@ class SettingsController {
     app.theme.evalColors[4] = colorFromHex(evalColorsI[0]["color5"]);
 
     enableNotifications = settings["notifications"] == 1;
+    enableNews = settings["news_show"] == 1;
     renderHtml = settings["render_html"] == 1;
 
     List usersInstance = await app.storage.storage.query("users");

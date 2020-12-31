@@ -504,6 +504,8 @@ class I18n implements WidgetsLocalizations {
   String get settingsPrivacySeen => "\"Láttam\" küldése";
   /// "Értesítések"
   String get settingsNotificationsTitle => "Értesítések";
+  /// "Hírlevél mutatása"
+  String get settingsNotificationsNews => "Hírlevél mutatása";
   /// "Működés"
   String get settingsBehaviorTitle => "Működés";
   /// "Tartalom renderelése HTML-ben"
@@ -1380,6 +1382,9 @@ class _I18n_en_US extends I18n {
   /// "Notifications"
   @override
   String get settingsNotificationsTitle => "Notifications";
+  /// "Show Newsletter"
+  @override
+  String get settingsNotificationsNews => "Show Newsletter";
   /// "Behavior"
   @override
   String get settingsBehaviorTitle => "Behavior";
@@ -2327,6 +2332,9 @@ class _I18n_de_DE extends I18n {
   /// "Benachrichtigungen"
   @override
   String get settingsNotificationsTitle => "Benachrichtigungen";
+  /// "Newsletter anzeigen"
+  @override
+  String get settingsNotificationsNews => "Newsletter anzeigen";
   /// "Optionen"
   @override
   String get settingsBehaviorTitle => "Optionen";

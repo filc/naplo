@@ -313,7 +313,8 @@
       "seen": "Gesehenstatus melden"
     },
     "notifications": {
-      "title": "Benachrichtigungen"
+      "title": "Benachrichtigungen",
+      "news": "Newsletter anzeigen"
     },
     "behavior": {
       "title": "Optionen",

@@ -314,7 +314,8 @@
       "seen": "\"Láttam\" küldése"
     },
     "notifications": {
-      "title": "Értesítések"
+      "title": "Értesítések",
+      "news": "Hírlevél mutatása"
     },
     "behavior": {
       "title": "Működés",

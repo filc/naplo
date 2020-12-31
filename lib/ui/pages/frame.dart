@@ -33,15 +33,17 @@ class _PageFrameState extends State<PageFrame> {
     });
 
     app.user.sync.news.sync().then((_) {
-      app.user.sync.news.fresh.reversed.forEach(
-        (news) async {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (BuildContext context) => NewsView(news),
-            ),
-          );
-        },
-      );
+      if (app.settings.enableNews) {
+        app.user.sync.news.fresh.reversed.forEach(
+          (news) async {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) => NewsView(news),
+              ),
+            );
+          },
+        );
+      }
     });
   }
 
