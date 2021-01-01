@@ -1,3 +1,4 @@
+import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/subject.dart';
 import 'package:filcnaplo/ui/pages/evaluations/subjects/view.dart';
@@ -27,7 +28,17 @@ class SubjectTile extends StatelessWidget {
           ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              studentAvg < 2
+                  ? Container(
+                      child: Icon(
+                        FeatherIcons.alertCircle,
+                        color: app.theme.evalColors[0],
+                      ),
+                      margin: EdgeInsets.only(right: 8),
+                    )
+                  : Container(),
               classAvg != null && classAvg.round() != 0
                   ? Container(
                       width: 55,
