@@ -164,7 +164,7 @@ Future<String> saveAttachment(
       var filePath = downloads + "/" + attachment.name;
       if (app.debugMode) print("INFO: Saved file: " + filePath);
       if (await StorageController.writeFile(filePath, data)) {
-        print("Downloaded " + attachment.name);
+        print("INFO: Downloaded " + attachment.name);
         return filePath;
       } else {
         throw "Storage Permission denied";

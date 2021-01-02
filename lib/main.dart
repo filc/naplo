@@ -46,10 +46,8 @@ void main() async {
       settingsCopy["default_page"] = settingsCopy["default_page"] ?? 0;
       settingsCopy["config"] =
           settingsCopy["config"] ?? jsonEncode(Config.defaults.json);
-      settingsCopy["news_len"] =
-          settingsCopy["news_len"] ?? settingsCopy["news_len"];
-      settingsCopy["news_show"] =
-          settingsCopy["news_show"] ?? settingsCopy["news_show"];
+      settingsCopy["news_len"] = settingsCopy["news_len"] ?? 0;
+      settingsCopy["news_show"] = settingsCopy["news_show"] ?? 1;
       await app.storage.storage.execute("drop table settings");
       try {
         await app.storage.storage.execute("drop table tabs");
@@ -58,7 +56,7 @@ void main() async {
       await app.storage.storage.insert("settings", settingsCopy);
     }
   } catch (error) {
-    print("[WARN] main: " + error.toString());
+    print("[WARN] main: (probably normal) " + error.toString());
     await app.storage.create();
     app.firstStart = true;
   }

@@ -28,8 +28,8 @@ class _LoginPageState extends State<LoginPage> {
 
     loginContext = LoginContext();
     app.settings.update(login: false);
-    app.kretaApi.client.getConfig().then((conf) {
-      app.kretaApi.client.userAgent = conf.userAgent;
+    app.settings.config.sync().then((_) {
+      app.kretaApi.client.userAgent = app.settings.config.data.userAgent;
       app.kretaApi.client.getSchools().then((schools) {
         loginContext.schools = schools;
         loginContext.schoolState = true;

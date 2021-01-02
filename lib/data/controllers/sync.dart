@@ -1,4 +1,3 @@
-import 'package:filcnaplo/data/sync/config.dart';
 import 'package:filcnaplo/data/sync/evaluation.dart';
 import 'package:filcnaplo/data/sync/message.dart';
 import 'package:filcnaplo/data/sync/news.dart';
@@ -131,7 +130,6 @@ class SyncController {
       sync.exam.delete();
       sync.homework.delete();
       sync.timetable.delete();
-      sync.config.delete();
       sync.news.delete();
     });
   }
@@ -149,7 +147,6 @@ class SyncUser {
   HomeworkSync homework = HomeworkSync();
   TimetableSync timetable = TimetableSync();
   NewsSync news = NewsSync();
-  ConfigSync config = ConfigSync();
   SyncUser() {
     TimetableBuilder builder = TimetableBuilder();
     Week currentWeek = builder.getWeek(builder.getCurrentWeek());

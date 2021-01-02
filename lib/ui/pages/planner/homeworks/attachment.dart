@@ -52,7 +52,7 @@ class _AttachmentTileState extends State<AttachmentTile> {
 
     handleShare() async {
       String dir = (await getTemporaryDirectory()).path;
-      print(dir);
+      // print(dir);
       File temp = new File('$dir/temp.file.' + attachment.name);
       await temp.writeAsBytes(data);
       await Share.shareFiles(['$dir/temp.file.' + attachment.name]);
@@ -150,9 +150,9 @@ Future<String> saveAttachment(
 
     if (data != null) {
       var filePath = downloads + "/" + attachment.name;
-      print("File: " + filePath);
+      print("INFO: Download path: " + filePath);
       if (await StorageController.writeFile(filePath, data)) {
-        print("Downloaded " + attachment.name);
+        print("INFO: Downloaded " + attachment.name);
         return filePath;
       } else {
         throw "Storage Permission denied";

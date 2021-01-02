@@ -41,7 +41,9 @@ class EvaluationTile extends StatelessWidget {
                         (evaluation.value.weight != 100
                             ? evaluation.value.weight.toString() + "%"
                             : "")
-                    : evaluation.form != null ? "\n" + evaluation.form : "")
+                    : evaluation.form != null
+                        ? "\n" + evaluation.form
+                        : "")
                 : "")
         : evaluation.value.valueName.split("(")[0];
 
@@ -131,7 +133,7 @@ class EvaluationTile extends StatelessWidget {
             ? IconButton(
                 icon: Icon(FeatherIcons.trash),
                 color: Colors.red,
-                tooltip: I18n.of(context).evaluationsGhostTooltip,
+                tooltip: I18n.of(context).tooltipGhostRemove,
                 onPressed: () {
                   if (deleteCallback != null) deleteCallback(evaluation);
                 })

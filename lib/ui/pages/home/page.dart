@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> feedCards = buildFeed();
-    
+
     return Container(
       child: Stack(
         children: <Widget>[
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
     cards.sort((a, b) => -a.compare.compareTo(b.compare));
 
     elements.addAll(cards);
-
+    
     return elements;
   }
 }

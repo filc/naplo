@@ -8,8 +8,9 @@ import 'package:fl_chart/fl_chart.dart';
 
 class SubjectGraph extends StatefulWidget {
   final List<Evaluation> data;
+  final int dayThreshold;
 
-  SubjectGraph(this.data);
+  SubjectGraph(this.data, {this.dayThreshold = 7});
 
   @override
   _SubjectGraphState createState() => _SubjectGraphState();
@@ -23,10 +24,8 @@ class _SubjectGraphState extends State<SubjectGraph> {
 
     widget.data.forEach((element) {
       if (sortedData.last.length != 0 &&
-          (sortedData.last.last.date ?? sortedData.last.last.date)
-                  .difference(element.date ?? element.date)
-                  .inDays >
-              7) sortedData.add([]);
+          sortedData.last.last.date.difference(element.date).inDays >
+              widget.dayThreshold) sortedData.add([]);
       sortedData.forEach((dataList) {
         dataList.add(element);
       });

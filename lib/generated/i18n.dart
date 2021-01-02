@@ -76,6 +76,8 @@ class I18n implements WidgetsLocalizations {
   String get grade => "osztályzat";
   /// "Fiókok"
   String get accountTitle => "Fiókok";
+  /// "infó"
+  String get accountInfo => "infó";
   /// "fiók hozzáadása"
   String get accountAdd => "fiók hozzáadása";
   /// "Felhasználó törlése"
@@ -90,6 +92,8 @@ class I18n implements WidgetsLocalizations {
   String get actionChange => "szerkesztés";
   /// "szerkesztés"
   String get actionEdit => "szerkesztés";
+  /// "visszaállítás"
+  String get actionReset => "visszaállítás";
   /// "OK"
   String get dialogOk => "OK";
   /// "IGEN"
@@ -110,6 +114,8 @@ class I18n implements WidgetsLocalizations {
   String get dialogAdd => "Hozzáadás";
   /// "megnyitás"
   String get dialogOpen => "megnyitás";
+  /// "VISSZA"
+  String get dialogBack => "VISSZA";
   /// "idő"
   String get time => "idő";
   /// "óra"
@@ -166,7 +172,7 @@ class I18n implements WidgetsLocalizations {
   String get dateWeekPrev => "előző hét";
   /// "következő hét"
   String get dateWeekNext => "következő hét";
-    /// "jan"
+  /// "jan"
   String get dateJan => "jan";
   /// "feb"
   String get dateFeb => "feb";
@@ -414,14 +420,14 @@ class I18n implements WidgetsLocalizations {
   String get evaluationsSubjects => "Tárgyak";
   /// "Statisztikák"
   String get evaluationsStatistics => "Statisztikák";
-  /// "Tantárgyaid átlaga"
-  String get evaluationsSubjectsAverage => "Tantárgyaid átlaga";
+  /// "Tantárgyaid"
+  String get evaluationsSubjectsAverage => "Tantárgyaid";
+  /// "Éves átlagod"
+  String get evaluationsYearlyGraph => "Éves átlagod";
   /// "SZELLEMJEGY"
   String get evaluationsGhost => "SZELLEMJEGY";
   /// "Szellemjegy hozzáadása"
   String get evaluationsGhostTitle => "Szellemjegy hozzáadása";
-  /// "Szellemjegy eltávolítása"
-  String get evaluationsGhostTooltip => "Szellemjegy eltávolítása";
   /// "Iskola"
   String get studentSchool => "Iskola";
   /// "Születési dátum"
@@ -522,6 +528,8 @@ class I18n implements WidgetsLocalizations {
   String get settingsGeneralLanguage => "Nyelv";
   /// "Kezdőoldal"
   String get settingsGeneralStartPage => "Kezdőoldal";
+  /// "Kerekítés"
+  String get settingsGeneralRound => "Kerekítés";
   /// "Adatvédelem"
   String get settingsPrivacyTitle => "Adatvédelem";
   /// "\"Láttam\" küldése"
@@ -686,6 +694,14 @@ class I18n implements WidgetsLocalizations {
   String showOthers(String count) => "További ${count} megjelenítése";
   /// "Lista összecsukása"
   String get collapseList => "Lista összecsukása";
+  /// "Szellemjegy eltávolítása"
+  String get tooltipGhostRemove => "Szellemjegy eltávolítása";
+  /// "Összes jegyed átlaga"
+  String get tooltipStatisticsEvalsAvg => "Összes jegyed átlaga";
+  /// "Ha most zárnának le, a tárgyaidból ilyen jegyeket szereznél."
+  String get tooltipStatisticsSubjects => "Ha most zárnának le, a tárgyaidból ilyen jegyeket szereznél.";
+  /// "Ha most zárnának le, a tárgyakra kapott jegyek átlaga ez lenne."
+  String get tooltipStatisticsSubjectsAvg => "Ha most zárnának le, a tárgyakra kapott jegyek átlaga ez lenne.";
 }
 
 class _I18n_hu_HU extends I18n {
@@ -764,6 +780,9 @@ class _I18n_en_US extends I18n {
   /// "Accounts"
   @override
   String get accountTitle => "Accounts";
+  /// "info"
+  @override
+  String get accountInfo => "info";
   /// "add account"
   @override
   String get accountAdd => "add account";
@@ -785,6 +804,9 @@ class _I18n_en_US extends I18n {
   /// "edit"
   @override
   String get actionEdit => "edit";
+  /// "reset"
+  @override
+  String get actionReset => "reset";
   /// "OK"
   @override
   String get dialogOk => "OK";
@@ -815,6 +837,9 @@ class _I18n_en_US extends I18n {
   /// "open"
   @override
   String get dialogOpen => "open";
+  /// "BACK"
+  @override
+  String get dialogBack => "BACK";
   /// "time"
   @override
   String get time => "time";
@@ -1274,15 +1299,15 @@ class _I18n_en_US extends I18n {
   /// "Your subjects"
   @override
   String get evaluationsSubjectsAverage => "Your subjects";
+  /// "Average troughout the year"
+  @override
+  String get evaluationsYearlyGraph => "Average troughout the year";
   /// "GHOST GRADE"
   @override
   String get evaluationsGhost => "GHOST GRADE";
   /// "Add new Ghost Grade"
   @override
   String get evaluationsGhostTitle => "Add new Ghost Grade";
-  /// "Remove this Ghost Grade"
-  @override
-  String get evaluationsGhostTooltip => "Remove this Ghost Grade";
   /// "School"
   @override
   String get studentSchool => "School";
@@ -1433,6 +1458,9 @@ class _I18n_en_US extends I18n {
   /// "Start page"
   @override
   String get settingsGeneralStartPage => "Start page";
+  /// "Rounding"
+  @override
+  String get settingsGeneralRound => "Rounding";
   /// "Privacy"
   @override
   String get settingsPrivacyTitle => "Privacy";
@@ -1679,6 +1707,18 @@ class _I18n_en_US extends I18n {
   /// "Collapse list"
   @override
   String get collapseList => "Collapse list";
+  /// "Remove this Ghost Grade"
+  @override
+  String get tooltipGhostRemove => "Remove this Ghost Grade";
+  /// "Average of all your grades"
+  @override
+  String get tooltipStatisticsEvalsAvg => "Average of all your grades";
+  /// "If your grades would be finalized now, your subjects would be finalized like this."
+  @override
+  String get tooltipStatisticsSubjects => "If your grades would be finalized now, your subjects would be finalized like this.";
+  /// "If your grades would be finalized now, this would be the average of them."
+  @override
+  String get tooltipStatisticsSubjectsAvg => "If your grades would be finalized now, this would be the average of them.";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -1753,6 +1793,9 @@ class _I18n_de_DE extends I18n {
   /// "Konten"
   @override
   String get accountTitle => "Konten";
+  /// "Info"
+  @override
+  String get accountInfo => "Info";
   /// "Konto hinzufügen"
   @override
   String get accountAdd => "Konto hinzufügen";
@@ -1774,6 +1817,9 @@ class _I18n_de_DE extends I18n {
   /// "Bearbeiten"
   @override
   String get actionEdit => "Bearbeiten";
+  /// "zurücksetzen"
+  @override
+  String get actionReset => "zurücksetzen";
   /// "OK"
   @override
   String get dialogOk => "OK";
@@ -1804,6 +1850,9 @@ class _I18n_de_DE extends I18n {
   /// "öffnen"
   @override
   String get dialogOpen => "öffnen";
+  /// "zurück"
+  @override
+  String get dialogBack => "zurück";
   /// "zeit"
   @override
   String get time => "zeit";
@@ -1888,7 +1937,7 @@ class _I18n_de_DE extends I18n {
   /// "nächste Woche"
   @override
   String get dateWeekNext => "nächste Woche";
-   /// "jan"
+  /// "jan"
   @override
   String get dateJan => "jan";
   /// "feb"
@@ -2260,15 +2309,18 @@ class _I18n_de_DE extends I18n {
   /// "Statistiken"
   @override
   String get evaluationsStatistics => "Statistiken";
+  /// "Deine Fächer"
+  @override
+  String get evaluationsSubjectsAverage => "Deine Fächer";
+  /// "Durchschnitt im Jahr"
+  @override
+  String get evaluationsYearlyGraph => "Durchschnitt im Jahr";
   /// "SCHATTENNOTE"
   @override
   String get evaluationsGhost => "SCHATTENNOTE";
   /// "Schattennote addieren"
   @override
   String get evaluationsGhostTitle => "Schattennote addieren";
-  /// "Schattennote löschen"
-  @override
-  String get evaluationsGhostTooltip => "Schattennote löschen";
   /// "Schule"
   @override
   String get studentSchool => "Schule";
@@ -2419,6 +2471,9 @@ class _I18n_de_DE extends I18n {
   /// "Startseite"
   @override
   String get settingsGeneralStartPage => "Startseite";
+  /// "abzurunden"
+  @override
+  String get settingsGeneralRound => "abzurunden";
   /// "Datenschutz"
   @override
   String get settingsPrivacyTitle => "Datenschutz";
@@ -2665,6 +2720,18 @@ class _I18n_de_DE extends I18n {
   /// "Liste stauchen"
   @override
   String get collapseList => "Liste stauchen";
+  /// "Schattennote löschen"
+  @override
+  String get tooltipGhostRemove => "Schattennote löschen";
+  /// "Durchschnitt alle deiner Noten"
+  @override
+  String get tooltipStatisticsEvalsAvg => "Durchschnitt alle deiner Noten";
+  /// "Wenn deine Noten jetzt abgeschlossen wären, würden deine Fächer so abgeschlossen."
+  @override
+  String get tooltipStatisticsSubjects => "Wenn deine Noten jetzt abgeschlossen wären, würden deine Fächer so abgeschlossen.";
+  /// "Wenn deine Noten jetzt abgeschlossen wären, wäre dies der Durchschnitt von ihnen."
+  @override
+  String get tooltipStatisticsSubjectsAvg => "Wenn deine Noten jetzt abgeschlossen wären, wäre dies der Durchschnitt von ihnen.";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;

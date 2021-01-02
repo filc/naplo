@@ -30,6 +30,7 @@
   },
   "account": {
     "title": "Accounts",
+    "info": "info",
     "add": "add account",
     "delete": "Delete user",
     "deleteConfirm": "Are you sure you want to delete {name}?",
@@ -38,7 +39,8 @@
   "action": {
     "delete": "delete",
     "change": "change",
-    "edit": "edit"
+    "edit": "edit",
+    "reset": "reset"
   },
   "dialog": {
     "ok": "OK",
@@ -50,7 +52,8 @@
     "skip": "SKIP",
     "next": "NEXT",
     "add": "Add",
-    "open": "open"
+    "open": "open",
+    "back": "BACK"
   },
   "time": {
     "": "time",
@@ -248,10 +251,10 @@
     "subjects": "subjects",
     "statistics": "statistics",
     "subjectsAverage":"Your subjects",
+    "yearlyGraph":"Average troughout the year",
     "ghost": {
       "": "GHOST GRADE",
-      "title": "Add new Ghost Grade",
-      "tooltip": "Remove this Ghost Grade"
+      "title": "Add new Ghost Grade"
     }
   },
   "student": {
@@ -319,7 +322,8 @@
     "general": {
       "title": "General",
       "language": "Language",
-      "startPage": "Start page"
+      "startPage": "Start page",
+      "round": "Rounding"
     },
     "privacy": {
       "title": "Privacy",
@@ -437,5 +441,13 @@
   },
   "unknown": "unknown",
   "showOthers": "Show {count} more",
-  "collapseList": "Collapse list"
+  "collapseList": "Collapse list",
+  "tooltip": {
+    "ghostRemove": "Remove this Ghost Grade",
+    "statistics": {
+      "evalsAvg": "Average of all your grades",
+      "subjects": "If your grades would be finalized now, your subjects would be finalized like this.",
+      "subjectsAvg": "If your grades would be finalized now, this would be the average of them."
+    }
+  }
 }

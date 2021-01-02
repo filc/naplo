@@ -25,7 +25,7 @@ class _AccountPageState extends State<AccountPage> {
     });
     app.sync.updateCallback();
     app.sync.fullSync();
-    Navigator.pop(context);
+    app.user.kreta.userAgent = app.settings.config.data.userAgent;
   }
 
   @override
@@ -83,7 +83,9 @@ class _AccountPageState extends State<AccountPage> {
                           )
                         : Container(),
 
-                    app.users.length > 1 ? Divider() : Container(),
+                    app.users.length > 1
+                        ? Divider(thickness: 2.0)
+                        : Container(),
 
                     app.users.length > 1
                         ? Flexible(

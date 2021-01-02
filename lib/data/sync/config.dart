@@ -10,7 +10,7 @@ class ConfigSync {
   Future<bool> sync() async {
     if (!app.debugUser) {
       Config config;
-      config = await app.user.kreta.getConfig();
+      config = await app.kretaApi.client.getConfig();
 
       if (config != null) {
         data = config;

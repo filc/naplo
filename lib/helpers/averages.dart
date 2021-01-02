@@ -1,6 +1,7 @@
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/data/models/subject.dart';
+import 'package:flutter/cupertino.dart';
 
 class SubjectAverage {
   SubjectAverage(this.subject, this.average, this.classAverage);
@@ -9,17 +10,15 @@ class SubjectAverage {
   final double classAverage;
 }
 
-int roundSubjectAverage(Subject subject, double average) {
-  /* print(subject.name +
-      " " +
-      subject.category.name +
-      "|" +
-      subject.category.description +
-      "|" +
-      subject.category.id); */
+int roundSubjAvg(double average) {
+  if (average >= average.floor() + (app.settings.roundUp / 10))
+    return average.ceil();
+  else
+    return average.floor();
+}
 
-  // todo: ability to change rounding point of each subject
-  return average.round();
+Color getAverageColor(double average) {
+  return app.theme.evalColors[(roundSubjAvg(average) - 1).clamp(0, 4)];
 }
 
 List<SubjectAverage> calculateSubjectsAverage() {

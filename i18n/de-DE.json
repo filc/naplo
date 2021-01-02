@@ -30,6 +30,7 @@
   },
   "account": {
     "title": "Konten",
+    "info": "Info",
     "add": "Konto hinzufügen",
     "delete": "Konto löschen",
     "deleteConfirm": "Möchtest du {name} wirklich löschen?",
@@ -38,7 +39,8 @@
   "action": {
     "delete": "löschen",
     "change": "wechseln",
-    "edit": "Bearbeiten"
+    "edit": "Bearbeiten",
+    "reset": "zurücksetzen"
   },
   "dialog": {
     "ok": "OK",
@@ -50,7 +52,8 @@
     "skip": "SKIP",
     "next": "NEXT",
     "add": "Addieren",
-    "open": "öffnen"
+    "open": "öffnen",
+    "back": "zurück"
   },
   "time": {
     "": "zeit",
@@ -247,10 +250,11 @@
     "endYear": "Zeugnis",
     "subjects": "Fächer",
     "statistics": "Statistiken",
+    "subjectsAverage": "Deine Fächer",
+    "yearlyGraph":"Durchschnitt im Jahr",
     "ghost": {
       "": "SCHATTENNOTE",
-      "title": "Schattennote addieren",
-      "tooltip": "Schattennote löschen"
+      "title": "Schattennote addieren"
     }
   },
   "student": {
@@ -318,7 +322,8 @@
     "general": {
       "title": "Allgemein",
       "language": "Sprache",
-      "startPage": "Startseite"
+      "startPage": "Startseite",
+      "round": "abzurunden"
     },
     "privacy": {
       "title": "Datenschutz",
@@ -436,5 +441,13 @@
   },
   "unknown": "unknown",
   "showOthers": "Nächste {count} anzeigen",
-  "collapseList": "Liste stauchen"
+  "collapseList": "Liste stauchen",
+  "tooltip": {
+    "ghostRemove": "Schattennote löschen",
+    "statistics": {
+      "evalsAvg": "Durchschnitt alle deiner Noten",
+      "subjects": "Wenn deine Noten jetzt abgeschlossen wären, würden deine Fächer so abgeschlossen.",
+      "subjectsAvg": "Wenn deine Noten jetzt abgeschlossen wären, wäre dies der Durchschnitt von ihnen."
+    }
+  }
 }

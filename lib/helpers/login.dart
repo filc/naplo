@@ -19,8 +19,12 @@ class LoginHelper {
         loginContext.password == "nobody" &&
         app.debugMode) {
       app.users.add(User("debug", "nobody", "nobody", null));
+      app.users.add(User("debug2", "nobody2", "nobody", null));
       app.user.name = "Test User";
       app.user.realName = "Test User";
+      app.users[1].name = "Test User 2";
+      app.users[1].realName = "Test User 2";
+      app.users[1].loginState = true;
       app.debugUser = true;
       app.selectedUser = 0;
       app.user.loginState = true;

@@ -26,8 +26,12 @@ class _PageFrameState extends State<PageFrame> {
 
     // Sync at startup
     app.settings.update().then((_) {
-      app.user.sync.config.sync().then((_) {
-        app.user.kreta.userAgent = app.user.sync.config.data.userAgent;
+      app.user.kreta.userAgent = app.settings.config.data.userAgent;
+      app.settings.config.sync().then((success) {
+        app.user.kreta.userAgent = app.settings.config.data.userAgent;
+        if (app.user.loginState) app.sync.fullSync();
+      }).catchError((error) {
+        print("ERROR: PageFrame.initState: Could not get config: $error");
         if (app.user.loginState) app.sync.fullSync();
       });
     });
@@ -36,7 +40,7 @@ class _PageFrameState extends State<PageFrame> {
       if (app.settings.enableNews && !app.firstStart) {
         Future.delayed(Duration(seconds: 1), () {
           Future.forEach(
-            app.user.sync.news.fresh.reversed,
+            app.user.sync.news.fresh,
             (news) async => await showDialog(
               useSafeArea: true,
               context: context,

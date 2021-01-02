@@ -30,6 +30,7 @@
   },
   "account": {
     "title": "Fiókok",
+    "info": "infó",
     "add": "fiók hozzáadása",
     "delete": "Felhasználó törlése",
     "deleteConfirm": "Biztosan törölni szeretnéd {name} felhasználót?",
@@ -38,7 +39,8 @@
   "action": {
     "delete": "törlés",
     "change": "szerkesztés",
-    "edit": "szerkesztés"
+    "edit": "szerkesztés",
+    "reset": "visszaállítás"
   },
   "dialog": {
     "ok": "OK",
@@ -50,7 +52,8 @@
     "skip": "ÁTUGRÁS",
     "next": "TOVÁBB",
     "add": "Hozzáadás",
-    "open": "megnyitás"
+    "open": "megnyitás",
+    "back": "VISSZA"
   },
   "time": {
     "": "idő",
@@ -247,11 +250,11 @@
     "endYear": "Év végi",
     "subjects": "Tárgyak",
     "statistics": "Statisztikák",
-    "subjectsAverage":"Tantárgyaid átlaga",
+    "subjectsAverage":"Tantárgyaid",
+    "yearlyGraph":"Éves átlagod",
     "ghost": {
       "": "SZELLEMJEGY",
-      "title": "Szellemjegy hozzáadása",
-      "tooltip": "Szellemjegy eltávolítása"
+      "title": "Szellemjegy hozzáadása"
     }
   },
   "student": {
@@ -319,7 +322,8 @@
     "general": {
       "title": "Általános",
       "language": "Nyelv",
-      "startPage": "Kezdőoldal"
+      "startPage": "Kezdőoldal",
+      "round": "Kerekítés"
     },
     "privacy": {
       "title": "Adatvédelem",
@@ -437,5 +441,13 @@
   },
   "unknown": "ismeretlen",
   "showOthers": "További {count} megjelenítése",
-  "collapseList": "Lista összecsukása"
+  "collapseList": "Lista összecsukása",
+  "tooltip": {
+    "ghostRemove": "Szellemjegy eltávolítása",
+    "statistics": {
+      "evalsAvg": "Összes jegyed átlaga",
+      "subjects": "Ha most zárnának le, a tárgyaidból ilyen jegyeket szereznél.",
+      "subjectsAvg": "Ha most zárnának le, a tárgyakra kapott jegyek átlaga ez lenne."
+    }
+  }
 }

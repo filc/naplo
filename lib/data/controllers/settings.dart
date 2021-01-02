@@ -1,7 +1,9 @@
 import 'package:filcnaplo/data/models/absence.dart';
+import 'package:filcnaplo/data/models/config.dart';
 import 'package:filcnaplo/data/models/homework.dart';
 import 'package:filcnaplo/data/models/lesson.dart';
 import 'package:filcnaplo/data/models/exam.dart';
+import 'package:filcnaplo/data/sync/config.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
@@ -28,6 +30,9 @@ class SettingsController {
   int defaultPage;
   int eveningStartHour;
   bool enableNews;
+  ConfigSync config = ConfigSync();
+  int roundUp;
+
   get locale {
     List<String> lang = (language == "auto"
             ? deviceLanguage != null
@@ -72,10 +77,14 @@ class SettingsController {
     enableNews = settings["news_show"] == 1;
     renderHtml = settings["render_html"] == 1;
 
+    config.data = Config.fromJson(jsonDecode(settings["config"]));
+
+    roundUp = settings["round_up"];
+
     List usersInstance = await app.storage.storage.query("users");
 
     if (app.debugMode)
-      print("Loading " + usersInstance.length.toString() + " users");
+      print("INFO: Loading " + usersInstance.length.toString() + " users");
 
     for (int i = 0; i < usersInstance.length; i++) {
       Map instance = usersInstance[i];

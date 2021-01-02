@@ -1,6 +1,8 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/helpers/averages.dart';
+import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class GeneralSettings extends StatefulWidget {
@@ -99,6 +101,95 @@ class _GeneralSettingsState extends State<GeneralSettings> {
                 return items;
               }(),
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            ),
+
+            // Default Page
+            Padding(
+              padding: EdgeInsets.all(12.0),
+              child: Text(
+                I18n.of(context).settingsGeneralRound.toUpperCase(),
+                style: TextStyle(
+                  fontSize: 15.0,
+                  letterSpacing: .7,
+                ),
+              ),
+            ),
+
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 55,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(45.0)),
+                        color: app.theme.evalColors[
+                            (3 + (app.settings.roundUp / 10)).floor() - 1],
+                      ),
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        app.settings.language.split("_")[0] == "en"
+                            ? (3 + (app.settings.roundUp / 10))
+                                .toStringAsFixed(1)
+                            : (3 + (app.settings.roundUp / 10))
+                                .toStringAsFixed(1)
+                                .split(".")
+                                .join(","),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          height: 1.2,
+                          fontSize: 18.0,
+                          color: textColor(
+                            app.theme.evalColors[
+                                (3 + (app.settings.roundUp / 10)).floor() - 1],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Icon(FeatherIcons.arrowRight),
+                    ),
+                    Container(
+                      width: 55,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(45.0)),
+                        color: getAverageColor(3 + (app.settings.roundUp / 10)),
+                      ),
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        app.settings.language.split("_")[0] == "en"
+                            ? roundSubjAvg(3 + (app.settings.roundUp / 10))
+                                .toStringAsFixed(1)
+                            : roundSubjAvg(3 + (app.settings.roundUp / 10))
+                                .toStringAsFixed(1)
+                                .split(".")
+                                .join(","),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          height: 1.2,
+                          fontSize: 18.0,
+                          color: textColor(
+                              getAverageColor(3 + (app.settings.roundUp / 10))),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Slider(
+                  value: app.settings.roundUp.toDouble(),
+                  divisions: 8,
+                  min: 1.0,
+                  max: 9.0,
+                  onChanged: (roundUp) {
+                    setState(() => app.settings.roundUp = roundUp.toInt());
+                  },
+                  activeColor: Theme.of(context).accentColor,
+                ),
+              ],
             ),
           ],
         ),

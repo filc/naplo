@@ -29,31 +29,36 @@ class _NewsViewState extends State<NewsView> {
           borderRadius: BorderRadius.all(Radius.circular(12)),
           color: app.settings.theme.backgroundColor,
         ),
-        child: ListView(
-          physics: BouncingScrollPhysics(),
+        child: Column(
           children: [
-            Text(
-              widget.news.title,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: FontSize.large.size,
+            Expanded(
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                children: [
+                  Text(
+                    widget.news.title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: FontSize.large.size,
+                    ),
+                  ),
+                  widget.news.content != null
+                      ? Container(
+                          margin: EdgeInsets.only(top: 10, bottom: 20),
+                          child: SelectableText(widget.news.content),
+                        )
+                      : Container(),
+                  widget.news.image != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          child: Image.network(
+                            widget.news.image,
+                          ),
+                        )
+                      : Container(),
+                ],
               ),
             ),
-            widget.news.content != null
-                ? Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 20),
-                    child: SelectableText("widget.news.content"),
-                  )
-                : Container(),
-            // TODO: Spacer()
-            widget.news.image != null
-                ? ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                    child: Image.network(
-                      widget.news.image,
-                    ),
-                  )
-                : Container(),
             Row(
               children: [
                 widget.news.link != null

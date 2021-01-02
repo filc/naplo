@@ -1,6 +1,7 @@
 import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/data/models/subject.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/helpers/averages.dart';
 import 'package:filcnaplo/ui/empty.dart';
 import 'package:filcnaplo/ui/pages/evaluations/grades/tile.dart';
 import 'package:filcnaplo/ui/pages/evaluations/subjects/graph.dart';
@@ -73,35 +74,31 @@ class _SubjectViewState extends State<SubjectView> {
         shadowColor: Colors.transparent,
         backgroundColor: app.settings.theme.scaffoldBackgroundColor,
         actions: <Widget>[
-          studentAvg.round() != 0
+          roundSubjAvg(studentAvg) != 0
               ? Padding(
                   padding: EdgeInsets.fromLTRB(0, 12.0, 8.0, 12.0),
                   child: Container(
                     width: 55,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(45.0)),
-                      color: app.theme
-                          .evalColors[(studentAvg.round() - 1).clamp(0, 4)],
+                      color: getAverageColor(studentAvg),
                     ),
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      app.settings.language == "en"
+                      app.settings.language.split("_")[0] == "en"
                           ? studentAvg.toStringAsFixed(2)
                           : studentAvg.toStringAsFixed(2).split(".").join(","),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         height: 1.2,
-                        color: textColor(
-                          app.theme
-                              .evalColors[(studentAvg.round() - 1).clamp(0, 4)],
-                        ),
+                        color: textColor(getAverageColor(studentAvg)),
                       ),
                     ),
                   ),
                 )
               : Container(),
-          widget.classAvg != null && widget.classAvg.round() != 0
+          widget.classAvg != null && roundSubjAvg(widget.classAvg) != 0
               ? Padding(
                   padding: EdgeInsets.fromLTRB(0, 12.0, 8.0, 12.0),
                   child: Container(
@@ -110,13 +107,12 @@ class _SubjectViewState extends State<SubjectView> {
                       borderRadius: BorderRadius.all(Radius.circular(45.0)),
                       border: Border.all(
                         width: 3.0,
-                        color: app.theme.evalColors[
-                            (widget.classAvg.round() - 1).clamp(0, 4)],
+                        color: getAverageColor(widget.classAvg),
                       ),
                     ),
                     padding: EdgeInsets.all(5.0),
                     child: Text(
-                      app.settings.language == "en"
+                      app.settings.language.split("_")[0] == "en"
                           ? widget.classAvg.toStringAsFixed(2)
                           : widget.classAvg
                               .toStringAsFixed(2)
@@ -144,7 +140,7 @@ class _SubjectViewState extends State<SubjectView> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
-                child: SubjectGraph(subjectEvals),
+                child: SubjectGraph(subjectEvals, dayThreshold: 5),
               ),
               Container(
                 padding:

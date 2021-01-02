@@ -4,25 +4,27 @@ import 'package:filcnaplo/data/models/new.dart';
 class NewsSync {
   List<News> data = [];
   List<News> fresh = []; // News to show with popup
-  int lenght;
+  int length;
   int prevLength;
-  Future<void> sync() async {
+
+  Future sync() async {
     prevLength = (await app.storage.storage.query("settings"))[0]["news_len"];
     data = await app.user.kreta.getNews();
+    fresh = [];
 
-    lenght = data.length;
-    if (lenght > prevLength) {
-      int lag = (lenght - prevLength).clamp(0, 3);
+    length = data.length;
+    if (length > prevLength) {
+      int lag = (length - prevLength).clamp(0, 3);
 
       while (lag > 0) {
         // Add the missed news to list
         fresh.add(data[lag - 1]);
         lag--;
       }
-      print(fresh.map((e) => e.title));
+      // print(fresh.map((e) => e.title));
     }
 
-    await app.storage.storage.update("settings", {"news_len": lenght});
+    await app.storage.storage.update("settings", {"news_len": length});
   }
 
   void delete() {
