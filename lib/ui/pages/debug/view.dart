@@ -35,6 +35,7 @@ class _DebugViewState extends State<DebugView> {
       ),
       body: Container(
         child: ListView(
+          physics: BouncingScrollPhysics(),
           children:
               debug.endpoints.map((endpoint) => DebugTile(endpoint)).toList() ??
                   [Empty()],

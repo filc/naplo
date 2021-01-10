@@ -1,29 +1,41 @@
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/format.dart';
+
 class ResponseView extends StatelessWidget {
   final int statusCode;
   final String response;
   final String uri;
   final Map<String, String> headers;
-  ResponseView(
-      {this.uri, this.response, this.statusCode, this.headers = const {}});
+
+  ResponseView({
+    this.uri,
+    this.response,
+    this.statusCode,
+    this.headers = const {},
+  });
 
   @override
   Widget build(BuildContext context) {
-    String headerText = "";
+    List<InlineSpan> headerParts = [];
     headers.forEach((key, value) {
-      headerText += "$key: $value\n";
+      headerParts.add(TextSpan(
+        text: capitalize(key),
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ));
+      headerParts.add(TextSpan(text: ": $value\n"));
     });
-
-    List<String> responseLines = response.split("\n");
-    String lines = "";
-    String lineNumbers = "";
-
+    TextSpan headerText = TextSpan(children: headerParts);
+    List<String> responseLines = response.replaceAll("\r", "").split("\n");
+    dynamic lines = [];
+    dynamic lineNumbers = [];
     for (int i = 0; i < responseLines.length; i++) {
-      lineNumbers += "${i + 1}\n";
-      lines += "${responseLines[i]}\n";
+      lineNumbers.add("${i + 1}");
+      lines.add("${responseLines[i]}");
     }
+    lines = lines.join('\n');
+    lineNumbers = lineNumbers.join('\n');
 
     Color statusColor = [
       Colors.green,
@@ -69,8 +81,8 @@ class ResponseView extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0),
         child: ListView(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          physics: BouncingScrollPhysics(),
+          children: [
             Padding(
               padding: EdgeInsets.all(12.0),
               child: Text(
@@ -81,11 +93,18 @@ class ResponseView extends StatelessWidget {
                 ),
               ),
             ),
-            SelectableText(
-              headerText,
-              style: TextStyle(
-                fontSize: 12.0,
-                fontFamily: "SpaceMono",
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: EdgeInsets.only(left: 12.0),
+                child: SelectableText.rich(
+                  headerText,
+                  scrollPhysics: NeverScrollableScrollPhysics(),
+                  style: TextStyle(
+                    fontSize: 12.0,
+                    fontFamily: "SpaceMono",
+                  ),
+                ),
               ),
             ),
             Divider(color: Colors.grey[700]),
