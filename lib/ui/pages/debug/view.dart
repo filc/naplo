@@ -1,44 +1,9 @@
-import 'package:filcnaplo/data/context/app.dart';
-import 'package:filcnaplo/kreta/api.dart';
 import 'package:filcnaplo/ui/empty.dart';
-import 'package:filcnaplo/ui/pages/debug/debug.dart';
+import 'package:filcnaplo/ui/pages/debug/struct.dart';
+import 'package:filcnaplo/ui/pages/debug/tile.dart';
 import 'package:flutter/material.dart';
 
 enum DebugViewClass { evalutaions, planner, messages, absences }
-
-class DebugViewStruct {
-  String title;
-  List<DebugEndpoint> endpoints;
-}
-
-class DebugViewEvaluations implements DebugViewStruct {
-  String title = "ui.pages.evaluations.debug.view";
-  List<DebugEndpoint> endpoints = [
-    DebugEndpoint(
-      host: BaseURL.kreta(app.user.kreta.instituteCode),
-      uri: KretaEndpoints.evaluations,
-    ),
-    DebugEndpoint(
-      host: BaseURL.kreta(app.user.kreta.instituteCode),
-      uri: KretaEndpoints.classAverages,
-    )
-  ];
-}
-
-class DebugViewPlanner implements DebugViewStruct {
-  String title = "ui.pages.planner.debug.view";
-  List<DebugEndpoint> endpoints;
-}
-
-class DebugViewMessages implements DebugViewStruct {
-  String title = "ui.pages.messages.debug.view";
-  List<DebugEndpoint> endpoints;
-}
-
-class DebugViewAbsences implements DebugViewStruct {
-  String title = "ui.pages.absences.debug.view";
-  List<DebugEndpoint> endpoints;
-}
 
 class DebugView extends StatefulWidget {
   final DebugViewClass type;
@@ -54,23 +19,7 @@ class _DebugViewState extends State<DebugView> {
 
   @override
   void initState() {
-    switch (widget.type) {
-      case DebugViewClass.evalutaions:
-        debug = DebugViewEvaluations();
-        break;
-
-      case DebugViewClass.planner:
-        debug = DebugViewPlanner();
-        break;
-
-      case DebugViewClass.messages:
-        debug = DebugViewMessages();
-        break;
-
-      case DebugViewClass.absences:
-        debug = DebugViewAbsences();
-        break;
-    }
+    debug = DebugViewStruct(widget.type);
     super.initState();
   }
 
@@ -84,7 +33,13 @@ class _DebugViewState extends State<DebugView> {
         shadowColor: Colors.transparent,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
-      body: Container(child: ListView(children: debug.endpoints ?? [Empty()])),
+      body: Container(
+        child: ListView(
+          children:
+              debug.endpoints.map((endpoint) => DebugTile(endpoint)).toList() ??
+                  [Empty()],
+        ),
+      ),
     );
   }
 }
