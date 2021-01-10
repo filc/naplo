@@ -1,7 +1,7 @@
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/lesson.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/ui/customSnackBar.dart';
+import 'package:filcnaplo/ui/custom_snackbar.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/day.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:filcnaplo/modules/printing/printerDebugScreen.dart';

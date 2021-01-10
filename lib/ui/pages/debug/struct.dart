@@ -6,7 +6,8 @@ import 'package:intl/intl.dart';
 class DebugEndpoint {
   String host;
   String uri;
-  DebugEndpoint({this.host, this.uri});
+  String name;
+  DebugEndpoint({this.host, this.uri, this.name});
 }
 
 class DebugError {
@@ -39,10 +40,12 @@ class DebugViewStruct {
           DebugEndpoint(
             host: BaseURL.kreta(app.user.instituteCode),
             uri: KretaEndpoints.evaluations,
+            name: "Evaluations",
           ),
           DebugEndpoint(
             host: BaseURL.kreta(app.user.instituteCode),
             uri: KretaEndpoints.classAverages,
+            name: "ClassAverages",
           )
         ];
         break;
@@ -68,16 +71,19 @@ class DebugViewStruct {
                   0,
                   0,
                 )),
+            name: "Timetable",
           ),
           DebugEndpoint(
             host: BaseURL.kreta(app.user.instituteCode),
-            uri: KretaEndpoints.homeworks +
+            uri: KretaEndpoints.homework +
                 "?datumTol=" +
                 DateTime.fromMillisecondsSinceEpoch(1).toIso8601String(),
+            name: "Homework",
           ),
           DebugEndpoint(
             host: BaseURL.kreta(app.user.instituteCode),
             uri: KretaEndpoints.exams,
+            name: "Exams",
           ),
         ];
         break;
@@ -87,14 +93,17 @@ class DebugViewStruct {
           DebugEndpoint(
             host: BaseURL.KRETA_ADMIN,
             uri: AdminEndpoints.messages("beerkezett"),
+            name: "Messages (INBOX)",
           ),
           DebugEndpoint(
             host: BaseURL.kreta(app.user.instituteCode),
             uri: KretaEndpoints.notes,
+            name: "Notes",
           ),
           DebugEndpoint(
             host: BaseURL.kreta(app.user.instituteCode),
             uri: KretaEndpoints.events,
+            name: "Events",
           ),
         ];
         break;
@@ -104,6 +113,7 @@ class DebugViewStruct {
           DebugEndpoint(
             host: BaseURL.kreta(app.user.instituteCode),
             uri: KretaEndpoints.absences,
+            name: "Absences",
           ),
         ];
         break;

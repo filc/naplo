@@ -1,7 +1,7 @@
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:flutter/material.dart';
 
-Widget chip({
+Widget customChip({
   IconData iconData,
   String textString,
   Function onTap,

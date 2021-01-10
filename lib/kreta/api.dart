@@ -31,7 +31,7 @@ class KretaEndpoints {
       "/ellenorzo/V3/Sajat/Ertekelesek/Atlagok/OsztalyAtlagok";
   static const timetable = "/ellenorzo/V3/Sajat/OrarendElemek";
   static const exams = "/ellenorzo/V3/Sajat/BejelentettSzamonkeresek";
-  static const homeworks = "/ellenorzo/V3/Sajat/HaziFeladatok";
+  static const homework = "/ellenorzo/V3/Sajat/HaziFeladatok";
   static const homeworkDone = "/ellenorzo/V3/Sajat/HaziFeladatok/Megoldva";
   static const capabilities = "/ellenorzo/V3/Sajat/Intezmenyek";
   static String downloadHomeworkAttachments(String uid, String type) =>

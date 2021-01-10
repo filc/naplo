@@ -1,4 +1,4 @@
-import 'package:filcnaplo/ui/customSnackBar.dart';
+import 'package:filcnaplo/ui/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/message.dart';

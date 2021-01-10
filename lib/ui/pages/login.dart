@@ -1,5 +1,5 @@
 import 'package:filcnaplo/helpers/login.dart';
-import 'package:filcnaplo/ui/customSnackBar.dart';
+import 'package:filcnaplo/ui/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 

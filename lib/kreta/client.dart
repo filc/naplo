@@ -668,7 +668,7 @@ class KretaClient {
     try {
       var response = await client.get(
         BaseURL.kreta(instituteCode) +
-            KretaEndpoints.homeworks +
+            KretaEndpoints.homework +
             "?datumTol=" +
             from.toUtc().toIso8601String(),
         headers: {
@@ -685,7 +685,7 @@ class KretaClient {
         //homeworks.add(Homework.fromJson(homework)
         var response2 = await client.get(
           BaseURL.kreta(instituteCode) +
-              KretaEndpoints.homeworks +
+              KretaEndpoints.homework +
               "/" +
               homework["Uid"],
           headers: {

@@ -1,6 +1,6 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/ui/account_button.dart';
-import 'package:filcnaplo/ui/customSnackBar.dart';
+import 'package:filcnaplo/ui/custom_snackbar.dart';
 import 'package:filcnaplo/ui/custom_tabs.dart';
 import 'package:filcnaplo/ui/empty.dart';
 import 'package:filcnaplo/ui/pages/debug/button.dart';

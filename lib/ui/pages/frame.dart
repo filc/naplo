@@ -1,5 +1,5 @@
 import 'package:filcnaplo/data/state/sync.dart';
-import 'package:filcnaplo/ui/customSnackBar.dart';
+import 'package:filcnaplo/ui/custom_snackbar.dart';
 import 'package:filcnaplo/ui/pages/news/view.dart';
 import 'package:filcnaplo/ui/sync/indicator.dart';
 import 'package:filcnaplo/generated/i18n.dart';

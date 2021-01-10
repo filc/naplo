@@ -116,7 +116,7 @@ class LessonTile extends StatelessWidget {
                 runSpacing: 1.0,
                 children: <Widget>[
                       homework != null
-                          ? chip(
+                          ? customChip(
                               iconData: FeatherIcons.home,
                               textString: escapeHtml(homework.content)
                                   .replaceAll("\n", " "),
@@ -132,7 +132,7 @@ class LessonTile extends StatelessWidget {
                     ] +
                     exams
                         .map(
-                          (exam) => chip(
+                          (exam) => customChip(
                             iconData: FeatherIcons.edit2,
                             textString: exam.description != null
                                 ? exam.description.replaceAll("\n", " ")

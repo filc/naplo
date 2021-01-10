@@ -1,7 +1,6 @@
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/kreta/client.dart';
-import 'package:filcnaplo/ui/custom_chip.dart';
-import 'package:filcnaplo/ui/pages/debug/responseView.dart';
+import 'package:filcnaplo/ui/pages/debug/response_view.dart';
 import 'package:filcnaplo/ui/pages/debug/struct.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +55,18 @@ class DebugTile extends StatelessWidget {
             padding: EdgeInsets.all(12.0),
             child: snapshot.hasData
                 ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 12.0),
+                        child: Text(
+                          endpoint.name,
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            letterSpacing: .7,
+                          ),
+                        ),
+                      ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -84,7 +94,7 @@ class DebugTile extends StatelessWidget {
                               ),
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
-                                child: Text(
+                                child: SelectableText(
                                   endpoint.uri,
                                   style: TextStyle(
                                     fontSize: 14.0,
@@ -94,24 +104,6 @@ class DebugTile extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: chip(
-                              textString: "MORE",
-                              color: Theme.of(context).accentColor,
-                              onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ResponseView(
-                                    uri: endpoint.uri,
-                                    response: snapshot.data.response,
-                                    statusCode: snapshot.data.statusCode,
-                                    headers: snapshot.data.headers,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
                         ],
                       ),
                       GestureDetector(
@@ -119,12 +111,12 @@ class DebugTile extends StatelessWidget {
                           margin: EdgeInsets.only(top: 6),
                           padding: EdgeInsets.all(4),
                           decoration: BoxDecoration(
-                            color: Colors.black26,
+                            color: Colors.black12,
                             borderRadius: BorderRadius.all(Radius.circular(5)),
                           ),
                           child: Text(
                             snapshot.data.response
-                                .replaceAll(RegExp(r'([\n\t]|  )+'), " "),
+                                .replaceAll(RegExp(r'[\n\t\s]+'), " "),
                             maxLines: 5,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
