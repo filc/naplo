@@ -4,6 +4,7 @@ import 'package:filcnaplo/data/models/homework.dart';
 import 'package:filcnaplo/data/models/lesson.dart';
 import 'package:filcnaplo/data/models/exam.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/ui/custom_chip.dart';
 import 'package:filcnaplo/ui/pages/planner/exams/view.dart';
 import 'package:filcnaplo/ui/pages/planner/homeworks/view.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/view.dart';
@@ -116,7 +117,7 @@ class LessonTile extends StatelessWidget {
                 children: <Widget>[
                       homework != null
                           ? chip(
-                              icon: Icon(FeatherIcons.home, size: 14.0),
+                              iconData: FeatherIcons.home,
                               textString: escapeHtml(homework.content)
                                   .replaceAll("\n", " "),
                               onTap: () => showModalBottomSheet(
@@ -132,7 +133,7 @@ class LessonTile extends StatelessWidget {
                     exams
                         .map(
                           (exam) => chip(
-                            icon: Icon(FeatherIcons.edit2, size: 14.0),
+                            iconData: FeatherIcons.edit2,
                             textString: exam.description != null
                                 ? exam.description.replaceAll("\n", " ")
                                 : exam.mode.description,
@@ -169,37 +170,6 @@ class LessonTile extends StatelessWidget {
   String formatTime(DateTime time) => time != null
       ? time.hour.toString() + ":" + time.minute.toString().padLeft(2, "0")
       : '';
-
-  Widget chip({Icon icon, String textString, Function onTap}) {
-    return InkWell(
-      child: Container(
-        decoration: ShapeDecoration(
-          shape: StadiumBorder(
-            side: BorderSide(color: Colors.white, width: 1.2),
-          ),
-        ),
-        margin: EdgeInsets.only(right: 5.0),
-        padding: EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            icon,
-            Flexible(
-              child: Padding(
-                padding: EdgeInsets.only(left: 8.0),
-                child: Text(
-                  textString,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      onTap: onTap,
-    );
-  }
 }
 
 class SpecialDateTile extends LessonTile {

@@ -101,15 +101,16 @@ class SearchController {
     ].expand((x) => x).toList();
 
     messages.forEach((message) => searchables.add(Searchable(
-        text: searchString([escapeHtml(message.content), message.subject]),
-        child: GestureDetector(
-          child: MessageTile(message),
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => MessageView([message], updateCallback)));
-          },
-        ),  
-    )));
+          text: searchString([escapeHtml(message.content), message.subject]),
+          child: GestureDetector(
+            child: MessageTile(message),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>
+                      MessageView([message], updateCallback)));
+            },
+          ),
+        )));
 
     // Notes
     app.user.sync.note.data.forEach((note) => searchables.add(Searchable(
@@ -158,6 +159,7 @@ class SearchController {
                   showModalBottomSheet(
                     context: context,
                     backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
                     builder: (BuildContext context) => HomeworkView(homework),
                   );
                 },

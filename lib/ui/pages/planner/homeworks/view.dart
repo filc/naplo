@@ -75,33 +75,36 @@ class _HomeworkViewState extends State<HomeworkView> {
 
           // Message content
           Expanded(
-            child: ListView(children: [
-              app.settings.renderHtml
-                  ? Html(
-                      data: widget.homework.content,
-                      onLinkTap: (url) async {
-                        if (await canLaunch(url))
-                          await launch(url);
-                        else
-                          throw '[ERROR] HomeworkView.build: Invalid URL';
-                      },
-                    )
-                  : SelectableLinkify(
-                      text: escapeHtml(widget.homework.content),
-                      onOpen: (url) async {
-                        if (await canLaunch(url.url))
-                          await launch(url.url);
-                        else
-                          throw '[ERROR] HomeworkView.build: Invalid URL';
-                      },
-                    ),
-              widget.homework.attachments == []
-                  ? Container()
-                  : Column(
-                      children: widget.homework.attachments
-                          .map((attachment) => AttachmentTile(attachment))
-                          .toList())
-            ]),
+            child: ListView(
+              physics: BouncingScrollPhysics(),
+              children: [
+                app.settings.renderHtml
+                    ? Html(
+                        data: widget.homework.content,
+                        onLinkTap: (url) async {
+                          if (await canLaunch(url))
+                            await launch(url);
+                          else
+                            throw '[ERROR] HomeworkView.build: Invalid URL';
+                        },
+                      )
+                    : SelectableLinkify(
+                        text: escapeHtml(widget.homework.content),
+                        onOpen: (url) async {
+                          if (await canLaunch(url.url))
+                            await launch(url.url);
+                          else
+                            throw '[ERROR] HomeworkView.build: Invalid URL';
+                        },
+                      ),
+                widget.homework.attachments == []
+                    ? Container()
+                    : Column(
+                        children: widget.homework.attachments
+                            .map((attachment) => AttachmentTile(attachment))
+                            .toList())
+              ],
+            ),
           ),
         ],
       ),
