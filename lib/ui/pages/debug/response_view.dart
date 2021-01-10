@@ -1,7 +1,6 @@
 import 'package:filcnaplo/utils/colors.dart';
+import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
-
-import '../../../utils/format.dart';
 
 class ResponseView extends StatelessWidget {
   final int statusCode;
