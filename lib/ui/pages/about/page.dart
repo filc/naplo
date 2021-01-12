@@ -19,7 +19,7 @@ class AboutPage extends StatelessWidget {
               alignment: Alignment.topLeft,
               padding: EdgeInsets.only(top: 36.0, left: 12.0),
               child: IconButton(
-                icon: Icon(FeatherIcons.x, color: Colors.white),
+                icon: Icon(FeatherIcons.arrowLeft, color: Colors.white),
                 onPressed: () => Navigator.pop(context),
               ),
             ),

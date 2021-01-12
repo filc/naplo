@@ -167,8 +167,8 @@
     "title": "Feljegyzések"
   },
   "event": {
-    "": "esemény",
-    "title": "Események"
+    "": "bejegyzés",
+    "title": "Faliújság"
   },
   "message": {
     "": "üzenet",
@@ -380,7 +380,7 @@
   "sync": {
     "message": "Üzenetek szinkronizálása ...",
     "student": "Adatok szinkronizálása...",
-    "event": "Események szinkronizálása...",
+    "event": "Faliújság szinkronizálása...",
     "note": "Feljegyzések szinkronizálása...",
     "evaluation": "Jegyek szinkronizálása...",
     "absence": "Hiányok szinkronizálása...",
@@ -391,7 +391,7 @@
   },
   "about": {
     "": "információk",
-    "title": "Információk",
+    "title": "Névjegy",
     "privacy": "Adatvédelmi irányelvek",
     "licenses": "Licenszek",
     "supporters": "Támogatók",
@@ -402,7 +402,7 @@
     "": "Micsoda üresség!",
     "messages": "Nincsenek üzeneteid",
     "notes": "Nincsenek feljegyzéseid",
-    "events": "Nincsenek eseményeid",
+    "events": "Nincs semmi a faliújságon",
     "absences": "Nincsenek mulasztásaid",
     "delays": "Nincsenek késéseid",
     "misses": "Még semmit sem felejtettél otthon, és a házikat is szorgalmasan elkészítetted.",
@@ -423,7 +423,7 @@
     "all": "Összes",
     "top": "Kiemelt"
   },
-  "welcome": "Üdvözöl az új",
+  "welcome": "Üdvözöl a ",
   "begin": "Kezdés",
   "features": {
     "1": "Modern, könnyen kezelhető felület",
@@ -432,13 +432,13 @@
     "4": "Maximálisan testreszabható"
   },
   "tutorial": {
-    "1": "A főoldalon minden egyéb oldal adatait egy helyre összegyűjtve láthatod.\nA felső sávba gépelve minden adat között kereshetsz, legyen az akár egy jegy címe, vagy a nevelőtestületi megrovás szövege.",
-    "2": "Itt találod az összes jegyet.\nTöbb szempont alapján rendezheted őket a bal alsó sarokban.\nFelül válthatsz az évközi jegyek és lezárt eredmények között,\nvalamint megnézheted a tárgyi átlagokat, és a hozzájuk tartozó jegyeket.",
-    "3": "A tervezőben találod az órarendet, ami egyben a naptár is.\nItt vannak a házik és a dolgozatok, számon tarthatod, mennyi mindenre nem lesz idő készülni.",
-    "4": "Ezen az oldalon találod a személyes üzeneteidet, jobb alul tudsz új üzenetet írni, bal felül pedig a mappák között váltani.\nA következő fülön a feljegyzéseket, faliújságot, rendszerüzeneteket,\naz utolsón pedig az eseményeket láthatod. Ezt a funkciót még sosem láttuk működés közben, de a hivatalos appban is benne van ¯\\\\_(ツ)_/¯",
-    "5": "Itt láthatod minden huncutság eredményét.\nFigyelheted, mikor vonják meg tőletek a családi pótlékot a hiányzások miatt,\nláthatod a késéseket, el nem készített házi feladatokat és felszereléshiányokat.\nHa nem látsz itt semmit, kiérdemelsz egy vállveregetést.",
+    "1": "A főoldalon minden egyéb oldal adatait egy helyre összegyűjtve láthatod.\nA felső sávba gépelve minden adat között kereshetsz, legyen az akár egy jegy címe, egy házi szövege, vagy egy tantárgy neve, amiből dolgozatot írsz.",
+    "2": "Itt találod az összes jegyet.\nTöbb szempont alapján rendezheted őket a bal alsó sarokban.\nFelül válthatsz az évközi jegyek és lezárt eredmények között,\nmegnézheted a tárgyi átlagokat, és a hozzájuk tartozó jegyeket, és az összes jegyedre vonatkozó statisztikákat láthatsz.",
+    "3": "A tervezőben találod az órarendet,\nitt vannak a házik és a dolgozatok, számon tarthatod, mennyi mindenre nem lesz idő készülni.",
+    "4": "Ezen az oldalon találod a személyes üzeneteidet, jobb alul tudsz új üzenetet írni, bal felül pedig a mappák között váltani.\nA következő fülön a feljegyzéseket, faliújságot, rendszerüzeneteket,\naz utolsón pedig a faliújságot láthatod.",
+    "5": "Ezen az oldalon listázzuk bűneidet.\nFigyelheted, mikor vonják meg tőletek a családi pótlékot a hiányzások miatt,\nláthatod a késéseket, el nem készített házi feladatokat és felszereléshiányokat.\nHa nem látsz itt semmit, akkor még biztos szeptember van.",
     "6": "Itt válthatsz bejelentkezett fiókok között.\nEgy fióknak beállíthatsz egyéni nevet, és profilképet.\nFelvehetsz és törölhetsz fiókokat.\nItt találod az app beállításait és néhány további információt is.",
-    "7": "Reméljük, elégedett leszel az új appal!\nNem találod a kedvenc régi funkciódat?\nNe aggódj, az app még kezdeti fázisban van, sok funkcióval fog gyarapodni."
+    "7": "Reméljük, elégedett leszel a Filc Naplóval!\nNyílt forráskódú projekt lévén az appot a közösség folyamatosan fejleszti, a frissítéseket és híreket itt, a főoldalon fogod megtalálni."
   },
   "unknown": "ismeretlen",
   "showOthers": "További {count} megjelenítése",
@@ -447,8 +447,12 @@
     "ghostRemove": "Szellemjegy eltávolítása",
     "statistics": {
       "evalsAvg": "Összes jegyed átlaga",
-      "subjects": "Ha most zárnának le, a tárgyaidból ilyen jegyeket szereznél.",
+      "subjects": "Így állsz a tárgyaidból.",
       "subjectsAvg": "Ha most zárnának le, a tárgyakra kapott jegyek átlaga ez lenne."
+    },
+    "subjects": {
+      "failWarning": "Bukásra állsz!",
+      "almostFailWarning": "Majdnem bukásra állsz!"
     }
   }
 }

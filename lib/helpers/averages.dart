@@ -11,14 +11,15 @@ class SubjectAverage {
 }
 
 int roundSubjAvg(double average) {
-  if (average >= average.floor() + (app.settings.roundUp / 10))
+  if ((average >= average.floor() + (app.settings.roundUp / 10)) &&
+      average >= 2.0)
     return average.ceil();
   else
     return average.floor();
 }
 
 Color getAverageColor(double average) {
-  return app.theme.evalColors[(roundSubjAvg(average) - 1).clamp(0, 4)];
+  return app.theme.evalColors[(roundSubjAvg(average) - 1).clamp(0,4)];
 }
 
 List<SubjectAverage> calculateSubjectsAverage() {

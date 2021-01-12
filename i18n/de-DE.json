@@ -90,12 +90,12 @@
     "feb": "feb",
     "mar": "mar",
     "apr": "apr",
-    "may": "may",
+    "may": "mai",
     "jun": "jun",
     "jul": "jul",
     "aug": "aug",
     "sep": "sep",
-    "oct": "oct",
+    "oct": "okt",
     "nov": "nov",
     "dec": "dec"
   },
@@ -167,8 +167,8 @@
     "title": "Durchsagen"
   },
   "event": {
-    "": "Ereignis",
-    "title": "Ereignisse"
+    "": "Poste",
+    "title": "Wandezeitung"
   },
   "message": {
     "": "Benachrichtigung",
@@ -323,7 +323,7 @@
       "title": "Allgemein",
       "language": "Sprache",
       "startPage": "Startseite",
-      "round": "abzurunden"
+      "round": "Rundung"
     },
     "privacy": {
       "title": "Datenschutz",
@@ -380,7 +380,7 @@
   "sync": {
     "message": "Mitteilungen werden abgerufen...",
     "student": "Konto wird abgerufen...",
-    "event": "Ereignisse werden abgerufen...",
+    "event": "Wandezeitung wird abgerufen...",
     "note": "Durchsagen werden abgerufen...",
     "evaluation": "Noten werden abgerufen...",
     "absence": "Ausschreitungen werden abgerufen...",
@@ -402,7 +402,7 @@
     "": "Wow, so leer!",
     "messages": "Du hast keine Mitteilungen",
     "notes": "Du hast keine Durchsagen",
-    "events": "Du hast keine Ereignisse",
+    "events": "Es gibt nicht an der Wandezeitung",
     "absences": "Du hast keine Abwesenheiten",
     "delays": "Du hast keine Verspätungen",
     "misses": "Du hast noch nichts zu Hause vergessen und immer alle Hausaufgaben tüchtig gemacht.",
@@ -423,32 +423,36 @@
     "all": "Alle",
     "top": "Top"
   },
-  "welcome": "Welcome to the new",
+  "welcome": "Wilkommen zur",
   "begin": "Beginnen",
   "features": {
-    "1": "Modern, user-friendly interface",
-    "2": "Plan your day",
-    "3": "Get notified quickly",
-    "4": "Fully customizable"
+    "1": "Moderne, benutzerfreundliche Oberfläche",
+    "2": "Plan deinen Tag",
+    "3": "Läss du dich schnell benachrichtigen",
+    "4": "Vollständig anpassbar"
   },
   "tutorial": {
-    "1": "Hier kannst du alles sehen und oben kannst du nach allem suchen.",
-    "2": "Hier kannst du die Noten sortieren, und die durchschnitte und Noten für einem Fach sehen. Du bekommst deine Halbjahres und Jahresende Noten auch hier.",
-    "3": "Hier siehst du die Stundenplan/Kalender, die Hausaufgaben und Klassenarbeiten.",
-    "4": "Hier siehst du deine personalle Mitteilungen, und Hinweise die alle empfängt. Es gibt hier auch die Ereignisse, aber wir wissen auch nicht, was das sein soll ¯\\\\_(ツ)_/¯",
-    "5": "Hier siehst du alle Auslassungen, so die Abwesenheiten, Verspätungen und wenn du keine Hausaufgabe gemacht hast oder wenn du etwas nicht zum Stunde gebracht hast.",
-    "6": "Hier kannst du die Konten bearbeiten, neue Konten hinzufügen oder anderen löschen. Es gibt auch die Einstellungen und ein Bisschen Info über den app hier.",
-    "7": "Wir hoffen, dass dir die neuem App gefallen wird!\nBitte sei nicht stört, wenn du deine Lieblingsfunktion nicht findest. Wir werden viele Funktionen noch addieren."
+    "1": "Auf der Hauptseite siehst du alle Daten der anderen Seiten.\nDu kannst mit der Suchleiste oben suchen. Du kannst alles aus den zugehörigen Daten finden, z. B. das Thema einer Note, das Inhalt einer Hausaufgabe oder Name eines Fachs, in dem du eine Prüfung scheiben wirst.",
+    "2": "Hier findest du alle deine Noten.\nUnten kannst du sie sortieren und oben kannst du zwischen normalen Noten und deinen endgültigen Ergebnissen wechseln.\nDu kannst auch die Durchschnittswerte für jedes Fach anzeigen und die entsprechenden Bewertungen sowie Statistiken und Tipps zu deinen Noten.",
+    "3": "Dies ist die Planerseite.\nDu hast hier den Zeitplan sowie die Hausaufgaben und geplanten Prüfungen. Alles, wofür du nie Zeit haben wirst.",
+    "4": "Auf dieser Seite findest du deine persönlichen Nachrichten, und kannst du unten rechts eine neue schreiben. Du kannst oben links zwischen Ordnern wechseln.\nAuf der zweiten Tab befinden sich Memos und Systemnachrichten,\nUnd auf der dritten befindet sich die Wandezeitung.",
+    "5": "Jemand war ein böser Junge. Das heißt, wenn diese Seite nicht leer ist.\nDu kannst hier alle verpassten Klassen, Verzögerungen sehen, wenn die Hausaufgaben nicht erledigt wurden oder wenn du die gesamte Ausrüstung nicht für den Stunde hattest.",
+    "6": "Hier kannst du zwischen Konten wechseln und diese hinzufügen oder entfernen. Du kannst für jedes Konto einen benutzerdefinierten Anzeigenamen und ein Profilbild festlegen. Die Einstellungen und weitere Informationen zur App findest du auch hier.",
+    "7": "Wir hoffen, dass du Filc Napló genießen wirst!\nDies ist ein Free und Open Source Projekt, das von der Community kontinuierlich weiterentwickelt wird. Du wirst hier auf der Hauptseite über Updates und Neuigkeiten informiert.\nHast du einen Übersetzungsfehler gefunden? Vergiss nicht, uns davon zu erzählen."
   },
-  "unknown": "unknown",
+  "unknown": "unbekannt",
   "showOthers": "Nächste {count} anzeigen",
   "collapseList": "Liste stauchen",
   "tooltip": {
     "ghostRemove": "Schattennote löschen",
     "statistics": {
       "evalsAvg": "Durchschnitt alle deiner Noten",
-      "subjects": "Wenn deine Noten jetzt abgeschlossen wären, würden deine Fächer so abgeschlossen.",
+      "subjects": "Deine Fächer würden so abgeschlossen.",
       "subjectsAvg": "Wenn deine Noten jetzt abgeschlossen wären, wäre dies der Durchschnitt von ihnen."
+    },
+    "subjects": {
+      "failWarning": "Du wirst dieses Fach nicht bestehen!",
+      "almostFailWarning": "Du bist kurz davor, dieses Fach nicht zu bestehen!"
     }
   }
 }

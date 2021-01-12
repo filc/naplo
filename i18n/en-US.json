@@ -167,8 +167,8 @@
     "title": "Notes"
   },
   "event": {
-    "": "event",
-    "title": "Events"
+    "": "post",
+    "title": "Notice board"
   },
   "message": {
     "": "message",
@@ -380,7 +380,7 @@
   "sync": {
     "message": "Syncing messages...",
     "student": "Syncing student...",
-    "event": "Syncing events...",
+    "event": "Syncing notice board posts...",
     "note": "Syncing notes...",
     "evaluation": "Syncing evaluations...",
     "absence": "Syncing absences...",
@@ -402,7 +402,7 @@
     "": "Wow, such empty!",
     "messages": "You have no messages",
     "notes": "You have no notes",
-    "events": "You have no events",
+    "events": "There are no posts on the notice board.",
     "absences": "You have no absences",
     "delays": "You have no delays",
     "misses": "You have never forgotten anything at home, and always diligently made your homework.",
@@ -423,7 +423,7 @@
     "all": "All",
     "top": "Top"
   },
-  "welcome": "Welcome to the new",
+  "welcome": "Welcome to ",
   "begin": "Begin",
   "features": {
     "1": "Modern, user-friendly interface",
@@ -432,13 +432,13 @@
     "4": "Fully customizable"
   },
   "tutorial": {
-    "1": "On the main page you'll see all the data from the other ones.\nYou can search with the searchbar at the top, you can find anything from any associated data. Almost.",
-    "2": "On the evaluations page you can order the evaluations according to multiple aspects,\nat the top you can switch between the every-day evaluations, and your final grades.\nYou can also see the averages for each subject, and the corresponding evaluations (ghosh, how many times do I have to type that word?)",
-    "3": "The planner page is the page of pages. You can see all the stuff you'll never have time for.\nYou have the timetable/calendar here, as well as the homeworks, and scheduled exams.",
-    "4": "This is the page of text. You get your personal messages here, and you can write a new one on the bottom-right. You can switch between folders on the top-left.\nOn the second tab are notices, and system messages.\nOn the third one, you have the events - although we have never seen that feature in use either. ¯\\\\_(ツ)_/¯",
-    "5": "Someone's been a bad boy. That is, if this page is not empty.\nYou can see all your class-misses, delays, when the homework wasn't done or when you didn't have all the equipment for class.",
-    "6": "Here you can switch between accounts. What, you only have one? You can fix that here too. And you can remove them after. Nifty, right? No. This is what's nifty: You can set a custom display name and profile picture for each account. Not impressed? Too bad.\nAlmost forgot, you can find the settings, and some more info about the app here as well.",
-    "7": "Hope, you'll enjoy the new app!\nAre you missing your favourite feature from the new version?\nFear not, this will change soon, as we have just begin the developement."
+    "1": "On the main page you'll see all the data from the other ones.\nYou can search with the search bar at the top, you can find anything from any associated data, like the topic of a grade, the content of a homework or a name of a subject you'll have an exam in.",
+    "2": "You'll find all your grades here.\nAt the bottom, you can sort them, and at the top, you can switch between normal grades and your finalized results.\nYou can also see the averages for each subject, and the corresponding evaluations, as well as statistics and tips about your grades.",
+    "3": "This is the Planner page.\nYou have the timetable here, as well as the homeworks, and scheduled exams. All the stuff you'll never have time for.",
+    "4": "On this page, you'll find your personal messages, and you can write a new one on the bottom right. You can switch between folders on the top-left.\nOn the second tab are memos and system messages,\nAnd on the third is the noticeboard.",
+    "5": "Someone's been a bad boy. That is, if this page is not empty.\nYou can see all your missed classes, delays, when the homework wasn't done or when you didn't have all the equipment for class.",
+    "6": "Here you can switch between accounts, and you can add or remove them. You can set a custom display name and profile picture for each account. You can find the settings, and some more info about the app here as well.",
+    "7": "Hope, you'll enjoy the new app!\nThis being a Free and Open Source project, is continuously being developed by the community. You'll get notified about updates and news here, on the main page.\nFound a translation error? Don't forget to tell us about it."
   },
   "unknown": "unknown",
   "showOthers": "Show {count} more",
@@ -447,8 +447,12 @@
     "ghostRemove": "Remove this Ghost Grade",
     "statistics": {
       "evalsAvg": "Average of all your grades",
-      "subjects": "If your grades would be finalized now, your subjects would be finalized like this.",
+      "subjects": "Your subjects would be finalized like this.",
       "subjectsAvg": "If your grades would be finalized now, this would be the average of them."
+    },
+    "subjects": {
+      "failWarning": "You're going to fail this subject!",
+      "almostFailWarning": "You're close to failing this subject!"
     }
   }
 }

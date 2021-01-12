@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
       fillColor: Colors.black12,
       filled: true,
       contentPadding: EdgeInsets.all(12.0),
-      isDense: true,
+      isDense: false,
       suffixIcon: inputIcon(type: type),
     );
   }
@@ -132,9 +132,18 @@ class _LoginPageState extends State<LoginPage> {
                       Container(
                         alignment: Alignment.topLeft,
                         padding: EdgeInsets.only(bottom: 6.0),
-                        child: Text(
-                          capital(I18n.of(context).loginUsername),
-                          style: TextStyle(color: Colors.white),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              capital(I18n.of(context).loginUsername),
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            loginContext.loginError["username"] != null
+                                ? Text(loginContext.loginError["username"],
+                                    style: TextStyle(color: Colors.orange[600]))
+                                : Container(),
+                          ],
                         ),
                       ),
                       TextField(
@@ -147,15 +156,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
-                // Username Error Message
-                loginContext.loginError["username"] != null
-                    ? Padding(
-                        padding: EdgeInsets.only(top: 4.0),
-                        child: Text(loginContext.loginError["username"],
-                            style: TextStyle(color: Colors.orange[600])),
-                      )
-                    : Container(),
-
                 // Password Input
                 Tooltip(
                   message: I18n.of(context).loginPasswordHint,
@@ -164,9 +164,18 @@ class _LoginPageState extends State<LoginPage> {
                       Container(
                         alignment: Alignment.topLeft,
                         padding: EdgeInsets.only(top: 12.0, bottom: 6.0),
-                        child: Text(
-                          capital(I18n.of(context).loginPassword),
-                          style: TextStyle(color: Colors.white),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              capital(I18n.of(context).loginPassword),
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            loginContext.loginError["password"] != null
+                                ? Text(loginContext.loginError["password"],
+                                    style: TextStyle(color: Colors.orange[600]))
+                                : Container(),
+                          ],
                         ),
                       ),
                       TextField(
@@ -180,39 +189,44 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
-                // Password Error Message
-                loginContext.loginError["password"] != null
-                    ? Padding(
-                        padding: EdgeInsets.only(top: 4.0),
-                        child: Text(loginContext.loginError["password"],
-                            style: TextStyle(color: Colors.orange[600])),
-                      )
-                    : Container(),
-
                 // School Selector
                 Container(
                   alignment: Alignment.topLeft,
                   padding: EdgeInsets.only(top: 12.0, bottom: 2.0),
-                  child: Text(
-                    capital(I18n.of(context).loginSchool),
-                    style: TextStyle(color: Colors.white),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        capital(I18n.of(context).loginSchool),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      loginContext.loginError["school"] != null
+                          ? Text(loginContext.loginError["school"],
+                              style: TextStyle(color: Colors.orange[600]))
+                          : Container(),
+                    ],
                   ),
                 ),
-                Container(
-                  width: 999,
+                SizedBox(
+                  height: 46,
                   child: FlatButton(
                     color: Colors.black12,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6.0)),
+                        borderRadius: BorderRadius.circular(7.5)),
                     padding:
                         EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
-                    child: Text(
-                      loginContext.selectedSchool == null
-                          ? I18n.of(context).loginChooseSchool
-                          : loginContext.selectedSchool.name,
-                      softWrap: false,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.white),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          loginContext.selectedSchool == null
+                              ? I18n.of(context).loginChooseSchool
+                              : loginContext.selectedSchool.name,
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -225,17 +239,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
-                // School Error Message
-                loginContext.loginError["school"] != null
-                    ? Text(loginContext.loginError["school"],
-                        style: TextStyle(color: Colors.orange[600]))
-                    : Container(),
-
-                SizedBox(height: 24.0),
-
                 // Login Button
                 Container(
+                  margin: EdgeInsets.only(top: 24),
                   width: 200,
+                  height: 45,
                   child: FlatButton(
                     onPressed: () {
                       setState(() => loading = true);
@@ -269,8 +277,8 @@ class _LoginPageState extends State<LoginPage> {
                       padding: EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
                       child: (loading)
                           ? Container(
-                              height: 24.0,
-                              width: 24.0,
+                              width: 20,
+                              height: 20,
                               child: CircularProgressIndicator(
                                 strokeWidth: 3.0,
                                 valueColor:

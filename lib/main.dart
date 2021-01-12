@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:filcnaplo/data/models/config.dart';
+import 'package:filcnaplo/helpers/settings.dart';
 import 'package:filcnaplo/ui/pages/welcome.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:filcnaplo/utils/tools.dart';
@@ -36,24 +37,30 @@ void main() async {
       "default_page",
       "config",
       "news_show",
-      "news_len"
+      "news_len",
+      "round_up"
     ];
-    migrationRequired = addedDBKeys.any((item) => !settings.containsKey(item));
+
+    migrationRequired = addedDBKeys.any((key) =>
+        !settings.containsKey(key) || settings[key].toString() == 'null');
 
     if (migrationRequired) {
       // settings is immutable, see https://github.com/tekartik/sqflite/issues/140
       settingsCopy = Map<String, dynamic>.from(settings);
-      settingsCopy["default_page"] = settingsCopy["default_page"] ?? 0;
+      var checker = SettingsHelper(settings: settingsCopy);
+      settingsCopy["default_page"] = checker.checkDBkey("default_page", 0);
       settingsCopy["config"] =
-          settingsCopy["config"] ?? jsonEncode(Config.defaults.json);
-      settingsCopy["news_len"] = settingsCopy["news_len"] ?? 0;
-      settingsCopy["news_show"] = settingsCopy["news_show"] ?? 1;
+          checker.checkDBkey("config", jsonEncode(Config.defaults.json));
+      settingsCopy["news_len"] = checker.checkDBkey("news_len", 0);
+      settingsCopy["news_show"] = checker.checkDBkey("news_show", 1);
+      settingsCopy["round_up"] = checker.checkDBkey("round_up", 5);
       await app.storage.storage.execute("drop table settings");
       try {
         await app.storage.storage.execute("drop table tabs");
       } catch (_) {}
       await app.storage.createSettingsTable(app.storage.storage);
       await app.storage.storage.insert("settings", settingsCopy);
+      print("INFO: Database migrated");
     }
   } catch (error) {
     print("[WARN] main: (probably normal) " + error.toString());

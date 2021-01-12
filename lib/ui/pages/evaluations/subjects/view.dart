@@ -73,42 +73,6 @@ class _SubjectViewState extends State<SubjectView> {
         shadowColor: Colors.transparent,
         backgroundColor: app.settings.theme.scaffoldBackgroundColor,
         actions: <Widget>[
-          roundSubjAvg(studentAvg) != 0
-              ? Padding(
-                  padding: EdgeInsets.fromLTRB(0, 12.0, 8.0, 12.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        capitalize(I18n.of(context).evaluationAverage),
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                      ),
-                      Container(
-                        width: 55,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(45.0)),
-                          color: getAverageColor(studentAvg),
-                        ),
-                        padding: EdgeInsets.all(8.0),
-                        margin: EdgeInsets.only(left: 5.0),
-                        child: Text(
-                          app.settings.language.split("_")[0] == "en"
-                              ? studentAvg.toStringAsFixed(2)
-                              : studentAvg
-                                  .toStringAsFixed(2)
-                                  .split(".")
-                                  .join(","),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            height: 1.2,
-                            color: textColor(getAverageColor(studentAvg)),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              : Container(),
           widget.classAvg != null && roundSubjAvg(widget.classAvg) != 0
               ? Padding(
                   padding: EdgeInsets.fromLTRB(0, 12.0, 8.0, 12.0),
@@ -140,6 +104,42 @@ class _SubjectViewState extends State<SubjectView> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             height: 1.2,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : Container(),
+          roundSubjAvg(studentAvg) != 0
+              ? Padding(
+                  padding: EdgeInsets.fromLTRB(0, 12.0, 8.0, 12.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        capitalize(I18n.of(context).evaluationAverage),
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                      Container(
+                        width: 55,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(45.0)),
+                          color: getAverageColor(studentAvg),
+                        ),
+                        padding: EdgeInsets.all(8.0),
+                        margin: EdgeInsets.only(left: 5.0),
+                        child: Text(
+                          app.settings.language.split("_")[0] == "en"
+                              ? studentAvg.toStringAsFixed(2)
+                              : studentAvg
+                                  .toStringAsFixed(2)
+                                  .split(".")
+                                  .join(","),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            height: 1.2,
+                            color: textColor(getAverageColor(studentAvg)),
                           ),
                         ),
                       ),
