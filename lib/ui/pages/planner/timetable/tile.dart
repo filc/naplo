@@ -8,6 +8,7 @@ import 'package:filcnaplo/ui/custom_chip.dart';
 import 'package:filcnaplo/ui/pages/planner/exams/view.dart';
 import 'package:filcnaplo/ui/pages/planner/homeworks/view.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/view.dart';
+import 'package:filcnaplo/utils/colors.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 
@@ -75,7 +76,9 @@ class LessonTile extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: lesson.isEmpty ? Colors.grey : Colors.white,
+                        color: lesson.isEmpty
+                            ? Colors.grey
+                            : textColor(Theme.of(context).backgroundColor),
                         fontSize: 16.0,
                       ),
                     ),
@@ -117,7 +120,8 @@ class LessonTile extends StatelessWidget {
                 children: <Widget>[
                       homework != null
                           ? customChip(
-                              color: Colors.white,
+                              color:
+                                  textColor(Theme.of(context).backgroundColor),
                               iconData: FeatherIcons.home,
                               textString: escapeHtml(homework.content)
                                   .replaceAll("\n", " "),
@@ -134,7 +138,7 @@ class LessonTile extends StatelessWidget {
                     exams
                         .map(
                           (exam) => customChip(
-                            color: Colors.white,
+                            color: textColor(Theme.of(context).backgroundColor),
                             iconData: FeatherIcons.edit2,
                             textString: exam.description != null
                                 ? exam.description.replaceAll("\n", " ")
