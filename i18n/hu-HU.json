@@ -189,7 +189,7 @@
     "delete": "Törlés véglegesen",
     "deleted": "Üzenet törölve",
     "drawer": {
-      "inbox": "beérkezett",
+      "inbox": "beérkező",
       "sent": "elküldött",
       "drafts": "piszkozatok",
       "trash": "kuka"

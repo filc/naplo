@@ -324,8 +324,8 @@ class I18n implements WidgetsLocalizations {
   String get messageDelete => "Törlés véglegesen";
   /// "Üzenet törölve"
   String get messageDeleted => "Üzenet törölve";
-  /// "beérkezett"
-  String get messageDrawerInbox => "beérkezett";
+  /// "beérkező"
+  String get messageDrawerInbox => "beérkező";
   /// "elküldött"
   String get messageDrawerSent => "elküldött";
   /// "piszkozatok"
@@ -2642,9 +2642,9 @@ class _I18n_de_DE extends I18n {
   /// "Du hast keine Durchsagen"
   @override
   String get emptyNotes => "Du hast keine Durchsagen";
-  /// "Es gibt nicht an der Wandezeitung"
+  /// "Es gibt nichts an der Wandezeitung"
   @override
-  String get emptyEvents => "Es gibt nicht an der Wandezeitung";
+  String get emptyEvents => "Es gibt nichts an der Wandezeitung";
   /// "Du hast keine Abwesenheiten"
   @override
   String get emptyAbsences => "Du hast keine Abwesenheiten";
