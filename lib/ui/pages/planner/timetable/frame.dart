@@ -22,6 +22,15 @@ class _TimetableFrameState extends State<TimetableFrame>
   TimetableBuilder _timetableBuilder;
   Week currentWeek;
 
+  Future<bool> future;
+
+  changeWeek(int week) {
+    setState(() {
+      selectedWeek = week;
+      refreshWeek();
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -32,6 +41,7 @@ class _TimetableFrameState extends State<TimetableFrame>
     );
 
     selectedWeek = _timetableBuilder.getCurrentWeek();
+    future = refreshWeek();
   }
 
   @override
@@ -45,7 +55,7 @@ class _TimetableFrameState extends State<TimetableFrame>
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: refreshWeek(),
+      future: future,
       builder: (context, snapshot) {
         _timetableBuilder.build(selectedWeek);
 
@@ -85,7 +95,9 @@ class _TimetableFrameState extends State<TimetableFrame>
                     IconButton(
                       icon: Icon(FeatherIcons.chevronLeft),
                       onPressed: () {
-                        if (selectedWeek > 0) setState(() => selectedWeek--);
+                        if (selectedWeek > 0) {
+                          changeWeek(selectedWeek - 1);
+                        }
                       },
                     ),
                     Expanded(
@@ -108,7 +120,9 @@ class _TimetableFrameState extends State<TimetableFrame>
                     IconButton(
                       icon: Icon(FeatherIcons.chevronRight),
                       onPressed: () {
-                        if (selectedWeek < 51) setState(() => selectedWeek++);
+                        if (selectedWeek < 51) {
+                          changeWeek(selectedWeek + 1);
+                        }
                       },
                     ),
                   ],
