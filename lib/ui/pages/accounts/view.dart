@@ -1,3 +1,4 @@
+import 'package:filcnaplo/ui/bottom_card.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/context/app.dart';
@@ -26,20 +27,22 @@ class _AccountViewState extends State<AccountView> {
         ? app.sync.users[widget.user.id].student.data
         : null;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: app.settings.theme.backgroundColor,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24.0),
-          topRight: Radius.circular(24.0),
+    return BottomCard(
+      child: Container(
+        decoration: BoxDecoration(
+          color: app.settings.theme.backgroundColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24.0),
+            topRight: Radius.circular(24.0),
+          ),
         ),
-      ),
-      child: Column(
-        children: <Widget>[
-          // User
-          Padding(
-            padding: EdgeInsets.only(top: 12.0, bottom: 4.0),
-            child: ListTile(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            // User
+            ListTile(
+              contentPadding: EdgeInsets.only(top: 8.0, bottom: 4.0),
               leading: GestureDetector(
                 child: ProfileIcon(
                     name: widget.user.name,
@@ -67,14 +70,12 @@ class _AccountViewState extends State<AccountView> {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-          ),
 
-          // User Details
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 6.0),
-            child: student != null
+            // User Details
+            student != null
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       widget.user.name != widget.user.realName
                           ? StudentDetail(I18n.of(context).studentRealName,
@@ -103,8 +104,8 @@ class _AccountViewState extends State<AccountView> {
                 : app.debugMode
                     ? StudentDetail("UserID", widget.user.id)
                     : Container(),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

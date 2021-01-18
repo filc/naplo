@@ -42,7 +42,7 @@ class ProfileIcon extends StatelessWidget {
       child: image == null || image == ""
           ? name != null && text != ""
               ? Text(
-                  text,
+                  text.toUpperCase(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: size * 26,

@@ -34,35 +34,30 @@ class LessonTile extends StatelessWidget {
       ),
     );
 
-    return GestureDetector(
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 12.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(14.0)),
-          border: accentColor != null
-              ? Border.all(color: accentColor, width: 2.5)
-              : null,
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 12.0),
+      child: FlatButton(
+        padding: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(14.0),
+          side: accentColor != null
+              ? BorderSide(color: accentColor, width: 2.5)
+              : BorderSide(color: Colors.transparent),
         ),
         child: Column(
           children: <Widget>[
             ListTile(
-              dense: true,
-              leading: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    lesson.lessonIndex,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30.0,
-                      height: 1.35,
-                      color: accentColor,
-                    ),
-                  ),
-                ],
+              leading: Text(
+                lesson.lessonIndex,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30.0,
+                  height: 1.35,
+                  color: accentColor,
+                ),
               ),
               title: Row(
-                children: <Widget>[
+                children: [
                   Expanded(
                     flex: 2,
                     child: Text(
@@ -88,7 +83,10 @@ class LessonTile extends StatelessWidget {
                     child: Text(
                       lesson.room,
                       textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 14.0,
+                      ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -105,25 +103,26 @@ class LessonTile extends StatelessWidget {
                   : null,
               trailing: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                children: [
                   Text(formatTime(lesson.start)),
                   Text(formatTime(lesson.end)),
                 ],
               ),
             ),
+            if (homework != null || exams.isNotEmpty)
             Container(
               padding: EdgeInsets.only(left: 70.0),
               margin: EdgeInsets.only(bottom: 5.0),
               child: Wrap(
                 alignment: WrapAlignment.start,
                 runSpacing: 1.0,
-                children: <Widget>[
+                children: [
                       homework != null
-                          ? customChip(
+                          ? CustomChip(
                               color:
                                   textColor(Theme.of(context).backgroundColor),
-                              iconData: FeatherIcons.home,
-                              textString: escapeHtml(homework.content)
+                              icon: FeatherIcons.home,
+                              text: escapeHtml(homework.content)
                                   .replaceAll("\n", " "),
                               onTap: () => showModalBottomSheet(
                                 context: context,
@@ -137,10 +136,10 @@ class LessonTile extends StatelessWidget {
                     ] +
                     exams
                         .map(
-                          (exam) => customChip(
+                          (exam) => CustomChip(
                             color: textColor(Theme.of(context).backgroundColor),
-                            iconData: FeatherIcons.edit2,
-                            textString: exam.description != null
+                            icon: FeatherIcons.edit2,
+                            text: exam.description != null
                                 ? exam.description.replaceAll("\n", " ")
                                 : exam.mode.description,
                             onTap: () => showModalBottomSheet(
@@ -155,14 +154,14 @@ class LessonTile extends StatelessWidget {
             ),
           ],
         ),
+        onPressed: () => lesson.isEmpty
+            ? null
+            : showModalBottomSheet(
+                backgroundColor: Colors.transparent,
+                context: context,
+                builder: (context) => TimetableView(lesson),
+              ),
       ),
-      onTap: () => lesson.isEmpty
-          ? null
-          : showModalBottomSheet(
-              backgroundColor: Colors.transparent,
-              context: context,
-              builder: (context) => TimetableView(lesson),
-            ),
     );
   }
 
