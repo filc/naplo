@@ -27,17 +27,45 @@ class _TimetableFrameState extends State<TimetableFrame>
   changeWeek(int week) {
     setState(() {
       selectedWeek = week;
-      refreshWeek();
+      refreshWeek().then((_) {
+        int selectedDay = _tabController.index;
+        int length = _timetableBuilder.week.days.length;
+        if (length == 0) length = 1;
+        //Even empty weeks have one tab, so length must be 1 at least.
+        _tabController = TabController(
+          vsync: this,
+          length: length,
+          initialIndex: selectedDay,
+        );
+      });
     });
   }
 
   @override
   void initState() {
     super.initState();
+
     _timetableBuilder = TimetableBuilder();
+    _timetableBuilder.build(selectedWeek);
+
+    DateTime currentDay = _timetableBuilder.week.days.firstWhere((day) {
+      int dif = day.date.difference(DateTime.now()).inHours;
+
+      return dif > -24 && dif < 0;
+    }, orElse: () => Day()).date;
+
+    int dayIndex = currentDay != null
+        ? currentDay.weekday - (6 - _timetableBuilder.week.days.length)
+        : 0;
+
+    if (_timetableBuilder.week.days.length > 1) {
+      dayIndex = dayIndex.clamp(0, _timetableBuilder.week.days.length - 1);
+    }
+
     _tabController = TabController(
       vsync: this,
-      length: 1,
+      length: _timetableBuilder.week.days.length.clamp(1, 7),
+      initialIndex: dayIndex,
     );
 
     selectedWeek = _timetableBuilder.getCurrentWeek();
@@ -57,32 +85,6 @@ class _TimetableFrameState extends State<TimetableFrame>
     return FutureBuilder(
       future: future,
       builder: (context, snapshot) {
-        _timetableBuilder.build(selectedWeek);
-
-        _tabController = TabController(
-          vsync: this,
-          length: _timetableBuilder.week.days.length.clamp(1, 7),
-          initialIndex: 0,
-        );
-
-        DateTime currentDay = _timetableBuilder.week.days.firstWhere((day) {
-          int dif = day.date.difference(DateTime.now()).inHours;
-
-          return dif > -24 && dif < 0;
-        }, orElse: () => Day()).date;
-
-        int dayIndex = 0;
-
-        dayIndex = currentDay != null
-            ? currentDay.weekday - (6 - _timetableBuilder.week.days.length)
-            : 0;
-
-        if (_timetableBuilder.week.days.length > 1) {
-          dayIndex = dayIndex.clamp(0, _timetableBuilder.week.days.length - 1);
-        }
-
-        _tabController.index = dayIndex;
-
         bool ready = snapshot.hasData || snapshot.hasError;
 
         return Container(
@@ -170,12 +172,12 @@ class _TimetableFrameState extends State<TimetableFrame>
 
   Future<bool> refreshWeek() async {
     currentWeek = _timetableBuilder.getWeek(selectedWeek);
-
     app.user.sync.timetable.from = currentWeek.start;
     app.user.sync.timetable.to = currentWeek.end;
 
     await app.user.sync.timetable.sync();
 
+    _timetableBuilder.build(selectedWeek);
     return true;
   }
 }

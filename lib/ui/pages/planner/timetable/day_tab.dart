@@ -107,7 +107,10 @@ class TimetableTabIndicator extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
           padding: EdgeInsets.zero,
           onPressed: () {
-            controller.animateTo(index);
+            controller.animateTo(
+              index,
+              duration: Duration(milliseconds: 650),
+            );
           },
           child: Center(
             child: DayTabButton(day, color: backgroundColor),
