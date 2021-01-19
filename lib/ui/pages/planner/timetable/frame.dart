@@ -35,11 +35,7 @@ class _TimetableFrameState extends State<TimetableFrame>
         _tabController = TabController(
           vsync: this,
           length: length,
-<<<<<<< HEAD
-          initialIndex: selectedDay,
-=======
           initialIndex: selectedDay.clamp(0, length - 1),
->>>>>>> 8d95cacba0a96d7cd4bd51972f33032e52ef6758
         );
       });
     });
