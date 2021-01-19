@@ -17,7 +17,7 @@ class HomeworkTile extends StatelessWidget {
           width: 46.0,
           height: 46.0,
           alignment: Alignment.center,
-          child: Icon(FeatherIcons.home, color: app.settings.appColor)),
+          child: Icon(FeatherIcons.home, color: app.settings.appColor, size: 30)),
       title: Row(
         children: <Widget>[
           Expanded(

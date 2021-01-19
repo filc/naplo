@@ -14,8 +14,11 @@ Map<String, Locale> languages = {
   "hu_HU": hu_HU
 };
 
-String capital(String s) =>
-    s != null ? s.length > 0 ? s[0].toUpperCase() + s.substring(1) : "" : null;
+String capital(String s) => s != null
+    ? s.length > 0
+        ? s[0].toUpperCase() + s.substring(1)
+        : ""
+    : null;
 
 String capitalize(String s) =>
     s != null ? s.split(" ").map((w) => capital(w)).join(" ") : null;
@@ -64,6 +67,9 @@ String formatDate(BuildContext context, DateTime date,
   }
 }
 
+String formatTime(DateTime time) =>
+    time.hour.toString() + ":" + time.minute.toString().padLeft(2, "0");
+
 String escapeHtml(String htmlString) {
   if (htmlString == null) return null;
   htmlString = htmlString.replaceAll("\r", "");
@@ -83,4 +89,14 @@ String monogram(String name) {
     if (word != '') mg += word[0];
   });
   return mg;
+}
+
+String amountPlural(String singular, String plural, int amount) {
+  return amount.toString() +
+      " " +
+      ((app.settings.language == "hu_HU")
+          ? singular
+          : amount > 1
+              ? plural
+              : singular);
 }

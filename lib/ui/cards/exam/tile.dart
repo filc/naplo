@@ -23,7 +23,8 @@ class ExamTile extends StatelessWidget {
                   : FeatherIcons.checkSquare,
               color: exam.writeDate.isAfter(DateTime.now())
                   ? app.settings.appColor
-                  : Colors.green)),
+                  : Colors.green,
+              size: 30)),
       title: Row(
         children: <Widget>[
           Expanded(

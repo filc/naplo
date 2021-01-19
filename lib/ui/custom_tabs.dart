@@ -89,30 +89,13 @@ class CustomTabIndicator extends StatelessWidget {
     }
 
     return Expanded(
-      child: Container(
-        margin: EdgeInsets.all(4.0),
-        child: FlatButton(
-          key: _menuKey,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
-          padding: EdgeInsets.symmetric(horizontal: 4.0),
-          onPressed: () {
-            if (label.dropdown != null && controller.index == index) {
-              if (items.length > 1)
-                showMenu(
-                  context: context,
-                  position: () {
-                    Offset pos = _getPosition(_menuKey);
-                    return RelativeRect.fromLTRB(0, pos.dy, pos.dx, 0);
-                  }(),
-                  items: items,
-                ).then((value) {
-                  if (value != null) label.dropdown.callback(value);
-                });
-            }
-            onTap(index);
-          },
-          child: Center(
+      child: InkWell(
+        customBorder: StadiumBorder(),
+        child: Padding(
+          padding: EdgeInsets.only(top: 4, bottom: 4),
+          child: Container(
+            key: _menuKey,
+            padding: EdgeInsets.symmetric(horizontal: 4.0),
             child: CustomTabButton(
                 label.dropdown != null
                     ? label.dropdown.values.values
@@ -124,6 +107,22 @@ class CustomTabIndicator extends StatelessWidget {
                 color: backgroundColor),
           ),
         ),
+        onTap: () {
+          if (label.dropdown != null && controller.index == index) {
+            if (items.length > 1)
+              showMenu(
+                context: context,
+                position: () {
+                  Offset pos = _getPosition(_menuKey);
+                  return RelativeRect.fromLTRB(0, pos.dy, pos.dx, 0);
+                }(),
+                items: items,
+              ).then((value) {
+                if (value != null) label.dropdown.callback(value);
+              });
+          }
+          onTap(index);
+        },
       ),
     );
   }
@@ -148,7 +147,7 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
   final Color selectedColor;
   final onTap;
 
-  final Size preferredSize = Size.fromHeight(56.0);
+  final Size preferredSize = Size.fromHeight(48.0);
 
   Widget _buildTabIndicator(
       int tabIndex,
@@ -205,29 +204,24 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
     return AnimatedBuilder(
       animation: animation,
       builder: (BuildContext context, Widget child) {
-        return Semantics(
-          child: Container(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: List<Widget>.generate(labels.length, (int tabIndex) {
-                final Color fixColor = color;
-                final Color fixSelectedColor =
-                    selectedColor ?? Theme.of(context).accentColor;
-                final ColorTween selectedColorTween =
-                    ColorTween(begin: fixColor, end: fixSelectedColor);
-                final ColorTween previousColorTween =
-                    ColorTween(begin: fixSelectedColor, end: fixColor);
+        return Row(
+          children: List<Widget>.generate(labels.length, (int tabIndex) {
+            final Color fixColor = color;
+            final Color fixSelectedColor =
+                selectedColor ?? Theme.of(context).accentColor;
+            final ColorTween selectedColorTween =
+                ColorTween(begin: fixColor, end: fixSelectedColor);
+            final ColorTween previousColorTween =
+                ColorTween(begin: fixSelectedColor, end: fixColor);
 
-                return _buildTabIndicator(
-                  tabIndex,
-                  tabController,
-                  selectedColorTween,
-                  previousColorTween,
-                  context,
-                );
-              }).toList(),
-            ),
-          ),
+            return _buildTabIndicator(
+              tabIndex,
+              tabController,
+              selectedColorTween,
+              previousColorTween,
+              context,
+            );
+          }).toList(),
         );
       },
     );

@@ -82,6 +82,7 @@ class _MessageTabsState extends State<MessageTabs>
               floating: true,
               pinned: true,
               forceElevated: true,
+              stretch: true,
               shadowColor: Colors.transparent,
               backgroundColor:
                   app.settings.theme.bottomNavigationBarTheme.backgroundColor,

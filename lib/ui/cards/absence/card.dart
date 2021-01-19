@@ -2,7 +2,6 @@ import 'package:filcnaplo/ui/cards/absence/tile.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/cards/card.dart';
 import 'package:filcnaplo/data/models/absence.dart';
-import 'package:filcnaplo/ui/pages/absences/absence/view.dart';
 
 class AbsenceCard extends BaseCard {
   final Absence absence;
@@ -16,17 +15,8 @@ class AbsenceCard extends BaseCard {
     return BaseCard(
       key: key,
       compare: compare,
-      child: GestureDetector(
-        child: Container(
-          child: AbsenceTile(absence),
-        ),
-        onTap: () {
-          showModalBottomSheet(
-            context: context,
-            backgroundColor: Colors.transparent,
-            builder: (BuildContext context) => AbsenceView(absence),
-          );
-        },
+      child: Container(
+        child: AbsenceTile(absence),
       ),
     );
   }

@@ -107,7 +107,7 @@ class _AbsenceTabsState extends State<AbsenceTabs>
               child: widget._absenceTiles.length > 0
                   ? CupertinoScrollbar(
                       child: ListView(
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          padding: EdgeInsets.symmetric(vertical: 8),
                           physics: BouncingScrollPhysics(
                               parent: AlwaysScrollableScrollPhysics()),
                           children: widget._absenceTiles),
