@@ -105,7 +105,7 @@ class _TimetableFrameState extends State<TimetableFrame>
     return FutureBuilder(
       future: future,
       builder: (context, snapshot) {
-        bool ready = snapshot.data == true;
+        bool ready = snapshot.data;
 
         return Container(
           child: Column(
@@ -191,16 +191,14 @@ class _TimetableFrameState extends State<TimetableFrame>
   }
 
   Future<bool> refreshWeek() async {
-    print("ddosing...");
     currentWeek = _timetableBuilder.getWeek(selectedWeek);
     app.user.sync.timetable.from = currentWeek.start;
     app.user.sync.timetable.to = currentWeek.end;
     bool successfull = false;
     for (int i = 0; i < 5; i++) {
       successfull = await app.user.sync.timetable.sync();
-      print("lekeres $i");
       if (successfull) break;
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(Duration(seconds: 1));
     }
 
     return successfull;
