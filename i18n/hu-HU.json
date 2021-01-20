@@ -144,7 +144,7 @@
     "uploadUser": "feltöltő",
     "uploadTime": "feltöltés ideje",
     "past": "Korábbi házik",
-    "upcoming":"Közelgő házik"
+    "upcoming": "Közelgő házik"
   },
   "planner": {
     "title": "Tervező",
@@ -250,8 +250,8 @@
     "endYear": "Év végi",
     "subjects": "Tárgyak",
     "statistics": "Statisztikák",
-    "subjectsAverage":"Tantárgyaid",
-    "yearlyGraph":"Éves átlagod",
+    "subjectsAverage": "Tantárgyaid",
+    "yearlyGraph": "Éves átlagod",
     "ghost": {
       "": "SZELLEMJEGY",
       "title": "Szellemjegy hozzáadása"
@@ -364,7 +364,10 @@
     "messages": "Nem sikerült lekérni az üzeneteket",
     "messageSend": "Nem sikerült elküldeni az üzenetet",
     "evaluations": "Nem sikerült lekérni a jegyeket",
-    "internet": "Nincs internetkapcsolat."
+    "internet": "Nincs internetkapcsolat.",
+    "timetable": {
+      "week": "Nem sikerült lekérni a kijelölt hetet"
+    }
   },
   "download": {
     "": "letöltés",

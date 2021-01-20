@@ -1,6 +1,7 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/ui/custom_snackbar.dart';
 import 'package:filcnaplo/ui/empty.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/builder.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/day.dart';
@@ -25,19 +26,38 @@ class _TimetableFrameState extends State<TimetableFrame>
   Future<bool> future;
 
   changeWeek(int week) {
-    setState(() {
-      selectedWeek = week;
-      refreshWeek().then((_) {
-        int selectedDay = _tabController.index;
-        int length = _timetableBuilder.week.days.length;
-        if (length == 0) length = 1;
-        //Even empty weeks have one tab, so length must be 1 at least.
-        _tabController = TabController(
-          vsync: this,
-          length: length,
-          initialIndex: selectedDay.clamp(0, length - 1),
+    //Start loading animation by making setting future to a constant false
+    future = () async {
+      setState(() {});
+      return false;
+    }();
+
+    // Start loading new week
+    selectedWeek = week;
+    refreshWeek().then((successfull) {
+      if (successfull) {
+        //After week is refreshed, stop animation, display week
+        future = () async {
+          return true;
+        }();
+        setState(() {
+          _timetableBuilder.build(selectedWeek);
+          int selectedDay = _tabController.index;
+          int length = _timetableBuilder.week.days.length;
+          _tabController = TabController(
+            vsync: this,
+            length: length.clamp(1, length),
+            initialIndex: selectedDay.clamp(0, length - 1),
+          );
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          CustomSnackBar(
+            color: Colors.red,
+            message: I18n.of(context).errorTimetableWeek,
+          ),
         );
-      });
+      }
     });
   }
 
@@ -85,7 +105,7 @@ class _TimetableFrameState extends State<TimetableFrame>
     return FutureBuilder(
       future: future,
       builder: (context, snapshot) {
-        bool ready = snapshot.hasData || snapshot.hasError;
+        bool ready = snapshot.data == true;
 
         return Container(
           child: Column(
@@ -171,13 +191,18 @@ class _TimetableFrameState extends State<TimetableFrame>
   }
 
   Future<bool> refreshWeek() async {
+    print("ddosing...");
     currentWeek = _timetableBuilder.getWeek(selectedWeek);
     app.user.sync.timetable.from = currentWeek.start;
     app.user.sync.timetable.to = currentWeek.end;
+    bool successfull = false;
+    for (int i = 0; i < 5; i++) {
+      successfull = await app.user.sync.timetable.sync();
+      print("lekeres $i");
+      if (successfull) break;
+      await Future.delayed(Duration(milliseconds: 500));
+    }
 
-    await app.user.sync.timetable.sync();
-
-    _timetableBuilder.build(selectedWeek);
-    return true;
+    return successfull;
   }
 }
