@@ -105,7 +105,7 @@ class _TimetableFrameState extends State<TimetableFrame>
     return FutureBuilder(
       future: future,
       builder: (context, snapshot) {
-        bool ready = snapshot.data;
+        bool ready = snapshot.data ?? false;
 
         return Container(
           child: Column(
