@@ -17,7 +17,7 @@ jobs:
           java-version: "8.0.x"
       - uses: subosito/flutter-action@v1
         with:
-          channel: "dev"
+          channel: "beta"
 
       - name: Install dependencies
         run: flutter pub get
@@ -34,7 +34,7 @@ jobs:
           java-version: "8.0.x"
       - uses: subosito/flutter-action@v1
         with:
-          channel: "dev"
+          channel: "beta"
       - name: Install dependencies
         run: flutter pub get
       - name: Build APK

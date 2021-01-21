@@ -9,9 +9,8 @@ import 'package:fl_chart/fl_chart.dart';
 class SubjectGraph extends StatefulWidget {
   final List<Evaluation> data;
   final int dayThreshold;
-  final bool isCurved;
 
-  SubjectGraph(this.data, {this.dayThreshold = 7, this.isCurved = false});
+  SubjectGraph(this.data, {this.dayThreshold = 7});
 
   @override
   _SubjectGraphState createState() => _SubjectGraphState();
@@ -61,7 +60,8 @@ class _SubjectGraphState extends State<SubjectGraph> {
           lineBarsData: [
             LineChartBarData(
               spots: subjectData,
-              isCurved: widget.isCurved,
+              isCurved: true,
+              curveSmoothness: .1,
               colors: [app.settings.theme.accentColor],
               barWidth: 8,
               isStrokeCapRound: true,

@@ -1,4 +1,5 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/absence.dart';
 import 'package:filcnaplo/ui/pages/absences/absence/view.dart';
 import 'package:filcnaplo/utils/colors.dart';
@@ -6,6 +7,7 @@ import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/cards/absence/tile.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:intl/intl.dart';
 
 class AbsenceTileGroup extends StatelessWidget {
   final List<Absence> absences;
@@ -59,10 +61,11 @@ class AbsenceTileGroup extends StatelessWidget {
                         ),
                         title: Text(amountPlural(I18n.of(context).absence,
                             I18n.of(context).absenceAbsences, absences.length)),
-                        subtitle: Text(capital(
-                            weekdayString(context, absences[0].date.weekday) +
-                                " " +
-                                formatDate(context, absences[0].date))),
+                        subtitle: Text(capital(DateFormat(
+                                    "EEEE", app.settings.locale.toString())
+                                .format(absences[0].date)) +
+                            " " +
+                            formatDate(context, absences[0].date)),
                         children:
                             absences.map((a) => AbsenceTileSmall(a)).toList(),
                       ),
@@ -104,7 +107,8 @@ class AbsenceTileSmall extends StatelessWidget {
                           : formatTime(absence.lessonStart) +
                               " - " +
                               formatTime(absence.lessonEnd)),
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(
+                          color: Theme.of(context).textTheme.caption.color),
                     )
                   : Container(),
             ),

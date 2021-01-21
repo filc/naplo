@@ -1,8 +1,10 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/absence.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/pages/absences/absence/view.dart';
+import 'package:intl/intl.dart';
 
 class AbsenceTile extends StatelessWidget {
   final Absence absence;
@@ -79,7 +81,8 @@ class AbsenceTile extends StatelessWidget {
                 ),
               ],
             ),
-            Text(capital(weekdayString(context, absence.lessonStart.weekday)) +
+            Text(capital(DateFormat("EEEE", app.settings.locale.toString())
+                    .format(absence.date)) +
                 " " +
                 formatDate(context, absence.lessonStart))
           ],
