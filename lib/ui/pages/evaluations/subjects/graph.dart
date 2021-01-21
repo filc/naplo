@@ -9,8 +9,9 @@ import 'package:fl_chart/fl_chart.dart';
 class SubjectGraph extends StatefulWidget {
   final List<Evaluation> data;
   final int dayThreshold;
+  final bool isCurved;
 
-  SubjectGraph(this.data, {this.dayThreshold = 7});
+  SubjectGraph(this.data, {this.dayThreshold = 7, this.isCurved = false});
 
   @override
   _SubjectGraphState createState() => _SubjectGraphState();
@@ -22,10 +23,12 @@ class _SubjectGraphState extends State<SubjectGraph> {
     List<FlSpot> subjectData = [];
     List<List<Evaluation>> sortedData = [[]];
 
-    List<Evaluation> data = List<Evaluation>.from(widget.data);
-    data.sort((a, b) => a.date.compareTo(b.date));
+    List<Evaluation> data = widget.data
+        .where((evaluation) => evaluation.value.weight != 0)
+        .toList();
+    data.sort((a, b) => b.date.compareTo(a.date));
 
-    widget.data.forEach((element) {
+    data.forEach((element) {
       if (sortedData.last.length != 0 &&
           sortedData.last.last.date.difference(element.date).inDays >
               widget.dayThreshold) sortedData.add([]);
@@ -58,7 +61,7 @@ class _SubjectGraphState extends State<SubjectGraph> {
           lineBarsData: [
             LineChartBarData(
               spots: subjectData,
-              isCurved: true,
+              isCurved: widget.isCurved,
               colors: [app.settings.theme.accentColor],
               barWidth: 8,
               isStrokeCapRound: true,
@@ -178,7 +181,7 @@ class _SubjectGraphState extends State<SubjectGraph> {
                     ret = '?';
                     break;
                 }
-                
+
                 return ret.toUpperCase();
               },
             ),
