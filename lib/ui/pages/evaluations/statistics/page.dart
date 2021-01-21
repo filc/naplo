@@ -166,8 +166,7 @@ class StatisticsPage extends StatelessWidget {
                 padding: EdgeInsets.only(left: 10, right: 25),
                 margin: EdgeInsets.only(top: 15, bottom: 30),
                 height: 200,
-                child:
-                    SubjectGraph(evaluations, dayThreshold: 2, isCurved: true)),
+                child: SubjectGraph(evaluations, dayThreshold: 2)),
             //Subjects
             Tooltip(
               message: I18n.of(context).tooltipStatisticsSubjects,
