@@ -1,9 +1,10 @@
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/note.dart';
-import 'package:filcnaplo/ui/pages/absences/miss/tile.dart';
+import 'package:flutter/material.dart';
+import 'package:filcnaplo/ui/cards/note/tile.dart';
 
 class MissBuilder {
-  List<MissTile> missTiles = [];
+  List<Widget> missTiles = [];
   void build() {
     missTiles = [];
     List<Note> misses = app.user.sync.note.data
@@ -16,6 +17,9 @@ class MissBuilder {
       (a, b) => -a.date.compareTo(b.date),
     );
 
-    misses.forEach((miss) => missTiles.add(MissTile(miss)));
+    misses.forEach((miss) => missTiles.add(Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+          child: NoteTile(miss),
+        )));
   }
 }

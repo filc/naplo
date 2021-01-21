@@ -251,7 +251,7 @@
     "subjects": "Fächer",
     "statistics": "Statistiken",
     "subjectsAverage": "Deine Fächer",
-    "yearlyGraph":"Durchschnitt im Jahr",
+    "yearlyGraph": "Durchschnitt im Jahr",
     "ghost": {
       "": "SCHATTENNOTE",
       "title": "Schattennote addieren"
@@ -364,7 +364,10 @@
     "messages": "Mitteilungen konnten nicht abgerufen werden",
     "messageSend": "Mitteilung wurde nicht geschickt",
     "evaluations": "Noten konnten nicht abgerufen werden",
-    "internet": "Keine Internetverbindung."
+    "internet": "Keine Internetverbindung.",
+    "timetable": {
+      "week": "Beim Abrufen der Woche ist ein Fehler aufgetreten"
+    }
   },
   "download": {
     "": "Herunterladen",

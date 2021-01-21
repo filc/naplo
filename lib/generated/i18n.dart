@@ -582,6 +582,8 @@ class I18n implements WidgetsLocalizations {
   String get errorEvaluations => "Nem sikerült lekérni a jegyeket";
   /// "Nincs internetkapcsolat."
   String get errorInternet => "Nincs internetkapcsolat.";
+  /// "Nem sikerült lekérni a kijelölt hetet"
+  String get errorTimetableWeek => "Nem sikerült lekérni a kijelölt hetet";
   /// "letöltés"
   String get download => "letöltés";
   /// "Töltsd le most a legújabb verziót"
@@ -1545,6 +1547,9 @@ class _I18n_en_US extends I18n {
   /// "No internet connection."
   @override
   String get errorInternet => "No internet connection.";
+  /// "Failed to get selected week"
+  @override
+  String get errorTimetableWeek => "Failed to get selected week";
   /// "download"
   @override
   String get download => "download";
@@ -2567,6 +2572,9 @@ class _I18n_de_DE extends I18n {
   /// "Keine Internetverbindung."
   @override
   String get errorInternet => "Keine Internetverbindung.";
+  /// "Beim Abrufen der Woche ist ein Fehler aufgetreten"
+  @override
+  String get errorTimetableWeek => "Beim Abrufen der Woche ist ein Fehler aufgetreten";
   /// "Herunterladen"
   @override
   String get download => "Herunterladen";

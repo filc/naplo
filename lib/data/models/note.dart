@@ -5,7 +5,7 @@ class Note {
   String id;
   String title;
   DateTime date;
-  DateTime createDate;
+  DateTime submitDate;
   String teacher;
   DateTime seenDate;
   String groupId;
@@ -16,7 +16,7 @@ class Note {
     this.id,
     this.title,
     this.date,
-    this.createDate,
+    this.submitDate,
     this.teacher,
     this.seenDate,
     this.groupId,

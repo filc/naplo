@@ -1,4 +1,4 @@
-import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/utils/format.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/day.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/tile.dart';
 import 'package:flutter/material.dart';
@@ -46,22 +46,12 @@ class DayTabButton extends StatelessWidget {
       ),
       padding: EdgeInsets.symmetric(vertical: 8.0),
       child: Text(
-        days(context, day.date.weekday).toUpperCase(),
+        weekdayStringShort(context, day.date.weekday).toUpperCase(),
         style: TextStyle(
             fontWeight: FontWeight.bold, fontSize: 24.0, color: color),
       ),
     );
   }
-
-  String days(BuildContext context, int i) => [
-        I18n.of(context).dateMondayShort,
-        I18n.of(context).dateTuesdayShort,
-        I18n.of(context).dateWednesdayShort,
-        I18n.of(context).dateThursdayShort,
-        I18n.of(context).dateFridayShort,
-        I18n.of(context).dateSaturdayShort,
-        I18n.of(context).dateSundayShort
-      ][i - 1];
 }
 
 double _indexChangeProgress(TabController controller) {

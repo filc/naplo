@@ -100,3 +100,23 @@ String amountPlural(String singular, String plural, int amount) {
               ? plural
               : singular);
 }
+
+String weekdayStringShort(BuildContext context, int i) => [
+      I18n.of(context).dateMondayShort,
+      I18n.of(context).dateTuesdayShort,
+      I18n.of(context).dateWednesdayShort,
+      I18n.of(context).dateThursdayShort,
+      I18n.of(context).dateFridayShort,
+      I18n.of(context).dateSaturdayShort,
+      I18n.of(context).dateSundayShort
+    ][i - 1];
+
+String weekdayString(BuildContext context, int i) => [
+      I18n.of(context).dateMonday,
+      I18n.of(context).dateTuesday,
+      I18n.of(context).dateWednesday,
+      I18n.of(context).dateThursday,
+      I18n.of(context).dateFriday,
+      I18n.of(context).dateSaturday,
+      I18n.of(context).dateSunday
+    ][i - 1];

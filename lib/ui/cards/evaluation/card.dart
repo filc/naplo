@@ -1,7 +1,6 @@
 import 'package:filcnaplo/ui/cards/evaluation/tile.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/cards/card.dart';
-import 'package:filcnaplo/ui/pages/evaluations/grades/view.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
 
 class EvaluationCard extends BaseCard {
@@ -21,18 +20,7 @@ class EvaluationCard extends BaseCard {
               evaluation.mode.description != ""
           ? EdgeInsets.all(12)
           : EdgeInsets.symmetric(horizontal: 12.0),
-      child: GestureDetector(
-        child: Container(
-          child: EvaluationTile(evaluation),
-        ),
-        onTap: () {
-          showModalBottomSheet(
-            context: context,
-            backgroundColor: Colors.transparent,
-            builder: (BuildContext context) => EvaluationView(evaluation),
-          );
-        },
-      ),
+      child: EvaluationTile(evaluation),
     );
   }
 }

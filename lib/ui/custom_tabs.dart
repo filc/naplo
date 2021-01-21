@@ -92,7 +92,7 @@ class CustomTabIndicator extends StatelessWidget {
       child: InkWell(
         customBorder: StadiumBorder(),
         child: Padding(
-          padding: EdgeInsets.only(top: 4, bottom: 4),
+          padding: EdgeInsets.only(top: 3, bottom: 3),
           child: Container(
             key: _menuKey,
             padding: EdgeInsets.symmetric(horizontal: 4.0),

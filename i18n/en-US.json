@@ -144,7 +144,7 @@
     "uploadUser": "uploader",
     "uploadTime": "uploaded at",
     "past": "Past homework",
-    "upcoming":"Upcoming homeworks"
+    "upcoming": "Upcoming homeworks"
   },
   "planner": {
     "title": "Planner",
@@ -250,8 +250,8 @@
     "endYear": "Report",
     "subjects": "subjects",
     "statistics": "statistics",
-    "subjectsAverage":"Your subjects",
-    "yearlyGraph":"Average troughout the year",
+    "subjectsAverage": "Your subjects",
+    "yearlyGraph": "Average troughout the year",
     "ghost": {
       "": "GHOST GRADE",
       "title": "Add new Ghost Grade"
@@ -364,7 +364,10 @@
     "messages": "Failed to get messages",
     "messageSend": "Failed to send message",
     "evaluations": "Failed to get evaluations",
-    "internet": "No internet connection."
+    "internet": "No internet connection.",
+    "timetable": {
+      "week": "Failed to get selected week"
+    }
   },
   "download": {
     "": "download",

@@ -1,6 +1,7 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/data/models/absence.dart';
 import 'package:filcnaplo/ui/pages/absences/absence/view.dart';
+import 'package:filcnaplo/utils/colors.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/cards/absence/tile.dart';
@@ -20,13 +21,15 @@ class AbsenceTileGroup extends StatelessWidget {
                 ? Container(
                     padding: EdgeInsets.only(right: 9),
                     decoration: BoxDecoration(
-                        color: Theme.of(context).backgroundColor,
-                        borderRadius: BorderRadius.circular(12.0),
-                        border: Border.all(
-                            color: Theme.of(context).backgroundColor)),
+                      color: textColor(Theme.of(context).backgroundColor)
+                          .withAlpha(25),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
                     child: Theme(
                       data: Theme.of(context).copyWith(
                           dividerColor: Colors.transparent,
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
                           accentColor:
                               Theme.of(context).textTheme.bodyText1.color),
                       child: ExpansionTile(
@@ -54,9 +57,12 @@ class AbsenceTileGroup extends StatelessWidget {
                                       : Colors.green,
                               size: 30),
                         ),
-                        title: Text(formatDate(context, absences[0].date)),
-                        subtitle: Text(amountPlural(I18n.of(context).absence,
+                        title: Text(amountPlural(I18n.of(context).absence,
                             I18n.of(context).absenceAbsences, absences.length)),
+                        subtitle: Text(capital(
+                            weekdayString(context, absences[0].date.weekday) +
+                                " " +
+                                formatDate(context, absences[0].date))),
                         children:
                             absences.map((a) => AbsenceTileSmall(a)).toList(),
                       ),

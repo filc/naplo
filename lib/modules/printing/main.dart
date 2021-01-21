@@ -21,16 +21,6 @@ current week.
 */
 
 class TimetablePrinter {
-  String dayNames(BuildContext context, int i) => [
-        I18n.of(context).dateMondayShort,
-        I18n.of(context).dateTuesdayShort,
-        I18n.of(context).dateWednesdayShort,
-        I18n.of(context).dateThursdayShort,
-        I18n.of(context).dateFridayShort,
-        I18n.of(context).dateSaturdayShort,
-        I18n.of(context).dateSundayShort,
-      ][i - 1];
-
   pw.Document build(
       BuildContext context, pw.Document pdf, List<Day> days, int min, int max) {
     List rows = <pw.TableRow>[];
@@ -40,7 +30,7 @@ class TimetablePrinter {
     days.forEach((day) => headerChildren.add(pw.Padding(
         padding: pw.EdgeInsets.all(5),
         child:
-            pw.Center(child: pw.Text(dayNames(context, day.date.weekday))))));
+            pw.Center(child: pw.Text(weekdayStringShort(context, day.date.weekday))))));
     pw.TableRow headerRow = pw.TableRow(
         children: headerChildren,
         verticalAlignment: pw.TableCellVerticalAlignment.middle);

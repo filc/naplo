@@ -26,7 +26,7 @@ class AbsenceBuilder {
 
     absenceDays.keys.forEach((day) {
       List<Absence> absences = absenceDays[day];
-      absences.sort((a, b) => a.lessonIndex.compareTo(b.lessonIndex));
+      absences.sort((a, b) => a.lessonStart.compareTo(b.lessonStart));
       absenceTiles.add(AbsenceTileGroup(absences));
     });
   }
