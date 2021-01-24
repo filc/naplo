@@ -65,8 +65,7 @@ class _PageFrameState extends State<PageFrame> {
             });
           },
         );
-      } else
-        print("not showing");
+      }
     });
   }
 
