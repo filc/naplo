@@ -1,3 +1,4 @@
+import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class Label extends StatelessWidget {
           fontSize: 15.0,
           letterSpacing: .7,
           fontWeight: FontWeight.w600,
-          color: Theme.of(context).accentColor,
+          color: app.settings.appColor,
         ),
       ),
     );

@@ -44,21 +44,20 @@ class DelayView extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              delay.lessonIndex != null
-                  ? DelayDetail(
-                      I18n.of(context).delayLesson,
-                      delay.lessonIndex.toString() +
-                          ". (" +
-                          (delay.lessonStart != null
-                              ? DateFormat("HH:mm").format(delay.lessonStart)
-                              : I18n.of(context).unknown) +
-                          " - " +
-                          (delay.lessonEnd != null
-                              ? DateFormat("HH:mm").format(delay.lessonEnd)
-                              : I18n.of(context).unknown) +
-                          ")",
-                    )
-                  : Container(),
+              DelayDetail(
+                I18n.of(context).delayLesson,
+                (delay.lessonIndex != null
+                        ? (delay.lessonIndex.toString() + ". (")
+                        : "") +
+                    (delay.lessonStart != null
+                        ? DateFormat("HH:mm").format(delay.lessonStart)
+                        : I18n.of(context).unknown) +
+                    " - " +
+                    (delay.lessonEnd != null
+                        ? DateFormat("HH:mm").format(delay.lessonEnd)
+                        : I18n.of(context).unknown) +
+                    (delay.lessonIndex != null ? ")" : ""),
+              ),
               delay.mode != null
                   ? DelayDetail(
                       I18n.of(context).delayMode,

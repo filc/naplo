@@ -67,12 +67,12 @@ class _SearchPageState extends State<SearchPage> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(FeatherIcons.search, color: Theme.of(context).accentColor),
+                Icon(FeatherIcons.search, color: app.settings.appColor),
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: TextField(
-                      cursorColor: Theme.of(context).accentColor,
+                      cursorColor: app.settings.appColor,
                       controller: _searchController,
                       autofocus: true,
                       decoration: InputDecoration(

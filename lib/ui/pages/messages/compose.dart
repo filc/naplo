@@ -38,6 +38,8 @@ class _NewMessagePageState extends State<NewMessagePage> {
         contentPadding: EdgeInsets.all(8.0),
         isDense: true,
         hintText: hint,
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: app.settings.appColor)),
       );
 
   List<Recipient> recipientsAll = [];
@@ -45,7 +47,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
   Widget searchField() {
     return TypeAheadFormField(
       textFieldConfiguration: TextFieldConfiguration(
-          cursorColor: Theme.of(context).accentColor,
+          cursorColor: app.settings.appColor,
           controller: _typeAheadController,
           decoration: inputDecoration()),
       suggestionsCallback: (pattern) {
@@ -92,7 +94,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
             ),
           ),
           IconButton(
-            icon: Icon(FeatherIcons.x, color: Theme.of(context).accentColor),
+            icon: Icon(FeatherIcons.x, color: app.settings.appColor),
             onPressed: () {
               setState(() {
                 messageContext.attachments.removeWhere((f) => f.file == file);
@@ -182,7 +184,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
                   children: [
                     // Back
                     BackButton(
-                      color: Theme.of(context).accentColor,
+                      color: app.settings.appColor,
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -194,7 +196,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
                     IconButton(
                       icon: Icon(
                         FeatherIcons.paperclip,
-                        color: Theme.of(context).accentColor,
+                        color: app.settings.appColor,
                       ),
                       tooltip: capital(I18n.of(context).messageAttachments),
                       onPressed: () async {
@@ -291,7 +293,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
                             SizedBox(width: 12.0),
                             Expanded(
                               child: TextField(
-                                cursorColor: Theme.of(context).accentColor,
+                                cursorColor: app.settings.appColor,
                                 controller: subjectController,
                                 decoration: inputDecoration(),
                               ),
@@ -312,7 +314,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
                         child: Container(
                           padding: EdgeInsets.only(left: 14.0, right: 14.0),
                           child: TextField(
-                            cursorColor: Theme.of(context).accentColor,
+                            cursorColor: app.settings.appColor,
                             controller: messageController,
                             textAlignVertical: TextAlignVertical.top,
                             keyboardType: TextInputType.multiline,

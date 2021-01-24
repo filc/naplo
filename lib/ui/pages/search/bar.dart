@@ -29,7 +29,7 @@ class SearchBar extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(FeatherIcons.search, color: Theme.of(context).accentColor),
+          Icon(FeatherIcons.search, color: app.settings.appColor),
           Expanded(
             child: GestureDetector(
               child: Container(

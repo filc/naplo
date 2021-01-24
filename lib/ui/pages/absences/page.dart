@@ -43,8 +43,6 @@ class _AbsencesPageState extends State<AbsencesPage>
 
   TabController _tabController;
 
-  DateTime lastStateInit;
-
   @override
   void initState() {
     super.initState();
@@ -52,7 +50,6 @@ class _AbsencesPageState extends State<AbsencesPage>
       vsync: this,
       length: 3,
     );
-    lastStateInit = DateTime.now();
   }
 
   @override
@@ -82,6 +79,8 @@ class _AbsencesPageState extends State<AbsencesPage>
                 I18n.of(context).absenceTitle,
                 style: TextStyle(fontSize: 22.0),
               ),
+              // BackButton appears between pages while animating
+              automaticallyImplyLeading: false,
               actions: [
                 app.debugMode
                     ? DebugButton(DebugViewClass.absences)
@@ -119,17 +118,13 @@ class _AbsencesPageState extends State<AbsencesPage>
               },
               child: _absenceBuilder.absenceTiles.length > 0
                   ? CupertinoScrollbar(
-                      child: ListView.builder(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          physics: BouncingScrollPhysics(
-                              parent: AlwaysScrollableScrollPhysics()),
-                          itemCount: _absenceBuilder.absenceTiles.length,
-                          itemBuilder: (context, index) {
-                            if (lastStateInit.isAfter(DateTime.now()
-                                    .subtract(Duration(seconds: 2))) &&
-                                (index <
-                                    (MediaQuery.of(context).size.height / 72) -
-                                        2)) {
+                      child: AnimationLimiter(
+                        child: ListView.builder(
+                            padding: EdgeInsets.symmetric(vertical: 8),
+                            physics: BouncingScrollPhysics(
+                                parent: AlwaysScrollableScrollPhysics()),
+                            itemCount: _absenceBuilder.absenceTiles.length,
+                            itemBuilder: (context, index) {
                               return AnimationConfiguration.staggeredList(
                                 position: index,
                                 duration: Duration(milliseconds: 400),
@@ -140,10 +135,8 @@ class _AbsencesPageState extends State<AbsencesPage>
                                           _absenceBuilder.absenceTiles[index]),
                                 ),
                               );
-                            } else {
-                              return _absenceBuilder.absenceTiles[index];
-                            }
-                          }),
+                            }),
+                      ),
                     )
                   : Empty(title: I18n.of(context).emptyAbsences),
             ),

@@ -64,7 +64,7 @@ class Absence {
       lessonEnd = json["Ora"]["VegDatum"] != null
           ? DateTime.parse(json["Ora"]["VegDatum"]).toLocal()
           : null;
-      lessonIndex = json["Ora"]["Oraszam"] ?? 0;
+      lessonIndex = json["Ora"]["Oraszam"];
     }
     
     String group =

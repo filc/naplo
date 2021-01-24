@@ -42,8 +42,7 @@ class EventView extends StatelessWidget {
               ListTile(
                 title: Text(formatDate(context, event.start)),
                 trailing: IconButton(
-                  icon: Icon(FeatherIcons.share2,
-                      color: Theme.of(context).accentColor),
+                  icon: Icon(FeatherIcons.share2, color: app.settings.appColor),
                   onPressed: () {
                     Share.share(event.content);
                   },

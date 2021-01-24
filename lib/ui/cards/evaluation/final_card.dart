@@ -112,15 +112,20 @@ class FinalCard extends BaseCard {
                 style: TextStyle(color: secondary),
               )
             : null,
-        trailing: IconButton(
-          icon: Icon(
-            FeatherIcons.arrowRight,
-            color: color,
+        trailing: ClipOval(
+          child: Material(
+            color: Colors.transparent,
+            child: IconButton(
+              icon: Icon(
+                FeatherIcons.arrowRight,
+                color: color,
+              ),
+              onPressed: () {
+                app.gotoPage(PageType.evaluations,
+                    pageContext: PageContext(evaluationType: evals.first.type));
+              },
+            ),
           ),
-          onPressed: () {
-            app.gotoPage(PageType.evaluations,
-                pageContext: PageContext(evaluationType: evals.first.type));
-          },
         ),
       ),
     );

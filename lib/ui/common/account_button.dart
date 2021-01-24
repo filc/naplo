@@ -15,7 +15,8 @@ class AccountButton extends StatelessWidget {
       child: IconButton(
         icon: app.user.profileIcon,
         onPressed: () {
-          app.root.currentState.push(PageTransition.vertical(AccountPage()));
+          Navigator.of(context, rootNavigator: true)
+              .push(PageTransition.vertical(AccountPage()));
         },
       ),
     );

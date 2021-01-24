@@ -79,7 +79,7 @@ class _MessagesPageState extends State<MessagesPage>
               onPressed: () {
                 messageContext = MessageContext();
 
-                app.root.currentState.push(
+                Navigator.of(context, rootNavigator: true).push(
                     MaterialPageRoute(builder: (context) => NewMessagePage()));
               },
             )
@@ -89,6 +89,8 @@ class _MessagesPageState extends State<MessagesPage>
           return [
             SliverAppBar(
               floating: true,
+              // BackButton appears between pages while animating
+              automaticallyImplyLeading: false,
               pinned: true,
               forceElevated: true,
               stretch: true,
@@ -153,37 +155,35 @@ class _MessagesPageState extends State<MessagesPage>
 
               // Message Tiles
               child: CupertinoScrollbar(
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  padding: EdgeInsets.only(top: 12.0),
-                  itemCount: messageTiles.length != 0 ? messageTiles.length : 1,
-                  itemBuilder: (context, index) {
-                    if (messageTiles.length > 0) {
-                      if (lastStateInit.isAfter(
-                              DateTime.now().subtract(Duration(seconds: 2))) &&
-                          (index <
-                              (MediaQuery.of(context).size.height / 76) - 2)) {
-                        return AnimationConfiguration.staggeredList(
-                          position: index,
-                          duration: Duration(milliseconds: 400),
-                          child: SlideAnimation(
-                            verticalOffset: 150,
-                            child: FadeInAnimation(child: messageTiles[index]),
-                          ),
-                        );
-                      } else {
-                        return messageTiles[index];
-                      }
-                    } else {
-                      return Empty(
-                        title: selectedMessageType == MessageType.draft
-                            ? I18n.of(context).notImplemented
-                            : I18n.of(context).emptyMessages,
-                      );
-                    }
-                  },
-                ),
+                child: messageTiles.length > 0
+                    ? AnimationLimiter(
+                        child: ListView.builder(
+                          physics: BouncingScrollPhysics(
+                              parent: AlwaysScrollableScrollPhysics()),
+                          padding: EdgeInsets.only(top: 12.0),
+                          itemCount: messageTiles.length,
+                          itemBuilder: (context, index) {
+                            return AnimationConfiguration.staggeredList(
+                              position: index,
+                              duration: Duration(milliseconds: 400),
+                              child: SlideAnimation(
+                                verticalOffset: 150,
+                                child:
+                                    FadeInAnimation(child: messageTiles[index]),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    : ListView(
+                        children: [
+                          Expanded(
+                            child: Empty(
+                              title: I18n.of(context).emptyMessages,
+                            ),
+                          )
+                        ],
+                      ),
               ),
             ),
 

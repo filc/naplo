@@ -18,12 +18,14 @@ import 'package:filcnaplo/data/context/theme.dart';
 import 'package:filcnaplo/data/models/user.dart';
 import 'package:filcnaplo/ui/common/profile_icon.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:tinycolor/tinycolor.dart';
 
 class SettingsController {
   String language;
   String deviceLanguage;
   ThemeData theme;
-  Color appColor;
+  Color _appColor;
+  bool _isDark;
   int backgroundColor;
   bool enableNotifications;
   bool renderHtml;
@@ -43,6 +45,21 @@ class SettingsController {
     return Locale(lang[0], lang[1]);
   }
 
+  Color get appColor {
+    if (!(_isDark ?? app.settings.theme.brightness == Brightness.dark))
+      return TinyColor(_appColor).darken(10).color;
+    else
+      return _appColor;
+  }
+
+  Color get rawAppColor {
+    return _appColor;
+  }
+
+  set appColor(Color color) {
+    _appColor = color;
+  }
+
   Color colorFromHex(String hexColor) {
     hexColor = hexColor.toUpperCase().replaceAll("#", "");
     if (hexColor.length == 6) {
@@ -54,15 +71,17 @@ class SettingsController {
   Future update({bool login = true, Map<String, dynamic> settings}) async {
     settings = settings ?? (await app.storage.storage.query("settings"))[0];
     language = settings["language"];
-    appColor = ThemeContext.colors[settings["app_color"]];
+    _appColor = ThemeContext.colors[settings["app_color"]];
     backgroundColor = settings["background_color"];
     defaultPage = settings["default_page"];
+    _isDark = settings["theme"] != "light";
     theme = {
       "light": ThemeContext().light(app.settings.appColor),
       "tinted": ThemeContext().tinted(),
       "dark": ThemeContext()
           .dark(app.settings.appColor, app.settings.backgroundColor)
     }[settings["theme"]];
+    _isDark = null;
     app.debugMode = settings["debug_mode"] == 1;
 
     List evalColorsI = await app.storage.storage.query("eval_colors");

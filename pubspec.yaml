@@ -1,6 +1,6 @@
 name: filcnaplo
-description: 'Nem hivatalos e-napló alkalmazás az e-Kréta rendszerhez'
-version: 2.1.0-pre2+52
+description: "Nem hivatalos e-napló alkalmazás az e-Kréta rendszerhez"
+version: 2.1.0-rc1+53
 publish_to: none
 
 environment:
@@ -28,7 +28,7 @@ dependencies:
   path_provider: ^1.6.9
   tinycolor: ^1.0.2
   open_file: ^3.0.1
-  background_fetch: ^0.5.6
+  background_fetch: ^0.6.0
   circular_reveal_animation: ^1.1.5
   flutter_speed_dial:
     git:
@@ -116,4 +116,3 @@ flutter:
         - asset: fonts/RedHatDisplay/RedHatDisplay-BlackItalic.ttf
           style: italic
           weight: 800
-        

@@ -1,3 +1,4 @@
+import 'package:filcnaplo/data/context/app.dart';
 import 'package:flutter/material.dart';
 
 class CustomTabButton extends StatelessWidget {
@@ -170,7 +171,7 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
       final double offset = tabController.offset;
       if (tabController.index == tabIndex) {
         background = selectedColorTween.lerp(1.0 - offset.abs());
-        borderColor = Theme.of(context).accentColor;
+        borderColor = app.settings.appColor;
       } else if (tabController.index == tabIndex - 1 && offset > 0.0) {
         background = selectedColorTween.lerp(offset);
       } else if (tabController.index == tabIndex + 1 && offset < 0.0) {
@@ -208,7 +209,7 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
           children: List<Widget>.generate(labels.length, (int tabIndex) {
             final Color fixColor = color;
             final Color fixSelectedColor =
-                selectedColor ?? Theme.of(context).accentColor;
+                selectedColor ?? app.settings.appColor;
             final ColorTween selectedColorTween =
                 ColorTween(begin: fixColor, end: fixSelectedColor);
             final ColorTween previousColorTween =

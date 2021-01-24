@@ -1,3 +1,4 @@
+import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/lesson.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/ui/common/bottom_card.dart';
@@ -27,7 +28,7 @@ class TimetableView extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 42.0,
                   height: 1.15,
-                  color: Theme.of(context).accentColor,
+                  color: app.settings.appColor,
                 ),
               ),
             ),

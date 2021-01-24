@@ -47,7 +47,7 @@ class _AppearanceSettingsState extends State<AppearanceSettings>
                   borderRadius: BorderRadius.circular(99.0),
                 ),
               ),
-              Theme.of(context).accentColor == color
+              app.settings.rawAppColor == color
                   ? Container(
                       alignment: Alignment.center,
                       width: 56.0,
@@ -97,7 +97,7 @@ class _AppearanceSettingsState extends State<AppearanceSettings>
                 physics: BouncingScrollPhysics(),
                 children: [
                   AppBar(
-                    leading: BackButton(color: Theme.of(context).accentColor),
+                    leading: BackButton(color: app.settings.appColor),
                     centerTitle: true,
                     title: Text(
                       I18n.of(context).settingsAppearanceTitle,

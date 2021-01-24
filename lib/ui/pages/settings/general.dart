@@ -34,7 +34,7 @@ class _GeneralSettingsState extends State<GeneralSettings> {
           children: [
             AppBar(
               centerTitle: true,
-              leading: BackButton(color: Theme.of(context).accentColor),
+              leading: BackButton(color: app.settings.appColor),
               title: Text(I18n.of(context).settingsGeneralTitle),
               shadowColor: Colors.transparent,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -172,7 +172,7 @@ class _GeneralSettingsState extends State<GeneralSettings> {
                     app.storage.storage
                         .update("settings", {"round_up": roundUp.toInt()});
                   },
-                  activeColor: Theme.of(context).accentColor,
+                  activeColor: app.settings.appColor,
                 ),
               ],
             ),

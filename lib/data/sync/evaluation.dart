@@ -10,14 +10,14 @@ class EvaluationSync {
 
   Future<bool> sync() async {
     if (!app.debugUser) {
-      evaluations = await app.user.kreta.getEvaluations();
+      evaluations = await app.user.kreta.getEvaluations() ?? [];
       if (app.user.sync.student.data.groupId != null)
         averages = await app.user.kreta
             .getAverages(app.user.sync.student.data.groupId);
 
       if (evaluations == null) {
         await app.user.kreta.refreshLogin();
-        evaluations = await app.user.kreta.getEvaluations();
+        evaluations = await app.user.kreta.getEvaluations() ?? [];
         if (app.user.sync.student.data.groupId != null)
           averages = await app.user.kreta
               .getAverages(app.user.sync.student.data.groupId);

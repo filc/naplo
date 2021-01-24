@@ -25,7 +25,7 @@ class _DebugSettingsState extends State<DebugSettings> {
       body: Container(
         child: Column(children: [
           AppBar(
-            leading: BackButton(color: Theme.of(context).accentColor),
+            leading: BackButton(color: app.settings.appColor),
             centerTitle: true,
             title: Text(
               I18n.of(context).settingsDebugTitle,
@@ -35,7 +35,7 @@ class _DebugSettingsState extends State<DebugSettings> {
               Padding(
                 padding: EdgeInsets.only(right: 8.0),
                 child: Switch(
-                  activeColor: Theme.of(context).accentColor,
+                  activeColor: app.settings.appColor,
                   value: app.debugMode,
                   onChanged: (value) => setState(() {
                     app.debugMode = value;
@@ -66,7 +66,8 @@ class _DebugSettingsState extends State<DebugSettings> {
                     ));
 
                     DebugHelper().eraseData(context).then((_) {
-                      app.root.currentState.pushAndRemoveUntil(
+                      Navigator.of(context, rootNavigator: true)
+                          .pushAndRemoveUntil(
                         MaterialPageRoute(builder: (context) => LoginPage()),
                         (_) => false,
                       );
@@ -81,7 +82,7 @@ class _DebugSettingsState extends State<DebugSettings> {
                   color: app.debugMode ? null : Colors.grey,
                 )),
             trailing: Switch(
-              activeColor: Theme.of(context).accentColor,
+              activeColor: app.settings.appColor,
               value: app.debugMode && app.settings.renderHtml,
               onChanged: (bool value) {
                 setState(() => app.settings.renderHtml = value);

@@ -76,7 +76,7 @@ class AverageCalculatorState extends State<AverageCalculator> {
                 onChanged: (newWeight) {
                   setState(() => weight = newWeight);
                 },
-                activeColor: Theme.of(context).accentColor,
+                activeColor: app.settings.appColor,
               ),
             ),
             FlatButton(
@@ -131,7 +131,7 @@ class AverageCalculatorState extends State<AverageCalculator> {
         Radio<int>(
           value: value,
           groupValue: evaluation,
-          activeColor: Theme.of(context).accentColor,
+          activeColor: app.settings.appColor,
           onChanged: (int value) {
             setState(() {
               evaluation = value;

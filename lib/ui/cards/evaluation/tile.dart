@@ -87,7 +87,7 @@ class EvaluationTile extends StatelessWidget {
                         height: 1.2,
                         fontWeight: FontWeight.w500,
                         color: isTemp
-                            ? Theme.of(context).accentColor
+                            ? app.settings.appColor
                             : evaluation.value.value != 0 &&
                                     evaluation.evaluationType != null &&
                                     evaluation.evaluationType.name ==
@@ -119,7 +119,7 @@ class EvaluationTile extends StatelessWidget {
                     ? Text(
                         I18n.of(context).evaluationsGhost,
                         style: TextStyle(
-                            color: Theme.of(context).accentColor,
+                            color: app.settings.appColor,
                             fontWeight: FontWeight.bold),
                       )
                     : Text(

@@ -130,3 +130,4 @@ class AbsenceTileSmall extends StatelessWidget {
     );
   }
 }
+

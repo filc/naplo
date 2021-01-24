@@ -70,7 +70,7 @@ class _SubjectViewState extends State<SubjectView> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Theme.of(context).accentColor),
+        leading: BackButton(color: app.settings.appColor),
         shadowColor: Colors.transparent,
         backgroundColor: app.settings.theme.scaffoldBackgroundColor,
         actions: [

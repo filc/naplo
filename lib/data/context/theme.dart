@@ -7,10 +7,11 @@ class ThemeContext {
     "green": Colors.green[200],
     "lime": Colors.lime[200],
     "yellow": Colors.yellow[200],
-    "orange": Colors.orange[200],
+    "orange": Colors.deepOrange[200],
     "red": Colors.red[200],
     "pink": Colors.pink[200],
     "purple": Colors.purple[200],
+    "grey": Colors.grey[700],
   };
 
   List<Color> evalColors = [

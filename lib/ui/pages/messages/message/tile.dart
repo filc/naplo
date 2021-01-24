@@ -1,4 +1,3 @@
-import 'package:filcnaplo/data/context/app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/models/message.dart';
@@ -89,7 +88,7 @@ class MessageTile extends StatelessWidget {
           onTap: () {
             ScaffoldMessenger.of(context).removeCurrentSnackBar();
 
-            app.root.currentState.push(CupertinoPageRoute(
+            Navigator.of(context, rootNavigator: true).push(CupertinoPageRoute(
                 builder: (context) => MessageView(children, updateCallback)));
           },
         ),

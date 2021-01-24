@@ -98,6 +98,8 @@ class _EvaluationsPageState extends State<EvaluationsPage>
           return [
             SliverAppBar(
               floating: true,
+              // BackButton appears between pages while animating
+              automaticallyImplyLeading: false,
               pinned: true,
               forceElevated: true,
               shadowColor: Colors.transparent,
@@ -180,17 +182,13 @@ class _EvaluationsPageState extends State<EvaluationsPage>
               },
               child: _gradeBuilder.gradeTiles.length > 0
                   ? CupertinoScrollbar(
-                      child: ListView.builder(
-                        padding: EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 64.0),
-                        physics: BouncingScrollPhysics(
-                            parent: AlwaysScrollableScrollPhysics()),
-                        itemCount: _gradeBuilder.gradeTiles.length,
-                        itemBuilder: (context, index) {
-                          if (lastStateInit.isAfter(DateTime.now()
-                                  .subtract(Duration(seconds: 2))) &&
-                              (index <
-                                  (MediaQuery.of(context).size.height / 72) -
-                                      2)) {
+                      child: AnimationLimiter(
+                        child: ListView.builder(
+                          padding: EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 64.0),
+                          physics: BouncingScrollPhysics(
+                              parent: AlwaysScrollableScrollPhysics()),
+                          itemCount: _gradeBuilder.gradeTiles.length,
+                          itemBuilder: (context, index) {
                             return AnimationConfiguration.staggeredList(
                               position: index,
                               duration: Duration(milliseconds: 500),
@@ -201,10 +199,8 @@ class _EvaluationsPageState extends State<EvaluationsPage>
                                 ),
                               ),
                             );
-                          } else {
-                            return _gradeBuilder.gradeTiles[index];
-                          }
-                        },
+                          },
+                        ),
                       ),
                     )
                   : Empty(title: I18n.of(context).emptyGrades),

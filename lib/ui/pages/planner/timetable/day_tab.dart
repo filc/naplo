@@ -1,3 +1,4 @@
+import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/day.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/tile.dart';
@@ -151,7 +152,7 @@ class TimetableTabBar extends StatelessWidget {
       final double offset = tabController.offset;
       if (tabController.index == tabIndex) {
         background = selectedColorTween.lerp(1.0 - offset.abs());
-        borderColor = Theme.of(context).accentColor;
+        borderColor = app.settings.appColor;
       } else if (tabController.index == tabIndex - 1 && offset > 0.0) {
         background = selectedColorTween.lerp(offset);
       } else if (tabController.index == tabIndex + 1 && offset < 0.0) {
@@ -193,7 +194,7 @@ class TimetableTabBar extends StatelessWidget {
               final Color fixColor =
                   dif > -24 && dif < 0 ? currentDayColor : color;
               final Color fixSelectedColor =
-                  selectedColor ?? Theme.of(context).accentColor;
+                  selectedColor ?? app.settings.appColor;
               final ColorTween selectedColorTween =
                   ColorTween(begin: fixColor, end: fixSelectedColor);
               final ColorTween previousColorTween =

@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       TextField(
-                        cursorColor: Theme.of(context).accentColor,
+                        cursorColor: app.settings.appColor,
                         style: TextStyle(color: Color(0xE0FFFFFF)),
                         decoration: inputDecoration(type: 0),
                         controller: loginUsernameController,
@@ -174,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       TextField(
-                        cursorColor: Theme.of(context).accentColor,
+                        cursorColor: app.settings.appColor,
                         style: TextStyle(color: Color(0xE0FFFFFF)),
                         obscureText: !loginContext.passwordVisible,
                         decoration: inputDecoration(type: 1),
@@ -260,11 +260,12 @@ class _LoginPageState extends State<LoginPage> {
                                   .where((user) => user.loginState)
                                   .length >
                               0) {
-                            app.root.currentState.pushReplacement(
-                                MaterialPageRoute(
+                            Navigator.of(context, rootNavigator: true)
+                                .pushReplacement(MaterialPageRoute(
                                     builder: (context) => PageFrame()));
-                          } else
-                            app.root.currentState.pop();
+                          } else {
+                            Navigator.of(context, rootNavigator: true).pop();
+                          }
 
                           // save login details & reset
                           loginContext = LoginContext();

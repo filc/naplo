@@ -40,15 +40,13 @@ class _HomePageState extends State<HomePage> {
                 await app.sync.fullSync();
               },
               child: CupertinoScrollbar(
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  padding: EdgeInsets.only(top: 100.0),
-                  itemCount: _feedBuilder.elements.length,
-                  itemBuilder: (context, index) {
-                    if (lastStateInit.isAfter(
-                            DateTime.now().subtract(Duration(seconds: 2))) &&
-                        (index < (MediaQuery.of(context).size.height / 92))) {
+                child: AnimationLimiter(
+                  child: ListView.builder(
+                    physics: BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics()),
+                    padding: EdgeInsets.only(top: 100.0),
+                    itemCount: _feedBuilder.elements.length,
+                    itemBuilder: (context, index) {
                       return AnimationConfiguration.staggeredList(
                         position: index,
                         duration: Duration(milliseconds: 500),
@@ -59,10 +57,8 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       );
-                    } else {
-                      return _feedBuilder.elements[index];
-                    }
-                  },
+                    },
+                  ),
                 ),
               ),
             ),

@@ -20,7 +20,6 @@ class AppContext {
 
   String appDataPath;
   final GlobalKey<NavigatorState> frame = GlobalKey<NavigatorState>();
-  final GlobalKey<NavigatorState> root = GlobalKey<NavigatorState>();
 
   String currentAppVersion = "unknown";
   String platform = "unknown";

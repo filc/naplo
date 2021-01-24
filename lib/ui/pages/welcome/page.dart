@@ -1,5 +1,4 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
-import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/ui/common/page_transition.dart';
 import 'package:filcnaplo/ui/pages/welcome/features.dart';
@@ -88,7 +87,8 @@ class WelcomePage extends StatelessWidget {
                                   color: Colors.white),
                             ],
                           ),
-                          onPressed: () => app.root.currentState
+                          onPressed: () => Navigator.of(context,
+                                  rootNavigator: true)
                               .pushReplacement(
                                   PageTransition.horizontal(FeaturesPage())),
                         ),

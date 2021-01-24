@@ -38,7 +38,7 @@ class SettingsHelper {
           FlatButton(
             child: Text(
               I18n.of(context).dialogOk,
-              style: TextStyle(color: Theme.of(context).accentColor),
+              style: TextStyle(color: app.settings.appColor),
             ),
             onPressed: () {
               Navigator.pop(context);

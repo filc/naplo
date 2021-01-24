@@ -27,7 +27,7 @@ class AccountHelper {
         .update("settings", {"nickname": newName}).then((_) {
       if (newName.toLowerCase() == "rendszerüzenet" &&
           newName.toLowerCase() != user.name.toLowerCase())
-        app.root.currentState.push(MaterialPageRoute(
+        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
           builder: (context) => Scaffold(
             body: Container(
               color: Colors.red[700],
@@ -192,7 +192,8 @@ class AccountHelper {
               app.storage.deleteUser(user.id).then((_) {
                 if (app.users.length == 0) {
                   DebugHelper().eraseData(context).then((_) {
-                    app.root.currentState.pushAndRemoveUntil(
+                    Navigator.of(context, rootNavigator: true)
+                        .pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => LoginPage()),
                       (_) => false,
                     );

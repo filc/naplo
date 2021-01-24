@@ -44,21 +44,20 @@ class AbsenceView extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              absence.lessonIndex != null
-                  ? AbsenceDetail(
-                      I18n.of(context).delayLesson,
-                      absence.lessonIndex.toString() +
-                          ". (" +
-                          (absence.lessonStart != null
-                              ? DateFormat("HH:mm").format(absence.lessonStart)
-                              : I18n.of(context).unknown) +
-                          " - " +
-                          (absence.lessonEnd != null
-                              ? DateFormat("HH:mm").format(absence.lessonEnd)
-                              : I18n.of(context).unknown) +
-                          ")",
-                    )
-                  : Container(),
+              AbsenceDetail(
+                I18n.of(context).delayLesson,
+                (absence.lessonIndex != null
+                        ? (absence.lessonIndex.toString() + ". (")
+                        : "") +
+                    (absence.lessonStart != null
+                        ? DateFormat("HH:mm").format(absence.lessonStart)
+                        : I18n.of(context).unknown) +
+                    " - " +
+                    (absence.lessonEnd != null
+                        ? DateFormat("HH:mm").format(absence.lessonEnd)
+                        : I18n.of(context).unknown) +
+                    (absence.lessonIndex != null ? ")" : ""),
+              ),
               absence.mode != null
                   ? AbsenceDetail(
                       I18n.of(context).delayMode,

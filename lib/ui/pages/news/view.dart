@@ -65,7 +65,7 @@ class _NewsViewState extends State<NewsView> {
                         child: Text(
                           I18n.of(context).dialogOpen.toUpperCase(),
                           style: TextStyle(
-                            color: Theme.of(context).accentColor,
+                            color: app.settings.appColor,
                           ),
                         ),
                         onPressed: () async {
@@ -81,7 +81,7 @@ class _NewsViewState extends State<NewsView> {
                   child: Text(
                     I18n.of(context).dialogDone.toUpperCase(),
                     style: TextStyle(
-                      color: Theme.of(context).accentColor,
+                      color: app.settings.appColor,
                     ),
                   ),
                   onPressed: () => Navigator.of(context).pop(),

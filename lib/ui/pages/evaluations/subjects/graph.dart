@@ -22,7 +22,9 @@ class _SubjectGraphState extends State<SubjectGraph> {
     List<FlSpot> subjectData = [];
     List<List<Evaluation>> sortedData = [[]];
 
-    List<Evaluation> data = List<Evaluation>.from(widget.data);
+    List<Evaluation> data = widget.data
+        .where((evaluation) => evaluation.value.weight != 0)
+        .toList();
     data.sort((a, b) => a.date.compareTo(b.date));
 
     widget.data.forEach((element) {
@@ -179,7 +181,7 @@ class _SubjectGraphState extends State<SubjectGraph> {
                     ret = '?';
                     break;
                 }
-                
+
                 return ret.toUpperCase();
               },
             ),

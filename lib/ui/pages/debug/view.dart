@@ -1,3 +1,4 @@
+import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/ui/common/empty.dart';
 import 'package:filcnaplo/ui/pages/debug/struct.dart';
 import 'package:filcnaplo/ui/pages/debug/tile.dart';
@@ -28,7 +29,7 @@ class _DebugViewState extends State<DebugView> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: BackButton(color: Theme.of(context).accentColor),
+        leading: BackButton(color: app.settings.appColor),
         title: Text(debug.title),
         shadowColor: Colors.transparent,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,

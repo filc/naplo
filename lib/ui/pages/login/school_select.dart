@@ -48,11 +48,13 @@ class _SchoolSelectState extends State<SchoolSelect> {
               children: [
                 Expanded(
                   child: TextField(
-                    cursorColor: Theme.of(context).accentColor,
+                    cursorColor: app.settings.appColor,
                     autofocus: true,
                     decoration: InputDecoration(
-                      hintText: capital(I18n.of(context).search),
-                    ),
+                        hintText: capital(I18n.of(context).search),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: app.settings.appColor))),
                     onChanged: (pattern) {
                       List<School> results = SearchController.schoolResults(
                         loginContext.schools,
@@ -66,8 +68,7 @@ class _SchoolSelectState extends State<SchoolSelect> {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(FeatherIcons.x,
-                      color: Theme.of(context).accentColor),
+                  icon: Icon(FeatherIcons.x, color: app.settings.appColor),
                   onPressed: () => Navigator.pop(context),
                 ),
               ],

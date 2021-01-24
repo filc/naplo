@@ -1,3 +1,4 @@
+import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/ui/common/label.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:filcnaplo/utils/format.dart';
@@ -47,7 +48,7 @@ class ResponseView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: BackButton(color: Theme.of(context).accentColor),
+        leading: BackButton(color: app.settings.appColor),
         title: Text(
           uri,
           overflow: TextOverflow.ellipsis,

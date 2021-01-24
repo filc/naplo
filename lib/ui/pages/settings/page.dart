@@ -22,7 +22,7 @@ class SettingsPage extends StatelessWidget {
           children: [
             AppBar(
               centerTitle: true,
-              leading: BackButton(color: Theme.of(context).accentColor),
+              leading: BackButton(color: app.settings.appColor),
               title: Text(
                 I18n.of(context).settingsTitle,
                 style: TextStyle(fontSize: 22.0),

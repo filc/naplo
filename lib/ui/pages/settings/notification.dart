@@ -17,7 +17,7 @@ class _NotificationSettingsState extends State<NotificationSettings> {
           children: [
             AppBar(
               centerTitle: true,
-              leading: BackButton(color: Theme.of(context).accentColor),
+              leading: BackButton(color: app.settings.appColor),
               title: Text(I18n.of(context).settingsNotificationsTitle),
               shadowColor: Colors.transparent,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -26,7 +26,7 @@ class _NotificationSettingsState extends State<NotificationSettings> {
               leading: Icon(FeatherIcons.mail),
               title: Text(I18n.of(context).settingsNotificationsNews),
               trailing: Switch(
-                activeColor: Theme.of(context).accentColor,
+                activeColor: app.settings.appColor,
                 value: app.settings.enableNews,
                 onChanged: (bool value) {
                   setState(() {
@@ -44,7 +44,7 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                   : FeatherIcons.bellOff),
               title: Text(I18n.of(context).settingsNotificationsTitle),
               trailing: Switch(
-                activeColor: Theme.of(context).accentColor,
+                activeColor: app.settings.appColor,
                 value: app.settings.enableNotifications,
                 onChanged: (bool value) {
                   setState(() {

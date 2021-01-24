@@ -44,8 +44,8 @@ class SupporterBuilder {
                   child: LinearProgressIndicator(
                     minHeight: 12.0,
                     backgroundColor: Colors.black12,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                        Theme.of(context).accentColor),
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(app.settings.appColor),
                     value: supporters["progress"]["value"] /
                         supporters["progress"]["max"],
                   ),

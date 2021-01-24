@@ -79,15 +79,16 @@ class _PageFrameState extends State<PageFrame> {
   _pageRoute(Function(BuildContext) builder) {
     return PageRouteBuilder(
       pageBuilder: (context, _, __) => builder(context),
-      // transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      //   var tween = Tween(begin: 0.0, end: 1.0);
-      //   var offsetAnimation = animation.drive(tween);
+      transitionDuration: Duration(milliseconds: 200),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var tween = Tween(begin: 0.0, end: 1.0);
+        var offsetAnimation = animation.drive(tween);
 
-      //   return FadeTransition(
-      //     opacity: offsetAnimation,
-      //     child: child,
-      //   );
-      // },
+        return FadeTransition(
+          opacity: offsetAnimation,
+          child: child,
+        );
+      },
     );
   }
 

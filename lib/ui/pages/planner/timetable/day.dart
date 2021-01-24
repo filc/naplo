@@ -10,8 +10,20 @@ class Day {
   Day({this.lessons = const [], this.date});
 
   void buildTiles() {
-    var lessonIndexes = lessons
-        .map((l) => int.parse(l.lessonIndex != "+" ? l.lessonIndex : '0'));
+    tiles = [];
+    var namedLessons = lessons.where((l) => l.subject != null);
+
+    if (
+      namedLessons.any((l) => l.lessonIndex == "+")
+    ) {
+      return namedLessons.forEach((l) {
+        tiles.add(LessonTile(l));
+      });
+    }
+
+    var lessonIndexes = namedLessons
+        .map((l) => int.parse(l.lessonIndex));
+  
     int minIndex = lessonIndexes.reduce(min);
     int maxIndex = lessonIndexes.reduce(max);
 
@@ -19,10 +31,10 @@ class Day {
 
     List<int>.generate(maxIndex - minIndex + 1, (int i) => minIndex + i)
         .forEach((int i) {
-      var lesson = lessons.firstWhere(
-          (l) => int.parse(l.lessonIndex != "+" ? l.lessonIndex : '0') == i,
+      var lesson = namedLessons.firstWhere(
+          (l) => int.parse(l.lessonIndex) == i,
           orElse: () => Lesson.fromJson({'isEmpty': true, 'Oraszam': i}));
-      if (lesson.subject != null) tiles.add(LessonTile(lesson));
+      tiles.add(LessonTile(lesson));
     });
   }
 }

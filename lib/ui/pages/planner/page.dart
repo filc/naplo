@@ -66,6 +66,8 @@ class _PlannerPageState extends State<PlannerPage>
             SliverAppBar(
               backgroundColor:
                   app.settings.theme.bottomNavigationBarTheme.backgroundColor,
+              // BackButton appears between pages while animating
+              automaticallyImplyLeading: false,
               shadowColor: Colors.transparent,
               floating: true,
               pinned: true,

@@ -18,9 +18,9 @@ class MessageSync {
           "elkuldott",
           "torolt",
         ];
-        inbox = await app.user.kreta.getMessages(types[0]);
-        sent = await app.user.kreta.getMessages(types[1]);
-        trash = await app.user.kreta.getMessages(types[2]);
+        inbox = await app.user.kreta.getMessages(types[0]) ?? [];
+        sent = await app.user.kreta.getMessages(types[1]) ?? [];
+        trash = await app.user.kreta.getMessages(types[2]) ?? [];
       }
 
       await getMessages();

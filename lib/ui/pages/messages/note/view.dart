@@ -45,8 +45,7 @@ class NoteView extends StatelessWidget {
                 title: Text(note.teacher),
                 subtitle: Text(formatDate(context, note.date)),
                 trailing: IconButton(
-                  icon: Icon(FeatherIcons.share2,
-                      color: Theme.of(context).accentColor),
+                  icon: Icon(FeatherIcons.share2, color: app.settings.appColor),
                   onPressed: () {
                     Share.share(note.content);
                   },

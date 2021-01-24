@@ -61,18 +61,19 @@ class _FeaturesPageState extends State<FeaturesPage> {
                       child: Text(
                         I18n.of(context).dialogSkip,
                         style: TextStyle(
-                          color: Theme.of(context).accentColor,
+                          color: app.settings.appColor,
                           fontSize: 18.0,
                         ),
                       ),
-                      onPressed: () => app.root.currentState.pushReplacement(
-                          MaterialPageRoute(
-                              builder: (context) => LoginPage()))),
+                      onPressed: () =>
+                          Navigator.of(context, rootNavigator: true)
+                              .pushReplacement(MaterialPageRoute(
+                                  builder: (context) => LoginPage()))),
                   FlatButton(
                     child: Text(
                       I18n.of(context).dialogNext,
                       style: TextStyle(
-                        color: Theme.of(context).accentColor,
+                        color: app.settings.appColor,
                         fontSize: 18.0,
                       ),
                     ),
@@ -81,8 +82,9 @@ class _FeaturesPageState extends State<FeaturesPage> {
                         _swiper.next();
                         index++;
                       } else {
-                        app.root.currentState.pushReplacement(MaterialPageRoute(
-                            builder: (context) => LoginPage()));
+                        Navigator.of(context, rootNavigator: true)
+                            .pushReplacement(MaterialPageRoute(
+                                builder: (context) => LoginPage()));
                       }
                     },
                   ),

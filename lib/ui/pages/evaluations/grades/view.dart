@@ -21,7 +21,11 @@ class EvaluationView extends StatelessWidget {
             contentPadding: EdgeInsets.only(left: 12.0),
             leading: Text(
               evaluation.value.value != 0
-                  ? evaluation.value.value.toString()
+                  ? (evaluation.value.value.toString() +
+                      ((evaluation.type != EvaluationType.midYear &&
+                              evaluation.description == "Dicséret"
+                          ? "*"
+                          : "")))
                   : evaluation.value.shortName ?? "?",
               textAlign: TextAlign.center,
               style: TextStyle(

@@ -103,7 +103,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
         children: [
           if (widget.isFirst)
             AppBar(
-                leading: BackButton(color: Theme.of(context).accentColor),
+                leading: BackButton(color: app.settings.appColor),
                 shadowColor: Colors.transparent,
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 actions: [
@@ -116,7 +116,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                             widget.message.deleted
                                 ? FeatherIcons.arrowUp
                                 : FeatherIcons.archive,
-                            color: Theme.of(context).accentColor),
+                            color: app.settings.appColor),
                         onPressed: () {
                           Navigator.pop(context);
                           widget.archiveCallback(
@@ -190,7 +190,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                                           ? FeatherIcons.chevronUp
                                           : FeatherIcons.chevronDown,
                                       size: 18.0,
-                                      color: Theme.of(context).accentColor),
+                                      color: app.settings.appColor),
                                   padding: EdgeInsets.zero,
                                   constraints:
                                       BoxConstraints.tight(Size(28.0, 32.0)),
@@ -213,7 +213,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                       child: IconButton(
                         padding: EdgeInsets.zero,
                         icon: Icon(FeatherIcons.cornerUpLeft,
-                            color: Theme.of(context).accentColor),
+                            color: app.settings.appColor),
                         constraints: BoxConstraints.tight(Size(32.0, 32.0)),
                         onPressed: () {
                           messageContext = MessageContext();
@@ -225,8 +225,9 @@ class _MessageViewTileState extends State<MessageViewTile> {
                           );
                           messageContext.replyId = widget.message.messageId;
 
-                          app.root.currentState.push(MaterialPageRoute(
-                              builder: (context) => NewMessagePage()));
+                          Navigator.of(context, rootNavigator: true).push(
+                              MaterialPageRoute(
+                                  builder: (context) => NewMessagePage()));
                         },
                       ),
                     ),
@@ -236,7 +237,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                       child: IconButton(
                         padding: EdgeInsets.zero,
                         icon: Icon(FeatherIcons.share2,
-                            color: Theme.of(context).accentColor),
+                            color: app.settings.appColor),
                         constraints: BoxConstraints.tight(Size(32.0, 32.0)),
                         onPressed: () {
                           Share.share(
