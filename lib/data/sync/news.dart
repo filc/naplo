@@ -4,10 +4,10 @@ import 'package:filcnaplo/data/models/new.dart';
 class NewsSync {
   List<News> data = [];
   List<News> fresh = []; // News to show with popup
-  int length;
-  int prevLength;
+  int length = 0;
+  int prevLength = 0;
 
-  Future sync() async {
+  Future<bool> sync() async {
     prevLength = (await app.storage.storage.query("settings"))[0]["news_len"];
     data = await app.user.kreta.getNews();
     fresh = [];
@@ -25,6 +25,7 @@ class NewsSync {
     }
 
     await app.storage.storage.update("settings", {"news_len": length});
+    return true;
   }
 
   void delete() {

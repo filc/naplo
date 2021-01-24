@@ -1,4 +1,5 @@
 import 'package:filcnaplo/data/context/page.dart';
+import 'package:filcnaplo/data/models/new.dart';
 import 'package:filcnaplo/data/state/sync.dart';
 import 'package:filcnaplo/ui/common/custom_snackbar.dart';
 import 'package:filcnaplo/ui/pages/news/view.dart';
@@ -50,24 +51,23 @@ class _PageFrameState extends State<PageFrame> {
       });
     });
 
-    if (app.firstStart) {
-      //Dont display news on first start.
-      app.user.sync.news.sync();
-    } else {
-      app.user.sync.news.sync().then((_) {
-        if (app.settings.enableNews) {
-          Future.delayed(Duration(seconds: 1), () {
-            Future.forEach(
-              app.user.sync.news.fresh,
-              (news) async => await showDialog(
-                context: context,
-                builder: (context) => NewsView(news),
-              ),
-            );
-          });
-        }
-      });
-    }
+    app.user.sync.news.sync().then((_) {
+      if (app.user.sync.news.prevLength != 0 && app.settings.enableNews) {
+        Future.delayed(
+          Duration(seconds: 1),
+          () {
+            Future.forEach(app.user.sync.news.fresh, (News news) async {
+              if (news.title != null)
+                await showDialog(
+                  context: context,
+                  builder: (context) => NewsView(news),
+                );
+            });
+          },
+        );
+      } else
+        print("not showing");
+    });
   }
 
   void _navItemSelected(int item) {
