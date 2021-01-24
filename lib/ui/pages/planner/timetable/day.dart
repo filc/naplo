@@ -10,6 +10,7 @@ class Day {
   Day({this.lessons = const [], this.date});
 
   void buildTiles() {
+    tiles = [];
     var namedLessons = lessons.where((l) => l.subject != null);
 
     if (
