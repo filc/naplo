@@ -18,7 +18,7 @@ class TimetableFrame extends StatefulWidget {
 class _TimetableFrameState extends State<TimetableFrame>
     with TickerProviderStateMixin {
   TabController _tabController;
-
+  int currentUser = app.selectedUser;
   int selectedWeek = 0;
   TimetableBuilder _timetableBuilder;
   Week currentWeek;
@@ -105,6 +105,10 @@ class _TimetableFrameState extends State<TimetableFrame>
     return FutureBuilder(
       future: future,
       builder: (context, snapshot) {
+        if (app.selectedUser != currentUser) {
+          changeWeek(selectedWeek);
+          currentUser = app.selectedUser;
+        }
         bool ready = snapshot.data ?? false;
 
         return Container(
