@@ -22,6 +22,7 @@ class _TimetableFrameState extends State<TimetableFrame>
   int selectedWeek = 0;
   TimetableBuilder _timetableBuilder;
   Week currentWeek;
+  int currentDayIndex;
   bool ready = false;
 
   changeWeek(int week) {
@@ -38,6 +39,7 @@ class _TimetableFrameState extends State<TimetableFrame>
         setState(() {
           ready = true;
 
+          bool previousWeekEmpty = _timetableBuilder.week.days.isEmpty;
           _timetableBuilder.build(selectedWeek);
           int selectedDay = _tabController.index;
           int length = _timetableBuilder.week.days.length;
@@ -45,7 +47,9 @@ class _TimetableFrameState extends State<TimetableFrame>
           _tabController = TabController(
             vsync: this,
             length: length,
-            initialIndex: selectedDay.clamp(0, length - 1),
+            initialIndex: (previousWeekEmpty ? currentDayIndex : selectedDay)
+                .clamp(0, length - 1),
+            // Start at current day if previous week was empty, better than starting at Monday
           );
         });
       } else {
@@ -72,18 +76,19 @@ class _TimetableFrameState extends State<TimetableFrame>
       return dif > -24 && dif < 0;
     }, orElse: () => Day()).date;
 
-    int dayIndex = currentDay != null
+    currentDayIndex = currentDay != null
         ? currentDay.weekday - (6 - _timetableBuilder.week.days.length)
         : 0;
 
     if (_timetableBuilder.week.days.length > 1) {
-      dayIndex = dayIndex.clamp(0, _timetableBuilder.week.days.length - 1);
+      currentDayIndex =
+          currentDayIndex.clamp(0, _timetableBuilder.week.days.length - 1);
     }
 
     _tabController = TabController(
       vsync: this,
       length: _timetableBuilder.week.days.length.clamp(1, 7),
-      initialIndex: dayIndex,
+      initialIndex: currentDayIndex,
     );
 
     selectedWeek = _timetableBuilder.getCurrentWeek();
