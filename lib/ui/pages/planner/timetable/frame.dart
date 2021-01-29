@@ -73,7 +73,7 @@ class _TimetableFrameState extends State<TimetableFrame>
     DateTime currentDay = _timetableBuilder.week.days.firstWhere((day) {
       int dif = day.date.difference(DateTime.now()).inHours;
 
-      return dif > -24 && dif < 0;
+      return dif >= -24 && dif < 0;
     }, orElse: () => Day()).date;
 
     currentDayIndex = currentDay != null
