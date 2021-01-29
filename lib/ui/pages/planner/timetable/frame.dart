@@ -41,9 +41,10 @@ class _TimetableFrameState extends State<TimetableFrame>
           _timetableBuilder.build(selectedWeek);
           int selectedDay = _tabController.index;
           int length = _timetableBuilder.week.days.length;
+          length = length == 0 ? 1 : length;
           _tabController = TabController(
             vsync: this,
-            length: length.clamp(1, length),
+            length: length,
             initialIndex: selectedDay.clamp(0, length - 1),
           );
         });
