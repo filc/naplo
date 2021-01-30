@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _feedBuilder = FeedBuilder(callback: () => setState(() {}));
+    _feedBuilder.build();
     saveKeyes();
   }
 
