@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/absence.dart';
+import 'package:flutter/material.dart';
 //import 'package:filcnaplo/data/models/dummy.dart';
 
 class AbsenceSync {
   List<Absence> absences = [];
+  Key key;
 
   Future<bool> sync() async {
     if (!app.debugUser) {
@@ -30,7 +32,8 @@ class AbsenceSync {
           }
         });
       }
-      
+
+      key = UniqueKey();
       return _absences != null;
     } else {
       //data = Dummy.absences;
@@ -40,5 +43,9 @@ class AbsenceSync {
 
   delete() {
     absences = [];
+  }
+
+  bool match(Key oldKey) {
+    return oldKey == key;
   }
 }

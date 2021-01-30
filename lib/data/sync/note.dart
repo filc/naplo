@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/note.dart';
 import 'package:filcnaplo/data/models/dummy.dart';
+import 'package:flutter/material.dart';
 
 class NoteSync {
   List<Note> notes = [];
+  Key key;
 
   Future<bool> sync() async {
     if (!app.debugUser) {
@@ -30,7 +32,8 @@ class NoteSync {
           }
         });
       }
-      
+
+      key = UniqueKey();
       return _notes != null;
     } else {
       notes = Dummy.notes;
@@ -40,5 +43,9 @@ class NoteSync {
 
   delete() {
     notes = [];
+  }
+
+  bool match(Key oldKey) {
+    return oldKey == key;
   }
 }

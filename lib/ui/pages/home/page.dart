@@ -16,15 +16,22 @@ class _HomePageState extends State<HomePage> {
 
   FeedBuilder _feedBuilder;
 
+  List<Key> dataKeyes = [];
+
   @override
   void initState() {
     super.initState();
     _feedBuilder = FeedBuilder(callback: () => setState(() {}));
+    saveKeyes();
   }
 
   @override
   Widget build(BuildContext context) {
-    _feedBuilder.build();
+    if (newData()) {
+      _feedBuilder.build();
+      print("hello hi");
+      saveKeyes();
+    }
 
     return Scaffold(
       body: Stack(
@@ -72,5 +79,28 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  void saveKeyes() {
+    dataKeyes = [];
+    dataKeyes.addAll([
+      app.user.sync.evaluation.key,
+      app.user.sync.timetable.key,
+      app.user.sync.homework.key,
+      app.user.sync.exam.key,
+      app.user.sync.note.key,
+      app.user.sync.event.key,
+      app.user.sync.absence.key
+    ]);
+  }
+
+  bool newData() {
+    return !(app.user.sync.evaluation.match(dataKeyes[0]) &&
+        app.user.sync.timetable.match(dataKeyes[1]) &&
+        app.user.sync.homework.match(dataKeyes[2]) &&
+        app.user.sync.exam.match(dataKeyes[3]) &&
+        app.user.sync.note.match(dataKeyes[4]) &&
+        app.user.sync.event.match(dataKeyes[5]) &&
+        app.user.sync.absence.match(dataKeyes[6]));
   }
 }

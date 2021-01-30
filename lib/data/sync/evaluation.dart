@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/data/models/dummy.dart';
+import 'package:flutter/material.dart';
 
 class EvaluationSync {
   List<Evaluation> evaluations = [];
   List<dynamic> averages = [];
+  Key key;
 
   Future<bool> sync() async {
     List<Evaluation> _evaluations;
@@ -41,6 +43,7 @@ class EvaluationSync {
         });
       }
 
+      key = UniqueKey();
       return _evaluations != null;
     } else {
       evaluations = Dummy.evaluations;
@@ -51,5 +54,9 @@ class EvaluationSync {
   delete() {
     evaluations = [];
     averages = [];
+  }
+
+  bool match(Key oldKey) {
+    return oldKey == key;
   }
 }

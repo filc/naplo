@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/dummy.dart';
 import 'package:filcnaplo/data/models/event.dart';
+import 'package:flutter/material.dart';
 
 class EventSync {
   List<Event> events = [];
+  Key key;
 
   Future<bool> sync() async {
     if (!app.debugUser) {
@@ -31,6 +33,7 @@ class EventSync {
         });
       }
 
+      key = UniqueKey();
       return _events != null;
     } else {
       events = Dummy.events;
@@ -40,5 +43,9 @@ class EventSync {
 
   delete() {
     events = [];
+  }
+  
+  bool match(Key oldKey) {
+    return oldKey == key;
   }
 }

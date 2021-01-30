@@ -1,11 +1,12 @@
 import 'dart:convert';
-
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/homework.dart';
 import 'package:filcnaplo/data/models/dummy.dart';
+import 'package:flutter/material.dart';
 
 class HomeworkSync {
   List<Homework> homework = [];
+  Key key;
 
   Future<bool> sync() async {
     if (!app.debugUser) {
@@ -32,6 +33,7 @@ class HomeworkSync {
         });
       }
 
+      key = UniqueKey();
       return _homework != null;
     } else {
       homework = Dummy.homework;
@@ -41,5 +43,9 @@ class HomeworkSync {
 
   delete() {
     homework = [];
+  }
+
+  bool match(Key oldKey) {
+    return oldKey == key;
   }
 }
