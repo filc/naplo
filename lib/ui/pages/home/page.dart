@@ -29,7 +29,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     if (newData()) {
       _feedBuilder.build();
-      print("hello hi");
       saveKeyes();
     }
 
