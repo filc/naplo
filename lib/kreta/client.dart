@@ -68,7 +68,7 @@ class KretaClient {
 
     try {
       var response = await http.get(
-        BaseURL.FILC + FilcEndpoints.schoolList2,
+        Uri.parse(BaseURL.FILC + FilcEndpoints.schoolList2),
         headers: {"Content-Type": "application/json"},
       );
 
@@ -98,7 +98,7 @@ class KretaClient {
   Future<Map> getSupporters() async {
     try {
       var response = await http.get(
-        BaseURL.FILC + FilcEndpoints.supporters,
+        Uri.parse(BaseURL.FILC + FilcEndpoints.supporters),
         headers: {"Content-Type": "application/json"},
       );
 
@@ -130,7 +130,7 @@ class KretaClient {
   Future<Config> getConfig() async {
     try {
       var response = await http.get(
-        BaseURL.FILC + FilcEndpoints.config2,
+        Uri.parse(BaseURL.FILC + FilcEndpoints.config2),
         headers: {"Content-Type": "application/json"},
       );
 
@@ -148,7 +148,8 @@ class KretaClient {
 
   Future<List<News>> getNews() async {
     try {
-      var response = await http.get(BaseURL.FILC + FilcEndpoints.news,
+      var response = await http.get(
+          Uri.parse(BaseURL.FILC + FilcEndpoints.news),
           headers: {"Content-Type": "application/json"});
       List<News> news = [];
 
@@ -166,7 +167,7 @@ class KretaClient {
   Future<bool> login(User user) async {
     try {
       var response = await client.post(
-        BaseURL.KRETA_IDP + KretaEndpoints.token,
+        Uri.parse(BaseURL.KRETA_IDP + KretaEndpoints.token),
         body: {
           "userName": user.username,
           "password": user.password,
@@ -275,7 +276,7 @@ class KretaClient {
     print(userAgent);
     try {
       var response = await client.get(
-        BaseURL.KRETA_ADMIN + AdminEndpoints.messages(type),
+        Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.messages(type)),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent,
@@ -302,7 +303,7 @@ class KretaClient {
   Future<Map> getMessage(int id) async {
     try {
       var response = await client.get(
-        BaseURL.KRETA_ADMIN + AdminEndpoints.message(id.toString()),
+        Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.message(id.toString())),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent,
@@ -323,7 +324,7 @@ class KretaClient {
   Future<List<Recipient>> getRecipients() async {
     try {
       var response = await client.get(
-        BaseURL.KRETA_ADMIN + AdminEndpoints.recipientsTeacher,
+        Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.recipientsTeacher),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent
@@ -409,7 +410,7 @@ class KretaClient {
       messageJson["feladoTitulus"] = "";
 
       var response = await client.post(
-        BaseURL.KRETA_ADMIN + AdminEndpoints.sendMessage,
+        Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.sendMessage),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent,
@@ -454,8 +455,8 @@ class KretaClient {
   Future<Uint8List> downloadAttachment(Attachment attachment) async {
     try {
       var response = await client.get(
-        BaseURL.KRETA_ADMIN +
-            AdminEndpoints.downloadAttachment(attachment.id.toString()),
+        Uri.parse(BaseURL.KRETA_ADMIN +
+            AdminEndpoints.downloadAttachment(attachment.id.toString())),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent,
@@ -474,7 +475,7 @@ class KretaClient {
   Future<List<Note>> getNotes() async {
     try {
       var response = await client.get(
-        BaseURL.kreta(instituteCode) + KretaEndpoints.notes,
+        Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.notes),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent,
@@ -498,7 +499,7 @@ class KretaClient {
   Future<List<Event>> getEvents() async {
     try {
       var response = await client.get(
-        BaseURL.kreta(instituteCode) + KretaEndpoints.events,
+        Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.events),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent,
@@ -522,7 +523,7 @@ class KretaClient {
   Future<Student> getStudent() async {
     try {
       var response = await client.get(
-        BaseURL.kreta(instituteCode) + KretaEndpoints.student,
+        Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.student),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent,
@@ -544,7 +545,7 @@ class KretaClient {
   Future<List<Evaluation>> getEvaluations() async {
     try {
       var response = await client.get(
-        BaseURL.kreta(instituteCode) + KretaEndpoints.evaluations,
+        Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.evaluations),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent,
@@ -569,7 +570,7 @@ class KretaClient {
   Future<List<Absence>> getAbsences() async {
     try {
       var response = await client.get(
-        BaseURL.kreta(instituteCode) + KretaEndpoints.absences,
+        Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.absences),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent,
@@ -594,7 +595,7 @@ class KretaClient {
   Future<Map<String, dynamic>> getGroup() async {
     try {
       var response = await client.get(
-        BaseURL.kreta(instituteCode) + KretaEndpoints.groups,
+        Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.groups),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent
@@ -617,10 +618,10 @@ class KretaClient {
   Future<List> getAverages(String groupId) async {
     try {
       var response = await client.get(
-        BaseURL.kreta(instituteCode) +
+        Uri.parse(BaseURL.kreta(instituteCode) +
             KretaEndpoints.classAverages +
             "?oktatasiNevelesiFeladatUid=" +
-            groupId,
+            groupId),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent
@@ -649,7 +650,7 @@ class KretaClient {
   Future<List<Exam>> getExams() async {
     try {
       var response = await client.get(
-        BaseURL.kreta(instituteCode) + KretaEndpoints.exams,
+        Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.exams),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent
@@ -673,10 +674,10 @@ class KretaClient {
   Future<List<Homework>> getHomeworks(DateTime from) async {
     try {
       var response = await client.get(
-        BaseURL.kreta(instituteCode) +
+        Uri.parse(BaseURL.kreta(instituteCode) +
             KretaEndpoints.homework +
             "?datumTol=" +
-            from.toUtc().toIso8601String(),
+            from.toUtc().toIso8601String()),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent
@@ -690,10 +691,10 @@ class KretaClient {
       responseJson.forEach((homework) async {
         //homeworks.add(Homework.fromJson(homework)
         var response2 = await client.get(
-          BaseURL.kreta(instituteCode) +
+          Uri.parse(BaseURL.kreta(instituteCode) +
               KretaEndpoints.homework +
               "/" +
-              homework["Uid"],
+              homework["Uid"]),
           headers: {
             "Authorization": "Bearer $accessToken",
             "User-Agent": userAgent
@@ -719,9 +720,9 @@ class KretaClient {
       HomeworkAttachment attachment) async {
     try {
       var response = await client.get(
-        BaseURL.kreta(instituteCode) +
+        Uri.parse(BaseURL.kreta(instituteCode) +
             KretaEndpoints.downloadHomeworkAttachments(
-                attachment.id.toString(), attachment.type),
+                attachment.id.toString(), attachment.type)),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent
@@ -742,14 +743,14 @@ class KretaClient {
 
     try {
       var response = await client.get(
-        BaseURL.kreta(instituteCode) +
+        Uri.parse(BaseURL.kreta(instituteCode) +
             KretaEndpoints.timetable +
             "?datumTol=" +
             DateFormat('yyyy-MM-dd').format(from) +
             //from.toUtc().toIso8601String() +
             "&datumIg=" +
             //to.toUtc().toIso8601String(),
-            DateFormat('yyyy-MM-dd').format(to),
+            DateFormat('yyyy-MM-dd').format(to)),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent
@@ -777,14 +778,14 @@ class KretaClient {
     };
 
     try {
-      var response =
-          await client.post(BaseURL.KRETA_ADMIN + AdminEndpoints.trashMessage,
-              headers: {
-                "Authorization": "Bearer $accessToken",
-                "User-Agent": userAgent,
-                "Content-Type": "application/json"
-              },
-              body: jsonEncode(data));
+      var response = await client.post(
+          Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.trashMessage),
+          headers: {
+            "Authorization": "Bearer $accessToken",
+            "User-Agent": userAgent,
+            "Content-Type": "application/json"
+          },
+          body: jsonEncode(data));
       await checkResponse(response);
     } catch (error) {
       print("ERROR: KretaAPI.trashMessage: " + error.toString());
@@ -795,10 +796,10 @@ class KretaClient {
   Future<void> deleteMessage(int id) async {
     try {
       var response = await client.delete(
-        BaseURL.KRETA_ADMIN +
+        Uri.parse(BaseURL.KRETA_ADMIN +
             AdminEndpoints.deleteMessage +
             "?postaladaElemAzonositok=" +
-            id.toString(),
+            id.toString()),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent,

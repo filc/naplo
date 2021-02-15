@@ -102,7 +102,8 @@ class AccountHelper {
   }
 
   Future<ProfileIcon> changeProfileI(BuildContext context) async {
-    File newImage = await FilePicker.getFile(type: FileType.image);
+    PlatformFile newImage =
+        (await FilePicker.platform.pickFiles(type: FileType.image)).files[0];
 
     if (newImage == null) return null;
 
@@ -175,14 +176,14 @@ class AccountHelper {
         backgroundColor: app.settings.theme.backgroundColor,
         content: Text(I18n.of(context).accountDeleteConfirm(user.name)),
         actions: [
-          FlatButton(
+          MaterialButton(
             textColor: app.settings.appColor,
             child: Text(I18n.of(context).dialogNo),
             onPressed: () {
               Navigator.of(context).pop(false);
             },
           ),
-          FlatButton(
+          MaterialButton(
             textColor: app.settings.appColor,
             child: Text(I18n.of(context).dialogYes),
             onPressed: () {

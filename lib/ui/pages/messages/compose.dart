@@ -75,7 +75,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
     );
   }
 
-  Widget attachmentTile(File file) {
+  Widget attachmentTile(PlatformFile file) {
     return Container(
       padding: EdgeInsets.only(bottom: 12.0),
       decoration: BoxDecoration(
@@ -201,10 +201,10 @@ class _NewMessagePageState extends State<NewMessagePage> {
                       tooltip: capital(I18n.of(context).messageAttachments),
                       onPressed: () async {
                         try {
-                          List<File> files = await FilePicker.getMultiFile();
+                          List<PlatformFile> files = (await FilePicker.platform.pickFiles()).files;
                           setState(() {
                             for (var i = 0; i < files.length; i++) {
-                              File f = files[i];
+                              PlatformFile f = files[i];
                               messageContext.attachments.add(
                                 Attachment(null, f, f.path.split("/").last,
                                     null, null),
