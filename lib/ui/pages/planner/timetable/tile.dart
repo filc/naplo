@@ -36,7 +36,7 @@ class LessonTile extends StatelessWidget {
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 12.0),
-      child: FlatButton(
+      child: MaterialButton(
         padding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14.0),

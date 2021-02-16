@@ -24,7 +24,7 @@ class SettingTile extends StatelessWidget {
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8.0),
-      child: FlatButton(
+      child: MaterialButton(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
         child: ListTile(

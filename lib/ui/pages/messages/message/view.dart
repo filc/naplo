@@ -294,7 +294,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                     ),
             ),
           if (quotedMessage != null)
-            FlatButton(
+            TextButton(
               child: Text(
                 showQuoted
                     ? I18n.of(context).messageHideQuoted

@@ -57,7 +57,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  FlatButton(
+                  TextButton(
                       child: Text(
                         I18n.of(context).dialogSkip,
                         style: TextStyle(
@@ -69,7 +69,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
                           Navigator.of(context, rootNavigator: true)
                               .pushReplacement(MaterialPageRoute(
                                   builder: (context) => LoginPage()))),
-                  FlatButton(
+                  TextButton(
                     child: Text(
                       I18n.of(context).dialogNext,
                       style: TextStyle(

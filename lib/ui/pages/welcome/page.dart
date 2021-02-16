@@ -69,7 +69,7 @@ class WelcomePage extends StatelessWidget {
                       SizedBox(height: 24.0),
                       SizedBox(
                         width: 150.0,
-                        child: FlatButton(
+                        child: MaterialButton(
                           padding: EdgeInsets.symmetric(
                               vertical: 8.0, horizontal: 12.0),
                           color: Color(0xFF225B55),

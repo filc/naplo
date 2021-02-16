@@ -106,7 +106,7 @@ class _AccountPageState extends State<AccountPage> {
                       // Add user
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 14.0),
-                        child: FlatButton(
+                        child: MaterialButton(
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.0)),
@@ -145,7 +145,7 @@ class _AccountPageState extends State<AccountPage> {
                 padding: EdgeInsets.only(bottom: 14.0),
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 14.0),
-                  child: FlatButton(
+                  child: MaterialButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0)),
                     child: ListTile(

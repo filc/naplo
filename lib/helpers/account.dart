@@ -70,7 +70,7 @@ class AccountHelper {
                         ],
                       ),
                     ),
-                    FlatButton(
+                    MaterialButton(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
                         "VISSZA",

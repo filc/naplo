@@ -112,7 +112,7 @@ class SchoolTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return MaterialButton(
       padding: EdgeInsets.zero,
       onPressed: () {
         loginContext.selectedSchool = School(schoolId, title, city);

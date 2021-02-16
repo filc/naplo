@@ -54,7 +54,7 @@ class AboutPrivacy extends StatelessWidget {
             ),
             Container(
               alignment: Alignment.bottomRight,
-              child: FlatButton(
+              child: TextButton(
                 child: Text(
                   I18n.of(context).dialogOk,
                   style: TextStyle(color: app.settings.appColor),

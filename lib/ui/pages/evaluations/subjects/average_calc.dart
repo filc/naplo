@@ -79,7 +79,7 @@ class AverageCalculatorState extends State<AverageCalculator> {
                 activeColor: app.settings.appColor,
               ),
             ),
-            FlatButton(
+            MaterialButton(
               padding:
                   EdgeInsets.only(top: 15, bottom: 15, right: 35, left: 35),
               shape: StadiumBorder(),
