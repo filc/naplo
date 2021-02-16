@@ -21,6 +21,8 @@ class SubjectTile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 4.0),
       child: MaterialButton(
+        elevation: 0,
+        highlightElevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
         child: ListTile(
           contentPadding: EdgeInsets.zero,
