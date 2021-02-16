@@ -20,6 +20,8 @@ class GradeTile extends StatelessWidget {
     return Padding(
       padding: padding,
       child: MaterialButton(
+        elevation: 0,
+        highlightElevation: 0,
         child: EvaluationTile(evaluation, deleteCallback: deleteCallback),
         padding: EdgeInsets.only(right: 6.0),
         shape:

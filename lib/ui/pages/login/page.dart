@@ -206,6 +206,8 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 46,
                   child: MaterialButton(
+                    elevation: 0,
+                    highlightElevation: 0,
                     color: Colors.black12,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(7.5)),
@@ -245,6 +247,8 @@ class _LoginPageState extends State<LoginPage> {
                   width: 200,
                   height: 45,
                   child: MaterialButton(
+                    elevation: 0,
+                    highlightElevation: 0,
                     onPressed: () {
                       setState(() => loading = true);
                       loginContext.loginError = {};

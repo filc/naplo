@@ -80,6 +80,8 @@ class AverageCalculatorState extends State<AverageCalculator> {
               ),
             ),
             MaterialButton(
+              elevation: 0,
+              highlightElevation: 0,
               padding:
                   EdgeInsets.only(top: 15, bottom: 15, right: 35, left: 35),
               shape: StadiumBorder(),

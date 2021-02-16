@@ -71,6 +71,8 @@ class AccountHelper {
                       ),
                     ),
                     MaterialButton(
+                      elevation: 0,
+                      highlightElevation: 0,
                       padding: EdgeInsets.all(8.0),
                       child: Text(
                         "VISSZA",
@@ -177,6 +179,8 @@ class AccountHelper {
         content: Text(I18n.of(context).accountDeleteConfirm(user.name)),
         actions: [
           MaterialButton(
+            elevation: 0,
+            highlightElevation: 0,
             textColor: app.settings.appColor,
             child: Text(I18n.of(context).dialogNo),
             onPressed: () {
@@ -184,6 +188,8 @@ class AccountHelper {
             },
           ),
           MaterialButton(
+            elevation: 0,
+            highlightElevation: 0,
             textColor: app.settings.appColor,
             child: Text(I18n.of(context).dialogYes),
             onPressed: () {
