@@ -13,7 +13,9 @@ dependencies:
     sdk: flutter
   http: ^0.13.0
   cupertino_icons: ^1.0.2
-  dynamic_theme: ^1.0.0
+  dynamic_theme:
+    git: 
+      url: https://github.com/Norbert515/dynamic_theme
   feather_icons_flutter: ^4.7.4
   flutter_typeahead: ^2.0.0
   file_picker: ^2.1.6
@@ -44,14 +46,19 @@ dependencies:
   photo_view: ^0.10.2
   downloads_path_provider: ^0.1.0
   webview_flutter: any
-  flutter_staggered_animations: "^0.1.2"
+  flutter_staggered_animations:
+    git:
+      url: https://github.com/josh-burton/flutter_staggered_animations.git
+      ref: findAncestorWidgetOfExactType
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-# dependency_overrides:
-#   intl: 0.17.0-nullsafety.2
+dependency_overrides:
+  flutter_svg: 0.20.0-nullsafety.3
+  path_drawing: ^0.5.0-nullsafety.0
+  path_parsing: ^0.2.0-nullsafety
 
 flutter:
   uses-material-design: true
