@@ -270,7 +270,7 @@ class _LoginPageState extends State<LoginPage> {
                               !app.debugUser) {
                             app.sync.fullSync();
                             Navigator.of(context)
-                                .pop(); //It turns out, you can pop twice!
+                                .pop(); //It turns out you can pop twice!
                             Navigator.of(context).pop();
                           } else {
                             Navigator.of(context, rootNavigator: true)

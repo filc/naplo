@@ -52,7 +52,7 @@ class ThemeContext {
         brightness: Brightness.light,
         accentColor: appColor,
         backgroundColor: lightBackground,
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.grey[100],
         textTheme: lightText,
         primaryTextTheme: lightText,
         iconTheme: IconThemeData(color: lightTextColor),
@@ -100,7 +100,7 @@ class ThemeContext {
       bodyText1: TextStyle(fontFamily: "GoogleSans", color: darkTextColor),
       bodyText2: TextStyle(fontFamily: "GoogleSans", color: darkTextColor));
 
-  static Color darkBackground = Color(0xff2f3136);
+  static Color darkBackground = Color(0xff2A2B2F);
   static Color blackBackground = Color(0xff18191c);
 
   ThemeData dark(Color appColor, int backgroundColor) => ThemeData(
@@ -113,7 +113,7 @@ class ThemeContext {
         iconTheme: IconThemeData(color: Colors.grey[100]),
         fontFamily: "GoogleSans",
         scaffoldBackgroundColor:
-            backgroundColor == 0 ? Colors.black : Color(0xff202225),
+            backgroundColor == 0 ? Colors.black : Color(0xff202125),
         snackBarTheme: SnackBarThemeData(
           backgroundColor:
               backgroundColor == 0 ? blackBackground : darkBackground,
@@ -127,6 +127,6 @@ class ThemeContext {
             textTheme: darkText),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
             backgroundColor:
-                backgroundColor == 0 ? Colors.black : Color(0xff202225)),
+                backgroundColor == 0 ? Colors.black : Color(0xff2A2B2F)),
       );
 }

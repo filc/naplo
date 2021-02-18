@@ -80,9 +80,6 @@ class StorageController {
 
       if (users[userID] == null) users[userID] = await openDatabase(userPath);
     }
-
-    app.sync.addUser(userID);
-    app.kretaApi.addUser(userID);
   }
 
   Future createUser(String userID) async {

@@ -98,7 +98,11 @@ class SettingsController {
       Map instance = usersInstance[i];
 
       if (instance["id"].isNotEmpty && instance["name"].isNotEmpty) {
+        // Create a Storage Controller instance for the user
         await app.storage.addUser(instance["id"]);
+
+        // Create a Sync Controller instance for the user
+        app.sync.addUser(instance["id"]);
 
         List kretaInstance;
 
@@ -111,6 +115,10 @@ class SettingsController {
           app.storage.users.remove(instance["id"]);
           continue;
         }
+
+        // Create an API Client instance for the user
+        app.kretaApi.addUser(instance["id"],
+            instituteCode: kretaInstance[0]["institute_code"]);
 
         User user = User(
           instance["id"],

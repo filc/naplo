@@ -26,6 +26,8 @@ class LoginHelper {
       app.selectedUser = 0;
       app.user.loginState = true;
       app.storage.addUser("debug");
+      app.sync.addUser("debug");
+      app.kretaApi.addUser("debug", instituteCode: null);
 
       return true;
     }
@@ -61,7 +63,9 @@ class LoginHelper {
       loginContext.selectedSchool.instituteCode,
     );
 
-    app.kretaApi.users[userID] = KretaClient();
+    app.kretaApi.users[userID] = KretaClient(
+        instituteCode: loginContext.selectedSchool.instituteCode,
+        userId: userID);
 
     if (await app.kretaApi.users[userID].login(user)) {
       await app.settings.update(login: false);

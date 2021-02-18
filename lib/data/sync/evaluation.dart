@@ -41,7 +41,7 @@ class EvaluationSync {
           }
         });
       }
-      
+
       uiPending = true;
 
       return _evaluations != null;

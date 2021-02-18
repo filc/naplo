@@ -1,10 +1,11 @@
+import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:filcnaplo/ui/common/account_button.dart';
 import 'package:filcnaplo/ui/pages/home/builder.dart';
-import 'package:filcnaplo/ui/pages/search/bar.dart';
+import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/context/app.dart';
-import 'package:filcnaplo/ui/pages/search/page.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _refreshHome = GlobalKey<RefreshIndicatorState>();
+  // final _refreshHome = GlobalKey<RefreshIndicatorState>();
 
   FeedBuilder _feedBuilder;
 
@@ -28,49 +29,85 @@ class _HomePageState extends State<HomePage> {
     if (homePending()) _feedBuilder.build();
 
     return Scaffold(
-      body: Stack(
-        children: [
-          // Cards
-          Container(
-            child: RefreshIndicator(
-              key: _refreshHome,
-              displacement: 100.0,
-              onRefresh: () async {
-                await app.sync.fullSync();
-              },
-              child: CupertinoScrollbar(
-                child: AnimationLimiter(
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(
-                        parent: AlwaysScrollableScrollPhysics()),
-                    padding: EdgeInsets.only(top: 100.0),
-                    itemCount: _feedBuilder.elements.length,
-                    itemBuilder: (context, index) {
-                      return AnimationConfiguration.staggeredList(
-                        position: index,
-                        duration: Duration(milliseconds: 500),
-                        child: SlideAnimation(
-                          verticalOffset: 150,
-                          child: FadeInAnimation(
-                            child: _feedBuilder.elements[index],
-                          ),
+      body: SafeArea(
+        child: NestedScrollView(
+          physics: BouncingScrollPhysics(),
+          headerSliverBuilder: (context, _) {
+            return [
+              SliverAppBar(
+                backgroundColor: app.settings.theme.scaffoldBackgroundColor,
+                actions: [
+                  IconButton(
+                    icon: Icon(FeatherIcons.search),
+                    onPressed: () {},
+                  ),
+                  AccountButton(),
+                ],
+                floating: false,
+                pinned: true,
+                expandedHeight: 230,
+                shadowColor: Colors.transparent,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        stops: [0, 0.1, 0.1, 1],
+                        colors: [
+                          app.settings.theme.scaffoldBackgroundColor,
+                          app.settings.theme.scaffoldBackgroundColor,
+                          textColor(app.settings.theme.scaffoldBackgroundColor)
+                              .withOpacity(.02),
+                          Colors.transparent,
+                        ],
+                      ),
+                    ),
+                    child: Swiper(
+                      loop: false,
+                      physics: BouncingScrollPhysics(),
+                      pagination: SwiperPagination(
+                        alignment: Alignment.bottomCenter,
+                        margin: EdgeInsets.only(top: 12.0),
+                        builder: DotSwiperPaginationBuilder(
+                          activeColor: app.settings.appColor,
+                          color: textColor(
+                                  app.settings.theme.scaffoldBackgroundColor)
+                              .withOpacity(.2),
+                          space: 5.0,
+                          size: 8.0,
+                          activeSize: 8.0,
                         ),
-                      );
-                    },
+                      ),
+                      itemCount: 3,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: EdgeInsets.only(top: 48.0, bottom: 24.0),
+                          padding: EdgeInsets.all(24.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.deepPurple,
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Good night!",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-            ),
+              )
+            ];
+          },
+          body: Container(
+            child: Text("Stuff"),
           ),
-
-          // Search bar
-          SearchBar(
-            openSearch: () => showDialog(
-              context: context,
-              builder: (context) => SearchPage(() => setState(() {})),
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
@@ -92,7 +129,8 @@ class _HomePageState extends State<HomePage> {
       app.user.sync.homework.uiPending = false;
 
       return true;
-    } else
+    } else {
       return false;
+    }
   }
 }

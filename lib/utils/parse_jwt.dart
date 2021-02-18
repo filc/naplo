@@ -2,10 +2,9 @@ import 'dart:convert';
 
 Map<String, dynamic> parseJwt(String token) {
   if (token == null) return null;
-  
+
   final parts = token.split('.');
-  if (parts.length != 3) 
-    return null;
+  if (parts.length != 3) return null;
 
   final payload = parts[1];
   var normalized = base64Url.normalize(payload);

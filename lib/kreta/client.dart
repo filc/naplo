@@ -24,6 +24,7 @@ import 'package:filcnaplo/data/models/user.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/data/models/absence.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 
 class KretaClient {
   var client = http.Client();
@@ -31,9 +32,11 @@ class KretaClient {
   String userAgent;
   String accessToken;
   String refreshToken;
-  String instituteCode;
-  String userId;
+  final String instituteCode;
+  final String userId;
   bool kretaOffline = false;
+
+  KretaClient({@required this.instituteCode, @required this.userId});
 
   Future checkResponse(http.Response response, {bool retry = true}) async {
     if (instituteCode != null) {
@@ -82,11 +85,18 @@ class KretaClient {
           school["name"] ?? "-",
           school["city"] ?? "-")));
 
-      schools.add(School(
-        "klik035246001",
-        "Zuglói Szent Szakáll Gimnázium",
-        "Budapest",
-      ));
+      schools.addAll([
+        School(
+          "klik035246001",
+          "Zuglói Szent Szakáll Gimnázium",
+          "Budapest",
+        ),
+        School(
+          "localhost",
+          "Localhost test server",
+          "Local",
+        )
+      ]);
 
       return schools;
     } catch (error) {
@@ -167,7 +177,9 @@ class KretaClient {
   Future<bool> login(User user) async {
     try {
       var response = await client.post(
-        Uri.parse(BaseURL.KRETA_IDP + KretaEndpoints.token),
+        Uri.parse(user.instituteCode == "localhost"
+            ? BaseURL.kreta(user.instituteCode) + "/idp" + KretaEndpoints.token
+            : BaseURL.KRETA_IDP + KretaEndpoints.token),
         body: {
           "userName": user.username,
           "password": user.password,
@@ -207,9 +219,6 @@ class KretaClient {
       if (responseJson["error"] == null) {
         accessToken = responseJson["access_token"];
         refreshToken = responseJson["refresh_token"];
-        instituteCode = user.instituteCode;
-        userId = user.id;
-
         Map studentJson = parseJwt(accessToken);
 
         if (!(await app.storage.storage.query("users"))
@@ -273,7 +282,6 @@ class KretaClient {
   // }
 
   Future<List<Message>> getMessages(String type) async {
-    print(userAgent);
     try {
       var response = await client.get(
         Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.messages(type)),
@@ -594,21 +602,25 @@ class KretaClient {
 
   Future<Map<String, dynamic>> getGroup() async {
     try {
-      var response = await client.get(
-        Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.groups),
-        headers: {
-          "Authorization": "Bearer $accessToken",
-          "User-Agent": userAgent
-        },
-      );
+      if (app.user.instituteCode != "localhost") {
+        var response = await client.get(
+          Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.groups),
+          headers: {
+            "Authorization": "Bearer $accessToken",
+            "User-Agent": userAgent
+          },
+        );
 
-      await checkResponse(response);
+        await checkResponse(response);
 
-      List responseJson = jsonDecode(response.body);
-      return {
-        "uid": responseJson[0]["OktatasNevelesiFeladat"]["Uid"],
-        "className": responseJson[0]["Nev"]
-      };
+        List responseJson = jsonDecode(response.body);
+        return {
+          "uid": responseJson[0]["OktatasNevelesiFeladat"]["Uid"],
+          "className": responseJson[0]["Nev"]
+        };
+      } else {
+        return {"uid": "0", "className": "8.B"};
+      }
     } catch (error) {
       print("ERROR: KretaAPI.getGroup: " + error.toString());
       return null;
@@ -689,7 +701,6 @@ class KretaClient {
       List responseJson = jsonDecode(response.body);
       List<Homework> homeworks = [];
       responseJson.forEach((homework) async {
-        //homeworks.add(Homework.fromJson(homework)
         var response2 = await client.get(
           Uri.parse(BaseURL.kreta(instituteCode) +
               KretaEndpoints.homework +

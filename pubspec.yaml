@@ -14,7 +14,7 @@ dependencies:
   http: ^0.13.0
   cupertino_icons: ^1.0.2
   dynamic_theme:
-    git: 
+    git:
       url: https://github.com/Norbert515/dynamic_theme
   feather_icons_flutter: ^4.7.4
   flutter_typeahead: ^2.0.0
@@ -30,7 +30,6 @@ dependencies:
   path_provider: ^1.6.9
   tinycolor: ^1.0.2
   open_file: ^3.0.1
-  background_fetch: ^0.7.0
   circular_reveal_animation: ^1.1.5
   flutter_speed_dial:
     git:
@@ -50,6 +49,9 @@ dependencies:
     git:
       url: https://github.com/josh-burton/flutter_staggered_animations.git
       ref: findAncestorWidgetOfExactType
+  flutter_local_notifications: ^4.0.1
+  salomon_bottom_bar: ^2.0.1
+  background_fetch: ^0.7.0
 
 dev_dependencies:
   flutter_test:

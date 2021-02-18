@@ -1,10 +1,12 @@
 import 'package:filcnaplo/kreta/client.dart';
+import 'package:flutter/material.dart';
 
 class BaseURL {
   static const FILC = "https://filcnaplo.hu";
   static const FILC_BACKUP = "https://backup.filcnaplo.hu";
-  static String kreta(String instituteCode) =>
-      "https://$instituteCode.e-kreta.hu";
+  static String kreta(String instituteCode) => instituteCode == "localhost"
+      ? "http://localhost"
+      : "https://$instituteCode.e-kreta.hu";
   static const KRETA_IDP = "https://idp.e-kreta.hu";
   static const KRETA_ADMIN = "https://eugyintezes.e-kreta.hu";
   static const KRETA_FILES = "https://files.e-kreta.hu";
@@ -57,9 +59,9 @@ class AdminEndpoints {
 
 class KretaAPI {
   Map<String, KretaClient> users = {};
-  KretaClient client = KretaClient();
+  KretaClient client = KretaClient(instituteCode: "", userId: "");
 
-  void addUser(userID) {
-    if (users[userID] == null) users[userID] = KretaClient();
+  void addUser(String userID, {@required String instituteCode}) {
+    if (users[userID] == null) users[userID] = KretaClient(userId: userID, instituteCode: instituteCode);
   }
 }

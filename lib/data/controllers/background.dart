@@ -1,23 +1,56 @@
 import 'package:background_fetch/background_fetch.dart';
+import 'package:filcnaplo/data/tasks/syncEvaluations.dart';
 
 class BackgroundController {
-  init() {
-    BackgroundFetch.configure(
-      BackgroundFetchConfig(minimumFetchInterval: 15),
-      (String taskId) async {
-        print("INFO: [BackgroundFetch] taskId: $taskId");
-        BackgroundFetch.finish(taskId);
-      },
-    ).then((int status) {
-      print("INFO: [BackgroundFetch] configure status: " + status.toString());
-    }).catchError((error) {
-      print("ERROR: [BackgroundFetch] configure failed: " + error.toString());
-    });
+  Future executeTask(String taskId) async {
+    switch (taskId) {
+      case "flutter_background_fetch":
+        await syncEvaluations();
+    }
   }
 
-  Future test() async {
-    await BackgroundFetch.scheduleTask(
-      TaskConfig(taskId: "task1", delay: 5000),
-    );
+  Future init() async {
+    try {
+      int status = await BackgroundFetch.configure(
+        BackgroundFetchConfig(
+          minimumFetchInterval: 15,
+          stopOnTerminate: false,
+          enableHeadless: true,
+          startOnBoot: true,
+          requiresBatteryNotLow: false,
+          requiresCharging: false,
+          requiresStorageNotLow: false,
+          requiresDeviceIdle: false,
+          requiredNetworkType: NetworkType.ANY,
+        ),
+        (String taskId) async {
+          print("INFO: [BackgroundFetch] taskId: $taskId");
+          // try {
+          await executeTask(taskId);
+          // } catch (error) {
+          // print("ERROR: [BackgroundFetch] Failed to execute task: " + taskId);
+          // }
+          BackgroundFetch.finish(taskId);
+        },
+      );
+      print("INFO: [BackgroundFetch] configure status: " + status.toString());
+    } catch (error) {
+      print("ERROR: [BackgroundFetch] configure failed: " + error.toString());
+    }
+
+    BackgroundFetch.registerHeadlessTask(_backgroundFetchHeadlessTask);
+  }
+
+  void _backgroundFetchHeadlessTask(HeadlessTask task) {
+    String taskId = task.taskId;
+    bool isTimeout = task.timeout;
+    if (isTimeout) {
+      // This task has exceeded its allowed running-time.
+      print("[BackgroundFetch] Headless task timed-out: $taskId");
+      BackgroundFetch.finish(taskId);
+      return;
+    }
+    print("[BackgroundFetch] Headless event received: $taskId");
+    BackgroundFetch.finish(taskId);
   }
 }

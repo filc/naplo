@@ -1,5 +1,7 @@
 import 'package:filcnaplo/data/context/page.dart';
 import 'package:filcnaplo/data/context/theme.dart';
+import 'package:filcnaplo/data/controllers/background.dart';
+import 'package:filcnaplo/data/controllers/notification.dart';
 import 'package:filcnaplo/kreta/api.dart';
 import 'package:filcnaplo/data/models/user.dart';
 import 'package:filcnaplo/data/controllers/settings.dart';
@@ -77,4 +79,6 @@ class AppContext {
   }
 
   PageContext get pageContext => _pageContext;
+  NotificationController notifications = NotificationController();
+  BackgroundController background = BackgroundController();
 }

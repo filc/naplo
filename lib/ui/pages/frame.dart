@@ -44,6 +44,7 @@ class _PageFrameState extends State<PageFrame> {
       app.user.kreta.userAgent = app.settings.config.config.userAgent;
       app.settings.config.sync().then((success) {
         app.user.kreta.userAgent = app.settings.config.config.userAgent;
+        app.background.init();
         if (app.user.loginState) app.sync.fullSync();
       }).catchError((error) {
         print("ERROR: PageFrame.initState: Could not get config: $error");
@@ -64,6 +65,7 @@ class _PageFrameState extends State<PageFrame> {
         });
       }
     });
+
   }
 
   void _navItemSelected(int item) {
@@ -167,7 +169,7 @@ class _PageFrameState extends State<PageFrame> {
       animateSyncProgress = false;
       Future.delayed(
         Duration(milliseconds: 200),
-        () => setState(() => showSyncProgress = false),
+        () => mounted ? setState(() => showSyncProgress = false) : null,
       );
     }
 

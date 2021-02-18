@@ -1,6 +1,7 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/models/absence.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/pages/absences/absence/view.dart';
@@ -71,7 +72,7 @@ class AbsenceTile extends StatelessWidget {
                       )
                     : Container(),
                 Text(
-                  capital(absence.subject.name),
+                  capital(absence.subject.name ?? I18n.of(context).unknown),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

@@ -34,7 +34,7 @@ class AbsenceView extends StatelessWidget {
               ],
             ),
             subtitle: Text(
-              capital(absence.subject.name),
+              capital(absence.subject.name ?? I18n.of(context).unknown),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),

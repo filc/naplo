@@ -82,15 +82,13 @@ class Evaluation {
     );
   }
 
-  bool compareTo(dynamic other) {
-    if (this.runtimeType != other.runtimeType) return false;
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Evaluation && runtimeType == other.runtimeType && id == other.id;
 
-    if (this.id == other.id && this.seenDate == other.seenDate) {
-      return true;
-    }
-
-    return false;
-  }
+  @override
+  get hashCode => super.hashCode;
 }
 
 class EvaluationValue {

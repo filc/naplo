@@ -11,7 +11,13 @@ class AccountButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding,
+      margin: padding,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(color: Colors.black12, blurRadius: 6.0, spreadRadius: -8.0)
+        ],
+      ),
       child: IconButton(
         icon: app.user.profileIcon,
         onPressed: () {
