@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  http: any
+  http: ^0.13.0
   cupertino_icons: ^1.0.2
   dynamic_theme:
     git: 
@@ -51,9 +51,9 @@ dependencies:
       url: https://github.com/josh-burton/flutter_staggered_animations.git
       ref: findAncestorWidgetOfExactType
 
-#dev_dependencies:
-#  flutter_test:
-#    sdk: flutter
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
 
 dependency_overrides:
   flutter_svg: 0.20.0-nullsafety.3
