@@ -25,11 +25,11 @@ class _SubjectGraphState extends State<SubjectGraph> {
     List<Evaluation> data = widget.data
         .where((evaluation) => evaluation.value.weight != 0)
         .toList();
-    data.sort((a, b) => a.date.compareTo(b.date));
+    data.sort((a, b) => a.writeDate.compareTo(b.writeDate));
 
     widget.data.forEach((element) {
       if (sortedData.last.length != 0 &&
-          sortedData.last.last.date.difference(element.date).inDays >
+          sortedData.last.last.writeDate.difference(element.writeDate).inDays >
               widget.dayThreshold) sortedData.add([]);
       sortedData.forEach((dataList) {
         dataList.add(element);
@@ -47,9 +47,9 @@ class _SubjectGraphState extends State<SubjectGraph> {
           dataList.map((e) => e.value.weight / 100).reduce((a, b) => a + b);
 
       subjectData.add(FlSpot(
-        dataList[0].date.month +
-            (dataList[0].date.day / 31) +
-            ((dataList[0].date.year - data.first.date.year) * 12),
+        dataList[0].writeDate.month +
+            (dataList[0].writeDate.day / 31) +
+            ((dataList[0].writeDate.year - data.first.writeDate.year) * 12),
         double.parse(average.toStringAsFixed(2)),
       ));
     });
