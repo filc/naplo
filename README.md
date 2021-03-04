@@ -1,9 +1,8 @@
 <img src=".github/assets/banhammer.png" width="10%">
 
-### A Filc Napló és minden más jelentős alternatív Kréta kliens **letiltásra került Google Play-en**, copyright indokkal.
+### A Filc Napló és minden más jelentős alternatív Kréta kliens **letiltásra került Google Play-en**.
 
-A tiltás (legalábbis ebben a formában mindenképpen) szerintünk jogtalan, dolgozunk a megoldáson.\
-Ez annyit jelent, hogy a Playen keresztül nem tudunk nektek frissítéseket kiadni, de a már telepített appok továbbra is működnek, ahogy a GitHub-on elérhető apk-k is.\
+A Filc Napló és minden más jelentős alternatív Kréta kliens letiltásra került Google Play-en, azonban Galaxy Store-on, App Galleryn, AppStore-on és F-Droidon továbbra is elérhetők vagyunk.\
 **[További információ](https://filcnaplo.hu/dmca)**
 
 <img src=".github/assets/banner.png" width="100%">
@@ -13,16 +12,11 @@ Ez annyit jelent, hogy a Playen keresztül nem tudunk nektek frissítéseket kia
 
 A népszerű Filc alkalmazás, alapoktól újraírva. Az eddiginél is gyorsabb és még könnyebben kezelhető.
 
+### [Letöltés](https://filcnaplo.hu/dmca/#telepites)
 
 ### Miért írtátok újra?
 
 Két oka is van. Az egyik az, hogy hogy a régi Filc a Szivacs kódjára épült, amit mi csak foltozgattunk, így egyre átláthatatlanabbá vált a kódbázis. A másik ok a Kréta új alkalmazása, ami már viszonylag gyors és egész könnyen kezelhető. Mivel versenyben szeretnénk maradni, a Filcet egy teljes körű iskolai asszisztenssé szeretnénk tenni, ami segít az időd beosztásában, a tanulmányaidban és mindenben IS.
-
-### Hogy tudom letölteni?
-
-[Google playen](https://play.google.com/store/apps/details?id=hu.filcnaplo.ellenorzo) fent vagyunk, így onnan egy kattintással letöltheted. Ha a Google-t minden gonosz forrásának tartod, akkor [weboldalunkról](https://filcnaplo.hu/downloads) APK formájában is letöltheted az appot.
-
-A Filc IOS-en is működni fog, azonban az AppStore-ba való kikerüléshez évente $100-t kell befizetni. Ha szeretnéd ezt a folyamatot meggyorsítani, kérjük, adományozz [PayPalen](https://paypal.me/filcnaplo), vagy támogass rendszeresen [Patreonon](https://patreon.com/filcnaplo).
 
 ### Hol léphetek veletek kapcsolatba?
 

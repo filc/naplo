@@ -19,7 +19,7 @@ class EventTile extends StatelessWidget {
           Text(formatDate(context, event.start)),
         ]),
         subtitle: Text(
-          event.content,
+          escapeHtml(event.content),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),

@@ -291,6 +291,8 @@ class _MessagesPageState extends State<MessagesPage>
     _noteBuilder.build();
     _eventBuilder.build();
 
+    messageTiles = [];
+
     messageTiles.addAll(_messageBuilder.messageTiles
         .getSelectedMessages(selectedMessageType.index));
     messageTiles.add(SizedBox(height: 100.0));

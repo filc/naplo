@@ -93,7 +93,7 @@ class TimetableTabIndicator extends StatelessWidget {
     return Expanded(
       child: Container(
         margin: EdgeInsets.all(4.0),
-        child: FlatButton(
+        child: MaterialButton(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
           padding: EdgeInsets.zero,

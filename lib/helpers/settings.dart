@@ -35,7 +35,7 @@ class SettingsHelper {
           shrinkWrap: true,
         ),
         actions: [
-          FlatButton(
+          TextButton(
             child: Text(
               I18n.of(context).dialogOk,
               style: TextStyle(color: app.settings.appColor),

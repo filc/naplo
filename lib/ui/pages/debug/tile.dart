@@ -16,7 +16,7 @@ class DebugTile extends StatelessWidget {
 
     try {
       var req = await api.client.get(
-        endpoint.host + endpoint.uri,
+        Uri.parse(endpoint.host + endpoint.uri),
         headers: {
           "User-Agent": api.userAgent,
           "Authorization": "Bearer ${api.accessToken}",

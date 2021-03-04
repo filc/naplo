@@ -33,7 +33,9 @@ class _AccountTileState extends State<AccountTile> {
     if (!editMode) {
       return Container(
         margin: EdgeInsets.symmetric(horizontal: 14.0),
-        child: FlatButton(
+        child: MaterialButton(
+          elevation: 0,
+          highlightElevation: 0,
           padding: EdgeInsets.zero,
           onPressed: () {
             widget.onSelect(app.users.indexOf(widget.user));
@@ -145,7 +147,9 @@ class AccountTileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      child: FlatButton(
+      child: MaterialButton(
+        elevation: 0,
+        highlightElevation: 0,
         height: 50,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),

@@ -72,7 +72,7 @@ class _AttachmentTileState extends State<AttachmentTile> {
 
     return Container(
       padding: EdgeInsets.fromLTRB(18.0, 0.0, 18.0, 12.0),
-      child: FlatButton(
+      child: MaterialButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
