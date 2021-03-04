@@ -19,7 +19,9 @@ class GradeTile extends StatelessWidget {
     final bool isTemp = evaluation.id.startsWith("temp_");
     return Padding(
       padding: padding,
-      child: FlatButton(
+      child: MaterialButton(
+        elevation: 0,
+        highlightElevation: 0,
         child: EvaluationTile(evaluation, deleteCallback: deleteCallback),
         padding: EdgeInsets.only(right: 6.0),
         shape:

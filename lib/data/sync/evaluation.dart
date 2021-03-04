@@ -28,6 +28,7 @@ class EvaluationSync {
       }
 
       if (_evaluations != null) {
+        _evaluations.sort((a, b) => -a.writeDate.compareTo(b.writeDate));
         evaluations = _evaluations;
         if (_averages != null) averages = _averages;
 
@@ -41,7 +42,7 @@ class EvaluationSync {
           }
         });
       }
-      
+
       uiPending = true;
 
       return _evaluations != null;

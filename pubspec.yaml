@@ -1,6 +1,6 @@
 name: filcnaplo
 description: "Nem hivatalos e-napló alkalmazás az e-Kréta rendszerhez"
-version: 2.1.1+61
+version: 2.1.2+62
 publish_to: none
 
 environment:
@@ -11,15 +11,17 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  http: ^0.12.1
-  cupertino_icons: ^0.1.2
-  dynamic_theme: ^1.0.0
+  http: ^0.13.0
+  cupertino_icons: ^1.0.2
+  dynamic_theme:
+    git: 
+      url: https://github.com/Norbert515/dynamic_theme
   feather_icons_flutter: ^4.7.4
-  flutter_typeahead: ^1.8.1
-  file_picker: ^1.9.0
+  flutter_typeahead: ^2.0.0
+  file_picker: ^2.1.6
   package_info: ^0.4.0
   intl: ^0.17.0-nullsafety.2
-  flutter_linkify: ^3.1.3
+  flutter_linkify: ^4.0.2
   url_launcher: ^5.4.10
   flutter_html: ^1.0.0
   share: any
@@ -28,7 +30,7 @@ dependencies:
   path_provider: ^1.6.9
   tinycolor: ^1.0.2
   open_file: ^3.0.1
-  background_fetch: ^0.6.0
+  background_fetch: ^0.7.0
   circular_reveal_animation: ^1.1.5
   flutter_speed_dial:
     git:
@@ -38,20 +40,25 @@ dependencies:
   fl_chart: ^0.12.2
   flutter_material_color_picker: ^1.0.5
   flutter_swiper: ^1.1.6
-  in_app_review: ^0.2.0
-  pdf: ^1.11.1
-  printing: ^3.6.1
+  in_app_review: ^1.0.4
+  pdf: ^2.1.0
+  printing: ^4.1.0
   photo_view: ^0.10.2
   downloads_path_provider: ^0.1.0
   webview_flutter: any
-  flutter_staggered_animations: "^0.1.2"
+  flutter_staggered_animations:
+    git:
+      url: https://github.com/josh-burton/flutter_staggered_animations.git
+      ref: findAncestorWidgetOfExactType
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 dependency_overrides:
-  intl: 0.17.0-nullsafety.2
+  flutter_svg: 0.20.0-nullsafety.3
+  path_drawing: ^0.5.0-nullsafety.0
+  path_parsing: ^0.2.0-nullsafety
 
 flutter:
   uses-material-design: true

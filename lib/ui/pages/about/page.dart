@@ -59,8 +59,7 @@ class AboutPage extends StatelessWidget {
                   text: I18n.of(context).aboutPrivacy,
                   onPressed: () {
                     showDialog(
-                        context: context,
-                        builder: (context) => AboutPrivacy());
+                        context: context, builder: (context) => AboutPrivacy());
                   },
                 ),
                 AboutButton(
@@ -163,7 +162,7 @@ class AboutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 250.0,
-      child: FlatButton(
+      child: MaterialButton(
         shape: StadiumBorder(),
         child: ListTile(
             leading: icon != null
@@ -204,7 +203,7 @@ class SocialButton extends StatelessWidget {
               )
             ],
           ),
-          child: FlatButton(
+          child: MaterialButton(
             shape: CircleBorder(),
             child: icon,
             color: color,

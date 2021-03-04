@@ -149,7 +149,7 @@ class _PlannerPageState extends State<PlannerPage>
                           _homeworkBuilder.homeworkTiles[0].length == 0
                               ? Label(I18n.of(context).homeworkPast)
                               : _homeworkBuilder.homeworkTiles[1].length > 0
-                                  ? FlatButton(
+                                  ? TextButton(
                                       onPressed: () => setState(() =>
                                           showPastHomework = !showPastHomework),
                                       child: Row(
@@ -206,7 +206,7 @@ class _PlannerPageState extends State<PlannerPage>
                           _examBuilder.examTiles[0].length == 0
                               ? Label(I18n.of(context).examPast.toUpperCase())
                               : _examBuilder.examTiles[1].length > 0
-                                  ? FlatButton(
+                                  ? TextButton(
                                       onPressed: () => setState(
                                           () => showPastExams = !showPastExams),
                                       child: Row(
