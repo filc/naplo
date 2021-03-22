@@ -1,17 +1,17 @@
 name: filcnaplo
 description: "Nem hivatalos e-napló alkalmazás az e-Kréta rendszerhez"
-version: 2.1.2+62
+version: 2.1.3+64
 publish_to: none
 
 environment:
-  sdk: ">=2.3.0 <3.0.0"
+  sdk: ">=2.11.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  http: ^0.13.0
+  http: ^0.13.1
   cupertino_icons: ^1.0.2
   dynamic_theme:
     git: 
@@ -19,31 +19,33 @@ dependencies:
   feather_icons_flutter: ^4.7.4
   flutter_typeahead: ^2.0.0
   file_picker: ^2.1.6
-  package_info: ^0.4.0
-  intl: ^0.17.0-nullsafety.2
-  flutter_linkify: ^4.0.2
+  package_info: ^2.0.0
+  intl: ^0.17.0
+  flutter_linkify: #TODO return to main pub as soon as his PR is merged
+    git:
+      url: https://github.com/MohamedEL-Torky/flutter_linkify
   url_launcher: ^5.4.10
   flutter_html: ^1.0.0
   share: any
-  sqflite: ^1.3.0
+  sqflite: ^2.0.0+3
   permission_handler: ^5.0.0
-  path_provider: ^1.6.9
+  path_provider: ^2.0.1
   tinycolor: ^1.0.2
   open_file: ^3.0.1
   background_fetch: ^0.7.0
-  circular_reveal_animation: ^1.1.5
+  circular_reveal_animation: ^2.0.0
   flutter_speed_dial:
     git:
       url: https://github.com/irasekh3/flutter_speed_dial
       ref: master
   image_cropper: ^1.2.3
-  fl_chart: ^0.12.2
+  fl_chart: ^0.20.1
   flutter_material_color_picker: ^1.0.5
   flutter_swiper: ^1.1.6
   in_app_review: ^1.0.4
-  pdf: ^2.1.0
-  printing: ^4.1.0
-  photo_view: ^0.10.2
+  pdf: ^3.0.1
+  printing: ^5.0.0
+  photo_view: ^0.11.1
   downloads_path_provider: ^0.1.0
   webview_flutter: any
   flutter_staggered_animations:
@@ -51,14 +53,14 @@ dependencies:
       url: https://github.com/josh-burton/flutter_staggered_animations.git
       ref: findAncestorWidgetOfExactType
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
+#dev_dependencies:
+#  flutter_test:
+#    sdk: flutter
 
-dependency_overrides:
-  flutter_svg: 0.20.0-nullsafety.3
-  path_drawing: ^0.5.0-nullsafety.0
-  path_parsing: ^0.2.0-nullsafety
+#dependency_overrides:
+#  flutter_svg: 0.20.0-nullsafety.3
+#  path_drawing: ^0.5.0-nullsafety.0
+#  path_parsing: ^0.2.0-nullsafety
 
 flutter:
   uses-material-design: true
