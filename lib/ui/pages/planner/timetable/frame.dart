@@ -58,6 +58,21 @@ class _TimetableFrameState extends State<TimetableFrame>
     });
   }
 
+  /// Return the index of today's tab in the timetable.
+  /// Returns 1 (first tab) if there are no more schooldays this week.
+  int todayIndex() {
+    int i = 0;
+    int returnable = 1;
+    _timetableBuilder.week.days.forEach((element) {
+      if (element.date.weekday >= DateTime.now().weekday) {
+        returnable = i;
+      } else {
+        i++;
+      }
+    });
+    return returnable;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -71,20 +86,6 @@ class _TimetableFrameState extends State<TimetableFrame>
       return dif > -24 && dif < 0;
     }, orElse: () => Day()).date;
 
-    int dayIndex = currentDay != null
-        ? currentDay.weekday - (6 - _timetableBuilder.week.days.length)
-        : 0;
-
-    if (_timetableBuilder.week.days.length > 1) {
-      dayIndex = dayIndex.clamp(0, _timetableBuilder.week.days.length - 1);
-    }
-
-    _tabController = TabController(
-      vsync: this,
-      length: _timetableBuilder.week.days.length.clamp(1, 7),
-      initialIndex: dayIndex,
-    );
-
     selectedWeek = _timetableBuilder.getCurrentWeek();
 
     refreshWeek(offline: true)
@@ -97,6 +98,18 @@ class _TimetableFrameState extends State<TimetableFrame>
                     _timetableBuilder.build(selectedWeek);
                   }))
             });
+
+    int dayIndex = currentDay != null ? todayIndex() : 0;
+
+    if (_timetableBuilder.week.days.length > 1) {
+      dayIndex = dayIndex.clamp(0, _timetableBuilder.week.days.length - 1);
+    }
+
+    _tabController = TabController(
+      vsync: this,
+      length: _timetableBuilder.week.days.length.clamp(1, 7),
+      initialIndex: dayIndex,
+    );
   }
 
   @override
