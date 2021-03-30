@@ -13,8 +13,6 @@ class HomeworkSync {
       List<Homework> _homework;
       DateTime from = DateTime.fromMillisecondsSinceEpoch(1);
       _homework = await app.user.kreta.getHomeworks(from);
-      print(_homework);
-
       if (_homework == null) {
         await app.user.kreta.refreshLogin();
         _homework = await app.user.kreta.getHomeworks(from);
