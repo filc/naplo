@@ -106,8 +106,14 @@ class _PageFrameState extends State<PageFrame> {
         selectedPage = PageType.absences;
         return _pageRoute((_) => AbsencesPage());
       default:
-        selectedPage = PageType.home;
-        return _pageRoute((_) => HomePage());
+        selectedPage = PageType.values[app.settings.defaultPage];
+        return _pageRoute((_) => [
+              HomePage(),
+              EvaluationsPage(),
+              PlannerPage(),
+              MessagesPage(),
+              AbsencesPage(),
+            ][selectedPage.index]);
     }
   }
 

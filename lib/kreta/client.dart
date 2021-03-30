@@ -241,8 +241,12 @@ class KretaClient {
     }
   }
 
-  Future<bool> refreshLogin() async =>
-      await login(app.users.firstWhere((search) => search.id == userId));
+  Future<bool> refreshLogin() async => await login(
+        app.users.firstWhere(
+          (search) => search.id == userId,
+          orElse: () => null,
+        ),
+      );
 
   // currently buggy, do not use
   // Future<bool> refreshLogin() async {
