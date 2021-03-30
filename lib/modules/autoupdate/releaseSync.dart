@@ -14,7 +14,7 @@ class ReleaseSync {
         latestRelease.version +
         "\nNotes: " +
         latestRelease.notes +
-        "\nLink:" +
+        "\nLink: " +
         latestRelease.url);
   }
 }

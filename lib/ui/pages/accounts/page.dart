@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/pages/settings/page.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/modules/autoupdate/main.dart';
+import 'package:filcnaplo/modules/autoupdate/autoUpdater.dart';
 
 class AccountPage extends StatefulWidget {
   @override
@@ -144,7 +144,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
 
-              Padding(padding: EdgeInsets.all(10), child: AutoUpdater()),
+              AutoUpdateButton(),
 
               Padding(
                 padding: EdgeInsets.only(bottom: 14.0),
