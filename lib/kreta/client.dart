@@ -691,14 +691,13 @@ class KretaClient {
       await checkResponse(response);
 
       List responseJson = jsonDecode(response.body);
-      List<Homework> homeworks = [];
-      responseJson.forEach((homework) async {
-        //homeworks.add(Homework.fromJson(homework)
+      List<Homework> homework = [];
+      await Future.forEach(responseJson, (hw) async {
         var response2 = await client.get(
           Uri.parse(BaseURL.kreta(instituteCode) +
               KretaEndpoints.homework +
               "/" +
-              homework["Uid"]),
+              hw["Uid"]),
           headers: {
             "Authorization": "Bearer $accessToken",
             "User-Agent": userAgent
@@ -708,10 +707,10 @@ class KretaClient {
         await checkResponse(response2);
 
         Map responseJson2 = jsonDecode(response2.body);
-        homeworks.add(Homework.fromJson(responseJson2));
+        homework.add(Homework.fromJson(responseJson2));
       });
 
-      return homeworks;
+      return homework;
     } catch (error) {
       print("ERROR: KretaAPI.getHomeworks: " + error.toString());
       return null;
