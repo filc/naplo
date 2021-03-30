@@ -8,6 +8,7 @@ class BaseURL {
   static const KRETA_IDP = "https://idp.e-kreta.hu";
   static const KRETA_ADMIN = "https://eugyintezes.e-kreta.hu";
   static const KRETA_FILES = "https://files.e-kreta.hu";
+  static const FILC_REPO = "https://api.github.com/repos/filc/naplo";
 }
 
 class FilcEndpoints {
@@ -17,6 +18,7 @@ class FilcEndpoints {
   static const config2 = "/v2/config.json";
   static const supporters = "/v2/supporters.json";
   static const news = "/v2/news.json";
+  static const latestRelease = "/releases/latest";
 }
 
 class KretaEndpoints {
