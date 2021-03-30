@@ -59,18 +59,16 @@ class _TimetableFrameState extends State<TimetableFrame>
   }
 
   /// Return the index of today's tab in the timetable.
-  /// Returns 1 (first tab) if there are no more schooldays this week.
+  /// Returns 0 (first tab) if there are no more schooldays this week.
   int todayIndex() {
-    int i = 0;
-    int returnable = 1;
-    _timetableBuilder.week.days.forEach((element) {
+    for (int i = 0; i < _timetableBuilder.week.days.length; i++) {
+      Day element = _timetableBuilder.week.days[i];
       if (element.date.weekday >= DateTime.now().weekday) {
-        returnable = i;
-      } else {
-        i++;
+        return i;
       }
-    });
-    return returnable;
+    }
+
+    return 0;
   }
 
   @override
