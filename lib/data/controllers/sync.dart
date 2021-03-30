@@ -37,11 +37,6 @@ class SyncController {
     );
 
     createTask(
-      name: "evaluation",
-      task: app.user.sync.evaluation.sync(),
-    );
-
-    createTask(
       name: "timetable",
       task: app.user.sync.timetable.sync(),
     );
@@ -74,6 +69,11 @@ class SyncController {
     createTask(
       name: "absence",
       task: app.user.sync.absence.sync(),
+    );
+
+    createTask(
+      name: "evaluation",
+      task: app.user.sync.evaluation.sync(),
     );
 
     currentTask = 0;
