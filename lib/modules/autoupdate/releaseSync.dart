@@ -1,5 +1,4 @@
-import 'package:filcnaplo/ui/pages/messages/message/attachment.dart';
-import 'package:http/http.dart' as http;
+import 'dart:io';
 import 'package:filcnaplo/data/context/app.dart';
 
 class ReleaseSync {
@@ -9,7 +8,10 @@ class ReleaseSync {
   Future sync() async {
     var latestReleaseJson = await app.user.kreta.getLatestRelease();
     latestRelease = Release.fromJson(latestReleaseJson);
-    isNew = compareVersions(latestRelease.version, app.currentAppVersion);
+    if (Platform.isAndroid) {
+      isNew = compareVersions(latestRelease.version, app.currentAppVersion);
+    } else
+      isNew = false;
   }
 
   bool compareVersions(String first, String second) {
