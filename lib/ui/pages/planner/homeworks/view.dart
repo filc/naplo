@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'attachment.dart';
 
@@ -82,19 +83,33 @@ class _HomeworkViewState extends State<HomeworkView> {
                     ? Html(
                         data: widget.homework.content,
                         onLinkTap: (url) async {
-                          if (await canLaunch(url))
-                            await launch(url);
-                          else
-                            throw '[ERROR] HomeworkView.build: Invalid URL';
+                          await FlutterWebBrowser.openWebPage(
+                            url: url,
+                            customTabsOptions: CustomTabsOptions(
+                              toolbarColor: app.settings.theme.backgroundColor,
+                              showTitle: true,
+                            ),
+                            safariVCOptions: SafariViewControllerOptions(
+                              dismissButtonStyle:
+                                  SafariViewControllerDismissButtonStyle.close,
+                            ),
+                          );
                         },
                       )
                     : SelectableLinkify(
                         text: escapeHtml(widget.homework.content),
                         onOpen: (url) async {
-                          if (await canLaunch(url.url))
-                            await launch(url.url);
-                          else
-                            throw '[ERROR] HomeworkView.build: Invalid URL';
+                          await FlutterWebBrowser.openWebPage(
+                            url: url.url,
+                            customTabsOptions: CustomTabsOptions(
+                              toolbarColor: app.settings.theme.backgroundColor,
+                              showTitle: true,
+                            ),
+                            safariVCOptions: SafariViewControllerOptions(
+                              dismissButtonStyle:
+                                  SafariViewControllerDismissButtonStyle.close,
+                            ),
+                          );
                         },
                       ),
                 widget.homework.attachments == []

@@ -10,6 +10,7 @@ import 'package:filcnaplo/utils/format.dart';
 import 'package:filcnaplo/ui/pages/messages/compose.dart';
 import 'package:filcnaplo/ui/common/profile_icon.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:share/share.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:filcnaplo/generated/i18n.dart';
@@ -277,19 +278,33 @@ class _MessageViewTileState extends State<MessageViewTile> {
                   ? Html(
                       data: messageContent,
                       onLinkTap: (url) async {
-                        if (await canLaunch(url))
-                          await launch(url);
-                        else
-                          throw '[ERROR] MessageView.build: Invalid URL';
+                        await FlutterWebBrowser.openWebPage(
+                          url: url,
+                          customTabsOptions: CustomTabsOptions(
+                            toolbarColor: app.settings.theme.backgroundColor,
+                            showTitle: true,
+                          ),
+                          safariVCOptions: SafariViewControllerOptions(
+                            dismissButtonStyle:
+                                SafariViewControllerDismissButtonStyle.close,
+                          ),
+                        );
                       },
                     )
                   : SelectableLinkify(
                       text: escapeHtml(messageContent),
                       onOpen: (url) async {
-                        if (await canLaunch(url.url))
-                          await launch(url.url);
-                        else
-                          throw '[ERROR] MessageView.build: nvalid URL';
+                        await FlutterWebBrowser.openWebPage(
+                          url: url.url,
+                          customTabsOptions: CustomTabsOptions(
+                            toolbarColor: app.settings.theme.backgroundColor,
+                            showTitle: true,
+                          ),
+                          safariVCOptions: SafariViewControllerOptions(
+                            dismissButtonStyle:
+                                SafariViewControllerDismissButtonStyle.close,
+                          ),
+                        );
                       },
                     ),
             ),
@@ -310,19 +325,33 @@ class _MessageViewTileState extends State<MessageViewTile> {
                   ? Html(
                       data: quotedMessage,
                       onLinkTap: (url) async {
-                        if (await canLaunch(url))
-                          await launch(url);
-                        else
-                          throw '[ERROR] MessageView.build: Invalid URL';
+                        await FlutterWebBrowser.openWebPage(
+                          url: url,
+                          customTabsOptions: CustomTabsOptions(
+                            toolbarColor: app.settings.theme.backgroundColor,
+                            showTitle: true,
+                          ),
+                          safariVCOptions: SafariViewControllerOptions(
+                            dismissButtonStyle:
+                                SafariViewControllerDismissButtonStyle.close,
+                          ),
+                        );
                       },
                     )
                   : SelectableLinkify(
                       text: escapeHtml(quotedMessage),
                       onOpen: (url) async {
-                        if (await canLaunch(url.url))
-                          await launch(url.url);
-                        else
-                          throw '[ERROR] MessageView.build: Invalid URL';
+                        await FlutterWebBrowser.openWebPage(
+                          url: url.url,
+                          customTabsOptions: CustomTabsOptions(
+                            toolbarColor: app.settings.theme.backgroundColor,
+                            showTitle: true,
+                          ),
+                          safariVCOptions: SafariViewControllerOptions(
+                            dismissButtonStyle:
+                                SafariViewControllerDismissButtonStyle.close,
+                          ),
+                        );
                       },
                     ),
             ),

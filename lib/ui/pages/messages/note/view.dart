@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:filcnaplo/ui/common/profile_icon.dart';
@@ -64,19 +65,37 @@ class NoteView extends StatelessWidget {
                         ? Html(
                             data: note.content,
                             onLinkTap: (url) async {
-                              if (await canLaunch(url))
-                                await launch(url);
-                              else
-                                throw '[ERROR] MessageView.build: Invalid URL';
+                              await FlutterWebBrowser.openWebPage(
+                                url: url,
+                                customTabsOptions: CustomTabsOptions(
+                                  toolbarColor:
+                                      app.settings.theme.backgroundColor,
+                                  showTitle: true,
+                                ),
+                                safariVCOptions: SafariViewControllerOptions(
+                                  dismissButtonStyle:
+                                      SafariViewControllerDismissButtonStyle
+                                          .close,
+                                ),
+                              );
                             },
                           )
                         : SelectableLinkify(
                             text: escapeHtml(note.content),
                             onOpen: (url) async {
-                              if (await canLaunch(url.url))
-                                await launch(url.url);
-                              else
-                                throw '[ERROR] MessageView.build: nvalid URL';
+                              await FlutterWebBrowser.openWebPage(
+                                url: url.url,
+                                customTabsOptions: CustomTabsOptions(
+                                  toolbarColor:
+                                      app.settings.theme.backgroundColor,
+                                  showTitle: true,
+                                ),
+                                safariVCOptions: SafariViewControllerOptions(
+                                  dismissButtonStyle:
+                                      SafariViewControllerDismissButtonStyle
+                                          .close,
+                                ),
+                              );
                             },
                           ),
                   ),

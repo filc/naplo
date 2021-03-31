@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -61,19 +62,37 @@ class EventView extends StatelessWidget {
                         ? Html(
                             data: event.content,
                             onLinkTap: (url) async {
-                              if (await canLaunch(url))
-                                await launch(url);
-                              else
-                                throw '[ERROR] MessageView.build: Invalid URL';
+                              await FlutterWebBrowser.openWebPage(
+                                url: url,
+                                customTabsOptions: CustomTabsOptions(
+                                  toolbarColor:
+                                      app.settings.theme.backgroundColor,
+                                  showTitle: true,
+                                ),
+                                safariVCOptions: SafariViewControllerOptions(
+                                  dismissButtonStyle:
+                                      SafariViewControllerDismissButtonStyle
+                                          .close,
+                                ),
+                              );
                             },
                           )
                         : SelectableLinkify(
                             text: escapeHtml(event.content),
                             onOpen: (url) async {
-                              if (await canLaunch(url.url))
-                                await launch(url.url);
-                              else
-                                throw '[ERROR] MessageView.build: nvalid URL';
+                              await FlutterWebBrowser.openWebPage(
+                                url: url.url,
+                                customTabsOptions: CustomTabsOptions(
+                                  toolbarColor:
+                                      app.settings.theme.backgroundColor,
+                                  showTitle: true,
+                                ),
+                                safariVCOptions: SafariViewControllerOptions(
+                                  dismissButtonStyle:
+                                      SafariViewControllerDismissButtonStyle
+                                          .close,
+                                ),
+                              );
                             },
                           ),
                   ),

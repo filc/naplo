@@ -7,6 +7,7 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_html/style.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsView extends StatefulWidget {
@@ -49,10 +50,19 @@ class _NewsViewState extends State<NewsView> {
                           child: SelectableLinkify(
                             text: escapeHtml(widget.news.content),
                             onOpen: (url) async {
-                              if (await canLaunch(url.url))
-                                await launch(url.url);
-                              else
-                                throw '[ERROR] NewsView.build: Invalid URL';
+                              await FlutterWebBrowser.openWebPage(
+                                url: url.url,
+                                customTabsOptions: CustomTabsOptions(
+                                  toolbarColor:
+                                      app.settings.theme.backgroundColor,
+                                  showTitle: true,
+                                ),
+                                safariVCOptions: SafariViewControllerOptions(
+                                  dismissButtonStyle:
+                                      SafariViewControllerDismissButtonStyle
+                                          .close,
+                                ),
+                              );
                             },
                           ),
                         )
@@ -79,10 +89,17 @@ class _NewsViewState extends State<NewsView> {
                           ),
                         ),
                         onPressed: () async {
-                          if (await canLaunch(widget.news.link))
-                            await launch(widget.news.link);
-                          else
-                            throw "Cannot open url ${widget.news.link}";
+                          await FlutterWebBrowser.openWebPage(
+                            url: widget.news.link,
+                            customTabsOptions: CustomTabsOptions(
+                              toolbarColor: app.settings.theme.backgroundColor,
+                              showTitle: true,
+                            ),
+                            safariVCOptions: SafariViewControllerOptions(
+                              dismissButtonStyle:
+                                  SafariViewControllerDismissButtonStyle.close,
+                            ),
+                          );
                         },
                       )
                     : Container(),

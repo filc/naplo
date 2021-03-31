@@ -3,13 +3,13 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/helpers/account.dart';
 import 'package:filcnaplo/ui/common/custom_snackbar.dart';
-import 'package:filcnaplo/ui/pages/accounts/dkt.dart';
 import 'package:filcnaplo/ui/pages/accounts/edit.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/common/profile_icon.dart';
 import 'package:filcnaplo/data/models/user.dart';
 import 'package:filcnaplo/ui/pages/accounts/view.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 class AccountTile extends StatefulWidget {
   final User user;
@@ -89,16 +89,31 @@ class _AccountTileState extends State<AccountTile> {
                           icon: FeatherIcons.grid,
                           title: "DKT",
                           onPressed: () {
-                            if (!app.debugUser)
-                              Navigator.of(context, rootNavigator: true).push(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          DKTPage(widget.user)));
-                            else
+                            if (!app.debugUser) {
+                              String accessToken = app
+                                  .kretaApi.users[widget.user.id].accessToken;
+                              String dkturl =
+                                  "https://dkttanulo.e-kreta.hu/sso?accessToken=$accessToken";
+
+                              FlutterWebBrowser.openWebPage(
+                                url: dkturl,
+                                customTabsOptions: CustomTabsOptions(
+                                  toolbarColor:
+                                      app.settings.theme.backgroundColor,
+                                  showTitle: true,
+                                ),
+                                safariVCOptions: SafariViewControllerOptions(
+                                  dismissButtonStyle:
+                                      SafariViewControllerDismissButtonStyle
+                                          .close,
+                                ),
+                              );
+                            } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   CustomSnackBar(
                                       color: Colors.red,
                                       message: "Debug user has no DKT page."));
+                            }
                           },
                         ),
                         AccountTileButton(
