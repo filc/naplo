@@ -54,6 +54,7 @@ dependencies:
       ref: findAncestorWidgetOfExactType
   flutter_web_browser: ^0.14.0
   sliding_sheet: ^0.5.0
+  flutter_markdown: ^0.6.1
 
 #dev_dependencies:
 #  flutter_test:

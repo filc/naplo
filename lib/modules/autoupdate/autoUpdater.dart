@@ -8,6 +8,7 @@ import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:open_file/open_file.dart';
@@ -112,13 +113,19 @@ class _AutoUpdaterState extends State<AutoUpdater> {
                       ],
                     ),
                   ),
-                  Padding(
+                  Container(
+                    constraints: BoxConstraints(maxHeight: 250),
                     padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      app.user.sync.release.latestRelease.notes,
-                      style: TextStyle(fontSize: 15),
-                      maxLines: 5,
-                      overflow: TextOverflow.ellipsis,
+                    child: Markdown(
+                      data: app.user.sync.release.latestRelease.notes,
+                      padding: EdgeInsets.all(0),
+                      physics: BouncingScrollPhysics(),
+                      styleSheet: MarkdownStyleSheet(
+                        p: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   )
                 ],
