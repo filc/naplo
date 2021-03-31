@@ -15,12 +15,9 @@ class ReleaseSync {
         }
       }
     } else {
-      List<Map> releases = [];
+      // List<Map> releases = [];
       latestRelease = Release.fromJson(releasesJson.first);
     }
-
-    //TODO removeme
-    print("Found release " + latestRelease.version);
 
     if (Platform.isAndroid) {
       isNew = compareVersions(latestRelease.version, app.currentAppVersion);
