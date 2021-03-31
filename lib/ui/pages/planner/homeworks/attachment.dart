@@ -204,7 +204,7 @@ Future downloadAttachment(
   var data = await app.user.kreta.downloadHomeworkAttachment(attachment);
   saveAttachment(attachment, data, context: context).then(
     (String f) => OpenFile.open(f).then((result) {
-      if (result.message != "done") {
+      if (result.type != ResultType.done) {
         print("ERROR: HomeworkView.downloadAttachment: " + result.message);
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(

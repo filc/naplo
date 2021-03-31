@@ -200,6 +200,21 @@ Future downloadAttachment(
   @required BuildContext context,
 }) async {
   var data = await app.user.kreta.downloadAttachment(attachment);
-  saveAttachment(attachment, data, context: context)
-      .then((String f) => OpenFile.open(f));
+  saveAttachment(attachment, data, context: context).then(
+    (String f) => OpenFile.open(f).then((result) {
+      if (result.type != ResultType.done) {
+        print("ERROR: HomeworkView.downloadAttachment: " + result.message);
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              I18n.of(context).messageAttachmentOpenFailed,
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }),
+  );
 }
