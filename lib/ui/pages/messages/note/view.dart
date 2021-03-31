@@ -5,7 +5,6 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:share/share.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:filcnaplo/ui/common/profile_icon.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:filcnaplo/data/models/note.dart';

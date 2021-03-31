@@ -8,7 +8,6 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:share/share.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class EventView extends StatelessWidget {
   final Event event;

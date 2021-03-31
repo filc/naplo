@@ -8,7 +8,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_html/style.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class NewsView extends StatefulWidget {
   final News news;
