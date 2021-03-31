@@ -380,7 +380,16 @@
     "latest": "Töltsd le most a legújabb verziót"
   },
   "update": {
-    "available": "Frissítés elérhető!"
+    "": "frissítés",
+    "downloading": "letöltés",
+    "saving": "mentés",
+    "installing": "telepítés",
+    "newVersion": "Új verzió",
+    "changes": "Újdonságok",
+    "currentVersion": "Jelenlegi verzió",
+    "available": "Frissítés elérhető!",
+    "searchPre": "Kísérleti verziók keresése",
+    "foundPre": "Legfrissebb (kísérleti) verzió"
   },
   "rateLimit": {
     "alert": "{minutes} percenként egyszer frissíthetsz!"

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/ui/pages/accounts/tile.dart';
 import 'package:filcnaplo/ui/pages/login/page.dart';
@@ -7,6 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/pages/settings/page.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/modules/autoupdate/autoUpdater.dart';
+//import 'package:filcnaplo/modules/autoupdate/releaseSync.dart';
 
 class AccountPage extends StatefulWidget {
   @override
@@ -143,6 +147,8 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                 ),
               ),
+
+              if (app.user.sync.release.isNew && Platform.isAndroid) AutoUpdateButton(),
 
               Padding(
                 padding: EdgeInsets.only(bottom: 14.0),

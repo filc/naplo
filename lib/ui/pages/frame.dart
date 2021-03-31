@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:filcnaplo/data/context/page.dart';
 import 'package:filcnaplo/data/models/new.dart';
 import 'package:filcnaplo/data/sync/state.dart';
@@ -14,6 +16,8 @@ import 'package:filcnaplo/ui/pages/welcome/tutorial.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/ui/common/bottom_navbar.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
 
 class PageFrame extends StatefulWidget {
   @override
@@ -31,6 +35,22 @@ class _PageFrameState extends State<PageFrame> {
     selectedPage = PageType.values[app.settings.defaultPage];
 
     // Sync at startup
+
+    if (Platform.isAndroid) {
+      app.user.sync.release.sync().then((_) {
+        getApplicationDocumentsDirectory().then((dir) {
+          String latestVersion = app.user.sync.release.latestRelease.version;
+          List apks = dir
+              .listSync()
+              .where((f) =>
+                  path.basename(f.path) == "filcnaplo-$latestVersion.apk")
+              .toList();
+
+          if (apks.length > 0) apks.first.delete();
+        });
+      });
+    }
+
     app.settings.update().then((_) {
       app.user.kreta.userAgent = app.settings.config.config.userAgent;
       app.settings.config.sync().then((success) {

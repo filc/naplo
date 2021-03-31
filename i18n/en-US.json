@@ -380,7 +380,16 @@
     "latest": "Download the latest version now"
   },
   "update": {
-    "available": "A new version is available!"
+    "": "install update",
+    "downloading": "downloading",
+    "saving": "saving",
+    "installing": "installing",
+    "newVersion": "Update",
+    "changes": "Changes",
+    "currentVersion": "Current version",
+    "available": "Update available!",
+    "searchPre": "Search for experimental versions",
+    "foundPre": "Latest (experimental) version"
   },
   "rateLimit": {
     "alert": "You can only refresh every {minutes} minute(s)!"
