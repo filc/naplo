@@ -8,99 +8,98 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:share/share.dart';
+import 'package:sliding_sheet/sliding_sheet.dart';
 
-class EventView extends StatelessWidget {
-  final Event event;
-
-  EventView(this.event);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24.0),
-          topRight: Radius.circular(24.0),
-        ),
+SlidingSheetDialog eventView(Event event, BuildContext context) {
+  return SlidingSheetDialog(
+    cornerRadius: 16,
+    cornerRadiusOnFullscreen: 0,
+    avoidStatusBar: true,
+    color: app.settings.theme.backgroundColor,
+    scrollSpec: ScrollSpec.bouncingScroll(),
+    duration: Duration(milliseconds: 300),
+    snapSpec: const SnapSpec(
+      snap: true,
+      snappings: [0.5, 0.7, 1.0],
+      positioning: SnapPositioning.relativeToAvailableSpace,
+    ),
+    headerBuilder: (context, state) {
+      return Material(
         color: app.settings.theme.backgroundColor,
-      ),
-      margin: EdgeInsets.only(top: 64.0),
-      padding: EdgeInsets.only(top: 24.0),
-      child: Column(
-        children: [
-          Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(12.0, 0, 12.0, 8.0),
-                child: Text(
-                  event.title,
-                  style: TextStyle(
-                    fontSize: 24.0,
-                  ),
-                ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(12.0),
               ),
-              ListTile(
-                title: Text(formatDate(context, event.start)),
-                trailing: IconButton(
-                  icon: Icon(FeatherIcons.share2, color: app.settings.appColor),
-                  onPressed: () {
-                    Share.share(event.content);
-                  },
+              height: 4.0,
+              width: 60.0,
+              margin: EdgeInsets.all(12.0),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(12.0, 0, 12.0, 8.0),
+              child: Text(
+                event.title,
+                style: TextStyle(
+                  fontSize: 24.0,
                 ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: CupertinoScrollbar(
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(12.0, 0, 12.0, 8.0),
-                    child: app.settings.renderHtml
-                        ? Html(
-                            data: event.content,
-                            onLinkTap: (url) async {
-                              await FlutterWebBrowser.openWebPage(
-                                url: url,
-                                customTabsOptions: CustomTabsOptions(
-                                  toolbarColor:
-                                      app.settings.theme.backgroundColor,
-                                  showTitle: true,
-                                ),
-                                safariVCOptions: SafariViewControllerOptions(
-                                  dismissButtonStyle:
-                                      SafariViewControllerDismissButtonStyle
-                                          .close,
-                                ),
-                              );
-                            },
-                          )
-                        : SelectableLinkify(
-                            text: escapeHtml(event.content),
-                            onOpen: (url) async {
-                              await FlutterWebBrowser.openWebPage(
-                                url: url.url,
-                                customTabsOptions: CustomTabsOptions(
-                                  toolbarColor:
-                                      app.settings.theme.backgroundColor,
-                                  showTitle: true,
-                                ),
-                                safariVCOptions: SafariViewControllerOptions(
-                                  dismissButtonStyle:
-                                      SafariViewControllerDismissButtonStyle
-                                          .close,
-                                ),
-                              );
-                            },
-                          ),
-                  ),
-                ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
+            ListTile(
+              title: Text(formatDate(context, event.start)),
+              trailing: IconButton(
+                icon: Icon(FeatherIcons.share2, color: app.settings.appColor),
+                onPressed: () {
+                  Share.share(event.content);
+                },
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+    builder: (context, state) {
+      return Material(
+        color: app.settings.theme.backgroundColor,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(12.0, 0, 12.0, 8.0),
+          child: app.settings.renderHtml
+              ? Html(
+                  data: event.content,
+                  onLinkTap: (url) async {
+                    await FlutterWebBrowser.openWebPage(
+                      url: url,
+                      customTabsOptions: CustomTabsOptions(
+                        toolbarColor: app.settings.theme.backgroundColor,
+                        showTitle: true,
+                      ),
+                      safariVCOptions: SafariViewControllerOptions(
+                        dismissButtonStyle:
+                            SafariViewControllerDismissButtonStyle.close,
+                      ),
+                    );
+                  },
+                )
+              : SelectableLinkify(
+                  text: escapeHtml(event.content),
+                  onOpen: (url) async {
+                    await FlutterWebBrowser.openWebPage(
+                      url: url.url,
+                      customTabsOptions: CustomTabsOptions(
+                        toolbarColor: app.settings.theme.backgroundColor,
+                        showTitle: true,
+                      ),
+                      safariVCOptions: SafariViewControllerOptions(
+                        dismissButtonStyle:
+                            SafariViewControllerDismissButtonStyle.close,
+                      ),
+                    );
+                  },
+                ),
+        ),
+      );
+    },
+  );
 }

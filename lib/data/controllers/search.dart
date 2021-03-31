@@ -17,6 +17,7 @@ import 'package:filcnaplo/ui/cards/note/tile.dart';
 import 'package:filcnaplo/ui/pages/messages/note/view.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
+import 'package:sliding_sheet/sliding_sheet.dart';
 
 class SearchController {
   static String specialChars(String s) => s
@@ -126,11 +127,9 @@ class SearchController {
           child: GestureDetector(
             child: NoteTile(note),
             onTap: () {
-              showModalBottomSheet(
-                context: context,
-                backgroundColor: Colors.transparent,
-                isScrollControlled: true,
-                builder: (BuildContext context) => NoteView(note),
+              showSlidingBottomSheet(
+                context,
+                builder: (BuildContext context) => noteView(note, context),
               );
             },
           ),
@@ -173,11 +172,9 @@ class SearchController {
           child: GestureDetector(
             child: HomeworkTile(homework),
             onTap: () {
-              showModalBottomSheet(
-                context: context,
-                backgroundColor: Colors.transparent,
-                isScrollControlled: true,
-                builder: (BuildContext context) => HomeworkView(homework),
+              showSlidingBottomSheet(
+                context,
+                builder: (context) => homeworkView(homework, context),
               );
             },
           ),

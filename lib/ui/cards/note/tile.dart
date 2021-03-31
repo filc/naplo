@@ -4,6 +4,7 @@ import 'package:filcnaplo/ui/common/profile_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/cards/miss/tile.dart';
 import 'package:filcnaplo/ui/pages/messages/note/view.dart';
+import 'package:sliding_sheet/sliding_sheet.dart';
 
 class NoteTile extends StatelessWidget {
   final Note note;
@@ -45,12 +46,10 @@ class NoteTile extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  backgroundColor: Colors.transparent,
-                  isScrollControlled: true,
+                showSlidingBottomSheet(
+                  context,
                   useRootNavigator: true,
-                  builder: (BuildContext context) => NoteView(note),
+                  builder: (BuildContext context) => noteView(note, context),
                 );
               },
             ),

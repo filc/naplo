@@ -178,7 +178,8 @@
     "recipients": "recipients",
     "attachments": "attachments",
     "attachment": {
-      "failed": "Failed to download attachment!"
+      "failed": "Failed to download attachment!",
+      "openFailed": "Failed to open attachment!"
     },
     "restore": "restore",
     "archive": "archive",

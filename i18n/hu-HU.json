@@ -178,7 +178,8 @@
     "recipients": "címzettek",
     "attachments": "csatolmányok",
     "attachment": {
-      "failed": "Sikertelen letöltés!"
+      "failed": "Sikertelen letöltés!",
+      "openFailed": "Nem sikerült megnyitni a letöltött filet!"
     },
     "restore": "visszaállítás",
     "archive": "archiválás",

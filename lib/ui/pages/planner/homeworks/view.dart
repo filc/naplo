@@ -10,120 +10,136 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:sliding_sheet/sliding_sheet.dart';
 import 'attachment.dart';
 
-class HomeworkView extends StatefulWidget {
-  final Homework homework;
-
-  HomeworkView(this.homework);
-
-  @override
-  _HomeworkViewState createState() => _HomeworkViewState();
-}
-
-class _HomeworkViewState extends State<HomeworkView> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24),
-          topRight: Radius.circular(24),
-        ),
+SlidingSheetDialog homeworkView(Homework homework, BuildContext context) {
+  return SlidingSheetDialog(
+    cornerRadius: 16,
+    cornerRadiusOnFullscreen: 0,
+    avoidStatusBar: true,
+    color: app.settings.theme.backgroundColor,
+    scrollSpec: ScrollSpec.bouncingScroll(),
+    duration: Duration(milliseconds: 300),
+    snapSpec: const SnapSpec(
+      snap: true,
+      snappings: [0.5, 0.7, 1.0],
+      positioning: SnapPositioning.relativeToAvailableSpace,
+    ),
+    headerBuilder: (context, state) {
+      return Material(
         color: app.settings.theme.backgroundColor,
-      ),
-      margin: EdgeInsets.only(top: 64.0),
-      padding: EdgeInsets.all(20),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(12.0, 0, 12.0, 8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
-                child: ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: ProfileIcon(name: widget.homework.teacher),
-                  title: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          widget.homework.teacher != null
-                              ? capitalize(widget.homework.teacher)
-                              : I18n.of(context).unknown,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
-                      ),
-                      Text(formatDate(context, widget.homework.date))
-                    ],
-                  ),
-                  subtitle: Text(capital(widget.homework.subjectName)),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(12.0),
                 ),
+                height: 4.0,
+                width: 60.0,
+                margin: EdgeInsets.all(12.0),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: ProfileIcon(name: homework.teacher),
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              homework.teacher != null
+                                  ? capitalize(homework.teacher)
+                                  : I18n.of(context).unknown,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
+                          ),
+                          Text(formatDate(context, homework.date))
+                        ],
+                      ),
+                      subtitle: Text(capital(homework.subjectName)),
+                    ),
+                  ),
+                ],
+              ),
+
+              // Homework details
+              Row(
+                children: [
+                  HomeworkDetail(
+                    I18n.of(context).homeworkDeadline,
+                    formatDate(context, homework.deadline),
+                  ),
+                ],
               ),
             ],
           ),
-
-          // Homework details
-
-          HomeworkDetail(
-            I18n.of(context).homeworkDeadline,
-            formatDate(context, widget.homework.deadline),
-          ),
-
-          SizedBox(height: 12.0),
-
-          // Message content
-          Expanded(
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              children: [
-                app.settings.renderHtml
-                    ? Html(
-                        data: widget.homework.content,
-                        onLinkTap: (url) async {
-                          await FlutterWebBrowser.openWebPage(
-                            url: url,
-                            customTabsOptions: CustomTabsOptions(
-                              toolbarColor: app.settings.theme.backgroundColor,
-                              showTitle: true,
-                            ),
-                            safariVCOptions: SafariViewControllerOptions(
-                              dismissButtonStyle:
-                                  SafariViewControllerDismissButtonStyle.close,
-                            ),
-                          );
-                        },
-                      )
-                    : SelectableLinkify(
-                        text: escapeHtml(widget.homework.content),
-                        onOpen: (url) async {
-                          await FlutterWebBrowser.openWebPage(
-                            url: url.url,
-                            customTabsOptions: CustomTabsOptions(
-                              toolbarColor: app.settings.theme.backgroundColor,
-                              showTitle: true,
-                            ),
-                            safariVCOptions: SafariViewControllerOptions(
-                              dismissButtonStyle:
-                                  SafariViewControllerDismissButtonStyle.close,
-                            ),
-                          );
-                        },
-                      ),
-                widget.homework.attachments == []
-                    ? Container()
-                    : Column(
-                        children: widget.homework.attachments
-                            .map((attachment) => AttachmentTile(attachment))
-                            .toList())
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      );
+    },
+    builder: (context, state) {
+      return Material(
+        color: app.settings.theme.backgroundColor,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(12.0, 0, 12.0, 8.0),
+          child:
+              // Message content
+              app.settings.renderHtml
+                  ? Html(
+                      data: homework.content,
+                      onLinkTap: (url) async {
+                        await FlutterWebBrowser.openWebPage(
+                          url: url,
+                          customTabsOptions: CustomTabsOptions(
+                            toolbarColor: app.settings.theme.backgroundColor,
+                            showTitle: true,
+                          ),
+                          safariVCOptions: SafariViewControllerOptions(
+                            dismissButtonStyle:
+                                SafariViewControllerDismissButtonStyle.close,
+                          ),
+                        );
+                      },
+                    )
+                  : SelectableLinkify(
+                      text: escapeHtml(homework.content),
+                      onOpen: (url) async {
+                        await FlutterWebBrowser.openWebPage(
+                          url: url.url,
+                          customTabsOptions: CustomTabsOptions(
+                            toolbarColor: app.settings.theme.backgroundColor,
+                            showTitle: true,
+                          ),
+                          safariVCOptions: SafariViewControllerOptions(
+                            dismissButtonStyle:
+                                SafariViewControllerDismissButtonStyle.close,
+                          ),
+                        );
+                      },
+                    ),
+        ),
+      );
+    },
+    footerBuilder: (context, state) {
+      return Material(
+        color: app.settings.theme.backgroundColor,
+        child: homework.attachments == []
+            ? Container()
+            : Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: homework.attachments
+                    .map((attachment) => AttachmentTile(attachment))
+                    .toList()),
+      );
+    },
+  );
 }
 
 class HomeworkDetail extends StatelessWidget {

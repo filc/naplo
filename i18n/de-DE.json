@@ -178,7 +178,8 @@
     "recipients": "Empfänger",
     "attachments": "Anhänge",
     "attachment": {
-      "failed": "Anhang konnte nicht heruntergeladen werden!"
+      "failed": "Befestigung konnte nicht heruntergeladen werden!",
+      "openFailed": "Befestigung nicht öffnen!"
     },
     "restore": "wiederherstellen",
     "archive": "archivieren",

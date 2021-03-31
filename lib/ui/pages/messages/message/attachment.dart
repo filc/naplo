@@ -179,12 +179,12 @@ Future<String> saveAttachment(
       throw "Cannot write null to file";
     }
   } catch (error) {
-    print("ERROR: downloadAttachment: " + error.toString());
+    print("ERROR: MessageView.downloadAttachment: " + error.toString());
     if (context != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            I18n.of(context).messageAttachmentFailed,
+            I18n.of(context).messageAttachmentOpenFailed,
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.red,

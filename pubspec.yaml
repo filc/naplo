@@ -53,6 +53,7 @@ dependencies:
       url: https://github.com/josh-burton/flutter_staggered_animations.git
       ref: findAncestorWidgetOfExactType
   flutter_web_browser: ^0.14.0
+  sliding_sheet: ^0.5.0
 
 #dev_dependencies:
 #  flutter_test:

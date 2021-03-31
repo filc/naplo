@@ -308,6 +308,8 @@ class I18n implements WidgetsLocalizations {
   String get messageAttachments => "csatolmányok";
   /// "Sikertelen letöltés!"
   String get messageAttachmentFailed => "Sikertelen letöltés!";
+  /// "Nem sikerült megnyitni a letöltött filet!"
+  String get messageAttachmentOpenFailed => "Nem sikerült megnyitni a letöltött filet!";
   /// "visszaállítás"
   String get messageRestore => "visszaállítás";
   /// "archiválás"
@@ -1144,6 +1146,9 @@ class _I18n_en_US extends I18n {
   /// "Failed to download attachment!"
   @override
   String get messageAttachmentFailed => "Failed to download attachment!";
+  /// "Failed to open attachment!"
+  @override
+  String get messageAttachmentOpenFailed => "Failed to open attachment!";
   /// "restore"
   @override
   String get messageRestore => "restore";
@@ -2178,9 +2183,12 @@ class _I18n_de_DE extends I18n {
   /// "Anhänge"
   @override
   String get messageAttachments => "Anhänge";
-  /// "Anhang konnte nicht heruntergeladen werden!"
+  /// "Befestigung konnte nicht heruntergeladen werden!"
   @override
-  String get messageAttachmentFailed => "Anhang konnte nicht heruntergeladen werden!";
+  String get messageAttachmentFailed => "Befestigung konnte nicht heruntergeladen werden!";
+  /// "Befestigung nicht öffnen!"
+  @override
+  String get messageAttachmentOpenFailed => "Befestigung nicht öffnen!";
   /// "wiederherstellen"
   @override
   String get messageRestore => "wiederherstellen";

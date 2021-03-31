@@ -2,6 +2,7 @@ import 'package:filcnaplo/ui/pages/messages/event/view.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/models/event.dart';
+import 'package:sliding_sheet/sliding_sheet.dart';
 
 class EventTile extends StatelessWidget {
   final Event event;
@@ -23,12 +24,10 @@ class EventTile extends StatelessWidget {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        onTap: () => showModalBottomSheet(
-          context: context,
-          builder: (context) => EventView(event),
-          backgroundColor: Colors.transparent,
-          isScrollControlled: true,
+        onTap: () => showSlidingBottomSheet(
+          context,
           useRootNavigator: true,
+          builder: (BuildContext context) => eventView(event, context),
         ),
       ),
     );
