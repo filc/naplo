@@ -410,18 +410,18 @@ class I18n implements WidgetsLocalizations {
   String get evaluationsYourGrades => "Jegyeid";
   /// "Évközi"
   String get evaluationsMidYear => "Évközi";
-  /// "1. Negyedévi"
-  String get evaluationsQYear => "1. Negyedévi";
-  /// "2. Negyedévi"
-  String get evaluations2qYear => "2. Negyedévi";
-  /// "Félévi"
-  String get evaluationsHalfYear => "Félévi";
-  /// "3. Negyedévi"
-  String get evaluations3qYear => "3. Negyedévi";
-  /// "4. Negyedévi"
-  String get evaluations4qYear => "4. Negyedévi";
-  /// "Év végi"
-  String get evaluationsEndYear => "Év végi";
+  /// "1. Negyedév"
+  String get evaluationsQYear => "1. Negyedév";
+  /// "2. Negyedév"
+  String get evaluations2qYear => "2. Negyedév";
+  /// "Félév"
+  String get evaluationsHalfYear => "Félév";
+  /// "3. Negyedév"
+  String get evaluations3qYear => "3. Negyedév";
+  /// "4. Negyedév"
+  String get evaluations4qYear => "4. Negyedév";
+  /// "Év vége"
+  String get evaluationsEndYear => "Év vége";
   /// "Tárgyak"
   String get evaluationsSubjects => "Tárgyak";
   /// "Statisztikák"
@@ -2305,9 +2305,9 @@ class _I18n_de_DE extends I18n {
   /// "durschnitt"
   @override
   String get evaluationAverage => "durschnitt";
-  /// "klassendurschnitt"
+  /// "klassdurschnitt"
   @override
-  String get evaluationAverageClass => "klassendurschnitt";
+  String get evaluationAverageClass => "klassdurschnitt";
   /// "Notenwert"
   @override
   String get evaluationValue => "Notenwert";

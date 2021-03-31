@@ -211,7 +211,7 @@ class _PlannerPageState extends State<PlannerPage>
                         children: [
                           Column(children: _examBuilder.examTiles[0]),
                           _examBuilder.examTiles[0].length == 0
-                              ? Label(I18n.of(context).examPast.toUpperCase())
+                              ? Label(I18n.of(context).examPast)
                               : _examBuilder.examTiles[1].length > 0
                                   ? TextButton(
                                       onPressed: () => setState(
