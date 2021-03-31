@@ -51,6 +51,25 @@ class _DebugSettingsState extends State<DebugSettings> {
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           ),
           ListTile(
+            leading: Icon(FeatherIcons.downloadCloud),
+            title: Text(
+              "Előzetes verziók keresése",
+              style: TextStyle(
+                color: app.debugMode ? null : Colors.grey,
+              ),
+            ),
+            onTap: app.debugMode
+                ? () {
+                    app.user.sync.release.sync(allowPrerelease: true).then(
+                        (_) => ScaffoldMessenger.of(context).showSnackBar(
+                            CustomSnackBar(
+                                message: "Legfrissebb (előzetes) verzió: " +
+                                    app.user.sync.release.latestRelease
+                                        .version)));
+                  }
+                : null,
+          ),
+          ListTile(
             leading: Icon(FeatherIcons.trash2),
             title: Text(
               I18n.of(context).settingsDebugDelete,

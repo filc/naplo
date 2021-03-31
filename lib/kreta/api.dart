@@ -18,7 +18,7 @@ class FilcEndpoints {
   static const config2 = "/v2/config.json";
   static const supporters = "/v2/supporters.json";
   static const news = "/v2/news.json";
-  static const latestRelease = "/releases/latest";
+  static const releases = "/releases";
 }
 
 class KretaEndpoints {

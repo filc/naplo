@@ -164,15 +164,14 @@ class KretaClient {
     }
   }
 
-  Future<Map> getLatestRelease() async {
+  Future<List> getReleases() async {
     try {
-      var response = await http
-          .get(Uri.parse(BaseURL.FILC_REPO + FilcEndpoints.latestRelease));
+      var response = await http.get(Uri.parse(BaseURL.FILC_REPO + FilcEndpoints.releases));
       var responseJson = json.decode(response.body);
       return responseJson;
     } catch (error) {
       print("ERROR: GitHubAPI.getLatestRelease: " + error.toString());
-      return Map();
+      return [];
     }
   }
 
