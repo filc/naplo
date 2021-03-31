@@ -11,7 +11,6 @@ import 'package:filcnaplo/ui/pages/home/page.dart';
 import 'package:filcnaplo/ui/pages/messages/page.dart';
 import 'package:filcnaplo/ui/pages/planner/page.dart';
 import 'package:filcnaplo/ui/pages/welcome/tutorial.dart';
-import 'package:filcnaplo/utils/network.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/ui/common/bottom_navbar.dart';

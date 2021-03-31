@@ -42,11 +42,11 @@ class _AccountViewState extends State<AccountView> {
           children: [
             // User
             ListTile(
-              contentPadding: EdgeInsets.only(top: 8.0, bottom: 4.0),
+              contentPadding: EdgeInsets.only(top: 6.0, bottom: 4.0),
               leading: GestureDetector(
                 child: ProfileIcon(
                     name: widget.user.name,
-                    size: 1.2,
+                    size: 1.1,
                     image: widget.user.customProfileIcon),
                 onTap: () {
                   showDialog(

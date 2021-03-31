@@ -44,97 +44,116 @@ class _AccountTileState extends State<AccountTile> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
           child: Column(
             children: [
-              ListTile(
-                leading: ProfileIcon(
-                    name: widget.user.name,
-                    size: 0.85,
-                    image: widget.user.customProfileIcon),
-                // cannot reuse the default profile icon because of size differences
-                title: Text(
-                  widget.user.name ?? I18n.of(context).unknown,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+              if (!isSelectedUser)
+                ListTile(
+                  leading: ProfileIcon(
+                      name: widget.user.name,
+                      size: 0.85,
+                      image: widget.user.customProfileIcon),
+                  // cannot reuse the default profile icon because of size differences
+                  title: Text(
+                    widget.user.name ?? I18n.of(context).unknown,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                )
+              else
+                Column(
+                  children: [
+                    ProfileIcon(
+                      name: widget.user.name,
+                      size: 1.2,
+                      image: widget.user.customProfileIcon,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        widget.user.name ?? I18n.of(context).unknown,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 22.0),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              isSelectedUser
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        AccountTileButton(
-                          icon: FeatherIcons.info,
-                          title: I18n.of(context).accountInfo,
-                          onPressed: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) => AccountView(widget.user,
-                                  callback: () => setState(() {})),
-                              backgroundColor: Colors.transparent,
-                            );
-                          },
-                        ),
-                        AccountTileButton(
-                          icon: FeatherIcons.edit2,
-                          title: I18n.of(context).actionEdit,
-                          onPressed: () => {
-                            if (!app.debugUser)
-                              setState(() => editMode = true)
-                            else
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  CustomSnackBar(
-                                      color: Colors.red,
-                                      message: "Debug user can't be edited."))
-                          },
-                        ),
-                        AccountTileButton(
-                          icon: FeatherIcons.grid,
-                          title: "DKT",
-                          onPressed: () {
-                            if (!app.debugUser) {
-                              String accessToken = app
-                                  .kretaApi.users[widget.user.id].accessToken;
-                              String dkturl =
-                                  "https://dkttanulo.e-kreta.hu/sso?accessToken=$accessToken";
+              if (isSelectedUser)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    AccountTileButton(
+                      icon: FeatherIcons.info,
+                      title: I18n.of(context).accountInfo,
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) => AccountView(widget.user,
+                              callback: () => setState(() {})),
+                          backgroundColor: Colors.transparent,
+                        );
+                      },
+                    ),
+                    AccountTileButton(
+                      icon: FeatherIcons.edit2,
+                      title: I18n.of(context).actionEdit,
+                      onPressed: () => {
+                        if (!app.debugUser)
+                          setState(() => editMode = true)
+                        else
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              CustomSnackBar(
+                                  color: Colors.red,
+                                  message: "Debug user can't be edited."))
+                      },
+                    ),
+                    AccountTileButton(
+                      icon: FeatherIcons.grid,
+                      title: "DKT",
+                      onPressed: () {
+                        if (!app.debugUser) {
+                          String accessToken =
+                              app.kretaApi.users[widget.user.id].accessToken;
+                          String dkturl =
+                              "https://dkttanulo.e-kreta.hu/sso?accessToken=$accessToken";
 
-                              FlutterWebBrowser.openWebPage(
-                                url: dkturl,
-                                customTabsOptions: CustomTabsOptions(
-                                  toolbarColor:
-                                      app.settings.theme.backgroundColor,
-                                  showTitle: true,
-                                ),
-                                safariVCOptions: SafariViewControllerOptions(
-                                  dismissButtonStyle:
-                                      SafariViewControllerDismissButtonStyle
-                                          .close,
-                                ),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  CustomSnackBar(
-                                      color: Colors.red,
-                                      message: "Debug user has no DKT page."));
-                            }
-                          },
-                        ),
-                        AccountTileButton(
-                          icon: FeatherIcons.trash2,
-                          title: I18n.of(context).actionDelete,
-                          onPressed: () {
-                            if (!app.debugUser) {
-                              AccountHelper(user: widget.user)
-                                  .deleteAccount(context);
-                              widget.onDelete();
-                            } else
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  CustomSnackBar(
-                                      color: Colors.red,
-                                      message:
-                                          "Restart the app to log out of Debug user."));
-                          },
-                        ),
-                      ],
-                    )
-                  : Container(),
+                          FlutterWebBrowser.openWebPage(
+                            url: dkturl,
+                            customTabsOptions: CustomTabsOptions(
+                              toolbarColor: app.settings.theme.backgroundColor,
+                              showTitle: true,
+                            ),
+                            safariVCOptions: SafariViewControllerOptions(
+                              dismissButtonStyle:
+                                  SafariViewControllerDismissButtonStyle.close,
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              CustomSnackBar(
+                                  color: Colors.red,
+                                  message: "Debug user has no DKT page."));
+                        }
+                      },
+                    ),
+                    AccountTileButton(
+                      icon: FeatherIcons.trash2,
+                      title: I18n.of(context).actionDelete,
+                      onPressed: () {
+                        if (!app.debugUser) {
+                          AccountHelper(user: widget.user)
+                              .deleteAccount(context);
+                          widget.onDelete();
+                        } else
+                          ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(
+                              color: Colors.red,
+                              message:
+                                  "Restart the app to log out of Debug user."));
+                      },
+                    ),
+                  ],
+                )
+              else
+                Container(),
             ],
           ),
         ),
@@ -162,30 +181,35 @@ class AccountTileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      child: MaterialButton(
-        elevation: 0,
-        highlightElevation: 0,
-        height: 50,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-        padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-        onPressed: onPressed,
-        child: Column(
-          children: [
-            if (icon != null)
-              Icon(
-                icon,
-                size: 20.0,
-                color: app.settings.appColor,
-              ),
-            if (icon != null) SizedBox(height: 3.0),
-            if (title != "")
-              Text(
-                capitalize(title),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.fade,
-                softWrap: false,
-              ),
-          ],
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 4.0),
+        child: MaterialButton(
+          elevation: 0,
+          highlightElevation: 0,
+          height: 50,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+          padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+          onPressed: onPressed,
+          color: app.settings.appColor.withOpacity(0.2),
+          child: Column(
+            children: [
+              if (icon != null)
+                Icon(
+                  icon,
+                  size: 20.0,
+                  color: app.settings.appColor,
+                ),
+              if (icon != null) SizedBox(height: 3.0),
+              if (title != "")
+                Text(
+                  capitalize(title),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.fade,
+                  softWrap: false,
+                ),
+            ],
+          ),
         ),
       ),
     );
