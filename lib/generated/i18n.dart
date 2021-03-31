@@ -596,6 +596,20 @@ class I18n implements WidgetsLocalizations {
   String get download => "letöltés";
   /// "Töltsd le most a legújabb verziót"
   String get downloadLatest => "Töltsd le most a legújabb verziót";
+  /// "frissítés"
+  String get update => "frissítés";
+  /// "letöltés"
+  String get updateDownloading => "letöltés";
+  /// "mentés"
+  String get updateSaving => "mentés";
+  /// "telepítés"
+  String get updateInstalling => "telepítés";
+  /// "Új verzió"
+  String get updateNewVersion => "Új verzió";
+  /// "Újdonságok"
+  String get updateChanges => "Újdonságok";
+  /// "Jelenlegi verzió"
+  String get updateCurrentVersion => "Jelenlegi verzió";
   /// "Frissítés elérhető!"
   String get updateAvailable => "Frissítés elérhető!";
   /// "${minutes} percenként egyszer frissíthetsz!"
@@ -1576,9 +1590,30 @@ class _I18n_en_US extends I18n {
   /// "Download the latest version now"
   @override
   String get downloadLatest => "Download the latest version now";
-  /// "A new version is available!"
+  /// "install update"
   @override
-  String get updateAvailable => "A new version is available!";
+  String get update => "install update";
+  /// "downloading"
+  @override
+  String get updateDownloading => "downloading";
+  /// "saving"
+  @override
+  String get updateSaving => "saving";
+  /// "installing"
+  @override
+  String get updateInstalling => "installing";
+  /// "Update"
+  @override
+  String get updateNewVersion => "Update";
+  /// "Changes"
+  @override
+  String get updateChanges => "Changes";
+  /// "Current version"
+  @override
+  String get updateCurrentVersion => "Current version";
+  /// "Update available!"
+  @override
+  String get updateAvailable => "Update available!";
   /// "You can only refresh every ${minutes} minute(s)!"
   @override
   String rateLimitAlert(String minutes) => "You can only refresh every ${minutes} minute(s)!";
@@ -2613,6 +2648,27 @@ class _I18n_de_DE extends I18n {
   /// "Bitte die neueste Ausgabe jetzt herunterladen!"
   @override
   String get downloadLatest => "Bitte die neueste Ausgabe jetzt herunterladen!";
+  /// "ausgabe installieren"
+  @override
+  String get update => "ausgabe installieren";
+  /// "wird heruntergeladen"
+  @override
+  String get updateDownloading => "wird heruntergeladen";
+  /// "wird speichert"
+  @override
+  String get updateSaving => "wird speichert";
+  /// "wird installiert"
+  @override
+  String get updateInstalling => "wird installiert";
+  /// "Neue Ausgabe"
+  @override
+  String get updateNewVersion => "Neue Ausgabe";
+  /// "Änderungen"
+  @override
+  String get updateChanges => "Änderungen";
+  /// "Aktuelle Version"
+  @override
+  String get updateCurrentVersion => "Aktuelle Version";
   /// "Neue Ausgabe steht zu verfügung!"
   @override
   String get updateAvailable => "Neue Ausgabe steht zu verfügung!";

@@ -378,6 +378,13 @@
     "latest": "Töltsd le most a legújabb verziót"
   },
   "update": {
+    "": "frissítés",
+    "downloading": "letöltés",
+    "saving": "mentés",
+    "installing": "telepítés",
+    "newVersion": "Új verzió",
+    "changes": "Újdonságok",
+    "currentVersion": "Jelenlegi verzió",
     "available": "Frissítés elérhető!"
   },
   "rateLimit": {

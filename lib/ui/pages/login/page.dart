@@ -1,3 +1,4 @@
+import 'package:filcnaplo/data/context/theme.dart';
 import 'package:filcnaplo/helpers/login.dart';
 import 'package:filcnaplo/ui/common/custom_snackbar.dart';
 import 'package:flutter/material.dart';
@@ -84,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Color(0xFF236A5B),
+      backgroundColor: ThemeContext.filcGreen,
       body: AutofillGroup(
         child: SingleChildScrollView(
           child: Container(

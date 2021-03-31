@@ -378,6 +378,13 @@
     "latest": "Bitte die neueste Ausgabe jetzt herunterladen!"
   },
   "update": {
+    "": "ausgabe installieren",
+    "downloading": "wird heruntergeladen",
+    "saving": "wird speichert",
+    "installing": "wird installiert",
+    "newVersion": "Neue Ausgabe",
+    "changes": "Änderungen",
+    "currentVersion": "Aktuelle Version",
     "available": "Neue Ausgabe steht zu verfügung!"
   },
   "rateLimit": {
