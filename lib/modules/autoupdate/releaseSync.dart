@@ -4,18 +4,29 @@ import 'package:filcnaplo/data/context/app.dart';
 
 class ReleaseSync {
   Release latestRelease;
+  bool isNew = false;
 
   Future sync() async {
     var latestReleaseJson = await app.user.kreta.getLatestRelease();
     latestRelease = Release.fromJson(latestReleaseJson);
+    isNew = compareVersions(latestRelease.version, app.currentAppVersion);
+  }
 
-    //TODO Removeme
-    print("\n#######################\nRelease sync!\nVersion: " +
-        latestRelease.version +
-        "\nNotes: " +
-        latestRelease.notes +
-        "\nLink: " +
-        latestRelease.url);
+  bool compareVersions(String first, String second) {
+    try {
+      var firstParts = first.split(".");
+      var secondParts = second.split(".");
+
+      int i = 0;
+      for (var firstPart in firstParts) {
+        if (int.parse(firstPart) > int.parse(secondParts[i])) return true;
+        i++;
+      }
+      return false;
+    } catch (e) {
+      print("ERROR in ReleaseSync.dart: " + e.toString());
+      return false;
+    }
   }
 }
 

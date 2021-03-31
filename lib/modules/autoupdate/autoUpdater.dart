@@ -198,26 +198,6 @@ class _AutoUpdaterState extends State<AutoUpdater> {
         OpenFile.open(apk.path);
       });
     });
-
-    /*var client = http.Client();
-
-    print("### Downloading file");
-
-    updateDisplay(LinearProgressIndicator(
-      backgroundColor: Colors.white.withAlpha(40),
-      valueColor: AlwaysStoppedAnimation<Color>(Colors.white.withAlpha(210)),
-    ));
-
-    var uri = Uri.parse(app.user.sync.release.latestRelease.url);
-
-    var response = await client.get(uri);
-    var rawData = response.bodyBytes;
-
-    updateDisplay(Text("Mentés..."));
-
-    String path = (await getApplicationDocumentsDirectory()).path;
-    File apk = new File('$path/filc-update.apk');
-    await apk.writeAsBytes(rawData);*/
   }
 }
 
@@ -252,8 +232,9 @@ class AutoUpdateButton extends StatelessWidget {
           ),
           onPressed: () {
             showModalBottomSheet(
-                useRootNavigator: true,
                 context: context,
+                isDismissible: false,
+                enableDrag: false,
                 backgroundColor: Colors.transparent,
                 builder: (BuildContext context) => AutoUpdater());
           },
