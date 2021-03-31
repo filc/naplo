@@ -23,6 +23,7 @@ class PageFrame extends StatefulWidget {
 
 class _PageFrameState extends State<PageFrame> {
   PageType selectedPage;
+  Tween<double> offlineAnimation;
 
   @override
   void initState() {
@@ -64,6 +65,8 @@ class _PageFrameState extends State<PageFrame> {
         });
       }
     });
+
+    offlineAnimation = Tween<double>(begin: 0.0, end: 0.0);
   }
 
   void _navItemSelected(int item) {
@@ -177,13 +180,13 @@ class _PageFrameState extends State<PageFrame> {
       );
     }
 
-    Tween<double> offlineAnimation;
-
-    if (app.user.kreta.kretaOffline)
+    if (app.user.kreta.kretaOffline) {
       offlineAnimation = Tween<double>(begin: 0.0, end: 100.0);
-    else
+    } else if (offlineAnimation.end == 100.0) {
       offlineAnimation = Tween<double>(begin: 100.0, end: 0.0);
-    // Tween<double> offlineAnimation = Tween<double>(begin: 0.0, end: 0.0);
+    } else {
+      offlineAnimation = Tween<double>(begin: 0.0, end: 0.0);
+    }
 
     return WillPopScope(
       onWillPop: () async {
@@ -200,37 +203,38 @@ class _PageFrameState extends State<PageFrame> {
                 curve: Curves.ease,
                 duration: Duration(milliseconds: 500),
                 builder: (context, value, _) => Padding(
-                  padding: EdgeInsets.only(top: value / (100 / 42)),
+                  padding: EdgeInsets.only(top: value / (100.0 / 42.0)),
                   child:
                       Navigator(key: app.frame, onGenerateRoute: handleRoute),
                 ),
               ),
 
               TweenAnimationBuilder(
-                tween: offlineAnimation,
-                duration: Duration(milliseconds: 500),
-                curve: Curves.ease,
-                builder: (context, value, _) => Opacity(
-                  opacity: value / 100,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    color: Colors.red,
-                    padding: EdgeInsets.only(
-                      left: 12.0,
-                      right: 12.0,
-                      bottom: 12.0,
-                      top: value / (100 / 38.0),
-                    ),
-                    child: Text(
-                      I18n.of(context).errorKretaOffline,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
+                  tween: offlineAnimation,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.ease,
+                  builder: (context, value, _) {
+                    return Opacity(
+                      opacity: 1 - value / 100.0,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.red,
+                        padding: EdgeInsets.only(
+                          left: 12.0,
+                          right: 12.0,
+                          bottom: 12.0,
+                          top: 38 - value / (100.0 / 38.0),
+                        ),
+                        child: Text(
+                          I18n.of(context).errorKretaOffline,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
+                    );
+                  }),
 
               // Sync Progress Indicator
               showSyncProgress
