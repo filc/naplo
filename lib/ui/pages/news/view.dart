@@ -1,10 +1,12 @@
 import 'package:filcnaplo/data/models/new.dart';
+import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_html/style.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsView extends StatefulWidget {
@@ -44,7 +46,15 @@ class _NewsViewState extends State<NewsView> {
                   widget.news.content != null
                       ? Container(
                           margin: EdgeInsets.only(top: 10, bottom: 20),
-                          child: SelectableText(widget.news.content),
+                          child: SelectableLinkify(
+                            text: escapeHtml(widget.news.content),
+                            onOpen: (url) async {
+                              if (await canLaunch(url.url))
+                                await launch(url.url);
+                              else
+                                throw '[ERROR] NewsView.build: Invalid URL';
+                            },
+                          ),
                         )
                       : Container(),
                   widget.news.image != null
