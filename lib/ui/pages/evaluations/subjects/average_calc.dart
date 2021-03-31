@@ -9,8 +9,9 @@ import 'package:filcnaplo/data/models/subject.dart';
 
 class AverageCalculator extends StatefulWidget {
   final Subject subject;
+  final int multiplier;
 
-  AverageCalculator(this.subject);
+  AverageCalculator(this.subject, {this.multiplier = 1});
 
   @override
   AverageCalculatorState createState() => AverageCalculatorState();
@@ -104,9 +105,11 @@ class AverageCalculatorState extends State<AverageCalculator> {
     var rand = Random();
     randId = rand.nextInt(1000);
 
+    DateTime date = DateTime.now().add(Duration(days: 7 * widget.multiplier));
+
     Evaluation tempEval = Evaluation(
       "temp_" + randId.toString(), //id
-      DateTime.now(), //writedate
+      date, //writedate
       EvaluationValue(evaluation, " ", " ", weight.toInt()),
       "", //teacher
       "", //description
@@ -115,8 +118,8 @@ class AverageCalculatorState extends State<AverageCalculator> {
       widget.subject,
       Type("", "", ""), //evaluationtype
       Type("", "", ""), //mode
-      DateTime.now(), //date
-      DateTime.now(), //seen-date
+      date, //date
+      date, //seen-date
       null,
     );
 

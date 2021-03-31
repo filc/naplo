@@ -196,8 +196,10 @@ class _SubjectViewState extends State<SubjectView> {
           Evaluation tempEval = await showModalBottomSheet(
             context: context,
             backgroundColor: Colors.transparent,
-            builder: (BuildContext context) =>
-                AverageCalculator(widget.subject),
+            builder: (BuildContext context) => AverageCalculator(
+              widget.subject,
+              multiplier: tempEvals.length + 1,
+            ),
           );
           if (tempEval != null) {
             setState(() {
