@@ -105,7 +105,8 @@ class _AccountPageState extends State<AccountPage> {
 
                       // Add user
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 14.0),
+                        margin: EdgeInsets.symmetric(
+                            horizontal: 14.0, vertical: 4.0),
                         child: MaterialButton(
                           elevation: 0,
                           highlightElevation: 0,
