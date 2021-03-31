@@ -1,7 +1,7 @@
 import 'package:filcnaplo/data/context/page.dart';
 import 'package:filcnaplo/data/models/new.dart';
 import 'package:filcnaplo/data/sync/state.dart';
-import 'package:filcnaplo/ui/common/custom_snackbar.dart';
+import 'package:filcnaplo/kreta/client.dart';
 import 'package:filcnaplo/ui/pages/news/view.dart';
 import 'package:filcnaplo/ui/sync/indicator.dart';
 import 'package:filcnaplo/generated/i18n.dart';
@@ -30,15 +30,6 @@ class _PageFrameState extends State<PageFrame> {
     super.initState();
 
     selectedPage = PageType.values[app.settings.defaultPage];
-
-    NetworkUtils.checkConnectivity().then((networkAvailable) {
-      if (!networkAvailable) {
-        ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(
-          message: I18n.of(context).errorInternet,
-          color: Colors.red,
-        ));
-      }
-    });
 
     // Sync at startup
     app.settings.update().then((_) {
@@ -214,11 +205,16 @@ class _PageFrameState extends State<PageFrame> {
                   duration: Duration(milliseconds: 500),
                   curve: Curves.ease,
                   builder: (context, value, _) {
+                    if (offlineAnimation.begin == 0.0 &&
+                        offlineAnimation.end == 0.0) value = 100;
                     return Opacity(
                       opacity: 1 - value / 100.0,
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        color: Colors.red,
+                        color: app.user.kreta.offlineState ==
+                                OfflineState.maintenance
+                            ? Colors.lightBlue
+                            : Colors.deepOrange,
                         padding: EdgeInsets.only(
                           left: 12.0,
                           right: 12.0,
@@ -226,7 +222,10 @@ class _PageFrameState extends State<PageFrame> {
                           top: 38 - value / (100.0 / 38.0),
                         ),
                         child: Text(
-                          I18n.of(context).errorKretaOffline,
+                          app.user.kreta.offlineState ==
+                                  OfflineState.maintenance
+                              ? I18n.of(context).errorKretaOffline
+                              : I18n.of(context).errorInternet,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
