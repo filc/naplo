@@ -100,7 +100,9 @@ class _SubjectGraphState extends State<SubjectGraph> {
           ),
           lineTouchData: LineTouchData(
             touchTooltipData: LineTouchTooltipData(
-              tooltipBgColor: Colors.black26,
+              tooltipBgColor: Colors.black54,
+              fitInsideVertically: true,
+              fitInsideHorizontally: true,
             ),
             touchCallback: (LineTouchResponse touchResponse) {},
             handleBuiltInTouches: true,
@@ -108,7 +110,12 @@ class _SubjectGraphState extends State<SubjectGraph> {
             getTouchedSpotIndicator: (_, spots) => List.generate(
               spots.length,
               (index) => TouchedSpotIndicatorData(
-                FlLine(color: Colors.transparent),
+                FlLine(
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Colors.grey[400]
+                      : app.settings.theme.backgroundColor,
+                  strokeWidth: 3.5,
+                ),
                 FlDotData(
                   getDotPainter: (a, b, c, d) => FlDotCirclePainter(
                     strokeWidth: 0,
