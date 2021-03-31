@@ -177,9 +177,13 @@ class _PageFrameState extends State<PageFrame> {
       );
     }
 
-    // Tween<double> offlineAnimation = Tween<double>(begin: 100.0, end: 0.0);
-    // Tween<double> offlineAnimation = Tween<double>(begin: 0.0, end: 100.0);
-    Tween<double> offlineAnimation = Tween<double>(begin: 0.0, end: 0.0);
+    Tween<double> offlineAnimation;
+
+    if (app.user.kreta.kretaOffline)
+      offlineAnimation = Tween<double>(begin: 0.0, end: 100.0);
+    else
+      offlineAnimation = Tween<double>(begin: 100.0, end: 0.0);
+    // Tween<double> offlineAnimation = Tween<double>(begin: 0.0, end: 0.0);
 
     return WillPopScope(
       onWillPop: () async {
@@ -218,8 +222,11 @@ class _PageFrameState extends State<PageFrame> {
                       top: value / (100 / 38.0),
                     ),
                     child: Text(
-                      "A kréta jelenleg karbantartás alatt van.",
+                      I18n.of(context).errorKretaOffline,
                       textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),

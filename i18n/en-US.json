@@ -365,6 +365,7 @@
   "error": {
     "": "Error",
     "network": "Network error",
+    "kretaOffline": "KRETA is currently under maintenance.",
     "readAccount": "Error while reading user",
     "messages": "Failed to get messages",
     "messageSend": "Failed to send message",

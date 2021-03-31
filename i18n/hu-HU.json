@@ -365,6 +365,7 @@
   "error": {
     "": "Hiba",
     "network": "Hálózati hiba",
+    "kretaOffline": "A kréta jelenleg karbantartás alatt van.",
     "readAccount": "Hiba a felhasználó olvasása közben",
     "messages": "Nem sikerült lekérni az üzeneteket",
     "messageSend": "Nem sikerült elküldeni az üzenetet",

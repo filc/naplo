@@ -91,10 +91,12 @@ class _TimetableFrameState extends State<TimetableFrame>
               ready = hasOfflineLessons;
             }))
         .then((_) => {
-              refreshWeek().then((successfulOnlineRefresh) => setState(() {
-                    ready = successfulOnlineRefresh;
-                    _timetableBuilder.build(selectedWeek);
-                  }))
+              refreshWeek().then((successfulOnlineRefresh) => mounted
+                  ? setState(() {
+                      ready = successfulOnlineRefresh;
+                      _timetableBuilder.build(selectedWeek);
+                    })
+                  : null)
             });
 
     int dayIndex = currentDay != null ? todayIndex() : 0;

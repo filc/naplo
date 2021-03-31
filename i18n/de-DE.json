@@ -365,6 +365,7 @@
   "error": {
     "": "Fehler",
     "network": "Netzwerkfehler",
+    "kretaOffline": "KRETA ist derzeit in der Wartung.",
     "readAccount": "Konto konnte nicht abgerufen werden",
     "messages": "Mitteilungen konnten nicht abgerufen werden",
     "messageSend": "Mitteilung wurde nicht geschickt",

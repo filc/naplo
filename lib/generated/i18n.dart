@@ -582,6 +582,8 @@ class I18n implements WidgetsLocalizations {
   String get error => "Hiba";
   /// "Hálózati hiba"
   String get errorNetwork => "Hálózati hiba";
+  /// "A kréta jelenleg karbantartás alatt van."
+  String get errorKretaOffline => "A kréta jelenleg karbantartás alatt van.";
   /// "Hiba a felhasználó olvasása közben"
   String get errorReadAccount => "Hiba a felhasználó olvasása közben";
   /// "Nem sikerült lekérni az üzeneteket"
@@ -1557,6 +1559,9 @@ class _I18n_en_US extends I18n {
   /// "Network error"
   @override
   String get errorNetwork => "Network error";
+  /// "KRETA is currently under maintenance."
+  @override
+  String get errorKretaOffline => "KRETA is currently under maintenance.";
   /// "Error while reading user"
   @override
   String get errorReadAccount => "Error while reading user";
@@ -2597,6 +2602,9 @@ class _I18n_de_DE extends I18n {
   /// "Netzwerkfehler"
   @override
   String get errorNetwork => "Netzwerkfehler";
+  /// "KRETA ist derzeit in der Wartung."
+  @override
+  String get errorKretaOffline => "KRETA ist derzeit in der Wartung.";
   /// "Konto konnte nicht abgerufen werden"
   @override
   String get errorReadAccount => "Konto konnte nicht abgerufen werden";
