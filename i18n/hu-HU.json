@@ -385,7 +385,9 @@
     "newVersion": "Új verzió",
     "changes": "Újdonságok",
     "currentVersion": "Jelenlegi verzió",
-    "available": "Frissítés elérhető!"
+    "available": "Frissítés elérhető!",
+    "searchPre": "Kísérleti verziók keresése",
+    "foundPre": "Legfrissebb (kísérleti) verzió"
   },
   "rateLimit": {
     "alert": "{minutes} percenként egyszer frissíthetsz!"

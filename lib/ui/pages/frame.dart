@@ -44,7 +44,6 @@ class _PageFrameState extends State<PageFrame> {
     // Sync at startup
 
     app.user.sync.release.sync().then((_) {
-      print("Deleing file");
       getApplicationDocumentsDirectory().then((dir) {
         dir
             .listSync()
@@ -54,8 +53,7 @@ class _PageFrameState extends State<PageFrame> {
                     app.user.sync.release.latestRelease.version +
                     ".apk"))
             .first
-            .delete()
-            .then((e) => print("File delete output: " + e.toString()));
+            .delete();
       });
     });
 

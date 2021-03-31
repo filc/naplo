@@ -612,6 +612,10 @@ class I18n implements WidgetsLocalizations {
   String get updateCurrentVersion => "Jelenlegi verzió";
   /// "Frissítés elérhető!"
   String get updateAvailable => "Frissítés elérhető!";
+  /// "Kísérleti verziók keresése"
+  String get updateSearchPre => "Kísérleti verziók keresése";
+  /// "Legfrissebb (kísérleti) verzió"
+  String get updateFoundPre => "Legfrissebb (kísérleti) verzió";
   /// "${minutes} percenként egyszer frissíthetsz!"
   String rateLimitAlert(String minutes) => "${minutes} percenként egyszer frissíthetsz!";
   /// "keresés"
@@ -1614,6 +1618,12 @@ class _I18n_en_US extends I18n {
   /// "Update available!"
   @override
   String get updateAvailable => "Update available!";
+  /// "Search for experimental versions"
+  @override
+  String get updateSearchPre => "Search for experimental versions";
+  /// "Latest (experimental) version"
+  @override
+  String get updateFoundPre => "Latest (experimental) version";
   /// "You can only refresh every ${minutes} minute(s)!"
   @override
   String rateLimitAlert(String minutes) => "You can only refresh every ${minutes} minute(s)!";
@@ -2672,6 +2682,12 @@ class _I18n_de_DE extends I18n {
   /// "Neue Ausgabe steht zu verfügung!"
   @override
   String get updateAvailable => "Neue Ausgabe steht zu verfügung!";
+  /// "Suche nach experimentellen Versionen"
+  @override
+  String get updateSearchPre => "Suche nach experimentellen Versionen";
+  /// "Neueste (experimentelle) Version"
+  @override
+  String get updateFoundPre => "Neueste (experimentelle) Version";
   /// "Neue Daten können erst jede ${minutes} Minuten abgerufen werden!"
   @override
   String rateLimitAlert(String minutes) => "Neue Daten können erst jede ${minutes} Minuten abgerufen werden!";

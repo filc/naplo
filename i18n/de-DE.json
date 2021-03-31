@@ -385,7 +385,9 @@
     "newVersion": "Neue Ausgabe",
     "changes": "Änderungen",
     "currentVersion": "Aktuelle Version",
-    "available": "Neue Ausgabe steht zu verfügung!"
+    "available": "Neue Ausgabe steht zu verfügung!",
+    "searchPre": "Suche nach experimentellen Versionen",
+    "foundPre": "Neueste (experimentelle) Version"
   },
   "rateLimit": {
     "alert": "Neue Daten können erst jede {minutes} Minuten abgerufen werden!"
