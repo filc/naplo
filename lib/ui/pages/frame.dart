@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:filcnaplo/data/context/page.dart';
 import 'package:filcnaplo/data/models/new.dart';
 import 'package:filcnaplo/data/sync/state.dart';
@@ -43,19 +45,20 @@ class _PageFrameState extends State<PageFrame> {
 
     // Sync at startup
 
-    app.user.sync.release.sync().then((_) {
-      getApplicationDocumentsDirectory().then((dir) {
-        dir
-            .listSync()
-            .where((file) =>
-                path.basename(file.path) ==
-                ("filcnaplo-" +
-                    app.user.sync.release.latestRelease.version +
-                    ".apk"))
-            .first
-            .delete();
+    if (Platform.isAndroid) {
+      app.user.sync.release.sync().then((_) {
+        getApplicationDocumentsDirectory().then((dir) {
+          String latestVersion = app.user.sync.release.latestRelease.version;
+          List apks = dir
+              .listSync()
+              .where((f) =>
+                  path.basename(f.path) == "filcnaplo-$latestVersion.apk")
+              .toList();
+
+          if (apks.length > 0) apks.first.delete();
+        });
       });
-    });
+    }
 
     app.settings.update().then((_) {
       app.user.kreta.userAgent = app.settings.config.config.userAgent;

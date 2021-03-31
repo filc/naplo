@@ -6,6 +6,8 @@ class ReleaseSync {
   bool isNew = false;
 
   Future sync({bool allowPrerelease = false}) async {
+    if (!Platform.isAndroid) return;
+
     var releasesJson = await app.user.kreta.getReleases();
     if (!allowPrerelease) {
       for (Map r in releasesJson) {
@@ -19,10 +21,7 @@ class ReleaseSync {
       latestRelease = Release.fromJson(releasesJson.first);
     }
 
-    if (Platform.isAndroid) {
-      isNew = compareVersions(latestRelease.version, app.currentAppVersion);
-    } else
-      isNew = false;
+    isNew = compareVersions(latestRelease.version, app.currentAppVersion);
   }
 
   bool compareVersions(String gitHub, String existing) {
@@ -44,9 +43,7 @@ class ReleaseSync {
         try {
           gitHubParts.add(int.parse(s));
         } catch (e) {
-          print(
-              "ERROR: releaseSync.dart compareVersions gitHubParts failed to parse version part! " +
-                  e.toString());
+          print("ERROR: ReleaseSync.compareVersions: " + e.toString());
         }
       }
       if (stableGitHub) gitHubParts.add(1000);
@@ -68,11 +65,10 @@ class ReleaseSync {
         try {
           existingParts.add(int.parse(s));
         } catch (e) {
-          print(
-              "ERROR: releaseSync.dart compareVersions existingParts failed to parse version part!" +
-                  e.toString());
+          print("ERROR: ReleaseSync.compareVersions: " + e.toString());
         }
       }
+      // what even
       if (stableExisting) existingParts.add(1000);
 
       int i = 0;
@@ -84,7 +80,7 @@ class ReleaseSync {
       }
       return false;
     } catch (e) {
-      print("ERROR in ReleaseSync.dart: " + e.toString());
+      print("ERROR: ReleaseSync.compareVersions: " + e.toString());
       return false;
     }
   }

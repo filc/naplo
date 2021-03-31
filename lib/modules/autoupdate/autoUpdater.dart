@@ -13,6 +13,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:open_file/open_file.dart';
 import 'package:filcnaplo/data/context/theme.dart';
 
+import '../../ui/common/custom_snackbar.dart';
+
+enum InstallState { update, downloading, saving, installing }
+
 class AutoUpdater extends StatefulWidget {
   @override
   _AutoUpdaterState createState() => _AutoUpdaterState();
@@ -22,20 +26,48 @@ class _AutoUpdaterState extends State<AutoUpdater> {
   bool buttonPressed = false;
   double progress;
   bool displayProgress = false;
-  String buttonText;
+  InstallState installState;
 
   void downloadCallback(
-      double progress, bool displayProgress, String buttonText) {
-    setState(() {
-      this.progress = progress;
-      this.displayProgress = displayProgress;
-      this.buttonText = buttonText;
-    });
+      double progress, bool displayProgress, InstallState installState) {
+    if (mounted) {
+      setState(() {
+        this.progress = progress;
+        this.displayProgress = displayProgress;
+        this.installState = installState;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!buttonPressed) buttonText = I18n.of(context).update;
+    if (!buttonPressed) installState = InstallState.update;
+
+    String buttonText;
+
+    switch (installState) {
+      case InstallState.update:
+        buttonText = I18n.of(context).update;
+        break;
+      case InstallState.downloading:
+        buttonText = I18n.of(context).updateDownloading;
+        break;
+      case InstallState.saving:
+        buttonText = I18n.of(context).updateSaving;
+        break;
+      case InstallState.installing:
+        buttonText = I18n.of(context).updateInstalling;
+        break;
+      default:
+        buttonText = I18n.of(context).error;
+    }
+
     return BottomCard(
       child: Padding(
         padding: EdgeInsets.only(top: 16),
@@ -45,44 +77,28 @@ class _AutoUpdaterState extends State<AutoUpdater> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 7, bottom: 5),
-                              child: Text(
-                                I18n.of(context).updateNewVersion,
-                                style: TextStyle(
-                                    fontSize: 23, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Text(
-                              app.user.sync.release.latestRelease.version,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1
-                                      .color
-                                      .withAlpha(200)),
-                            ),
-                          ],
-                        ),
+                  ListTile(
+                    contentPadding: EdgeInsets.only(left: 8.0),
+                    title: Text(
+                      I18n.of(context).updateNewVersion,
+                      style: TextStyle(
+                        fontSize: 23,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Container(
-                        padding: EdgeInsets.only(right: 8, bottom: 10),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(18),
-                            child: Image.asset("assets/logo.png")),
-                        width: 85,
+                    ),
+                    subtitle: Text(
+                      app.user.sync.release.latestRelease.version,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                       ),
-                    ],
+                    ),
+                    trailing: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: Image.asset(
+                        "assets/logo.png",
+                      ),
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(8),
@@ -154,12 +170,12 @@ class _AutoUpdaterState extends State<AutoUpdater> {
     );
   }
 
-  void installUpdate(BuildContext context, Function updateDisplay) async {
-    updateDisplay(null, true, I18n.of(context).updateDownloading);
+  Future installUpdate(BuildContext context, Function updateDisplay) async {
+    updateDisplay(null, true, InstallState.downloading);
 
     String dir = (await getApplicationDocumentsDirectory()).path;
-    String filename =
-        "filcnaplo-" + app.user.sync.release.latestRelease.version + ".apk";
+    String latestVersion = app.user.sync.release.latestRelease.version;
+    String filename = "filcnaplo-$latestVersion.apk";
     File apk = File("$dir/$filename");
 
     var httpClient = http.Client();
@@ -173,14 +189,14 @@ class _AutoUpdaterState extends State<AutoUpdater> {
     response.asStream().listen((http.StreamedResponse r) {
       r.stream.listen((List<int> chunk) {
         // Display percentage of completion
-        updateDisplay(downloaded / r.contentLength, true,
-            I18n.of(context).updateDownloading);
+        updateDisplay(
+            downloaded / r.contentLength, true, InstallState.downloading);
 
         chunks.add(chunk);
         downloaded += chunk.length;
       }, onDone: () async {
         // Display percentage of completion
-        updateDisplay(null, true, I18n.of(context).updateSaving);
+        updateDisplay(null, true, InstallState.saving);
 
         // Save the file
         final Uint8List bytes = Uint8List(r.contentLength);
@@ -191,8 +207,19 @@ class _AutoUpdaterState extends State<AutoUpdater> {
         }
         await apk.writeAsBytes(bytes);
 
-        updateDisplay(null, true, I18n.of(context).updateInstalling);
-        OpenFile.open(apk.path);
+        updateDisplay(null, true, InstallState.installing);
+        if (mounted) {
+          OpenFile.open(apk.path).then((result) {
+            if (result.type != ResultType.done) {
+              print("ERROR: installUpdate.openFile: " + result.message);
+              ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(
+                message: I18n.of(context).error,
+                color: Colors.red,
+              ));
+            }
+            Navigator.pop(context);
+          });
+        }
       });
     });
   }
@@ -229,9 +256,10 @@ class AutoUpdateButton extends StatelessWidget {
           ),
           onPressed: () {
             showModalBottomSheet(
-                context: context,
-                backgroundColor: Colors.transparent,
-                builder: (BuildContext context) => AutoUpdater());
+              context: context,
+              backgroundColor: Colors.transparent,
+              builder: (BuildContext context) => AutoUpdater(),
+            );
           },
         ),
       ),
