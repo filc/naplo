@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:filcnaplo/data/models/config.dart';
 import 'package:filcnaplo/data/models/new.dart';
-import 'package:filcnaplo/modules/autoupdate/releaseSync.dart';
 import 'package:http/http.dart' as http;
 import 'package:filcnaplo/kreta/api.dart';
 import 'package:filcnaplo/utils/parse_jwt.dart';
@@ -173,6 +172,7 @@ class KretaClient {
       return responseJson;
     } catch (error) {
       print("ERROR: GitHubAPI.getLatestRelease: " + error.toString());
+      return Map();
     }
   }
 

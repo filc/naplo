@@ -6,11 +6,8 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/ui/common/bottom_card.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/ui/pages/settings/page.dart';
-import 'package:filcnaplo/modules/autoupdate/releaseSync.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:open_file/open_file.dart';
@@ -220,7 +217,7 @@ class AutoUpdateButton extends StatelessWidget {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Frissítés elérhető!"),
+                Text(I18n.of(context).updateAvailable),
                 Text(
                   app.user.sync.release.latestRelease.version,
                   style: TextStyle(
@@ -233,8 +230,6 @@ class AutoUpdateButton extends StatelessWidget {
           onPressed: () {
             showModalBottomSheet(
                 context: context,
-                isDismissible: false,
-                enableDrag: false,
                 backgroundColor: Colors.transparent,
                 builder: (BuildContext context) => AutoUpdater());
           },
