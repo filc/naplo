@@ -40,12 +40,6 @@ class _AutoUpdaterState extends State<AutoUpdater> {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     if (!buttonPressed) installState = InstallState.update;
 
