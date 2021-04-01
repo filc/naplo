@@ -99,8 +99,8 @@ class _EditAccountTileState extends State<EditAccountTile> {
                       ),
                     )
                   : Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      child: Wrap(
+                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           TextButton(
                             child: Text(
