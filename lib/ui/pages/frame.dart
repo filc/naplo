@@ -39,14 +39,14 @@ class _PageFrameState extends State<PageFrame> {
     if (Platform.isAndroid) {
       app.user.sync.release.sync().then((_) {
         getApplicationDocumentsDirectory().then((dir) {
-          String latestVersion = app.user.sync.release.latestRelease.version;
-          List apks = dir
+          dir
               .listSync()
-              .where((f) =>
-                  path.basename(f.path) == "filcnaplo-$latestVersion.apk")
-              .toList();
-
-          if (apks.length > 0) apks.first.delete();
+              .where((f) => path.extension(f.path) == ".apk")
+              .forEach((apk) {
+            apk
+                .delete()
+                .then((result) => print("INFO: Deleted " + result.toString()));
+          });
         });
       });
     }

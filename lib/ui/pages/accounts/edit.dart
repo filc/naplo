@@ -100,7 +100,6 @@ class _EditAccountTileState extends State<EditAccountTile> {
                     )
                   : Expanded(
                       child: Wrap(
-                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           TextButton(
                             child: Text(
