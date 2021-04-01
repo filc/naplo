@@ -306,7 +306,7 @@ class HelpDialog extends StatelessWidget {
                 ),
               ),
               MaterialButton(
-                  child: Text(I18n.of(context).dialogOk),
+                  child: Text(I18n.of(context).dialogDone),
                   onPressed: () {
                     Navigator.of(context).pop();
                   })
