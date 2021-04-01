@@ -224,7 +224,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ? I18n.of(context).loginChooseSchool
                                   : loginContext.selectedSchool.name,
                               softWrap: false,
-                              overflow: TextOverflow.fade,
+                              overflow: TextOverflow.clip,
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
