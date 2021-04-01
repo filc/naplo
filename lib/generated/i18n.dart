@@ -612,8 +612,8 @@ class I18n implements WidgetsLocalizations {
   String get updateNewVersion => "Új verzió";
   /// "Újdonságok"
   String get updateChanges => "Újdonságok";
-  /// "Jelenlegi verzió"
-  String get updateCurrentVersion => "Jelenlegi verzió";
+  /// "Jelenlegi"
+  String get updateCurrentVersion => "Jelenlegi";
   /// "Frissítés elérhető!"
   String get updateAvailable => "Frissítés elérhető!";
   /// "Kísérleti verziók keresése"
@@ -1622,9 +1622,9 @@ class _I18n_en_US extends I18n {
   /// "Changes"
   @override
   String get updateChanges => "Changes";
-  /// "Current version"
+  /// "Current"
   @override
-  String get updateCurrentVersion => "Current version";
+  String get updateCurrentVersion => "Current";
   /// "Update available!"
   @override
   String get updateAvailable => "Update available!";
@@ -2692,12 +2692,12 @@ class _I18n_de_DE extends I18n {
   /// "Änderungen"
   @override
   String get updateChanges => "Änderungen";
-  /// "Aktuelle Version"
+  /// "Aktuell"
   @override
-  String get updateCurrentVersion => "Aktuelle Version";
-  /// "Neue Ausgabe steht zu verfügung!"
+  String get updateCurrentVersion => "Aktuell";
+  /// "Neue Ausgabe!"
   @override
-  String get updateAvailable => "Neue Ausgabe steht zu verfügung!";
+  String get updateAvailable => "Neue Ausgabe!";
   /// "Suche nach experimentellen Versionen"
   @override
   String get updateSearchPre => "Suche nach experimentellen Versionen";

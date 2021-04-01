@@ -386,8 +386,8 @@
     "installing": "wird installiert",
     "newVersion": "Neue Ausgabe",
     "changes": "Änderungen",
-    "currentVersion": "Aktuelle Version",
-    "available": "Neue Ausgabe steht zu verfügung!",
+    "currentVersion": "Aktuell",
+    "available": "Neue Ausgabe!",
     "searchPre": "Suche nach experimentellen Versionen",
     "foundPre": "Neueste (experimentelle) Version"
   },

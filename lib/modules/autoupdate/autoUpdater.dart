@@ -65,70 +65,92 @@ class _AutoUpdaterState extends State<AutoUpdater> {
 
     return BottomCard(
       child: Padding(
-        padding: EdgeInsets.only(top: 16),
+        padding: EdgeInsets.only(top: 13),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ListTile(
-                    contentPadding: EdgeInsets.only(left: 8.0),
-                    title: Text(
-                      I18n.of(context).updateNewVersion,
-                      style: TextStyle(
-                        fontSize: 23,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Text(
-                      app.user.sync.release.latestRelease.version,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    trailing: ClipRRect(
-                      borderRadius: BorderRadius.circular(12.0),
-                      child: Image.asset(
-                        "assets/logo.png",
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          I18n.of(context).updateChanges + ":",
-                          style: TextStyle(fontSize: 18),
+                        Expanded(
+                          child: ListTile(
+                            contentPadding: EdgeInsets.only(left: 8.0),
+                            title: Text(
+                              I18n.of(context).updateNewVersion,
+                              style: TextStyle(
+                                fontSize: 23,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            subtitle: Text(
+                              app.user.sync.release.latestRelease.version,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
                         ),
-                        Text(
-                          I18n.of(context).updateCurrentVersion +
-                              ": " +
-                              app.currentAppVersion,
-                          style: TextStyle(color: Colors.white.withAlpha(180)),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12.0),
+                          child: Image.asset(
+                            "assets/logo.png",
+                            width: 60,
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  Container(
-                    constraints: BoxConstraints(maxHeight: 250),
-                    padding: EdgeInsets.all(8.0),
-                    child: Markdown(
-                      data: app.user.sync.release.latestRelease.notes,
-                      padding: EdgeInsets.all(0),
-                      physics: BouncingScrollPhysics(),
-                      styleSheet: MarkdownStyleSheet(
-                        p: TextStyle(
-                          fontSize: 15,
-                          color: Colors.white,
-                        ),
+                    Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            I18n.of(context).updateChanges + ":",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Text(
+                            I18n.of(context).updateCurrentVersion +
+                                ": " +
+                                app.currentAppVersion,
+                            style:
+                                TextStyle(color: Colors.white.withAlpha(180)),
+                          ),
+                        ],
                       ),
                     ),
-                  )
-                ],
+                    Expanded(
+                      child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Builder(builder: (context) {
+                            try {
+                              return Markdown(
+                                shrinkWrap: true,
+                                data: app.user.sync.release.latestRelease.notes,
+                                padding: EdgeInsets.all(0),
+                                physics: BouncingScrollPhysics(),
+                                styleSheet: MarkdownStyleSheet(
+                                  p: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              );
+                            } catch (e) {
+                              print(
+                                  "ERROR: autoUpdater.dart failed to show markdown relase notes: " +
+                                      e.toString());
+                              return Text(
+                                  app.user.sync.release.latestRelease.notes);
+                            }
+                          })),
+                    )
+                  ],
+                ),
               ),
               MaterialButton(
                 color: ThemeContext.filcGreen,
@@ -156,7 +178,9 @@ class _AutoUpdaterState extends State<AutoUpdater> {
                       Text(
                         buttonText.toUpperCase(),
                         style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold),
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       )
                     ],
                   ),
@@ -245,7 +269,12 @@ class AutoUpdateButton extends StatelessWidget {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(I18n.of(context).updateAvailable),
+                Flexible(
+                    child: Text(
+                  I18n.of(context).updateAvailable,
+                  softWrap: false,
+                  overflow: TextOverflow.fade,
+                )),
                 Text(
                   app.user.sync.release.latestRelease.version,
                   style: TextStyle(

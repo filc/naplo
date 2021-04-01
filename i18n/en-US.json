@@ -386,7 +386,7 @@
     "installing": "installing",
     "newVersion": "Update",
     "changes": "Changes",
-    "currentVersion": "Current version",
+    "currentVersion": "Current",
     "available": "Update available!",
     "searchPre": "Search for experimental versions",
     "foundPre": "Latest (experimental) version"
