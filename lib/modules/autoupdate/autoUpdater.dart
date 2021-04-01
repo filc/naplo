@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_cropper/image_cropper.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:open_file/open_file.dart';
 import 'package:filcnaplo/data/context/theme.dart';
@@ -152,43 +153,64 @@ class _AutoUpdaterState extends State<AutoUpdater> {
                   ],
                 ),
               ),
-              MaterialButton(
-                color: ThemeContext.filcGreen,
-                elevation: 0,
-                highlightElevation: 0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(45.0)),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 9),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
+              Stack(
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      if (displayProgress)
-                        Container(
-                          margin: EdgeInsets.only(right: 10),
-                          height: 19,
-                          width: 19,
-                          child: CircularProgressIndicator(
-                            value: progress,
-                            valueColor:
-                                AlwaysStoppedAnimation<Color>(Colors.white),
-                            strokeWidth: 3.2,
-                          ),
-                        ),
-                      Text(
-                        buttonText.toUpperCase(),
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      )
+                      IconButton(
+                          icon: Icon(FeatherIcons.helpCircle),
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => HelpDialog());
+                          })
                     ],
                   ),
-                ),
-                onPressed: () {
-                  if (!buttonPressed) installUpdate(context, downloadCallback);
-                  buttonPressed = true;
-                },
+                  Center(
+                    child: MaterialButton(
+                      color: ThemeContext.filcGreen,
+                      elevation: 0,
+                      highlightElevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(45.0)),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 9),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (displayProgress)
+                              Container(
+                                margin: EdgeInsets.only(right: 10),
+                                height: 19,
+                                width: 19,
+                                child: CircularProgressIndicator(
+                                  value: progress,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white),
+                                  strokeWidth: 3.2,
+                                ),
+                              ),
+                            Text(
+                              buttonText.toUpperCase(),
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            )
+                          ],
+                        ),
+                      ),
+                      onPressed: () {
+                        if (!buttonPressed)
+                          installUpdate(context, downloadCallback);
+                        buttonPressed = true;
+                      },
+                    ),
+                  ),
+                ],
               ),
             ]),
       ),
@@ -249,6 +271,62 @@ class _AutoUpdaterState extends State<AutoUpdater> {
     });
   }
 }
+
+class HelpDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Container(
+            decoration: BoxDecoration(
+              color: app.settings.theme.backgroundColor,
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+            margin: EdgeInsets.all(32.0),
+            child: Column(children: [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Center(
+                  child: Icon(FeatherIcons.helpCircle),
+                ),
+              ),
+              Expanded(
+                child: Markdown(
+                  shrinkWrap: true,
+                  data: helpText,
+                  padding: EdgeInsets.all(0),
+                  physics: BouncingScrollPhysics(),
+                  styleSheet: MarkdownStyleSheet(
+                    p: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              MaterialButton(
+                  child: Text(I18n.of(context).dialogOk),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  })
+            ])));
+  }
+}
+
+const String helpText =
+    """A **FRISSÍTÉS** gombot megnyomva az app automatikusan letölti a GitHubról a legfrissebb Filc telepítőt.\\
+Ez kb. 50 MB adatforgalommal jár.\\
+A letöltött telepítőt ezután megnyitja az app.
+
+Telefonmárkától és Android verziótól függően nagyon különböző a telepítés folyamata, de ezekre figyelj:
+ - Ha kérdezi a telefon, **engedélyezd a Filctől származó appok telepítését**, majd nyomd meg a vissza gombot.\\
+ _(Újabb Android verziók)_
+ - Ha szól a telefon hogy a külső appok telepítése biztonsági okokból tiltott, a megjelenő gombbal **ugorj a beállításokba és kapcsold be az Ismeretlen források lehetőséget.**\\
+ _(Régi Android verziók)_
+ 
+A telepítés után újra megnyílik az app, immár a legfrissebb verzióval. Az indítás során törli a telepítéshez használt .apk fájlokat, így a tárhelyed miatt nem kell aggódnod.
+""";
 
 class AutoUpdateButton extends StatelessWidget {
   @override
