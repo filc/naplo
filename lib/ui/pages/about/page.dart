@@ -8,6 +8,7 @@ import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatelessWidget {
   @override
@@ -156,17 +157,7 @@ class AboutPage extends StatelessWidget {
                       color: Color(0xFF7289DA),
                       label: "Discord",
                       onPressed: () {
-                        FlutterWebBrowser.openWebPage(
-                          url: "https://filcnaplo.hu/discord",
-                          customTabsOptions: CustomTabsOptions(
-                            toolbarColor: app.settings.theme.backgroundColor,
-                            showTitle: true,
-                          ),
-                          safariVCOptions: SafariViewControllerOptions(
-                            dismissButtonStyle:
-                                SafariViewControllerDismissButtonStyle.close,
-                          ),
-                        );
+                        launch("https://discord.com/invite/GqzTJj5");
                       },
                     ),
                   ],
