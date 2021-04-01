@@ -27,7 +27,8 @@ class ExamView extends StatelessWidget {
                     exam.teacher != null
                         ? capitalize(exam.teacher)
                         : I18n.of(context).unknown,
-                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
                     maxLines: 1,
                   ),
                 ),
@@ -89,7 +90,8 @@ class TestDetail extends StatelessWidget {
           value,
           style: TextStyle(fontSize: 16.0),
           maxLines: 3,
-          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          overflow: TextOverflow.fade,
         ),
       ],
     );

@@ -58,6 +58,19 @@ class _TimetableFrameState extends State<TimetableFrame>
     });
   }
 
+  /// Return the index of today's tab in the timetable.
+  /// Returns 0 (first tab) if there are no more schooldays this week.
+  int todayIndex() {
+    for (int i = 1; i <= _timetableBuilder.week.days.length; i++) {
+      Day element = _timetableBuilder.week.days[i];
+      if (element.date.weekday >= DateTime.now().weekday) {
+        return i;
+      }
+    }
+
+    return 0;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -71,9 +84,22 @@ class _TimetableFrameState extends State<TimetableFrame>
       return dif > -24 && dif < 0;
     }, orElse: () => Day()).date;
 
-    int dayIndex = currentDay != null
-        ? currentDay.weekday - (6 - _timetableBuilder.week.days.length)
-        : 0;
+    selectedWeek = _timetableBuilder.getCurrentWeek();
+
+    refreshWeek(offline: true)
+        .then((hasOfflineLessons) => setState(() {
+              ready = hasOfflineLessons;
+            }))
+        .then((_) => {
+              refreshWeek().then((successfulOnlineRefresh) => mounted
+                  ? setState(() {
+                      ready = successfulOnlineRefresh;
+                      _timetableBuilder.build(selectedWeek);
+                    })
+                  : null)
+            });
+
+    int dayIndex = currentDay != null ? todayIndex() : 0;
 
     if (_timetableBuilder.week.days.length > 1) {
       dayIndex = dayIndex.clamp(0, _timetableBuilder.week.days.length - 1);
@@ -84,19 +110,6 @@ class _TimetableFrameState extends State<TimetableFrame>
       length: _timetableBuilder.week.days.length.clamp(1, 7),
       initialIndex: dayIndex,
     );
-
-    selectedWeek = _timetableBuilder.getCurrentWeek();
-
-    refreshWeek(offline: true)
-        .then((hasOfflineLessons) => setState(() {
-              ready = hasOfflineLessons;
-            }))
-        .then((_) => {
-              refreshWeek().then((successfulOnlineRefresh) => setState(() {
-                    ready = successfulOnlineRefresh;
-                    _timetableBuilder.build(selectedWeek);
-                  }))
-            });
   }
 
   @override
@@ -141,7 +154,8 @@ class _TimetableFrameState extends State<TimetableFrame>
                         formatDate(context, currentWeek.end, weekday: false) +
                         ")",
                     textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
                     maxLines: 1,
                   ),
                 ),

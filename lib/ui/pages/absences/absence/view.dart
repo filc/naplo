@@ -25,7 +25,8 @@ class AbsenceView extends StatelessWidget {
             title: Row(
               children: [
                 Expanded(
-                  child: Text(absence.teacher, overflow: TextOverflow.ellipsis),
+                  child: Text(absence.teacher,
+                      softWrap: false, overflow: TextOverflow.fade),
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 12.0),
@@ -36,7 +37,8 @@ class AbsenceView extends StatelessWidget {
             subtitle: Text(
               capital(absence.subject.name),
               maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              overflow: TextOverflow.fade,
             ),
           ),
 
@@ -112,7 +114,8 @@ class AbsenceDetail extends StatelessWidget {
           value,
           style: TextStyle(fontSize: 16.0),
           maxLines: 3,
-          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          overflow: TextOverflow.fade,
         ),
       ],
     );

@@ -32,29 +32,59 @@ class _SubjectViewState extends State<SubjectView> {
   Widget build(BuildContext context) {
     studentAvg = 0;
 
-    List<Evaluation> evaluations = app.user.sync.evaluation.evaluations
-        .where((evaluation) => evaluation.type == EvaluationType.midYear)
-        .toList();
+    List<Evaluation> evaluations = app.user.sync.evaluation.evaluations;
 
     List<Evaluation> subjectEvals =
         evaluations.where((e) => e.subject.id == widget.subject.id).toList();
     subjectEvals.insertAll(0, tempEvals);
 
-    List<GradeTile> evaluationTiles = [];
+    List<Widget> evaluationTiles = [];
 
     subjectEvals.forEach((evaluation) {
-      if (evaluation.date != null &&
-          evaluation.value.value !=
-              null) if (evaluation.id.startsWith("temp_")) {
-        evaluationTiles.add(GradeTile(
-          evaluation,
-          padding: EdgeInsets.only(bottom: 6.0),
-          deleteCallback: _deleteCallback,
-        ));
+      if (evaluation.type == EvaluationType.midYear) {
+        if (evaluation.date != null &&
+            evaluation.value.value !=
+                null) if (evaluation.id.startsWith("temp_")) {
+          evaluationTiles.add(GradeTile(
+            evaluation,
+            padding: EdgeInsets.only(bottom: 6.0),
+            deleteCallback: _deleteCallback,
+          ));
+        } else {
+          evaluationTiles.add(GradeTile(
+            evaluation,
+            padding: EdgeInsets.only(bottom: 6.0),
+          ));
+        }
       } else {
-        evaluationTiles.add(GradeTile(
-          evaluation,
-          padding: EdgeInsets.only(bottom: 6.0),
+        String yearTitle;
+
+        switch (evaluation.type) {
+          case EvaluationType.firstQ:
+            yearTitle = I18n.of(context).evaluationsQYear;
+            break;
+          case EvaluationType.secondQ:
+            yearTitle = I18n.of(context).evaluations2qYear;
+            break;
+          case EvaluationType.halfYear:
+            yearTitle = I18n.of(context).evaluationsHalfYear;
+            break;
+          case EvaluationType.thirdQ:
+            yearTitle = I18n.of(context).evaluations3qYear;
+            break;
+          case EvaluationType.fourthQ:
+            yearTitle = I18n.of(context).evaluations4qYear;
+            break;
+          case EvaluationType.endYear:
+            yearTitle = I18n.of(context).evaluationsEndYear;
+            break;
+          case EvaluationType.midYear:
+            break;
+        }
+
+        evaluationTiles.add(YearDivider(
+          text: yearTitle,
+          evaluation: evaluation,
         ));
       }
     });
@@ -196,8 +226,10 @@ class _SubjectViewState extends State<SubjectView> {
           Evaluation tempEval = await showModalBottomSheet(
             context: context,
             backgroundColor: Colors.transparent,
-            builder: (BuildContext context) =>
-                AverageCalculator(widget.subject),
+            builder: (BuildContext context) => AverageCalculator(
+              widget.subject,
+              multiplier: tempEvals.length + 1,
+            ),
           );
           if (tempEval != null) {
             setState(() {
@@ -213,5 +245,52 @@ class _SubjectViewState extends State<SubjectView> {
     setState(() {
       tempEvals.removeWhere((e) => e.id == toRemove.id);
     });
+  }
+}
+
+class YearDivider extends StatelessWidget {
+  const YearDivider({Key key, @required this.text, @required this.evaluation})
+      : super(key: key);
+
+  final String text;
+  final Evaluation evaluation;
+
+  @override
+  Widget build(BuildContext context) {
+    return text != null
+        ? Padding(
+            padding: EdgeInsets.only(bottom: 4.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(.7),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  height: 3.0,
+                  width: 100.0,
+                  margin: EdgeInsets.all(6.0),
+                ),
+                Text(
+                  text,
+                  style: TextStyle(
+                    color: app.settings.appColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(.7),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  height: 3.0,
+                  width: 100.0,
+                  margin: EdgeInsets.all(6.0),
+                ),
+              ],
+            ),
+          )
+        : Container();
   }
 }

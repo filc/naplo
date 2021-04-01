@@ -124,7 +124,8 @@ class EvaluationTile extends StatelessWidget {
                       )
                     : Text(
                         title,
-                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        overflow: TextOverflow.fade,
                       ),
               ),
               isTemp
@@ -142,7 +143,8 @@ class EvaluationTile extends StatelessWidget {
               : Text(
                   subtitle,
                   maxLines: evaluation.mode != null ? 2 : 1,
-                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  overflow: TextOverflow.fade,
                 ),
           trailing: isTemp
               ? IconButton(

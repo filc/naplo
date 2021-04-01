@@ -308,6 +308,8 @@ class I18n implements WidgetsLocalizations {
   String get messageAttachments => "csatolmányok";
   /// "Sikertelen letöltés!"
   String get messageAttachmentFailed => "Sikertelen letöltés!";
+  /// "Nem sikerült megnyitni a letöltött filet!"
+  String get messageAttachmentOpenFailed => "Nem sikerült megnyitni a letöltött filet!";
   /// "visszaállítás"
   String get messageRestore => "visszaállítás";
   /// "archiválás"
@@ -408,18 +410,18 @@ class I18n implements WidgetsLocalizations {
   String get evaluationsYourGrades => "Jegyeid";
   /// "Évközi"
   String get evaluationsMidYear => "Évközi";
-  /// "1. Negyedévi"
-  String get evaluationsQYear => "1. Negyedévi";
-  /// "2. Negyedévi"
-  String get evaluations2qYear => "2. Negyedévi";
-  /// "Félévi"
-  String get evaluationsHalfYear => "Félévi";
-  /// "3. Negyedévi"
-  String get evaluations3qYear => "3. Negyedévi";
-  /// "4. Negyedévi"
-  String get evaluations4qYear => "4. Negyedévi";
-  /// "Év végi"
-  String get evaluationsEndYear => "Év végi";
+  /// "1. Negyedév"
+  String get evaluationsQYear => "1. Negyedév";
+  /// "2. Negyedév"
+  String get evaluations2qYear => "2. Negyedév";
+  /// "Félév"
+  String get evaluationsHalfYear => "Félév";
+  /// "3. Negyedév"
+  String get evaluations3qYear => "3. Negyedév";
+  /// "4. Negyedév"
+  String get evaluations4qYear => "4. Negyedév";
+  /// "Év vége"
+  String get evaluationsEndYear => "Év vége";
   /// "Tárgyak"
   String get evaluationsSubjects => "Tárgyak";
   /// "Statisztikák"
@@ -580,6 +582,8 @@ class I18n implements WidgetsLocalizations {
   String get error => "Hiba";
   /// "Hálózati hiba"
   String get errorNetwork => "Hálózati hiba";
+  /// "A kréta jelenleg karbantartás alatt van."
+  String get errorKretaOffline => "A kréta jelenleg karbantartás alatt van.";
   /// "Hiba a felhasználó olvasása közben"
   String get errorReadAccount => "Hiba a felhasználó olvasása közben";
   /// "Nem sikerült lekérni az üzeneteket"
@@ -596,8 +600,26 @@ class I18n implements WidgetsLocalizations {
   String get download => "letöltés";
   /// "Töltsd le most a legújabb verziót"
   String get downloadLatest => "Töltsd le most a legújabb verziót";
+  /// "frissítés"
+  String get update => "frissítés";
+  /// "letöltés"
+  String get updateDownloading => "letöltés";
+  /// "mentés"
+  String get updateSaving => "mentés";
+  /// "telepítés"
+  String get updateInstalling => "telepítés";
+  /// "Új verzió"
+  String get updateNewVersion => "Új verzió";
+  /// "Újdonságok"
+  String get updateChanges => "Újdonságok";
+  /// "Jelenlegi"
+  String get updateCurrentVersion => "Jelenlegi";
   /// "Frissítés elérhető!"
   String get updateAvailable => "Frissítés elérhető!";
+  /// "Kísérleti verziók keresése"
+  String get updateSearchPre => "Kísérleti verziók keresése";
+  /// "Legfrissebb (kísérleti) verzió"
+  String get updateFoundPre => "Legfrissebb (kísérleti) verzió";
   /// "${minutes} percenként egyszer frissíthetsz!"
   String rateLimitAlert(String minutes) => "${minutes} percenként egyszer frissíthetsz!";
   /// "keresés"
@@ -1144,6 +1166,9 @@ class _I18n_en_US extends I18n {
   /// "Failed to download attachment!"
   @override
   String get messageAttachmentFailed => "Failed to download attachment!";
+  /// "Failed to open attachment!"
+  @override
+  String get messageAttachmentOpenFailed => "Failed to open attachment!";
   /// "restore"
   @override
   String get messageRestore => "restore";
@@ -1552,6 +1577,9 @@ class _I18n_en_US extends I18n {
   /// "Network error"
   @override
   String get errorNetwork => "Network error";
+  /// "KRETA is currently under maintenance."
+  @override
+  String get errorKretaOffline => "KRETA is currently under maintenance.";
   /// "Error while reading user"
   @override
   String get errorReadAccount => "Error while reading user";
@@ -1576,9 +1604,36 @@ class _I18n_en_US extends I18n {
   /// "Download the latest version now"
   @override
   String get downloadLatest => "Download the latest version now";
-  /// "A new version is available!"
+  /// "install update"
   @override
-  String get updateAvailable => "A new version is available!";
+  String get update => "install update";
+  /// "downloading"
+  @override
+  String get updateDownloading => "downloading";
+  /// "saving"
+  @override
+  String get updateSaving => "saving";
+  /// "installing"
+  @override
+  String get updateInstalling => "installing";
+  /// "Update"
+  @override
+  String get updateNewVersion => "Update";
+  /// "Changes"
+  @override
+  String get updateChanges => "Changes";
+  /// "Current"
+  @override
+  String get updateCurrentVersion => "Current";
+  /// "Update available!"
+  @override
+  String get updateAvailable => "Update available!";
+  /// "Search for experimental versions"
+  @override
+  String get updateSearchPre => "Search for experimental versions";
+  /// "Latest (experimental) version"
+  @override
+  String get updateFoundPre => "Latest (experimental) version";
   /// "You can only refresh every ${minutes} minute(s)!"
   @override
   String rateLimitAlert(String minutes) => "You can only refresh every ${minutes} minute(s)!";
@@ -2178,9 +2233,12 @@ class _I18n_de_DE extends I18n {
   /// "Anhänge"
   @override
   String get messageAttachments => "Anhänge";
-  /// "Anhang konnte nicht heruntergeladen werden!"
+  /// "Befestigung konnte nicht heruntergeladen werden!"
   @override
-  String get messageAttachmentFailed => "Anhang konnte nicht heruntergeladen werden!";
+  String get messageAttachmentFailed => "Befestigung konnte nicht heruntergeladen werden!";
+  /// "Befestigung nicht öffnen!"
+  @override
+  String get messageAttachmentOpenFailed => "Befestigung nicht öffnen!";
   /// "wiederherstellen"
   @override
   String get messageRestore => "wiederherstellen";
@@ -2292,9 +2350,9 @@ class _I18n_de_DE extends I18n {
   /// "durschnitt"
   @override
   String get evaluationAverage => "durschnitt";
-  /// "klassendurschnitt"
+  /// "klassdurschnitt"
   @override
-  String get evaluationAverageClass => "klassendurschnitt";
+  String get evaluationAverageClass => "klassdurschnitt";
   /// "Notenwert"
   @override
   String get evaluationValue => "Notenwert";
@@ -2589,6 +2647,9 @@ class _I18n_de_DE extends I18n {
   /// "Netzwerkfehler"
   @override
   String get errorNetwork => "Netzwerkfehler";
+  /// "KRETA ist derzeit in der Wartung."
+  @override
+  String get errorKretaOffline => "KRETA ist derzeit in der Wartung.";
   /// "Konto konnte nicht abgerufen werden"
   @override
   String get errorReadAccount => "Konto konnte nicht abgerufen werden";
@@ -2613,9 +2674,36 @@ class _I18n_de_DE extends I18n {
   /// "Bitte die neueste Ausgabe jetzt herunterladen!"
   @override
   String get downloadLatest => "Bitte die neueste Ausgabe jetzt herunterladen!";
-  /// "Neue Ausgabe steht zu verfügung!"
+  /// "ausgabe installieren"
   @override
-  String get updateAvailable => "Neue Ausgabe steht zu verfügung!";
+  String get update => "ausgabe installieren";
+  /// "wird heruntergeladen"
+  @override
+  String get updateDownloading => "wird heruntergeladen";
+  /// "wird speichert"
+  @override
+  String get updateSaving => "wird speichert";
+  /// "wird installiert"
+  @override
+  String get updateInstalling => "wird installiert";
+  /// "Neue Ausgabe"
+  @override
+  String get updateNewVersion => "Neue Ausgabe";
+  /// "Änderungen"
+  @override
+  String get updateChanges => "Änderungen";
+  /// "Aktuell"
+  @override
+  String get updateCurrentVersion => "Aktuell";
+  /// "Neue Ausgabe!"
+  @override
+  String get updateAvailable => "Neue Ausgabe!";
+  /// "Suche nach experimentellen Versionen"
+  @override
+  String get updateSearchPre => "Suche nach experimentellen Versionen";
+  /// "Neueste (experimentelle) Version"
+  @override
+  String get updateFoundPre => "Neueste (experimentelle) Version";
   /// "Neue Daten können erst jede ${minutes} Minuten abgerufen werden!"
   @override
   String rateLimitAlert(String minutes) => "Neue Daten können erst jede ${minutes} Minuten abgerufen werden!";

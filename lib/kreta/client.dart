@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:filcnaplo/data/models/config.dart';
 import 'package:filcnaplo/data/models/new.dart';
+import 'package:filcnaplo/utils/network.dart';
 import 'package:http/http.dart' as http;
 import 'package:filcnaplo/kreta/api.dart';
 import 'package:filcnaplo/utils/parse_jwt.dart';
@@ -25,6 +26,8 @@ import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/data/models/absence.dart';
 import 'package:intl/intl.dart';
 
+enum OfflineState { maintenance, network }
+
 class KretaClient {
   var client = http.Client();
   final String clientId = "kreta-ellenorzo-mobile";
@@ -34,6 +37,19 @@ class KretaClient {
   String instituteCode;
   String userId;
   bool kretaOffline = false;
+  OfflineState offlineState;
+
+  Future<bool> networkCheck() async {
+    bool result = await NetworkUtils.checkConnectivity();
+
+    kretaOffline = !result;
+    if (!result)
+      offlineState = OfflineState.network;
+    else
+      offlineState = OfflineState.maintenance;
+
+    return result;
+  }
 
   Future checkResponse(http.Response response, {bool retry = true}) async {
     if (instituteCode != null) {
@@ -55,12 +71,10 @@ class KretaClient {
     if (response.statusCode != 200 && response.statusCode != 204)
       throw "Invalid response: " + response.statusCode.toString();
 
-    if (response.headers.containsKey("x-maintenance-mode") &&
-        response.request.url.host.contains(instituteCode)) {
-      kretaOffline = true;
-    } else {
-      kretaOffline = false;
-    }
+    bool result = response.headers.containsKey("x-maintenance-mode") &&
+        response.request.url.host.contains(instituteCode);
+    kretaOffline = result;
+    if (result) offlineState = OfflineState.maintenance;
   }
 
   Future<List<School>> getSchools() async {
@@ -91,6 +105,7 @@ class KretaClient {
       return schools;
     } catch (error) {
       print("ERROR: KretaAPI.getSchools: " + error.toString());
+      networkCheck();
       return [];
     }
   }
@@ -119,6 +134,7 @@ class KretaClient {
       return supporters;
     } catch (error) {
       print("ERROR: KretaAPI.getSupporters: " + error.toString());
+      networkCheck();
       return {
         "top": [],
         "all": [],
@@ -142,6 +158,7 @@ class KretaClient {
       return config;
     } catch (error) {
       print("ERROR: KretaAPI.getConfig: " + error.toString());
+      networkCheck();
       return Config.defaults;
     }
   }
@@ -160,6 +177,18 @@ class KretaClient {
       return news;
     } catch (error) {
       print("ERROR: KretaAPI.getNews: " + error.toString());
+      networkCheck();
+      return [];
+    }
+  }
+
+  Future<List> getReleases() async {
+    try {
+      var response = await http.get(Uri.parse(BaseURL.FILC_REPO + FilcEndpoints.releases));
+      var responseJson = json.decode(response.body);
+      return responseJson;
+    } catch (error) {
+      print("ERROR: GitHubAPI.getLatestRelease: " + error.toString());
       return [];
     }
   }
@@ -237,12 +266,17 @@ class KretaClient {
       return false;
     } catch (error) {
       print("ERROR: KretaAPI.login: " + error.toString());
+      networkCheck();
       return false;
     }
   }
 
-  Future<bool> refreshLogin() async =>
-      await login(app.users.firstWhere((search) => search.id == userId));
+  Future<bool> refreshLogin() async => await login(
+        app.users.firstWhere(
+          (search) => search.id == userId,
+          orElse: () => null,
+        ),
+      );
 
   // currently buggy, do not use
   // Future<bool> refreshLogin() async {
@@ -273,7 +307,6 @@ class KretaClient {
   // }
 
   Future<List<Message>> getMessages(String type) async {
-    print(userAgent);
     try {
       var response = await client.get(
         Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.messages(type)),
@@ -296,6 +329,7 @@ class KretaClient {
       return messages;
     } catch (error) {
       print("ERROR: KretaAPI.getMessage: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -317,6 +351,7 @@ class KretaClient {
       return responseJson;
     } catch (error) {
       print("ERROR: KretaAPI.getMessage: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -346,6 +381,7 @@ class KretaClient {
       return recipients;
     } catch (error) {
       print("ERROR: KretaAPI.getRecipients: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -424,6 +460,7 @@ class KretaClient {
       return true;
     } catch (error) {
       print("ERROR: KretaAPI.sendMessage: " + error.toString());
+      networkCheck();
       return false;
     }
   }
@@ -448,6 +485,7 @@ class KretaClient {
       return attachment;
     } catch (error) {
       print("ERROR: KretaAPI.uploadAttachment: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -468,6 +506,7 @@ class KretaClient {
       return response.bodyBytes;
     } catch (error) {
       print("ERROR: KretaAPI.downloadAttachment: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -492,6 +531,7 @@ class KretaClient {
       return notes;
     } catch (error) {
       print("ERROR: KretaAPI.getNotes: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -516,6 +556,7 @@ class KretaClient {
       return events;
     } catch (error) {
       print("ERROR: KretaAPI.getEvents " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -538,6 +579,7 @@ class KretaClient {
       return student;
     } catch (error) {
       print("ERROR: KretaAPI.getStudent: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -563,6 +605,7 @@ class KretaClient {
       return evaluations;
     } catch (error) {
       print("ERROR: KretaAPI.getEvaluations: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -588,6 +631,7 @@ class KretaClient {
       return absences;
     } catch (error) {
       print("ERROR: KretaAPI.getAbsences: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -611,6 +655,7 @@ class KretaClient {
       };
     } catch (error) {
       print("ERROR: KretaAPI.getGroup: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -643,6 +688,7 @@ class KretaClient {
       return averages;
     } catch (error) {
       print("ERROR: KretaAPI.getAverages: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -667,6 +713,7 @@ class KretaClient {
       return exams;
     } catch (error) {
       print("ERROR: KretaAPI.getExams: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -687,14 +734,13 @@ class KretaClient {
       await checkResponse(response);
 
       List responseJson = jsonDecode(response.body);
-      List<Homework> homeworks = [];
-      responseJson.forEach((homework) async {
-        //homeworks.add(Homework.fromJson(homework)
+      List<Homework> homework = [];
+      await Future.forEach(responseJson, (hw) async {
         var response2 = await client.get(
           Uri.parse(BaseURL.kreta(instituteCode) +
               KretaEndpoints.homework +
               "/" +
-              homework["Uid"]),
+              hw["Uid"]),
           headers: {
             "Authorization": "Bearer $accessToken",
             "User-Agent": userAgent
@@ -704,17 +750,16 @@ class KretaClient {
         await checkResponse(response2);
 
         Map responseJson2 = jsonDecode(response2.body);
-        homeworks.add(Homework.fromJson(responseJson2));
+        homework.add(Homework.fromJson(responseJson2));
       });
 
-      return homeworks;
+      return homework;
     } catch (error) {
       print("ERROR: KretaAPI.getHomeworks: " + error.toString());
+      networkCheck();
       return null;
     }
   }
-
-  // Client method template
 
   Future<Uint8List> downloadHomeworkAttachment(
       HomeworkAttachment attachment) async {
@@ -734,6 +779,7 @@ class KretaClient {
       return response.bodyBytes;
     } catch (error) {
       print("ERROR: KretaAPI.downloadHomeworkAttachment: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -767,6 +813,7 @@ class KretaClient {
       return lessons;
     } catch (error) {
       print("ERROR: KretaAPI.getLessons: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -789,6 +836,7 @@ class KretaClient {
       await checkResponse(response);
     } catch (error) {
       print("ERROR: KretaAPI.trashMessage: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -808,6 +856,7 @@ class KretaClient {
       await checkResponse(response);
     } catch (error) {
       print("ERROR: KretaAPI.deleteMessage: " + error.toString());
+      networkCheck();
       return null;
     }
   }
@@ -830,6 +879,7 @@ class KretaClient {
         return template;
       } catch (error) {
         print("ERROR: KretaAPI.getTemplate: " + error.toString());
+        networkCheck();
         return null;
       }
     }

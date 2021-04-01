@@ -10,11 +10,11 @@ import 'package:filcnaplo/utils/format.dart';
 import 'package:filcnaplo/ui/pages/messages/compose.dart';
 import 'package:filcnaplo/ui/common/profile_icon.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:share/share.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:filcnaplo/helpers/archive_message.dart';
 
 class MessageView extends StatefulWidget {
@@ -153,7 +153,8 @@ class _MessageViewTileState extends State<MessageViewTile> {
                     Expanded(
                       child: Text(
                         widget.message.sender,
-                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        overflow: TextOverflow.fade,
                         style: TextStyle(fontSize: 14.0),
                       ),
                     ),
@@ -181,7 +182,8 @@ class _MessageViewTileState extends State<MessageViewTile> {
                                               .toString()
                                       : ""),
                               style: TextStyle(fontSize: 13.0),
-                              overflow: TextOverflow.ellipsis,
+                              softWrap: false,
+                              overflow: TextOverflow.fade,
                             ),
                           ),
                           widget.message.recipients.length > 1
@@ -204,7 +206,8 @@ class _MessageViewTileState extends State<MessageViewTile> {
                     : Text(
                         escapeHtml(widget.message.content),
                         maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        overflow: TextOverflow.fade,
                       ),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -277,19 +280,33 @@ class _MessageViewTileState extends State<MessageViewTile> {
                   ? Html(
                       data: messageContent,
                       onLinkTap: (url) async {
-                        if (await canLaunch(url))
-                          await launch(url);
-                        else
-                          throw '[ERROR] MessageView.build: Invalid URL';
+                        await FlutterWebBrowser.openWebPage(
+                          url: url,
+                          customTabsOptions: CustomTabsOptions(
+                            toolbarColor: app.settings.theme.backgroundColor,
+                            showTitle: true,
+                          ),
+                          safariVCOptions: SafariViewControllerOptions(
+                            dismissButtonStyle:
+                                SafariViewControllerDismissButtonStyle.close,
+                          ),
+                        );
                       },
                     )
                   : SelectableLinkify(
                       text: escapeHtml(messageContent),
                       onOpen: (url) async {
-                        if (await canLaunch(url.url))
-                          await launch(url.url);
-                        else
-                          throw '[ERROR] MessageView.build: nvalid URL';
+                        await FlutterWebBrowser.openWebPage(
+                          url: url.url,
+                          customTabsOptions: CustomTabsOptions(
+                            toolbarColor: app.settings.theme.backgroundColor,
+                            showTitle: true,
+                          ),
+                          safariVCOptions: SafariViewControllerOptions(
+                            dismissButtonStyle:
+                                SafariViewControllerDismissButtonStyle.close,
+                          ),
+                        );
                       },
                     ),
             ),
@@ -310,19 +327,33 @@ class _MessageViewTileState extends State<MessageViewTile> {
                   ? Html(
                       data: quotedMessage,
                       onLinkTap: (url) async {
-                        if (await canLaunch(url))
-                          await launch(url);
-                        else
-                          throw '[ERROR] MessageView.build: Invalid URL';
+                        await FlutterWebBrowser.openWebPage(
+                          url: url,
+                          customTabsOptions: CustomTabsOptions(
+                            toolbarColor: app.settings.theme.backgroundColor,
+                            showTitle: true,
+                          ),
+                          safariVCOptions: SafariViewControllerOptions(
+                            dismissButtonStyle:
+                                SafariViewControllerDismissButtonStyle.close,
+                          ),
+                        );
                       },
                     )
                   : SelectableLinkify(
                       text: escapeHtml(quotedMessage),
                       onOpen: (url) async {
-                        if (await canLaunch(url.url))
-                          await launch(url.url);
-                        else
-                          throw '[ERROR] MessageView.build: Invalid URL';
+                        await FlutterWebBrowser.openWebPage(
+                          url: url.url,
+                          customTabsOptions: CustomTabsOptions(
+                            toolbarColor: app.settings.theme.backgroundColor,
+                            showTitle: true,
+                          ),
+                          safariVCOptions: SafariViewControllerOptions(
+                            dismissButtonStyle:
+                                SafariViewControllerDismissButtonStyle.close,
+                          ),
+                        );
                       },
                     ),
             ),

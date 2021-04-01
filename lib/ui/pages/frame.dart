@@ -1,7 +1,9 @@
+import 'dart:io';
+
 import 'package:filcnaplo/data/context/page.dart';
 import 'package:filcnaplo/data/models/new.dart';
 import 'package:filcnaplo/data/sync/state.dart';
-import 'package:filcnaplo/ui/common/custom_snackbar.dart';
+import 'package:filcnaplo/kreta/client.dart';
 import 'package:filcnaplo/ui/pages/news/view.dart';
 import 'package:filcnaplo/ui/sync/indicator.dart';
 import 'package:filcnaplo/generated/i18n.dart';
@@ -11,10 +13,11 @@ import 'package:filcnaplo/ui/pages/home/page.dart';
 import 'package:filcnaplo/ui/pages/messages/page.dart';
 import 'package:filcnaplo/ui/pages/planner/page.dart';
 import 'package:filcnaplo/ui/pages/welcome/tutorial.dart';
-import 'package:filcnaplo/utils/network.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/ui/common/bottom_navbar.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
 
 class PageFrame extends StatefulWidget {
   @override
@@ -23,6 +26,7 @@ class PageFrame extends StatefulWidget {
 
 class _PageFrameState extends State<PageFrame> {
   PageType selectedPage;
+  Tween<double> offlineAnimation;
 
   @override
   void initState() {
@@ -30,16 +34,23 @@ class _PageFrameState extends State<PageFrame> {
 
     selectedPage = PageType.values[app.settings.defaultPage];
 
-    NetworkUtils.checkConnectivity().then((networkAvailable) {
-      if (!networkAvailable) {
-        ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(
-          message: I18n.of(context).errorInternet,
-          color: Colors.red,
-        ));
-      }
-    });
-
     // Sync at startup
+
+    if (Platform.isAndroid) {
+      app.user.sync.release.sync().then((_) {
+        getApplicationDocumentsDirectory().then((dir) {
+          dir
+              .listSync()
+              .where((f) => path.extension(f.path) == ".apk")
+              .forEach((apk) {
+            apk
+                .delete()
+                .then((result) => print("INFO: Deleted " + result.toString()));
+          });
+        });
+      });
+    }
+
     app.settings.update().then((_) {
       app.user.kreta.userAgent = app.settings.config.config.userAgent;
       app.settings.config.sync().then((success) {
@@ -64,6 +75,8 @@ class _PageFrameState extends State<PageFrame> {
         });
       }
     });
+
+    offlineAnimation = Tween<double>(begin: 0.0, end: 0.0);
   }
 
   void _navItemSelected(int item) {
@@ -106,8 +119,14 @@ class _PageFrameState extends State<PageFrame> {
         selectedPage = PageType.absences;
         return _pageRoute((_) => AbsencesPage());
       default:
-        selectedPage = PageType.home;
-        return _pageRoute((_) => HomePage());
+        selectedPage = PageType.values[app.settings.defaultPage];
+        return _pageRoute((_) => [
+              HomePage(),
+              EvaluationsPage(),
+              PlannerPage(),
+              MessagesPage(),
+              AbsencesPage(),
+            ][selectedPage.index]);
     }
   }
 
@@ -171,9 +190,13 @@ class _PageFrameState extends State<PageFrame> {
       );
     }
 
-    // Tween<double> offlineAnimation = Tween<double>(begin: 100.0, end: 0.0);
-    // Tween<double> offlineAnimation = Tween<double>(begin: 0.0, end: 100.0);
-    Tween<double> offlineAnimation = Tween<double>(begin: 0.0, end: 0.0);
+    if (app.user.kreta.kretaOffline) {
+      offlineAnimation = Tween<double>(begin: 0.0, end: 100.0);
+    } else if (offlineAnimation.end == 100.0) {
+      offlineAnimation = Tween<double>(begin: 100.0, end: 0.0);
+    } else {
+      offlineAnimation = Tween<double>(begin: 0.0, end: 0.0);
+    }
 
     return WillPopScope(
       onWillPop: () async {
@@ -190,34 +213,46 @@ class _PageFrameState extends State<PageFrame> {
                 curve: Curves.ease,
                 duration: Duration(milliseconds: 500),
                 builder: (context, value, _) => Padding(
-                  padding: EdgeInsets.only(top: value / (100 / 42)),
+                  padding: EdgeInsets.only(top: value / (100.0 / 42.0)),
                   child:
                       Navigator(key: app.frame, onGenerateRoute: handleRoute),
                 ),
               ),
 
               TweenAnimationBuilder(
-                tween: offlineAnimation,
-                duration: Duration(milliseconds: 500),
-                curve: Curves.ease,
-                builder: (context, value, _) => Opacity(
-                  opacity: value / 100,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    color: Colors.red,
-                    padding: EdgeInsets.only(
-                      left: 12.0,
-                      right: 12.0,
-                      bottom: 12.0,
-                      top: value / (100 / 38.0),
-                    ),
-                    child: Text(
-                      "A kréta jelenleg karbantartás alatt van.",
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ),
+                  tween: offlineAnimation,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.ease,
+                  builder: (context, value, _) {
+                    if (offlineAnimation.begin == 0.0 &&
+                        offlineAnimation.end == 0.0) value = 100;
+                    return Opacity(
+                      opacity: 1 - value / 100.0,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        color: app.user.kreta.offlineState ==
+                                OfflineState.maintenance
+                            ? Colors.lightBlue
+                            : Colors.deepOrange,
+                        padding: EdgeInsets.only(
+                          left: 12.0,
+                          right: 12.0,
+                          bottom: 12.0,
+                          top: 38 - value / (100.0 / 38.0),
+                        ),
+                        child: Text(
+                          app.user.kreta.offlineState ==
+                                  OfflineState.maintenance
+                              ? I18n.of(context).errorKretaOffline
+                              : I18n.of(context).errorInternet,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
 
               // Sync Progress Indicator
               showSyncProgress

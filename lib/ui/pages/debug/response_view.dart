@@ -51,7 +51,8 @@ class ResponseView extends StatelessWidget {
         leading: BackButton(color: app.settings.appColor),
         title: Text(
           uri,
-          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          overflow: TextOverflow.fade,
         ),
         actions: [
           Column(

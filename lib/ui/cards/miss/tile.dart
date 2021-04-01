@@ -29,7 +29,8 @@ class MissTile extends StatelessWidget {
           Expanded(
             child: Text(
               miss.type.description,
-              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              overflow: TextOverflow.fade,
             ),
           ),
           Padding(

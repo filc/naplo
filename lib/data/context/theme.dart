@@ -13,6 +13,8 @@ class ThemeContext {
     "purple": Colors.purple[200],
   };
 
+  static const Color filcGreen = Color(0xFF236A5B);
+
   List<Color> evalColors = [
     Colors.red,
     Colors.amber[700],

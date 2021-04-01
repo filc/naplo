@@ -40,7 +40,8 @@ class ExamTile extends StatelessWidget {
             Expanded(
               child: Text(
                 exam.mode.description,
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               ),
             ),
             Padding(
@@ -54,7 +55,8 @@ class ExamTile extends StatelessWidget {
               "\n" +
               exam.description.replaceAll("\n", " "),
           maxLines: 2,
-          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          overflow: TextOverflow.fade,
         ),
       ),
     );

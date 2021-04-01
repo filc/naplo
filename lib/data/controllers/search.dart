@@ -17,6 +17,7 @@ import 'package:filcnaplo/ui/cards/note/tile.dart';
 import 'package:filcnaplo/ui/pages/messages/note/view.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
+import 'package:sliding_sheet/sliding_sheet.dart';
 
 class SearchController {
   static String specialChars(String s) => s
@@ -85,7 +86,7 @@ class SearchController {
             specialChars(item.text.toLowerCase()).contains(variation)))
         .toList();
 
-    results.sort((a, b) => a.text.compareTo(b.text));
+    results.sort((a, b) => b.date.compareTo(a.date));
 
     return results;
   }
@@ -100,7 +101,10 @@ class SearchController {
       app.user.sync.messages.trash,
     ].expand((x) => x).toList();
 
-    messages.forEach((message) => searchables.add(Searchable(
+    messages.forEach(
+      (message) => searchables.add(
+        Searchable(
+          date: message.date,
           text: searchString([escapeHtml(message.content), message.subject]),
           child: GestureDetector(
             child: MessageTile(message),
@@ -110,26 +114,34 @@ class SearchController {
                       MessageView([message], updateCallback)));
             },
           ),
-        )));
+        ),
+      ),
+    );
 
     // Notes
-    app.user.sync.note.notes.forEach((note) => searchables.add(Searchable(
+    app.user.sync.note.notes.forEach(
+      (note) => searchables.add(
+        Searchable(
+          date: note.date,
           text: searchString([note.teacher, note.title, note.content]),
           child: GestureDetector(
             child: NoteTile(note),
             onTap: () {
-              showModalBottomSheet(
-                context: context,
-                backgroundColor: Colors.transparent,
-                isScrollControlled: true,
-                builder: (BuildContext context) => NoteView(note),
+              showSlidingBottomSheet(
+                context,
+                builder: (BuildContext context) => noteView(note, context),
               );
             },
           ),
-        )));
+        ),
+      ),
+    );
 
     // Absences
-    app.user.sync.absence.absences.forEach((absence) => searchables.add(Searchable(
+    app.user.sync.absence.absences.forEach(
+      (absence) => searchables.add(
+        Searchable(
+          date: absence.date,
           text: searchString([
             absence.teacher,
             absence.subject.name,
@@ -146,28 +158,35 @@ class SearchController {
               );
             },
           ),
-        )));
+        ),
+      ),
+    );
 
     // Homeworks
-    app.user.sync.homework.homework
-        .forEach((homework) => searchables.add(Searchable(
-              text: searchString(
-                  [homework.teacher, homework.subjectName, homework.content]),
-              child: GestureDetector(
-                child: HomeworkTile(homework),
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    backgroundColor: Colors.transparent,
-                    isScrollControlled: true,
-                    builder: (BuildContext context) => HomeworkView(homework),
-                  );
-                },
-              ),
-            )));
+    app.user.sync.homework.homework.forEach(
+      (homework) => searchables.add(
+        Searchable(
+          date: homework.date,
+          text: searchString(
+              [homework.teacher, homework.subjectName, homework.content]),
+          child: GestureDetector(
+            child: HomeworkTile(homework),
+            onTap: () {
+              showSlidingBottomSheet(
+                context,
+                builder: (context) => homeworkView(homework, context),
+              );
+            },
+          ),
+        ),
+      ),
+    );
 
     // Exams
-    app.user.sync.exam.exams.forEach((exam) => searchables.add(Searchable(
+    app.user.sync.exam.exams.forEach(
+      (exam) => searchables.add(
+        Searchable(
+          date: exam.date,
           text:
               searchString([exam.teacher, exam.subjectName, exam.description]),
           child: GestureDetector(
@@ -180,29 +199,35 @@ class SearchController {
               );
             },
           ),
-        )));
+        ),
+      ),
+    );
 
     // Evaluations
-    app.user.sync.evaluation.evaluations
-        .forEach((evaluation) => searchables.add(Searchable(
-              text: searchString([
-                evaluation.description,
-                evaluation.subject.name,
-                evaluation.value.weight != 0
-                    ? "${evaluation.value.weight}%"
-                    : "100%"
-              ]),
-              child: GestureDetector(
-                child: EvaluationTile(evaluation),
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    backgroundColor: Colors.transparent,
-                    builder: (context) => EvaluationView(evaluation),
-                  );
-                },
-              ),
-            )));
+    app.user.sync.evaluation.evaluations.forEach(
+      (evaluation) => searchables.add(
+        Searchable(
+          date: evaluation.date,
+          text: searchString([
+            evaluation.description,
+            evaluation.subject.name,
+            evaluation.value.weight != 0
+                ? "${evaluation.value.weight}%"
+                : "100%"
+          ]),
+          child: GestureDetector(
+            child: EvaluationTile(evaluation),
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.transparent,
+                builder: (context) => EvaluationView(evaluation),
+              );
+            },
+          ),
+        ),
+      ),
+    );
 
     return searchables;
   }

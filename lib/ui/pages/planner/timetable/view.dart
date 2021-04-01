@@ -41,7 +41,8 @@ class TimetableView extends StatelessWidget {
               capitalize(lesson.substituteTeacher != ""
                   ? lesson.substituteTeacher
                   : lesson.teacher),
-              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              overflow: TextOverflow.fade,
             ),
             trailing: Padding(
               padding: EdgeInsets.only(left: 8.0),
@@ -120,7 +121,8 @@ class TimetableDetail extends StatelessWidget {
           value,
           style: TextStyle(fontSize: 16.0),
           maxLines: 3,
-          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          overflow: TextOverflow.fade,
         ),
       ],
     );

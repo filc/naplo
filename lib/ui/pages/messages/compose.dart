@@ -88,7 +88,8 @@ class _NewMessagePageState extends State<NewMessagePage> {
               padding: EdgeInsets.only(left: 12.0),
               child: Text(
                 file.path.split("/").last,
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               ),
             ),
           ),
@@ -117,7 +118,8 @@ class _NewMessagePageState extends State<NewMessagePage> {
               avatar: ProfileIcon(name: recipient.name, size: 0.5),
               label: Text(
                 recipient.name,
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               ),
               onDeleted: () {
                 setState(() {

@@ -98,7 +98,8 @@ class FinalCard extends BaseCard {
                   style: TextStyle(
                       fontSize: Theme.of(context).textTheme.bodyText2.fontSize,
                       color: secondary),
-                  overflow: TextOverflow.ellipsis)
+                  softWrap: false,
+                  overflow: TextOverflow.fade)
             ],
           ),
           subtitle: (dicseretesAmount + failedAmount) > 0
