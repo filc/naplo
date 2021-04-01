@@ -142,7 +142,7 @@ class _AutoUpdaterState extends State<AutoUpdater> {
                               );
                             } catch (e) {
                               print(
-                                  "ERROR: autoUpdater.dart failed to show markdown relase notes: " +
+                                  "ERROR: autoUpdater.dart failed to show markdown release notes: " +
                                       e.toString());
                               return Text(
                                   app.user.sync.release.latestRelease.notes);
