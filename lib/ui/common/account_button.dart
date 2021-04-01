@@ -13,14 +13,16 @@ class AccountButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          padding: padding,
-          child: IconButton(
-            icon: app.user.profileIcon,
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true)
-                  .push(PageTransition.vertical(AccountPage()));
-            },
+        Center(
+          child: Container(
+            padding: padding,
+            child: IconButton(
+              icon: app.user.profileIcon,
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true)
+                    .push(PageTransition.vertical(AccountPage()));
+              },
+            ),
           ),
         ),
         if (app.user.sync.release.isNew) NotificationBadge(),

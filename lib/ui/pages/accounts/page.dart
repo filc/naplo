@@ -148,7 +148,8 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
 
-              if (app.user.sync.release.isNew && Platform.isAndroid) AutoUpdateButton(),
+              if (app.user.sync.release.isNew && Platform.isAndroid)
+                AutoUpdateButton(),
 
               Padding(
                 padding: EdgeInsets.only(bottom: 14.0),
