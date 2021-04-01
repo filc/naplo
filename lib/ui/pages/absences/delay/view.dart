@@ -25,7 +25,8 @@ class DelayView extends StatelessWidget {
             title: Row(
               children: [
                 Expanded(
-                  child: Text(delay.teacher, overflow: TextOverflow.ellipsis),
+                  child: Text(delay.teacher,
+                      softWrap: false, overflow: TextOverflow.fade),
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 12.0),
@@ -36,7 +37,8 @@ class DelayView extends StatelessWidget {
             subtitle: Text(
               capital(delay.subject.name),
               maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              overflow: TextOverflow.fade,
             ),
           ),
 
@@ -112,7 +114,8 @@ class DelayDetail extends StatelessWidget {
           value,
           style: TextStyle(fontSize: 16.0),
           maxLines: 3,
-          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          overflow: TextOverflow.fade,
         ),
       ],
     );

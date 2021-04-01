@@ -22,7 +22,8 @@ class MessageTile extends StatelessWidget {
           Expanded(
             child: Text(
               message.sender,
-              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              overflow: TextOverflow.fade,
             ),
           ),
           Padding(
@@ -36,7 +37,8 @@ class MessageTile extends StatelessWidget {
             "\n" +
             escapeHtml(message.content).replaceAll("\n", " "),
         maxLines: 2,
-        overflow: TextOverflow.ellipsis,
+        softWrap: false,
+        overflow: TextOverflow.fade,
       ),
     );
   }

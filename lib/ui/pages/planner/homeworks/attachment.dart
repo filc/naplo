@@ -136,7 +136,8 @@ class _AttachmentTileState extends State<AttachmentTile> {
                       padding: EdgeInsets.only(left: 12.0),
                       child: Text(
                         attachment.name,
-                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        overflow: TextOverflow.fade,
                       ),
                     ),
                   ),

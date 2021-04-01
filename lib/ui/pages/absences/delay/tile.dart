@@ -54,7 +54,8 @@ class DelayTile extends StatelessWidget {
                                   .bodyText2
                                   .fontSize,
                               color: Theme.of(context).textTheme.caption.color),
-                          overflow: TextOverflow.ellipsis)
+                          softWrap: false,
+                          overflow: TextOverflow.fade)
                     ],
                   ),
                 ),
@@ -88,7 +89,8 @@ class DelayTile extends StatelessWidget {
                     Text(
                       capital(delay.subject.name),
                       maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                      overflow: TextOverflow.fade,
                     ),
                   ],
                 ),

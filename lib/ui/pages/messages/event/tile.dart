@@ -15,14 +15,16 @@ class EventTile extends StatelessWidget {
       child: ListTile(
         title: Row(children: [
           Expanded(
-            child: Text(event.title, overflow: TextOverflow.ellipsis),
+            child:
+                Text(event.title, softWrap: false, overflow: TextOverflow.fade),
           ),
           Text(formatDate(context, event.start)),
         ]),
         subtitle: Text(
           escapeHtml(event.content),
           maxLines: 2,
-          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          overflow: TextOverflow.fade,
         ),
         onTap: () => showSlidingBottomSheet(
           context,

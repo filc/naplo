@@ -153,7 +153,8 @@ class _MessageViewTileState extends State<MessageViewTile> {
                     Expanded(
                       child: Text(
                         widget.message.sender,
-                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        overflow: TextOverflow.fade,
                         style: TextStyle(fontSize: 14.0),
                       ),
                     ),
@@ -181,7 +182,8 @@ class _MessageViewTileState extends State<MessageViewTile> {
                                               .toString()
                                       : ""),
                               style: TextStyle(fontSize: 13.0),
-                              overflow: TextOverflow.ellipsis,
+                              softWrap: false,
+                              overflow: TextOverflow.fade,
                             ),
                           ),
                           widget.message.recipients.length > 1
@@ -204,7 +206,8 @@ class _MessageViewTileState extends State<MessageViewTile> {
                     : Text(
                         escapeHtml(widget.message.content),
                         maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        overflow: TextOverflow.fade,
                       ),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,

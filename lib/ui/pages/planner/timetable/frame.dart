@@ -154,7 +154,8 @@ class _TimetableFrameState extends State<TimetableFrame>
                         formatDate(context, currentWeek.end, weekday: false) +
                         ")",
                     textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
                     maxLines: 1,
                   ),
                 ),

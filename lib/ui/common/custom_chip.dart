@@ -38,7 +38,8 @@ class CustomChip extends StatelessWidget {
                     child: Text(
                       text,
                       maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                      overflow: TextOverflow.fade,
                       style: TextStyle(
                           color: color ?? app.settings.theme.accentColor),
                     ),

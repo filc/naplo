@@ -29,7 +29,8 @@ class NoteTile extends StatelessWidget {
                   Expanded(
                     child: Text(
                       note.teacher,
-                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                      overflow: TextOverflow.fade,
                     ),
                   ),
                   Padding(
@@ -43,7 +44,8 @@ class NoteTile extends StatelessWidget {
                     "\n" +
                     escapeHtml(note.content).replaceAll("\n", " "),
                 maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               ),
               onTap: () {
                 showSlidingBottomSheet(

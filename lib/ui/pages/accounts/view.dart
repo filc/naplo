@@ -63,11 +63,13 @@ class _AccountViewState extends State<AccountView> {
               title: Text(
                 widget.user.name,
                 style: TextStyle(fontSize: 18.0),
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               ),
               subtitle: Text(
                 widget.user.username,
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               ),
             ),
 
@@ -133,7 +135,8 @@ class StudentDetail extends StatelessWidget {
           value,
           style: TextStyle(fontSize: 16.0),
           maxLines: 3,
-          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          overflow: TextOverflow.fade,
         ),
       ],
     );

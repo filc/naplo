@@ -73,7 +73,8 @@ class AbsenceTile extends StatelessWidget {
                 Text(
                   capital(absence.subject.name),
                   maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  overflow: TextOverflow.fade,
                 ),
               ],
             ),

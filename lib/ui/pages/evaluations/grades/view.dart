@@ -45,7 +45,8 @@ class EvaluationView extends StatelessWidget {
                 Expanded(
                   child: Text(
                     capital(evaluation.subject.name),
-                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
                   ),
                 ),
                 Text(
@@ -56,7 +57,8 @@ class EvaluationView extends StatelessWidget {
             ),
             subtitle: Text(
               evaluation.teacher,
-              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              overflow: TextOverflow.fade,
               style: TextStyle(fontSize: 14.0),
             ),
           ),
@@ -134,7 +136,8 @@ class EvaluationDetail extends StatelessWidget {
           value,
           style: TextStyle(fontSize: 16.0),
           maxLines: 3,
-          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          overflow: TextOverflow.fade,
         ),
       ],
     );

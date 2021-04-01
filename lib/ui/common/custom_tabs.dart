@@ -22,7 +22,8 @@ class CustomTabButton extends StatelessWidget {
             child: Text(
               title ?? "",
               maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              overflow: TextOverflow.fade,
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontWeight: FontWeight.bold, fontSize: 18.0, color: color),

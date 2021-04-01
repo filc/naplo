@@ -19,21 +19,24 @@ SnackBar CustomSnackBar({
       height: 48.0,
       decoration: BoxDecoration(
         color: color ?? app.settings.theme.backgroundColor,
-        boxShadow: [
-          BoxShadow(blurRadius: 8.0, color: Colors.black26)
-        ],
+        boxShadow: [BoxShadow(blurRadius: 8.0, color: Colors.black26)],
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           if (message != null)
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.0),
-              child: Text(
-                message,
-                style: TextStyle(
-                  color: textColor(color ?? app.settings.theme.backgroundColor),
+            Flexible(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 12.0),
+                child: Text(
+                  message,
+                  overflow: TextOverflow.fade,
+                  maxLines: 2,
+                  style: TextStyle(
+                    color:
+                        textColor(color ?? app.settings.theme.backgroundColor),
+                  ),
                 ),
               ),
             ),

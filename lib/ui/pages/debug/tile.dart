@@ -52,19 +52,18 @@ class DebugTile extends StatelessWidget {
                   ((snapshot.data.statusCode / 100).floor() - 2).clamp(0, 3)]
               : null;
 
-          return
-          GestureDetector(
+          return GestureDetector(
             onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ResponseView(
-                              uri: endpoint.uri,
-                              response: snapshot.data.response,
-                              statusCode: snapshot.data.statusCode,
-                              headers: snapshot.data.headers,
-                            ),
-                          ),
-                        ),
+              context,
+              MaterialPageRoute(
+                builder: (context) => ResponseView(
+                  uri: endpoint.uri,
+                  response: snapshot.data.response,
+                  statusCode: snapshot.data.statusCode,
+                  headers: snapshot.data.headers,
+                ),
+              ),
+            ),
             child: Container(
               padding: EdgeInsets.all(12.0),
               child: snapshot.hasData
@@ -75,7 +74,8 @@ class DebugTile extends StatelessWidget {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container( //Response code
+                            Container(
+                              //Response code
                               padding: EdgeInsets.all(4),
                               margin: EdgeInsets.only(right: 12.0),
                               decoration: BoxDecoration(
@@ -91,7 +91,8 @@ class DebugTile extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Expanded( //Request endpoint
+                            Expanded(
+                              //Request endpoint
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 0,
@@ -111,25 +112,26 @@ class DebugTile extends StatelessWidget {
                             ),
                           ],
                         ),
-                          Container( //Response
-                            margin: EdgeInsets.only(top: 6),
-                            padding: EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: Colors.black12,
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                            ),
-                            child: Text(
-                              snapshot.data.response
-                                  .replaceAll(RegExp(r'[\n\t\s]+'), " "),
-                              maxLines: 5,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontFamily: "SpaceMono",
-                                fontSize: 12.0,
-                              ),
+                        Container(
+                          //Response
+                          margin: EdgeInsets.only(top: 6),
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Colors.black12,
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                          child: Text(
+                            snapshot.data.response
+                                .replaceAll(RegExp(r'[\n\t\s]+'), " "),
+                            maxLines: 5,
+                            softWrap: false,
+                            overflow: TextOverflow.fade,
+                            style: TextStyle(
+                              fontFamily: "SpaceMono",
+                              fontSize: 12.0,
                             ),
                           ),
-                          
+                        ),
                       ],
                     )
                   : Center(child: CircularProgressIndicator()),

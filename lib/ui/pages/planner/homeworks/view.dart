@@ -56,7 +56,8 @@ SlidingSheetDialog homeworkView(Homework homework, BuildContext context) {
                               homework.teacher != null
                                   ? capitalize(homework.teacher)
                                   : I18n.of(context).unknown,
-                              overflow: TextOverflow.ellipsis,
+                              softWrap: false,
+                              overflow: TextOverflow.fade,
                               maxLines: 1,
                             ),
                           ),
@@ -164,7 +165,8 @@ class HomeworkDetail extends StatelessWidget {
           value,
           style: TextStyle(fontSize: 16.0),
           maxLines: 3,
-          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          overflow: TextOverflow.fade,
         ),
       ],
     );

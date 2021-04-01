@@ -62,7 +62,8 @@ class MessageTile extends StatelessWidget {
             Expanded(
               child: Text(
                 message.sender,
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
                 style: TextStyle(fontSize: 16.0),
               ),
             ),

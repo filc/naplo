@@ -39,7 +39,8 @@ class HomeworkTile extends StatelessWidget {
             ? Text(
                 escapeHtml(homework.content),
                 maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               )
             : null,
         onTap: () => showSlidingBottomSheet(

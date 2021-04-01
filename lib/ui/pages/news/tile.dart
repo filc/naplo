@@ -23,7 +23,8 @@ class NewsTile extends StatelessWidget {
         subtitle: Text(
           news.content.replaceAll("\n", " "),
           maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          overflow: TextOverflow.fade,
         ),
         onTap: () => showDialog(
             context: context,

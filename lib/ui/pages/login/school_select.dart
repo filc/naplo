@@ -127,14 +127,16 @@ class SchoolTile extends StatelessWidget {
             Expanded(
               child: Text(
                 schoolId,
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               ),
             ),
             Expanded(
               child: Text(
                 city,
                 textAlign: TextAlign.right,
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               ),
             ),
           ],

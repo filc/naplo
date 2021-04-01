@@ -70,7 +70,8 @@ class LessonTile extends StatelessWidget {
                                 : I18n.of(context).unknown,
                       ),
                       maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                      overflow: TextOverflow.fade,
                       style: TextStyle(
                         color: lesson.isEmpty
                             ? Colors.grey
@@ -89,7 +90,8 @@ class LessonTile extends StatelessWidget {
                         fontSize: 14.0,
                       ),
                       maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                      overflow: TextOverflow.fade,
                     ),
                   ),
                 ],
@@ -98,7 +100,8 @@ class LessonTile extends StatelessWidget {
                   ? Text(
                       lesson.description,
                       maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                      overflow: TextOverflow.fade,
                       style: TextStyle(fontSize: 14.0),
                     )
                   : null,
@@ -201,7 +204,8 @@ class SpecialDateTile extends LessonTile {
           child: Text(
             lesson.name,
             maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+            softWrap: false,
+            overflow: TextOverflow.fade,
           ),
         ),
       ],

@@ -34,7 +34,8 @@ class HomeworkTile extends StatelessWidget {
             Expanded(
               child: Text(
                 capital(homework.subjectName),
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               ),
             ),
             Padding(
@@ -47,7 +48,7 @@ class HomeworkTile extends StatelessWidget {
           escapeHtml(homework.content).replaceAll("\n", " "),
           softWrap: true,
           maxLines: 2,
-          overflow: TextOverflow.ellipsis,
+          overflow: TextOverflow.fade,
         ),
       ),
     );

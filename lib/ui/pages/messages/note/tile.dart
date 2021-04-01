@@ -19,7 +19,8 @@ class NoteTile extends StatelessWidget {
         title: Row(
           children: [
             Expanded(
-              child: Text(note.teacher, overflow: TextOverflow.ellipsis),
+              child: Text(note.teacher,
+                  softWrap: false, overflow: TextOverflow.fade),
             ),
             Padding(
               padding: EdgeInsets.only(left: 8.0),
@@ -33,12 +34,14 @@ class NoteTile extends StatelessWidget {
             Text(
               note.title,
               maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              overflow: TextOverflow.fade,
             ),
             Text(
               note.content,
               maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              overflow: TextOverflow.fade,
             ),
           ],
         ),

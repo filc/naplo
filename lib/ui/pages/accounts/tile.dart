@@ -54,7 +54,8 @@ class _AccountTileState extends State<AccountTile> {
                   title: Text(
                     widget.user.name ?? I18n.of(context).unknown,
                     maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
                   ),
                 )
               else
@@ -71,7 +72,8 @@ class _AccountTileState extends State<AccountTile> {
                         widget.user.name ?? I18n.of(context).unknown,
                         textAlign: TextAlign.center,
                         maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        overflow: TextOverflow.fade,
                         style: TextStyle(fontSize: 22.0),
                       ),
                     ),
