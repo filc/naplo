@@ -1,11 +1,13 @@
 import 'package:filcnaplo/data/models/new.dart';
+import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_html/style.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 class NewsView extends StatefulWidget {
   final News news;
@@ -44,7 +46,24 @@ class _NewsViewState extends State<NewsView> {
                   widget.news.content != null
                       ? Container(
                           margin: EdgeInsets.only(top: 10, bottom: 20),
-                          child: SelectableText(widget.news.content),
+                          child: SelectableLinkify(
+                            text: escapeHtml(widget.news.content),
+                            onOpen: (url) async {
+                              await FlutterWebBrowser.openWebPage(
+                                url: url.url,
+                                customTabsOptions: CustomTabsOptions(
+                                  toolbarColor:
+                                      app.settings.theme.backgroundColor,
+                                  showTitle: true,
+                                ),
+                                safariVCOptions: SafariViewControllerOptions(
+                                  dismissButtonStyle:
+                                      SafariViewControllerDismissButtonStyle
+                                          .close,
+                                ),
+                              );
+                            },
+                          ),
                         )
                       : Container(),
                   widget.news.image != null
@@ -69,10 +88,17 @@ class _NewsViewState extends State<NewsView> {
                           ),
                         ),
                         onPressed: () async {
-                          if (await canLaunch(widget.news.link))
-                            await launch(widget.news.link);
-                          else
-                            throw "Cannot open url ${widget.news.link}";
+                          await FlutterWebBrowser.openWebPage(
+                            url: widget.news.link,
+                            customTabsOptions: CustomTabsOptions(
+                              toolbarColor: app.settings.theme.backgroundColor,
+                              showTitle: true,
+                            ),
+                            safariVCOptions: SafariViewControllerOptions(
+                              dismissButtonStyle:
+                                  SafariViewControllerDismissButtonStyle.close,
+                            ),
+                          );
                         },
                       )
                     : Container(),

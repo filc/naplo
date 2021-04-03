@@ -21,7 +21,7 @@ class EvaluationSync {
 
       if (_evaluations == null) {
         await app.user.kreta.refreshLogin();
-        _evaluations = await app.user.kreta.getEvaluations() ?? [];
+        _evaluations = await app.user.kreta.getEvaluations();
         if (app.user.sync.student.student.groupId != null)
           _averages = await app.user.kreta
               .getAverages(app.user.sync.student.student.groupId);

@@ -26,34 +26,39 @@ class SearchBar extends StatelessWidget {
         ],
       ),
       padding: EdgeInsets.only(left: 12.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(FeatherIcons.search, color: app.settings.appColor),
-          Expanded(
-            child: GestureDetector(
-              child: Container(
-                padding: EdgeInsets.all(11.5),
-                child: Text(
-                  capital(I18n.of(context).search),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18.0),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(FeatherIcons.search, color: app.settings.appColor),
+              Expanded(
+                child: GestureDetector(
+                  child: Container(
+                    padding: EdgeInsets.all(11.5),
+                    child: Text(
+                      capital(I18n.of(context).search),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 18.0),
+                    ),
+                  ),
+                  onTap: openSearch,
                 ),
               ),
-              onTap: openSearch,
-            ),
+              Padding(
+                padding: EdgeInsets.only(right: 4.0),
+                child: ClipOval(
+                  child: Material(
+                    color: Colors.transparent,
+                    child: AccountButton(padding: EdgeInsets.zero),
+                  ),
+                ),
+              )
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),
-          Padding(
-            padding: EdgeInsets.only(right: 4.0),
-            child: ClipOval(
-              child: Material(
-                color: Colors.transparent,
-                child: AccountButton(padding: EdgeInsets.zero),
-              ),
-            ),
-          )
         ],
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
       ),
     );
   }

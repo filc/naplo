@@ -16,7 +16,7 @@ class Label extends StatelessWidget {
         style: TextStyle(
           fontSize: 15.0,
           letterSpacing: .7,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.bold,
           color: app.settings.appColor,
         ),
       ),

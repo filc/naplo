@@ -178,7 +178,8 @@
     "recipients": "Empfänger",
     "attachments": "Anhänge",
     "attachment": {
-      "failed": "Anhang konnte nicht heruntergeladen werden!"
+      "failed": "Befestigung konnte nicht heruntergeladen werden!",
+      "openFailed": "Befestigung nicht öffnen!"
     },
     "restore": "wiederherstellen",
     "archive": "archivieren",
@@ -229,7 +230,7 @@
   "evaluation": {
     "title": "Noten",
     "average": "durschnitt",
-    "averageClass": "klassendurschnitt",
+    "averageClass": "klassdurschnitt",
     "value": "Notenwert",
     "subject": "fach",
     "description": "bezeichnung",
@@ -364,6 +365,7 @@
   "error": {
     "": "Fehler",
     "network": "Netzwerkfehler",
+    "kretaOffline": "KRETA ist derzeit in der Wartung.",
     "readAccount": "Konto konnte nicht abgerufen werden",
     "messages": "Mitteilungen konnten nicht abgerufen werden",
     "messageSend": "Mitteilung wurde nicht geschickt",
@@ -378,7 +380,16 @@
     "latest": "Bitte die neueste Ausgabe jetzt herunterladen!"
   },
   "update": {
-    "available": "Neue Ausgabe steht zu verfügung!"
+    "": "ausgabe installieren",
+    "downloading": "wird heruntergeladen",
+    "saving": "wird speichert",
+    "installing": "wird installiert",
+    "newVersion": "Neue Ausgabe",
+    "changes": "Änderungen",
+    "currentVersion": "Aktuell",
+    "available": "Neue Ausgabe!",
+    "searchPre": "Suche nach experimentellen Versionen",
+    "foundPre": "Neueste (experimentelle) Version"
   },
   "rateLimit": {
     "alert": "Neue Daten können erst jede {minutes} Minuten abgerufen werden!"

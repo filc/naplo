@@ -4,6 +4,7 @@ import 'package:filcnaplo/data/models/homework.dart';
 import 'package:filcnaplo/ui/pages/planner/homeworks/view.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
+import 'package:sliding_sheet/sliding_sheet.dart';
 
 class HomeworkTile extends StatelessWidget {
   final Homework homework;
@@ -38,15 +39,14 @@ class HomeworkTile extends StatelessWidget {
             ? Text(
                 escapeHtml(homework.content),
                 maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               )
             : null,
-        onTap: () => showModalBottomSheet(
-          context: context,
-          backgroundColor: Colors.transparent,
-          isScrollControlled: true,
+        onTap: () => showSlidingBottomSheet(
+          context,
           useRootNavigator: true,
-          builder: (context) => HomeworkView(homework),
+          builder: (context) => homeworkView(homework, context),
         ),
       ),
     );

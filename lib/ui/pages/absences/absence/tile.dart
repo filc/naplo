@@ -116,7 +116,8 @@ class AbsenceTileSmall extends StatelessWidget {
                 padding: EdgeInsets.only(left: 6.0),
                 child: Text(
                   capital(absence.subject.name),
-                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  overflow: TextOverflow.fade,
                 ),
               ),
             ),
@@ -130,4 +131,3 @@ class AbsenceTileSmall extends StatelessWidget {
     );
   }
 }
-

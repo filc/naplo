@@ -155,12 +155,19 @@ class _PlannerPageState extends State<PlannerPage>
                                       child: Row(
                                         children: [
                                           Expanded(
-                                              child: Text(I18n.of(context)
-                                                  .homeworkPast)),
+                                            child: Text(
+                                              I18n.of(context).homeworkPast,
+                                              style: TextStyle(
+                                                  color: app.settings.theme
+                                                      .accentColor),
+                                            ),
+                                          ),
                                           Icon(
                                             showPastHomework
                                                 ? FeatherIcons.chevronUp
                                                 : FeatherIcons.chevronDown,
+                                            color:
+                                                app.settings.theme.accentColor,
                                           ),
                                         ],
                                       ),
@@ -204,7 +211,7 @@ class _PlannerPageState extends State<PlannerPage>
                         children: [
                           Column(children: _examBuilder.examTiles[0]),
                           _examBuilder.examTiles[0].length == 0
-                              ? Label(I18n.of(context).examPast.toUpperCase())
+                              ? Label(I18n.of(context).examPast)
                               : _examBuilder.examTiles[1].length > 0
                                   ? TextButton(
                                       onPressed: () => setState(
@@ -212,12 +219,19 @@ class _PlannerPageState extends State<PlannerPage>
                                       child: Row(
                                         children: [
                                           Expanded(
-                                              child: Text(
-                                                  I18n.of(context).examPast)),
+                                            child: Text(
+                                              I18n.of(context).examPast,
+                                              style: TextStyle(
+                                                  color: app.settings.theme
+                                                      .accentColor),
+                                            ),
+                                          ),
                                           Icon(
                                             showPastExams
                                                 ? FeatherIcons.chevronUp
                                                 : FeatherIcons.chevronDown,
+                                            color:
+                                                app.settings.theme.accentColor,
                                           ),
                                         ],
                                       ),

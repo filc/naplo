@@ -178,7 +178,8 @@
     "recipients": "címzettek",
     "attachments": "csatolmányok",
     "attachment": {
-      "failed": "Sikertelen letöltés!"
+      "failed": "Sikertelen letöltés!",
+      "openFailed": "Nem sikerült megnyitni a letöltött filet!"
     },
     "restore": "visszaállítás",
     "archive": "archiválás",
@@ -244,12 +245,12 @@
     "": "jegyek",
     "yourGrades": "Jegyeid",
     "midYear": "Évközi",
-    "qYear": "1. Negyedévi",
-    "2qYear": "2. Negyedévi",
-    "halfYear": "Félévi",
-    "3qYear": "3. Negyedévi",
-    "4qYear": "4. Negyedévi",
-    "endYear": "Év végi",
+    "qYear": "1. Negyedév",
+    "2qYear": "2. Negyedév",
+    "halfYear": "Félév",
+    "3qYear": "3. Negyedév",
+    "4qYear": "4. Negyedév",
+    "endYear": "Év vége",
     "subjects": "Tárgyak",
     "statistics": "Statisztikák",
     "subjectsAverage": "Tantárgyaid",
@@ -364,6 +365,7 @@
   "error": {
     "": "Hiba",
     "network": "Hálózati hiba",
+    "kretaOffline": "A kréta jelenleg karbantartás alatt van.",
     "readAccount": "Hiba a felhasználó olvasása közben",
     "messages": "Nem sikerült lekérni az üzeneteket",
     "messageSend": "Nem sikerült elküldeni az üzenetet",
@@ -378,7 +380,16 @@
     "latest": "Töltsd le most a legújabb verziót"
   },
   "update": {
-    "available": "Frissítés elérhető!"
+    "": "frissítés",
+    "downloading": "letöltés",
+    "saving": "mentés",
+    "installing": "telepítés",
+    "newVersion": "Új verzió",
+    "changes": "Újdonságok",
+    "currentVersion": "Jelenlegi",
+    "available": "Frissítés elérhető!",
+    "searchPre": "Kísérleti verziók keresése",
+    "foundPre": "Legfrissebb (kísérleti) verzió"
   },
   "rateLimit": {
     "alert": "{minutes} percenként egyszer frissíthetsz!"

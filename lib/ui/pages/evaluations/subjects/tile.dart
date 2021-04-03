@@ -30,7 +30,8 @@ class SubjectTile extends StatelessWidget {
             capital(subject.name),
             style: TextStyle(fontSize: 18.0),
             maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+            softWrap: false,
+            overflow: TextOverflow.fade,
           ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,

@@ -30,7 +30,8 @@ class ExamTile extends StatelessWidget {
                       " (" +
                       exam.subjectIndex.toString() +
                       ".)",
-                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  overflow: TextOverflow.fade,
                 ),
               ),
             ),

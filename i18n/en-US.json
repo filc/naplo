@@ -178,7 +178,8 @@
     "recipients": "recipients",
     "attachments": "attachments",
     "attachment": {
-      "failed": "Failed to download attachment!"
+      "failed": "Failed to download attachment!",
+      "openFailed": "Failed to open attachment!"
     },
     "restore": "restore",
     "archive": "archive",
@@ -364,6 +365,7 @@
   "error": {
     "": "Error",
     "network": "Network error",
+    "kretaOffline": "KRETA is currently under maintenance.",
     "readAccount": "Error while reading user",
     "messages": "Failed to get messages",
     "messageSend": "Failed to send message",
@@ -378,7 +380,16 @@
     "latest": "Download the latest version now"
   },
   "update": {
-    "available": "A new version is available!"
+    "": "install update",
+    "downloading": "downloading",
+    "saving": "saving",
+    "installing": "installing",
+    "newVersion": "Update",
+    "changes": "Changes",
+    "currentVersion": "Current",
+    "available": "Update available!",
+    "searchPre": "Search for experimental versions",
+    "foundPre": "Latest (experimental) version"
   },
   "rateLimit": {
     "alert": "You can only refresh every {minutes} minute(s)!"

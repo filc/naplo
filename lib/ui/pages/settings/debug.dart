@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/helpers/debug.dart';
 import 'package:filcnaplo/modules/printing/main.dart';
@@ -97,6 +99,29 @@ class _DebugSettingsState extends State<DebugSettings> {
             alignment: Alignment.topLeft,
             child: Label(I18n.of(context).settingsDebugExperimental),
           ),
+          if (Platform.isAndroid)
+            ListTile(
+              leading: Icon(FeatherIcons.downloadCloud),
+              title: Text(
+                I18n.of(context).updateSearchPre,
+                style: TextStyle(
+                  color: app.debugMode ? null : Colors.grey,
+                ),
+              ),
+              onTap: app.debugMode
+                  ? () {
+                      app.user.sync.release.sync(allowPrerelease: true).then(
+                            (_) => ScaffoldMessenger.of(context).showSnackBar(
+                              CustomSnackBar(
+                                message: I18n.of(context).updateFoundPre +
+                                    ": " +
+                                    app.user.sync.release.latestRelease.version,
+                              ),
+                            ),
+                          );
+                    }
+                  : null,
+            ),
           ListTile(
             leading: Icon(FeatherIcons.printer),
             title: Text(

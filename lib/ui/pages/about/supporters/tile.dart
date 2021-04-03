@@ -42,7 +42,8 @@ class SupporterTile extends StatelessWidget {
         ),
         title: Text(
           supporter.name,
-          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          overflow: TextOverflow.fade,
         ),
         trailing: Text(supporter.amount + " " + suffix),
       ),

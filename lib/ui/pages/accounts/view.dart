@@ -42,11 +42,11 @@ class _AccountViewState extends State<AccountView> {
           children: [
             // User
             ListTile(
-              contentPadding: EdgeInsets.only(top: 8.0, bottom: 4.0),
+              contentPadding: EdgeInsets.only(top: 6.0, bottom: 4.0),
               leading: GestureDetector(
                 child: ProfileIcon(
                     name: widget.user.name,
-                    size: 1.2,
+                    size: 1.1,
                     image: widget.user.customProfileIcon),
                 onTap: () {
                   showDialog(
@@ -63,11 +63,13 @@ class _AccountViewState extends State<AccountView> {
               title: Text(
                 widget.user.name,
                 style: TextStyle(fontSize: 18.0),
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               ),
               subtitle: Text(
                 widget.user.username,
-                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               ),
             ),
 
@@ -133,7 +135,8 @@ class StudentDetail extends StatelessWidget {
           value,
           style: TextStyle(fontSize: 16.0),
           maxLines: 3,
-          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          overflow: TextOverflow.fade,
         ),
       ],
     );

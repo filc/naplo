@@ -8,6 +8,9 @@ import 'package:filcnaplo/data/sync/absence.dart';
 import 'package:filcnaplo/data/sync/exam.dart';
 import 'package:filcnaplo/data/sync/homework.dart';
 import 'package:filcnaplo/data/sync/timetable.dart';
+
+import 'package:filcnaplo/modules/autoupdate/releaseSync.dart';
+
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/builder.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/week.dart';
@@ -75,6 +78,9 @@ class SyncController {
       name: "absence",
       task: app.user.sync.absence.sync(),
     );
+
+    app.user.sync.news.sync();
+    app.user.sync.release.sync();
 
     currentTask = 0;
     await Future.forEach(tasks, (task) async {
@@ -147,6 +153,8 @@ class SyncUser {
   HomeworkSync homework = HomeworkSync();
   TimetableSync timetable = TimetableSync();
   NewsSync news = NewsSync();
+  ReleaseSync release = ReleaseSync();
+
   SyncUser() {
     TimetableBuilder builder = TimetableBuilder();
     Week currentWeek = builder.getWeek(builder.getCurrentWeek());

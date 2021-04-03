@@ -67,22 +67,42 @@ class _SubjectGraphState extends State<SubjectGraph> {
               isStrokeCapRound: true,
               dotData: FlDotData(show: false),
               belowBarData: BarAreaData(
-                show: false,
+                show: true,
+                colors: [
+                  app.settings.theme.accentColor.withOpacity(0.7),
+                  app.settings.theme.accentColor.withOpacity(0.3),
+                  app.settings.theme.accentColor.withOpacity(0.2),
+                  app.settings.theme.accentColor.withOpacity(0.1),
+                ],
+                gradientColorStops: [0.1, 0.6, 0.8, 1],
+                gradientFrom: Offset(0, 0),
+                gradientTo: Offset(0, 1),
               ),
             ),
           ],
           minY: 1,
           maxY: 5,
           gridData: FlGridData(
-            drawVerticalLine: false,
+            show: true,
+            drawVerticalLine: true,
             getDrawingHorizontalLine: (_) => FlLine(
-              color: Colors.black12,
-              strokeWidth: 2.5,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.grey[400]
+                  : app.settings.theme.backgroundColor,
+              strokeWidth: 1,
+            ),
+            getDrawingVerticalLine: (_) => FlLine(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.grey[400]
+                  : app.settings.theme.backgroundColor,
+              strokeWidth: 1,
             ),
           ),
           lineTouchData: LineTouchData(
             touchTooltipData: LineTouchTooltipData(
-              tooltipBgColor: Colors.black26,
+              tooltipBgColor: Colors.black54,
+              fitInsideVertically: true,
+              fitInsideHorizontally: true,
             ),
             touchCallback: (LineTouchResponse touchResponse) {},
             handleBuiltInTouches: true,
@@ -90,7 +110,12 @@ class _SubjectGraphState extends State<SubjectGraph> {
             getTouchedSpotIndicator: (_, spots) => List.generate(
               spots.length,
               (index) => TouchedSpotIndicatorData(
-                FlLine(color: Colors.transparent),
+                FlLine(
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Colors.grey[400]
+                      : app.settings.theme.backgroundColor,
+                  strokeWidth: 3.5,
+                ),
                 FlDotData(
                   getDotPainter: (a, b, c, d) => FlDotCirclePainter(
                     strokeWidth: 0,
@@ -103,36 +128,23 @@ class _SubjectGraphState extends State<SubjectGraph> {
           ),
           borderData: FlBorderData(
             show: true,
-            border: Border(
-              bottom: BorderSide(
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Colors.grey[400]
-                    : app.settings.theme.backgroundColor,
-                width: 4,
-              ),
-              left: BorderSide(
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Colors.grey[400]
-                    : app.settings.theme.backgroundColor,
-                width: 4,
-              ),
-              right: BorderSide(
-                color: Colors.transparent,
-              ),
-              top: BorderSide(
-                color: Colors.transparent,
-              ),
+            border: Border.all(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.grey[400]
+                  : app.settings.theme.backgroundColor,
+              width: 4,
             ),
           ),
           titlesData: FlTitlesData(
             bottomTitles: SideTitles(
               showTitles: true,
-              reservedSize: 22,
-              getTextStyles: (value) => TextStyle(
+              reservedSize: 24,
+              getTextStyles: (_) => TextStyle(
                 color: textColor(app.settings.theme.backgroundColor),
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
               ),
+              interval: 1.2,
               margin: 12,
               getTitles: (value) {
                 String ret = "";
