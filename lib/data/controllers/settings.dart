@@ -17,6 +17,26 @@ class SettingsController {
   bool _isDark;
   int backgroundColor;
   bool enableNotifications;
+
+  /// The individual bits of this number determine if different notification categories are enabled.
+  ///
+  /// Use BitHelper class to modify and read.
+  /// ```md
+  /// 0 - [reserved]
+  /// ---- Kreta ----
+  /// 1 - Grades
+  /// 2 - Notes/Events
+  /// 3 - Inbox
+  /// 4 - Lessons
+  /// 5 - Absences
+  /// 6 - Exams/Homeworks
+  /// 7 - [reserved]
+  /// ---- Filc ----
+  /// 8 - Persistent Notification
+  /// 9 - Newsletter
+  /// ```
+  ///
+  int notificationMask;
   bool renderHtml;
   int defaultPage;
   int eveningStartHour;
@@ -82,6 +102,7 @@ class SettingsController {
     app.theme.evalColors[4] = colorFromHex(evalColorsI[0]["color5"]);
 
     enableNotifications = settings["notifications"] == 1;
+    notificationMask = settings["notificationMask"];
     enableNews = settings["news_show"] == 1;
     renderHtml = settings["render_html"] == 1;
 

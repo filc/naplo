@@ -336,7 +336,16 @@
     },
     "notifications": {
       "title": "Notifications",
-      "news": "Show Newsletter"
+      "news": "Show Newsletter",
+      "categories": "Categories",
+      "grades": "Evaluations",
+      "notesEvents": "Notes and Events",
+      "inbox": "Received messages",
+      "lessons": "Lessons cancelled or subbed",
+      "absences": "Absences",
+      "examHomework": "Exams and homeworks",
+      "persistent": "Current lesson (persistent)",
+      "newsletter": "Newsletter by Filc"
     },
     "behavior": {
       "title": "Behavior",

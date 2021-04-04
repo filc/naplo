@@ -546,8 +546,26 @@ class I18n implements WidgetsLocalizations {
   String get settingsPrivacySeen => "\"Láttam\" küldése";
   /// "Értesítések"
   String get settingsNotificationsTitle => "Értesítések";
+  /// "Kategóriák"
+  String get settingsNotificationsCategories => "Kategóriák";
   /// "Hírlevél mutatása"
   String get settingsNotificationsNews => "Hírlevél mutatása";
+  /// "Jegyek"
+  String get settingsNotificationsGrades => "Jegyek";
+  /// "Feljegyzések és események"
+  String get settingsNotificationsNotesEvents => "Feljegyzések és események";
+  /// "Beérkező üzenetek"
+  String get settingsNotificationsInbox => "Beérkező üzenetek";
+  /// "Elmaradt vagy helyettesített tanórák"
+  String get settingsNotificationsLessons => "Elmaradt vagy helyettesített tanórák";
+  /// "Mulasztások és hiányok"
+  String get settingsNotificationsAbsences => "Mulasztások és hiányok";
+  /// "Számonkérések és házifeladatok"
+  String get settingsNotificationsExamHomework => "Számonkérések és házifeladatok";
+  /// "Jelenlegi óra (Állandó)"
+  String get settingsNotificationsPersistent => "Jelenlegi óra (Állandó)";
+  /// "Hírlevél"
+  String get settingsNotificationsNewsletter => "Hírlevél";
   /// "Működés"
   String get settingsBehaviorTitle => "Működés";
   /// "Tartalom renderelése HTML-ben"
@@ -1523,9 +1541,36 @@ class _I18n_en_US extends I18n {
   /// "Notifications"
   @override
   String get settingsNotificationsTitle => "Notifications";
+  /// "Categories"
+  @override
+  String get settingsNotificationsCategories => "Categories";
   /// "Show Newsletter"
   @override
   String get settingsNotificationsNews => "Show Newsletter";
+  /// "Evaluations"
+  @override
+  String get settingsNotificationsGrades => "Evaluations";
+  /// "Notes and Events"
+  @override
+  String get settingsNotificationsNotesEvents => "Notes and Events";
+  /// "Received messages"
+  @override
+  String get settingsNotificationsInbox => "Received messages";
+  /// "Lessons cancelled or subbed"
+  @override
+  String get settingsNotificationsLessons => "Lessons cancelled or subbed";
+  /// "Absences"
+  @override
+  String get settingsNotificationsAbsences => "Absences";
+  /// "Exams and homeworks"
+  @override
+  String get settingsNotificationsExamHomework => "Exams and homeworks";
+  /// "Current lesson (persistent)"
+  @override
+  String get settingsNotificationsPersistent => "Current lesson (persistent)";
+  /// "Newsletter by Filc"
+  @override
+  String get settingsNotificationsNewsletter => "Newsletter by Filc";
   /// "Behavior"
   @override
   String get settingsBehaviorTitle => "Behavior";
@@ -2596,6 +2641,30 @@ class _I18n_de_DE extends I18n {
   /// "Newsletter anzeigen"
   @override
   String get settingsNotificationsNews => "Newsletter anzeigen";
+  /// "Bewertungen"
+  @override
+  String get settingsNotificationsGrades => "Bewertungen";
+  /// "Notizen und Ereignisse"
+  @override
+  String get settingsNotificationsNotesEvents => "Notizen und Ereignisse";
+  /// "Empfangene Nachrichten"
+  @override
+  String get settingsNotificationsInbox => "Empfangene Nachrichten";
+  /// "Lektionen abgesagt oder unterbunden"
+  @override
+  String get settingsNotificationsLessons => "Lektionen abgesagt oder unterbunden";
+  /// "Abwesenheiten"
+  @override
+  String get settingsNotificationsAbsences => "Abwesenheiten";
+  /// "Prüfungen und Hausaufgaben"
+  @override
+  String get settingsNotificationsExamHomework => "Prüfungen und Hausaufgaben";
+  /// "Aktuelle Lektion (persistent)"
+  @override
+  String get settingsNotificationsPersistent => "Aktuelle Lektion (persistent)";
+  /// "Newsletter von Filc"
+  @override
+  String get settingsNotificationsNewsletter => "Newsletter von Filc";
   /// "Optionen"
   @override
   String get settingsBehaviorTitle => "Optionen";

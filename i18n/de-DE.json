@@ -336,7 +336,15 @@
     },
     "notifications": {
       "title": "Benachrichtigungen",
-      "news": "Newsletter anzeigen"
+      "news": "Newsletter anzeigen",
+      "grades": "Bewertungen",
+      "notesEvents": "Notizen und Ereignisse",
+      "inbox": "Empfangene Nachrichten",
+      "lessons": "Lektionen abgesagt oder unterbunden",
+      "absences": "Abwesenheiten",
+      "examHomework": "Prüfungen und Hausaufgaben",
+      "persistent": "Aktuelle Lektion (persistent)",
+      "newsletter": "Newsletter von Filc"
     },
     "behavior": {
       "title": "Optionen",

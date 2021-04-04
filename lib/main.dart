@@ -37,6 +37,7 @@ void main() async {
       "default_page",
       "config",
       "news_show",
+      "notificationMask",
       "news_len",
       "round_up"
     ];
@@ -53,6 +54,8 @@ void main() async {
           checker.checkDBkey("config", jsonEncode(Config.defaults.json));
       settingsCopy["news_len"] = checker.checkDBkey("news_len", 0);
       settingsCopy["news_show"] = checker.checkDBkey("news_show", 1);
+      settingsCopy["notificationMask"] =
+          checker.checkDBkey("notificationMask", 1022);
       settingsCopy["round_up"] = checker.checkDBkey("round_up", 5);
       await app.storage.storage.execute("drop table settings");
       try {

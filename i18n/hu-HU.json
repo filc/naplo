@@ -336,7 +336,16 @@
     },
     "notifications": {
       "title": "Értesítések",
-      "news": "Hírlevél mutatása"
+      "categories": "Kategóriák",
+      "news": "Hírlevél mutatása",
+      "grades": "Jegyek",
+      "notesEvents": "Feljegyzések és események",
+      "inbox": "Beérkező üzenetek",
+      "lessons": "Elmaradt vagy helyettesített tanórák",
+      "absences": "Mulasztások és hiányok",
+      "examHomework": "Számonkérések és házifeladatok",
+      "persistent": "Jelenlegi óra (Állandó)",
+      "newsletter": "Hírlevél"
     },
     "behavior": {
       "title": "Működés",

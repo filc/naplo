@@ -1,6 +1,7 @@
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/helpers/bithelper.dart';
 import 'package:flutter/material.dart';
 
 class NotificationSettings extends StatefulWidget {
@@ -57,7 +58,28 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                 },
               ),
             ),
-
+            ExpansionTile(
+              title: Text(I18n.of(context).settingsNotificationsCategories),
+              leading: Icon(FeatherIcons.folder),
+              children: [
+                NotificationCategory(
+                    1, I18n.of(context).settingsNotificationsGrades),
+                NotificationCategory(
+                    2, I18n.of(context).settingsNotificationsNotesEvents),
+                NotificationCategory(
+                    3, I18n.of(context).settingsNotificationsInbox),
+                NotificationCategory(
+                    4, I18n.of(context).settingsNotificationsLessons),
+                NotificationCategory(
+                    5, I18n.of(context).settingsNotificationsAbsences),
+                NotificationCategory(
+                    6, I18n.of(context).settingsNotificationsExamHomework),
+                NotificationCategory(
+                    8, I18n.of(context).settingsNotificationsPersistent),
+                NotificationCategory(
+                    9, I18n.of(context).settingsNotificationsNewsletter),
+              ],
+            ),
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
@@ -68,11 +90,47 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                 ),
               ),
             ),
-
-            // todo: Notification categories
           ],
         ),
       ),
+    );
+  }
+}
+
+class NotificationCategory extends StatefulWidget {
+  final int categoryId;
+  final String name;
+
+  const NotificationCategory(this.categoryId, this.name);
+
+  @override
+  _NotificationCategoryState createState() => _NotificationCategoryState();
+}
+
+class _NotificationCategoryState extends State<NotificationCategory> {
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(
+          BitHelper.isBitSet(app.settings.notificationMask, widget.categoryId)
+              ? FeatherIcons.bell
+              : FeatherIcons.bellOff),
+      title: Text(widget.name),
+      trailing: Switch(
+          activeColor: app.settings.appColor,
+          value: BitHelper.isBitSet(
+              app.settings.notificationMask, widget.categoryId),
+          onChanged: app.settings.enableNotifications
+              ? (_) {
+                  setState(() {
+                    app.settings.notificationMask = BitHelper.toogleSingleBit(
+                        app.settings.notificationMask, widget.categoryId);
+                  });
+                  app.storage.storage.update("settings",
+                      {"notificationMask": app.settings.notificationMask});
+                  print(app.settings.notificationMask);
+                }
+              : null),
     );
   }
 }
