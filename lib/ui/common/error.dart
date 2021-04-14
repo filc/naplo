@@ -15,17 +15,17 @@ Widget errorBuilder(FlutterErrorDetails details) {
     return true;
   }());
   if (debug) {
-    //  return ErrorWidget(details.exception);
-    //} else {
+    return ErrorWidget(details.exception);
+  } else {
     return Builder(
-      builder: (context) =>  Center(
-          child: TextButton(
-            child: Text('Uh oh... :('),
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (ctx) => ReleaseError(details))),
-          ),
+      builder: (context) => Center(
+        child: TextButton(
+          child: Text('Uh oh... :('),
+          onPressed: () => Navigator.push(context,
+              MaterialPageRoute(builder: (ctx) => ReleaseError(details))),
         ),
-      );
+      ),
+    );
   }
 }
 
@@ -37,56 +37,65 @@ class ReleaseError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(),
         body: Center(
-      child: SingleChildScrollView(
-        child: Column(children: [
-          Icon(FeatherIcons.alertOctagon, size: 28),
-          Text('"A kréta törik, a filc folyik, mi rossz történhetne még?"'),
-          Text('Valamilyen hibába ütköztünk, elnézést a kellemetlenségért.'),
-          TextButton(
-            child: Text('Hiba elküldése a fejlesztőknek'),
-            onPressed: () async {
-              var content = json.encode({
-                'content': null,
-                "embeds": [
-                  {
-                    "title": "New Bug Report",
-                    "color": 3708004,
-                    "fields": [
+          child: SingleChildScrollView(
+            child: Column(children: [
+              Container(
+                  padding: EdgeInsets.only(bottom: 50),
+                  child: Icon(FeatherIcons.alertOctagon, size: 64)),
+              Text(
+                '"A kréta törik, a filc folyik, mi rossz történhetne még?"',
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                'Valamilyen hibába ütköztünk, elnézést a kellemetlenségért.',
+                textAlign: TextAlign.center,
+              ),
+              TextButton(
+                child: Text('Hiba elküldése a fejlesztőknek'),
+                onPressed: () async {
+                  var content = json.encode({
+                    'content': null,
+                    "embeds": [
                       {
-                        'name': 'OS',
-                        'value':
-                            '${Platform.operatingSystem} ${Platform.operatingSystemVersion}'
-                      },
-                      {
-                        'name': 'Error',
-                        'value': '```log\n${details.exceptionAsString()}```'
+                        "title": "New Bug Report",
+                        "color": 3708004,
+                        "fields": [
+                          {
+                            'name': 'OS',
+                            'value':
+                                '${Platform.operatingSystem} ${Platform.operatingSystemVersion}'
+                          },
+                          {
+                            'name': 'Error',
+                            'value': '```log\n${details.exceptionAsString()}```'
+                          }
+                        ]
                       }
                     ]
-                  }
-                ]
-              });
-              var req = http.MultipartRequest(
-                'POST',
-                Uri.parse(
-                    'https://discord.com/api/webhooks/831812647799619634/4NN11mgUuaRST3JNvvD08d0nQFT2_7ytknEgbJ9kxcyoIZau9-KgxRBJe4DhlIv0ToxJ'),
-              );
-              req.headers['Content-Type'] = 'multipart/form-data';
-              var trace_str = details.stack.toString().split('\n');
-              var len = trace_str.length;
-              trace_str.removeRange(min(25, len), len - 1);
-              req.files.add(http.MultipartFile.fromString(
-                  'file1', trace_str.join('\n'),
-                  filename: 'stack_trace.log',
-                  contentType: parser.MediaType('text', 'plain')));
-              req.fields.putIfAbsent('payload_json', () => content);
-              var resp = (await (await req.send()).stream.bytesToString());
-              print(resp);
-              Navigator.pop(context);
-            },
+                  });
+                  var req = http.MultipartRequest(
+                    'POST',
+                    Uri.parse(
+                        'https://discord.com/api/webhooks/831812647799619634/4NN11mgUuaRST3JNvvD08d0nQFT2_7ytknEgbJ9kxcyoIZau9-KgxRBJe4DhlIv0ToxJ'),
+                  );
+                  req.headers['Content-Type'] = 'multipart/form-data';
+                  var traceStr = details.stack.toString().split('\n');
+                  var len = traceStr.length;
+                  traceStr.removeRange(min(25, len), len - 1);
+                  req.files.add(http.MultipartFile.fromString(
+                      'file1', traceStr.join('\n'),
+                      filename: 'stack_trace.log',
+                      contentType: parser.MediaType('text', 'plain')));
+                  req.fields.putIfAbsent('payload_json', () => content);
+                  var resp = (await (await req.send()).stream.bytesToString());
+                  print(resp);
+                  Navigator.pop(context);
+                },
+              ),
+            ]),
           ),
-        ]),
-      ),
-    ));
+        ));
   }
 }
