@@ -44,7 +44,7 @@ class _MessageViewState extends State<MessageView> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      body: Container(
+      body: SafeArea(
         child: CupertinoScrollbar(
           child: ListView(
             physics: BouncingScrollPhysics(),
