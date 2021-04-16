@@ -19,6 +19,14 @@ class SubjectGraph extends StatefulWidget {
 class _SubjectGraphState extends State<SubjectGraph> {
   @override
   Widget build(BuildContext context) {
+    double average = widget.data
+            .map((e) => e.value.value * e.value.weight)
+            .fold(0, (p, e) => p + e) /
+        widget.data.map((e) => e.value.weight).fold(0, (p, e) => p + e);
+    Color averagecolor = ColorTween(
+            begin: app.theme.evalColors[average.floor() - 1],
+            end: app.theme.evalColors[average.ceil() - 1])
+        .transform(average - average.floor());
     List<FlSpot> subjectData = [];
     List<List<Evaluation>> sortedData = [[]];
 
@@ -62,17 +70,17 @@ class _SubjectGraphState extends State<SubjectGraph> {
               spots: subjectData,
               isCurved: true,
               curveSmoothness: .1,
-              colors: [app.settings.theme.accentColor],
+              colors: [averagecolor],
               barWidth: 8,
               isStrokeCapRound: true,
               dotData: FlDotData(show: false),
               belowBarData: BarAreaData(
                 show: true,
                 colors: [
-                  app.settings.theme.accentColor.withOpacity(0.7),
-                  app.settings.theme.accentColor.withOpacity(0.3),
-                  app.settings.theme.accentColor.withOpacity(0.2),
-                  app.settings.theme.accentColor.withOpacity(0.1),
+                  averagecolor.withOpacity(0.7),
+                  averagecolor.withOpacity(0.3),
+                  averagecolor.withOpacity(0.2),
+                  averagecolor.withOpacity(0.1),
                 ],
                 gradientColorStops: [0.1, 0.6, 0.8, 1],
                 gradientFrom: Offset(0, 0),
@@ -106,7 +114,7 @@ class _SubjectGraphState extends State<SubjectGraph> {
             ),
             touchCallback: (LineTouchResponse touchResponse) {},
             handleBuiltInTouches: true,
-            touchSpotThreshold: 50.0,
+            touchSpotThreshold: 20.0,
             getTouchedSpotIndicator: (_, spots) => List.generate(
               spots.length,
               (index) => TouchedSpotIndicatorData(
