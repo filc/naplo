@@ -1,32 +1,32 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:filcnaplo/data/context/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' as parser;
+import 'package:filcnaplo/generated/i18n.dart';
+
+bool errorShown = false;
+String lastException = '';
 
 Widget errorBuilder(FlutterErrorDetails details) {
-  bool debug = false;
-  assert(() {
-    debug = true;
-    return true;
-  }());
-  if (debug) {
-    return ErrorWidget(details.exception);
-  } else {
-    return Builder(
-      builder: (context) => Center(
-        child: TextButton(
-          child: Text('Uh oh... :('),
-          onPressed: () => Navigator.push(context,
-              MaterialPageRoute(builder: (ctx) => ReleaseError(details))),
-        ),
-      ),
-    );
-  }
+  return Builder(builder: (context) {
+    if (Navigator.of(context).canPop()) Navigator.pop(context);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!errorShown && details.exceptionAsString() != lastException) {
+        errorShown = true;
+        lastException = details.exceptionAsString();
+        Navigator.of(context, rootNavigator: true)
+            .push(MaterialPageRoute(builder: (ctx) => ReleaseError(details)))
+            .then((_) => errorShown = false);
+      }
+    });
+    return Container();
+  });
 }
 
 class ReleaseError extends StatelessWidget {
@@ -37,65 +37,128 @@ class ReleaseError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: Center(
-          child: SingleChildScrollView(
-            child: Column(children: [
+      backgroundColor: Colors.red,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              Align(
+                child: BackButton(),
+                alignment: Alignment.topLeft,
+              ),
+              Spacer(),
+              Icon(
+                FeatherIcons.alertTriangle,
+                size: 100,
+              ),
+              Spacer(),
+              Padding(
+                padding: EdgeInsets.only(bottom: 4.0),
+                child: Text(
+                  I18n.of(context).errorReportUhoh,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 32.0,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+              Text(
+                I18n.of(context).errorReportDesc,
+                style: TextStyle(
+                  color: Colors.white.withOpacity(.95),
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              Spacer(),
               Container(
-                  padding: EdgeInsets.only(bottom: 50),
-                  child: Icon(FeatherIcons.alertOctagon, size: 64)),
-              Text(
-                '"A kréta törik, a filc folyik, mi rossz történhetne még?"',
-                textAlign: TextAlign.center,
+                height: 110.0,
+                padding: EdgeInsets.all(12.0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.0),
+                    color: Colors.black.withOpacity(.2)),
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Text(
+                    details.exceptionAsString(),
+                    style: TextStyle(fontFamily: 'SpaceMono'),
+                  ),
+                ),
               ),
-              Text(
-                'Valamilyen hibába ütköztünk, elnézést a kellemetlenségért.',
-                textAlign: TextAlign.center,
+              Spacer(),
+              SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all(
+                        EdgeInsets.symmetric(vertical: 14.0)),
+                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0)),
+                    ),
+                  ),
+                  child: Text(
+                    I18n.of(context).errorReportSubmit,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 17.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onPressed: () =>
+                      app.settings.config.config.errorReport != null
+                          ? reportProblem(context)
+                          : null,
+                ),
               ),
-              TextButton(
-                child: Text('Hiba elküldése a fejlesztőknek'),
-                onPressed: () async {
-                  var content = json.encode({
-                    'content': null,
-                    "embeds": [
-                      {
-                        "title": "New Bug Report",
-                        "color": 3708004,
-                        "fields": [
-                          {
-                            'name': 'OS',
-                            'value':
-                                '${Platform.operatingSystem} ${Platform.operatingSystemVersion}'
-                          },
-                          {
-                            'name': 'Error',
-                            'value': '```log\n${details.exceptionAsString()}```'
-                          }
-                        ]
-                      }
-                    ]
-                  });
-                  var req = http.MultipartRequest(
-                    'POST',
-                    Uri.parse(
-                        'https://discord.com/api/webhooks/831812647799619634/4NN11mgUuaRST3JNvvD08d0nQFT2_7ytknEgbJ9kxcyoIZau9-KgxRBJe4DhlIv0ToxJ'),
-                  );
-                  req.headers['Content-Type'] = 'multipart/form-data';
-                  var traceStr = details.stack.toString().split('\n');
-                  var len = traceStr.length;
-                  traceStr.removeRange(min(25, len), len - 1);
-                  req.files.add(http.MultipartFile.fromString(
-                      'file1', traceStr.join('\n'),
-                      filename: 'stack_trace.log',
-                      contentType: parser.MediaType('text', 'plain')));
-                  req.fields.putIfAbsent('payload_json', () => content);
-                  var resp = (await (await req.send()).stream.bytesToString());
-                  print(resp);
-                  Navigator.pop(context);
-                },
-              ),
-            ]),
+              SizedBox(height: 32.0)
+            ],
           ),
-        ));
+        ),
+      ),
+    );
+  }
+
+  Future reportProblem(BuildContext context) async {
+    var content = json.encode({
+      'content': null,
+      "embeds": [
+        {
+          "title": "New Bug Report",
+          "color": 3708004,
+          "fields": [
+            {
+              'name': 'OS',
+              'value':
+                  '`${Platform.operatingSystem} ${Platform.operatingSystemVersion}`',
+            },
+            {
+              'name': 'Version',
+              'value': '`${app.currentAppVersion}`',
+            },
+            {
+              'name': 'Error',
+              'value': '```log\n${details.exceptionAsString()}```'
+            }
+          ]
+        }
+      ]
+    });
+
+    var req = http.MultipartRequest(
+      'POST',
+      Uri.parse(app.settings.config.config.errorReport),
+    );
+    req.headers['Content-Type'] = 'multipart/form-data';
+    String traceLog = details.toString();
+    req.files.add(http.MultipartFile.fromString('file1', traceLog,
+        filename: 'stack_trace.log',
+        contentType: parser.MediaType('text', 'plain')));
+    req.fields.putIfAbsent('payload_json', () => content);
+    await (await req.send()).stream.bytesToString();
+    Navigator.pop(context);
   }
 }

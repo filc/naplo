@@ -596,6 +596,12 @@ class I18n implements WidgetsLocalizations {
   String get errorInternet => "Nincs internetkapcsolat.";
   /// "Nem sikerült lekérni a kijelölt hetet"
   String get errorTimetableWeek => "Nem sikerült lekérni a kijelölt hetet";
+  /// "Ajajj!"
+  String get errorReportUhoh => "Ajajj!";
+  /// "Hiba történt!"
+  String get errorReportDesc => "Hiba történt!";
+  /// "Probléma Jelentése"
+  String get errorReportSubmit => "Probléma Jelentése";
   /// "letöltés"
   String get download => "letöltés";
   /// "Töltsd le most a legújabb verziót"
@@ -1598,6 +1604,15 @@ class _I18n_en_US extends I18n {
   /// "Failed to get selected week"
   @override
   String get errorTimetableWeek => "Failed to get selected week";
+  /// "Uh Oh!"
+  @override
+  String get errorReportUhoh => "Uh Oh!";
+  /// "An error occurred!"
+  @override
+  String get errorReportDesc => "An error occurred!";
+  /// "Report Problem"
+  @override
+  String get errorReportSubmit => "Report Problem";
   /// "download"
   @override
   String get download => "download";
@@ -2668,6 +2683,15 @@ class _I18n_de_DE extends I18n {
   /// "Beim Abrufen der Woche ist ein Fehler aufgetreten"
   @override
   String get errorTimetableWeek => "Beim Abrufen der Woche ist ein Fehler aufgetreten";
+  /// "Oh Oh!"
+  @override
+  String get errorReportUhoh => "Oh Oh!";
+  /// "Ein Fehler ist aufgetreten!"
+  @override
+  String get errorReportDesc => "Ein Fehler ist aufgetreten!";
+  /// "Problem Melden"
+  @override
+  String get errorReportSubmit => "Problem Melden";
   /// "Herunterladen"
   @override
   String get download => "Herunterladen";

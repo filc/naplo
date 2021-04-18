@@ -373,6 +373,11 @@
     "internet": "No internet connection.",
     "timetable": {
       "week": "Failed to get selected week"
+    },
+    "report": {
+      "uhoh": "Uh Oh!",
+      "desc": "An error occurred!",
+      "submit": "Report Problem"
     }
   },
   "download": {

@@ -21,6 +21,7 @@ import 'package:filcnaplo/ui/pages/frame.dart';
 import 'package:filcnaplo/ui/pages/login/page.dart';
 
 void main() async {
+  // Custom error page
   ErrorWidget.builder = errorBuilder;
   WidgetsFlutterBinding.ensureInitialized();
 

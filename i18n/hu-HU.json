@@ -373,6 +373,11 @@
     "internet": "Nincs internetkapcsolat.",
     "timetable": {
       "week": "Nem sikerült lekérni a kijelölt hetet"
+    },
+    "report":{
+      "uhoh": "Ajajj!",
+      "desc": "Hiba történt!",
+      "submit": "Probléma Jelentése"
     }
   },
   "download": {

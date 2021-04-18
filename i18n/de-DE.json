@@ -373,6 +373,11 @@
     "internet": "Keine Internetverbindung.",
     "timetable": {
       "week": "Beim Abrufen der Woche ist ein Fehler aufgetreten"
+    },
+    "report": {
+      "uhoh": "Oh Oh!",
+      "desc": "Ein Fehler ist aufgetreten!",
+      "submit": "Problem Melden"
     }
   },
   "download": {
