@@ -55,26 +55,38 @@ class SubjectTile extends StatelessWidget {
                   ? Tooltip(
                       message:
                           capitalize(I18n.of(context).evaluationAverageClass),
-                      child: Container(
-                        width: 55,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(45.0)),
-                          border: Border.all(
-                            width: 3.0,
-                            color: getAverageColor(classAvg),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(45.0)),
+                              border: Border.all(
+                                width: 3.0,
+                                color: getAverageColor(classAvg),
+                              ),
+                            ),
+                            padding: EdgeInsets.all(5.0),
+                            child: Text(
+                              "M,MM", //Widest character to be safe
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.transparent),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                        ),
-                        padding: EdgeInsets.all(5.0),
-                        child: Text(
-                          app.settings.language.split("_")[0] == "en"
-                              ? classAvg.toStringAsFixed(2)
-                              : classAvg
-                                  .toStringAsFixed(2)
-                                  .split(".")
-                                  .join(","),
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
+                          Text(
+                            app.settings.language.split("_")[0] == "en"
+                                ? classAvg.toStringAsFixed(2)
+                                : classAvg
+                                    .toStringAsFixed(2)
+                                    .split(".")
+                                    .join(","),
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          )
+                        ],
                       ),
                     )
                   : Container(),
@@ -82,27 +94,41 @@ class SubjectTile extends StatelessWidget {
                   ? Tooltip(
                       message: capitalize(I18n.of(context).evaluationAverage),
                       child: Container(
-                        width: 55,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(45.0)),
-                          color: getAverageColor(studentAvg),
-                        ),
-                        padding: EdgeInsets.all(8.0),
-                        margin: EdgeInsets.only(left: 8.0),
-                        child: Text(
-                          app.settings.language.split("_")[0] == "en"
-                              ? studentAvg.toStringAsFixed(2)
-                              : studentAvg
-                                  .toStringAsFixed(2)
-                                  .split(".")
-                                  .join(","),
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: textColor(
-                              getAverageColor(studentAvg),
+                        margin: EdgeInsets.only(left: 8),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(45.0)),
+                                color: getAverageColor(studentAvg),
+                              ),
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                "M,MM",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.transparent,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
-                          ),
-                          textAlign: TextAlign.center,
+                            Text(
+                              app.settings.language.split("_")[0] == "en"
+                                  ? studentAvg.toStringAsFixed(2)
+                                  : studentAvg
+                                      .toStringAsFixed(2)
+                                      .split(".")
+                                      .join(","),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: textColor(
+                                  getAverageColor(studentAvg),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
                     )
