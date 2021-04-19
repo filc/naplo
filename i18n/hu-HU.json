@@ -373,6 +373,17 @@
     "internet": "Nincs internetkapcsolat.",
     "timetable": {
       "week": "Nem sikerült lekérni a kijelölt hetet"
+    },
+    "report":{
+      "uhoh": "Ajajj!",
+      "desc": "Hiba történt!",
+      "submit": "Probléma Jelentése",
+      "details": {
+        "": "Részletek",
+        "os": "Operációs Rendszer",
+        "version": "App Verzió",
+        "stacktrace": "Stacktrace"
+      }
     }
   },
   "download": {
