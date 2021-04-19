@@ -377,7 +377,13 @@
     "report": {
       "uhoh": "Oh Oh!",
       "desc": "Ein Fehler ist aufgetreten!",
-      "submit": "Problem Melden"
+      "submit": "Problem Melden",
+      "details": {
+        "": "Details",
+        "os": "Betriebssystem",
+        "version": "App Version",
+        "stacktrace": "Stacktrace"
+      }
     }
   },
   "download": {

@@ -602,6 +602,14 @@ class I18n implements WidgetsLocalizations {
   String get errorReportDesc => "Hiba történt!";
   /// "Probléma Jelentése"
   String get errorReportSubmit => "Probléma Jelentése";
+  /// "Részletek"
+  String get errorReportDetails => "Részletek";
+  /// "Operációs Rendszer"
+  String get errorReportDetailsOs => "Operációs Rendszer";
+  /// "App Verzió"
+  String get errorReportDetailsVersion => "App Verzió";
+  /// "Stacktrace"
+  String get errorReportDetailsStacktrace => "Stacktrace";
   /// "letöltés"
   String get download => "letöltés";
   /// "Töltsd le most a legújabb verziót"
@@ -1613,6 +1621,18 @@ class _I18n_en_US extends I18n {
   /// "Report Problem"
   @override
   String get errorReportSubmit => "Report Problem";
+  /// "Részletek"
+  @override
+  String get errorReportDetails => "Részletek";
+  /// "Operációs Rendszer"
+  @override
+  String get errorReportDetailsOs => "Operációs Rendszer";
+  /// "App Verzió"
+  @override
+  String get errorReportDetailsVersion => "App Verzió";
+  /// "Stacktrace"
+  @override
+  String get errorReportDetailsStacktrace => "Stacktrace";
   /// "download"
   @override
   String get download => "download";
@@ -2692,6 +2712,18 @@ class _I18n_de_DE extends I18n {
   /// "Problem Melden"
   @override
   String get errorReportSubmit => "Problem Melden";
+  /// "Details"
+  @override
+  String get errorReportDetails => "Details";
+  /// "Betriebssystem"
+  @override
+  String get errorReportDetailsOs => "Betriebssystem";
+  /// "App Version"
+  @override
+  String get errorReportDetailsVersion => "App Version";
+  /// "Stacktrace"
+  @override
+  String get errorReportDetailsStacktrace => "Stacktrace";
   /// "Herunterladen"
   @override
   String get download => "Herunterladen";

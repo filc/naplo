@@ -377,7 +377,13 @@
     "report":{
       "uhoh": "Ajajj!",
       "desc": "Hiba történt!",
-      "submit": "Probléma Jelentése"
+      "submit": "Probléma Jelentése",
+      "details": {
+        "": "Részletek",
+        "os": "Operációs Rendszer",
+        "version": "App Verzió",
+        "stacktrace": "Stacktrace"
+      }
     }
   },
   "download": {
