@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/data/context/app.dart';
-import 'package:filcnaplo/ui/pages/about/privacy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;

@@ -21,8 +21,6 @@ class GradeBuilder {
         .toList();
 
     if (sortBy != null) {
-      print("Sort By " + sortBy.toString()); //TODO removeme
-
       switch (sortBy) {
         case 0: //Date forward
           evaluations.sort(
