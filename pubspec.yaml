@@ -1,6 +1,6 @@
 name: filcnaplo
 description: "Nem hivatalos e-napló alkalmazás az e-Kréta rendszerhez"
-version: 2.1.4-beta3+70
+version: 2.1.5-pre1+72
 publish_to: none
 
 environment:
@@ -21,9 +21,7 @@ dependencies:
   file_picker: ^2.1.6
   package_info: ^2.0.0
   intl: ^0.17.0
-  flutter_linkify: #TODO return to main pub as soon as his PR is merged
-    git:
-      url: https://github.com/MohamedEL-Torky/flutter_linkify
+  flutter_linkify: ^5.0.1
   url_launcher: ^5.4.10
   flutter_html: ^1.0.0
   share: any
