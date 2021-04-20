@@ -37,7 +37,9 @@ class _PageFrameState extends State<PageFrame> {
     // Sync at startup
 
     if (Platform.isAndroid) {
-      app.user.sync.release.sync().then((_) {
+      app.user.sync.release
+          .sync(allowPrerelease: app.settings.preUpdates)
+          .then((_) {
         getApplicationDocumentsDirectory().then((dir) {
           dir
               .listSync()
