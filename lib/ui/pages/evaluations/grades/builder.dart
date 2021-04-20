@@ -22,39 +22,53 @@ class GradeBuilder {
 
     if (sortBy != null) {
       switch (sortBy) {
-        case 0:
+        case 0: //Date forward
           evaluations.sort(
             (a, b) => -a.date.compareTo(b.date),
           );
           break;
-        case 1:
+        case 1: //Date backward
           evaluations.sort(
             (a, b) => a.date.compareTo(b.date),
           );
           break;
-        case 2:
+        case 2: //WriteDate forward
           evaluations.sort(
             (a, b) => -(a.writeDate ?? DateTime.fromMillisecondsSinceEpoch(0))
                 .compareTo(
                     b.writeDate ?? DateTime.fromMillisecondsSinceEpoch(0)),
           );
           break;
-        case 3:
+        case 3: //WriteDate backward
           evaluations.sort(
             (a, b) => (a.writeDate ?? DateTime.fromMillisecondsSinceEpoch(0))
                 .compareTo(
                     b.writeDate ?? DateTime.fromMillisecondsSinceEpoch(0)),
           );
           break;
-        case 4:
+        case 4: //Value better first
+          var dicseretesek = evaluations
+              .where((element) => element.description == "Dicséret")
+              .toList();
+          evaluations.removeWhere((element) => dicseretesek.contains(element));
+
           evaluations.sort(
             (a, b) => -(a.value.value ?? 0).compareTo(b.value.value ?? 0),
           );
+
+          evaluations.insertAll(0, dicseretesek);
           break;
-        case 5:
+        case 5: //Value worse first
+          var dicseretesek = evaluations
+              .where((element) => element.description == "Dicséret")
+              .toList();
+          evaluations.removeWhere((element) => dicseretesek.contains(element));
+
           evaluations.sort(
             (a, b) => (a.value.value ?? 0).compareTo(b.value.value ?? 0),
           );
+
+          evaluations.addAll(dicseretesek);
           break;
       }
     } else {

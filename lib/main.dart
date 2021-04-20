@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:filcnaplo/data/models/config.dart';
 import 'package:filcnaplo/helpers/settings.dart';
+import 'package:filcnaplo/ui/common/error.dart';
 import 'package:filcnaplo/ui/pages/welcome/page.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:filcnaplo/utils/tools.dart';
@@ -20,6 +21,8 @@ import 'package:filcnaplo/ui/pages/frame.dart';
 import 'package:filcnaplo/ui/pages/login/page.dart';
 
 void main() async {
+  // Custom error page
+  ErrorWidget.builder = errorBuilder;
   WidgetsFlutterBinding.ensureInitialized();
 
   PackageInfo packageInfo = await PackageInfo.fromPlatform();

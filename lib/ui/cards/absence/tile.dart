@@ -32,22 +32,27 @@ class AbsenceTile extends StatelessWidget {
         ),
         title: Row(
           children: [
-            Text(
-              absence.type.description,
-            ),
-            Flexible(
-              child: Container(
-                child: Text(" • " + absence.mode.description,
-                    maxLines: 1,
-                    softWrap: false,
-                    style: TextStyle(
-                        //Copied directly from ListTile source code, same as subtitle
-                        fontSize:
-                            Theme.of(context).textTheme.bodyText2.fontSize,
-                        color: Theme.of(context).textTheme.caption.color),
-                    overflow: TextOverflow.fade),
-              ),
-            ),
+            Expanded(
+                child: Row(
+              children: [
+                Text(
+                  absence.type.description,
+                ),
+                Flexible(
+                  child: Container(
+                    child: Text(" • " + absence.mode.description,
+                        maxLines: 1,
+                        softWrap: false,
+                        style: TextStyle(
+                            //Copied directly from ListTile source code, same as subtitle
+                            fontSize:
+                                Theme.of(context).textTheme.bodyText2.fontSize,
+                            color: Theme.of(context).textTheme.caption.color),
+                        overflow: TextOverflow.fade),
+                  ),
+                ),
+              ],
+            )),
             Padding(
               padding: EdgeInsets.only(left: 8.0),
               child: Text(formatDate(context, absence.submitDate)),

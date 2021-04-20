@@ -373,6 +373,17 @@
     "internet": "No internet connection.",
     "timetable": {
       "week": "Failed to get selected week"
+    },
+    "report": {
+      "uhoh": "Uh Oh!",
+      "desc": "An error occurred!",
+      "submit": "Report Problem",
+      "details": {
+        "": "Részletek",
+        "os": "Operációs Rendszer",
+        "version": "App Verzió",
+        "stacktrace": "Stacktrace"
+      }
     }
   },
   "download": {
