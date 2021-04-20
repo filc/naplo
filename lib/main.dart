@@ -41,7 +41,8 @@ void main() async {
       "config",
       "news_show",
       "news_len",
-      "round_up"
+      "round_up",
+      "pre_updates"
     ];
 
     migrationRequired = addedDBKeys.any((key) =>
@@ -57,6 +58,7 @@ void main() async {
       settingsCopy["news_len"] = checker.checkDBkey("news_len", 0);
       settingsCopy["news_show"] = checker.checkDBkey("news_show", 1);
       settingsCopy["round_up"] = checker.checkDBkey("round_up", 5);
+      settingsCopy["pre_updates"] = checker.checkDBkey("pre_updates", 0);
       await app.storage.storage.execute("drop table settings");
       try {
         await app.storage.storage.execute("drop table tabs");

@@ -23,6 +23,7 @@ class SettingsController {
   bool enableNews;
   ConfigSync config = ConfigSync();
   int roundUp;
+  bool preUpdates;
 
   get locale {
     List<String> lang = (language == "auto"
@@ -84,6 +85,7 @@ class SettingsController {
     enableNotifications = settings["notifications"] == 1;
     enableNews = settings["news_show"] == 1;
     renderHtml = settings["render_html"] == 1;
+    preUpdates = settings["pre_updates"] == 1;
 
     config.config = Config.fromJson(jsonDecode(settings["config"]));
 
