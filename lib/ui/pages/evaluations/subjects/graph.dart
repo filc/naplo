@@ -62,8 +62,7 @@ class _SubjectGraphState extends State<SubjectGraph> {
       ));
     });
 
-    return GestureDetector(
-      onHorizontalDragUpdate: (_) {},
+    return Container(
       child: LineChart(
         LineChartData(
           lineBarsData: [
