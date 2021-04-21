@@ -5,11 +5,11 @@ class ReleaseSync {
   Release latestRelease;
   bool isNew = false;
 
-  Future sync({bool allowPrerelease = false}) async {
+  Future sync() async {
     if (!Platform.isAndroid) return;
 
     var releasesJson = await app.user.kreta.getReleases();
-    if (!allowPrerelease) {
+    if (!app.settings.preUpdates) {
       for (Map r in releasesJson) {
         if (!r["prerelease"]) {
           latestRelease = Release.fromJson(r);
@@ -90,8 +90,9 @@ class Release {
   String version;
   String notes;
   String url;
+  bool isExperimental;
 
-  Release(this.version, this.notes, this.url);
+  Release(this.version, this.notes, this.url, this.isExperimental);
 
   factory Release.fromJson(Map json) {
     List<Map> assets = [];
@@ -100,6 +101,6 @@ class Release {
     });
     String url = assets[0]["browser_download_url"];
 
-    return Release(json["tag_name"], json["body"], url);
+    return Release(json["tag_name"], json["body"], url, json["prerelease"]);
   }
 }

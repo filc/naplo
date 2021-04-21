@@ -400,7 +400,9 @@
     "currentVersion": "Jelenlegi",
     "available": "Frissítés elérhető!",
     "searchPre": "Kísérleti verziók keresése",
-    "foundPre": "Legfrissebb (kísérleti) verzió"
+    "foundPre": "Legfrissebb kísérleti verzió",
+    "foundRelease": "Legfrissebb verzió",
+    "noPre": "A legfrissebb verzió nem kísérleti"
   },
   "rateLimit": {
     "alert": "{minutes} percenként egyszer frissíthetsz!"

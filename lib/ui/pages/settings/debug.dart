@@ -118,12 +118,16 @@ class _DebugSettingsState extends State<DebugSettings> {
                         });
                         app.storage.storage.update("settings",
                             {"pre_updates": (app.settings.preUpdates ? 1 : 0)});
-                        app.user.sync.release
-                            .sync(allowPrerelease: app.settings.preUpdates)
-                            .then(
+                        app.user.sync.release.sync().then(
                               (_) => ScaffoldMessenger.of(context).showSnackBar(
                                 CustomSnackBar(
-                                  message: I18n.of(context).updateFoundPre +
+                                  message: (app.settings.preUpdates
+                                          ? app.user.sync.release.latestRelease
+                                                  .isExperimental
+                                              ? I18n.of(context).updateFoundPre
+                                              : I18n.of(context).updateNoPre
+                                          : I18n.of(context)
+                                              .updateFoundRelease) +
                                       ": " +
                                       app.user.sync.release.latestRelease
                                           .version,

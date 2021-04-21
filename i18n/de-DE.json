@@ -400,7 +400,9 @@
     "currentVersion": "Aktuell",
     "available": "Neue Ausgabe!",
     "searchPre": "Suche nach experimentellen Versionen",
-    "foundPre": "Neueste (experimentelle) Version"
+    "foundPre": "Neueste experimentelle Version",
+    "foundRelease": "Neueste Version",
+    "noPre": "Neueste Version is nicht experimentell"
   },
   "rateLimit": {
     "alert": "Neue Daten können erst jede {minutes} Minuten abgerufen werden!"

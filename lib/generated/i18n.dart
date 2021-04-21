@@ -632,8 +632,12 @@ class I18n implements WidgetsLocalizations {
   String get updateAvailable => "Frissítés elérhető!";
   /// "Kísérleti verziók keresése"
   String get updateSearchPre => "Kísérleti verziók keresése";
-  /// "Legfrissebb (kísérleti) verzió"
-  String get updateFoundPre => "Legfrissebb (kísérleti) verzió";
+  /// "Legfrissebb kísérleti verzió"
+  String get updateFoundPre => "Legfrissebb kísérleti verzió";
+  /// "Legfrissebb verzió"
+  String get updateFoundRelease => "Legfrissebb verzió";
+  /// "A legfrissebb verzió nem kísérleti"
+  String get updateNoPre => "A legfrissebb verzió nem kísérleti";
   /// "${minutes} percenként egyszer frissíthetsz!"
   String rateLimitAlert(String minutes) => "${minutes} percenként egyszer frissíthetsz!";
   /// "keresés"
@@ -1666,9 +1670,15 @@ class _I18n_en_US extends I18n {
   /// "Search for experimental versions"
   @override
   String get updateSearchPre => "Search for experimental versions";
-  /// "Latest (experimental) version"
+  /// "Latest experimental version"
   @override
-  String get updateFoundPre => "Latest (experimental) version";
+  String get updateFoundPre => "Latest experimental version";
+  /// "Latest version"
+  @override
+  String get updateFoundRelease => "Latest version";
+  /// "Newest version is not experimental"
+  @override
+  String get updateNoPre => "Newest version is not experimental";
   /// "You can only refresh every ${minutes} minute(s)!"
   @override
   String rateLimitAlert(String minutes) => "You can only refresh every ${minutes} minute(s)!";
@@ -2757,9 +2767,15 @@ class _I18n_de_DE extends I18n {
   /// "Suche nach experimentellen Versionen"
   @override
   String get updateSearchPre => "Suche nach experimentellen Versionen";
-  /// "Neueste (experimentelle) Version"
+  /// "Neueste experimentelle Version"
   @override
-  String get updateFoundPre => "Neueste (experimentelle) Version";
+  String get updateFoundPre => "Neueste experimentelle Version";
+  /// "Neueste Version"
+  @override
+  String get updateFoundRelease => "Neueste Version";
+  /// "Neueste Version is nicht experimentell"
+  @override
+  String get updateNoPre => "Neueste Version is nicht experimentell";
   /// "Neue Daten können erst jede ${minutes} Minuten abgerufen werden!"
   @override
   String rateLimitAlert(String minutes) => "Neue Daten können erst jede ${minutes} Minuten abgerufen werden!";
