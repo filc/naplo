@@ -168,7 +168,7 @@ class ReleaseError extends StatelessWidget {
       Uri.parse(app.settings.config.config.errorReport),
     );
     req.headers['Content-Type'] = 'multipart/form-data';
-    String traceLog = details.toString();
+    String traceLog = details.stack.toString().substring(0, 5000);
     req.files.add(http.MultipartFile.fromString('file1', traceLog,
         filename: 'stack_trace.log',
         contentType: parser.MediaType('text', 'plain')));
@@ -218,7 +218,7 @@ class StacktracePopup extends StatelessWidget {
                   ErrorDetail(I18n.of(context).errorReportDetailsVersion,
                       app.currentAppVersion),
                   ErrorDetail(I18n.of(context).errorReportDetailsStacktrace,
-                      details.toString())
+                      details.stack.toString().substring(0, 5000))
                 ]),
               ),
               TextButton(
