@@ -2,7 +2,7 @@ import 'package:filcnaplo/kreta/client.dart';
 
 class BaseURL {
   static const FILC = "https://filcnaplo.hu";
-  static const FILC_BACKUP = "https://backup.filcnaplo.hu";
+  //static const FILC_BACKUP = "https://backup.filcnaplo.hu";
   static String kreta(String instituteCode) =>
       "https://$instituteCode.e-kreta.hu";
   static const KRETA_IDP = "https://idp.e-kreta.hu";

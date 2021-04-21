@@ -108,19 +108,35 @@ class _DebugSettingsState extends State<DebugSettings> {
                   color: app.debugMode ? null : Colors.grey,
                 ),
               ),
-              onTap: app.debugMode
-                  ? () {
-                      app.user.sync.release.sync(allowPrerelease: true).then(
-                            (_) => ScaffoldMessenger.of(context).showSnackBar(
-                              CustomSnackBar(
-                                message: I18n.of(context).updateFoundPre +
-                                    ": " +
-                                    app.user.sync.release.latestRelease.version,
+              trailing: Switch(
+                activeColor: app.settings.appColor,
+                value: app.settings.preUpdates,
+                onChanged: app.debugMode
+                    ? (bool b) {
+                        setState(() {
+                          app.settings.preUpdates = b;
+                        });
+                        app.storage.storage.update("settings",
+                            {"pre_updates": (app.settings.preUpdates ? 1 : 0)});
+                        app.user.sync.release.sync().then(
+                              (_) => ScaffoldMessenger.of(context).showSnackBar(
+                                CustomSnackBar(
+                                  message: (app.settings.preUpdates
+                                          ? app.user.sync.release.latestRelease
+                                                  .isExperimental
+                                              ? I18n.of(context).updateFoundPre
+                                              : I18n.of(context).updateNoPre
+                                          : I18n.of(context)
+                                              .updateFoundRelease) +
+                                      ": " +
+                                      app.user.sync.release.latestRelease
+                                          .version,
+                                ),
                               ),
-                            ),
-                          );
-                    }
-                  : null,
+                            );
+                      }
+                    : null,
+              ),
             ),
           ListTile(
             leading: Icon(FeatherIcons.printer),

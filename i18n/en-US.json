@@ -400,7 +400,9 @@
     "currentVersion": "Current",
     "available": "Update available!",
     "searchPre": "Search for experimental versions",
-    "foundPre": "Latest (experimental) version"
+    "foundPre": "Latest experimental version",
+    "foundRelease": "Latest version",
+    "noPre": "Newest version is not experimental"
   },
   "rateLimit": {
     "alert": "You can only refresh every {minutes} minute(s)!"
