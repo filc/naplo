@@ -72,7 +72,6 @@ class TimetableBuilder {
 
     return ((now.difference(schoolStart).inDays - (now.weekday - 1)) / 7)
             .floor() +
-        1 +
-        (now.weekday >= 6 ? 1 : 0);
+        1;
   }
 }
