@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:filcnaplo/data/controllers/notifications.dart';
 import 'package:filcnaplo/data/models/config.dart';
 import 'package:filcnaplo/helpers/settings.dart';
 import 'package:filcnaplo/ui/pages/welcome/page.dart';
@@ -30,6 +31,14 @@ void main() async {
 
   bool migrationRequired = false;
   Map<String, dynamic> settingsCopy;
+
+  /// test
+
+  var notif = NotificationController();
+  await notif.init();
+  await notif.show(NotificationDisplay(title: "hello"));
+
+  ///
 
   try {
     settings = (await app.storage.storage.query("settings"))[0];
