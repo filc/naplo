@@ -11,7 +11,7 @@ class HomeworkSync {
   Future<bool> sync() async {
     if (!app.debugUser) {
       List<Homework> _homework;
-      DateTime from = DateTime.fromMillisecondsSinceEpoch(1);
+      DateTime from = DateTime.now().subtract(Duration(days: 30));
       _homework = await app.user.kreta.getHomeworks(from);
       if (_homework == null) {
         await app.user.kreta.refreshLogin();
