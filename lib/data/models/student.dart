@@ -37,17 +37,21 @@ class Student {
         : null;
     String yearId = json["TanevUid"] ?? "";
     String address = json["Cimek"] != null
-        ? json["Cimek"].length > 0 ? json["Cimek"][0] : null
+        ? json["Cimek"].length > 0
+            ? json["Cimek"][0]
+            : null
         : null;
     List<String> parents = [];
 
     if (json["AnyjaNeve"] != null) {
       [
         [capitalize(json["AnyjaNeve"])],
-        json["Gondviselok"]
-            .map((e) => capitalize(e["Nev"]))
-            .toList()
-            .where((name) => !name.contains(json["AnyjaNeve"]))
+        json["Gondviselok"] != null
+            ? json["Gondviselok"]
+                .map((e) => capitalize(e["Nev"]))
+                .toList()
+                .where((name) => !name.contains(json["AnyjaNeve"]))
+            : []
       ].expand((x) => x).forEach((e) => parents.add(e));
     }
 

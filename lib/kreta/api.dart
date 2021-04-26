@@ -2,12 +2,18 @@ import 'package:filcnaplo/kreta/client.dart';
 
 class BaseURL {
   static const FILC = "https://filcnaplo.hu";
-  static const FILC_BACKUP = "https://backup.filcnaplo.hu";
   static String kreta(String instituteCode) =>
-      "https://$instituteCode.e-kreta.hu";
+      instituteCode == "klik69420-tesztfilc"
+          ? BaseURL.KRETA_DUMMY
+          : "https://$instituteCode.e-kreta.hu";
+  static String kretaAdmin(String instituteCode) =>
+      instituteCode == "klik69420-tesztfilc"
+          ? BaseURL.KRETA_DUMMY
+          : BaseURL.KRETA_ADMIN;
   static const KRETA_IDP = "https://idp.e-kreta.hu";
   static const KRETA_ADMIN = "https://eugyintezes.e-kreta.hu";
   static const KRETA_FILES = "https://files.e-kreta.hu";
+  static const KRETA_DUMMY = "http://tesztfilc.hu:5500"; // tesztfilc.hu
   static const FILC_REPO = "https://api.github.com/repos/filc/naplo";
 }
 

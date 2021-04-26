@@ -46,7 +46,9 @@ class DebugViewStruct {
             host: BaseURL.kreta(app.user.instituteCode),
             uri: KretaEndpoints.classAverages +
                 "?oktatasiNevelesiFeladatUid=" +
-                app.user.sync.student.student.groupId.toString(),
+                (app.user.sync.student.student != null
+                    ? app.user.sync.student.student.groupId.toString()
+                    : ""),
             name: "ClassAverages",
           )
         ];

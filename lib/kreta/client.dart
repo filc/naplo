@@ -102,6 +102,12 @@ class KretaClient {
         "Budapest",
       ));
 
+      schools.add(School(
+        "klik69420-tesztfilc",
+        "Poroszlói Tervelőszövetkezet Szakgimnázium",
+        "Poroszló",
+      ));
+
       return schools;
     } catch (error) {
       print("ERROR: KretaAPI.getSchools: " + error.toString());
@@ -184,7 +190,8 @@ class KretaClient {
 
   Future<List> getReleases() async {
     try {
-      var response = await http.get(Uri.parse(BaseURL.FILC_REPO + FilcEndpoints.releases));
+      var response =
+          await http.get(Uri.parse(BaseURL.FILC_REPO + FilcEndpoints.releases));
       var responseJson = json.decode(response.body);
       return responseJson;
     } catch (error) {
@@ -196,7 +203,11 @@ class KretaClient {
   Future<bool> login(User user) async {
     try {
       var response = await client.post(
-        Uri.parse(BaseURL.KRETA_IDP + KretaEndpoints.token),
+        Uri.parse(
+          user.instituteCode == "klik69420-tesztfilc"
+              ? BaseURL.KRETA_DUMMY + KretaEndpoints.token
+              : BaseURL.KRETA_IDP + KretaEndpoints.token,
+        ),
         body: {
           "userName": user.username,
           "password": user.password,
@@ -278,38 +289,11 @@ class KretaClient {
         ),
       );
 
-  // currently buggy, do not use
-  // Future<bool> refreshLogin() async {
-  //   try {
-  //     var response = await client.post(
-  //       BaseURL.KRETA_IDP + KretaEndpoints.token,
-  //       body: {
-  //         "refresh_token": refreshToken,
-  //         "institute_code": instituteCode,
-  //         "grant_type": "refresh_token",
-  //         "client_id": clientId,
-  //       },
-  //       headers: {
-  //         "Content-Type": "application/x-www-form-urlencoded",
-  //         "User-Agent": userAgent,
-  //       },
-  //     );
-
-  //     await checkResponse(response);
-
-  //     Map responseJson = jsonDecode(response.body);
-  //     accessToken = responseJson["access_token"];
-  //     refreshToken = responseJson["refresh_token"];
-  //   } catch (error) {
-  //     print("ERROR: KretaAPI.refreshLogin: " + error.toString());
-  //     return false;
-  //   }
-  // }
-
   Future<List<Message>> getMessages(String type) async {
     try {
       var response = await client.get(
-        Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.messages(type)),
+        Uri.parse(
+            BaseURL.kretaAdmin(instituteCode) + AdminEndpoints.messages(type)),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent,
@@ -337,7 +321,8 @@ class KretaClient {
   Future<Map> getMessage(int id) async {
     try {
       var response = await client.get(
-        Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.message(id.toString())),
+        Uri.parse(BaseURL.kretaAdmin(instituteCode) +
+            AdminEndpoints.message(id.toString())),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent,
@@ -359,7 +344,8 @@ class KretaClient {
   Future<List<Recipient>> getRecipients() async {
     try {
       var response = await client.get(
-        Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.recipientsTeacher),
+        Uri.parse(BaseURL.kretaAdmin(instituteCode) +
+            AdminEndpoints.recipientsTeacher),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent
@@ -446,7 +432,8 @@ class KretaClient {
       messageJson["feladoTitulus"] = "";
 
       var response = await client.post(
-        Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.sendMessage),
+        Uri.parse(
+            BaseURL.kretaAdmin(instituteCode) + AdminEndpoints.sendMessage),
         headers: {
           "Authorization": "Bearer $accessToken",
           "User-Agent": userAgent,
@@ -493,7 +480,7 @@ class KretaClient {
   Future<Uint8List> downloadAttachment(Attachment attachment) async {
     try {
       var response = await client.get(
-        Uri.parse(BaseURL.KRETA_ADMIN +
+        Uri.parse(BaseURL.kretaAdmin(instituteCode) +
             AdminEndpoints.downloadAttachment(attachment.id.toString())),
         headers: {
           "Authorization": "Bearer $accessToken",
@@ -826,7 +813,8 @@ class KretaClient {
 
     try {
       var response = await client.post(
-          Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.trashMessage),
+          Uri.parse(
+              BaseURL.kretaAdmin(instituteCode) + AdminEndpoints.trashMessage),
           headers: {
             "Authorization": "Bearer $accessToken",
             "User-Agent": userAgent,
@@ -844,7 +832,7 @@ class KretaClient {
   Future<void> deleteMessage(int id) async {
     try {
       var response = await client.delete(
-        Uri.parse(BaseURL.KRETA_ADMIN +
+        Uri.parse(BaseURL.kretaAdmin(instituteCode) +
             AdminEndpoints.deleteMessage +
             "?postaladaElemAzonositok=" +
             id.toString()),

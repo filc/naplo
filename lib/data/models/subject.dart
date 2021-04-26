@@ -9,7 +9,8 @@ class Subject {
 
   factory Subject.fromJson(Map json) {
     String id = json["Uid"] ?? "";
-    Type category = Type.fromJson(json["Kategoria"]);
+    Type category =
+        json["Kategoria"] != null ? Type.fromJson(json["Kategoria"]) : null;
     String name = json["Nev"];
 
     return Subject(id, category, name);
