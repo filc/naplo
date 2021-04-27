@@ -80,8 +80,11 @@ class _TimetableFrameState extends State<TimetableFrame>
     _timetableBuilder = TimetableBuilder();
     selectedWeek = _timetableBuilder.getCurrentWeek();
     _timetableBuilder.build(selectedWeek);
-    _tabController =
-        TabController(length: _timetableBuilder.week.days.length, vsync: this);
+    _tabController = TabController(
+      length: _timetableBuilder.week.days.length,
+      vsync: this,
+      initialIndex: currentDay(),
+    );
 
     refreshWeek(offline: true)
         .then((hasOfflineLessons) => setState(() {
@@ -91,8 +94,8 @@ class _TimetableFrameState extends State<TimetableFrame>
         .then((_) {
       refreshWeek().then((successfulOnlineRefresh) async {
         currentDay();
+        await Future.doWhile(() => !mounted);
         if (realWeekend) {
-          await Future.doWhile(() => !mounted);
           selectedWeek = selectedWeek + 1;
           changeWeek(selectedWeek);
         }
