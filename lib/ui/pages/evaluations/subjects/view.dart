@@ -82,6 +82,7 @@ class _SubjectViewState extends State<SubjectView> {
             yearTitle = I18n.of(context).evaluationsLevelExam;
             break;
           case EvaluationType.unknown:
+            yearTitle = I18n.of(context).unknown;
             break;
           case EvaluationType.midYear:
             break;
