@@ -27,28 +27,30 @@ class _TimetableFrameState extends State<TimetableFrame>
 
   changeWeek(int week) {
     //Start loading animation by making setting future to a constant false
-    setState(() {
-      ready = false;
-    });
+    if (mounted)
+      setState(() {
+        ready = false;
+      });
 
     // Start loading new week
     selectedWeek = week;
     refreshWeek().then((successful) {
       if (successful) {
         //After week is refreshed, stop animation, display week
-        setState(() {
-          ready = true;
+        if (mounted)
+          setState(() {
+            ready = true;
 
-          _timetableBuilder.build(selectedWeek);
-          int selectedDay = _tabController.index;
-          int length = _timetableBuilder.week.days.length;
-          length = length == 0 ? 1 : length;
-          _tabController = TabController(
-            vsync: this,
-            length: length,
-            initialIndex: selectedDay.clamp(0, length - 1),
-          );
-        });
+            _timetableBuilder.build(selectedWeek);
+            int selectedDay = _tabController.index;
+            int length = _timetableBuilder.week.days.length;
+            length = length == 0 ? 1 : length;
+            _tabController = TabController(
+              vsync: this,
+              length: length,
+              initialIndex: selectedDay.clamp(0, length - 1),
+            );
+          });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           CustomSnackBar(
@@ -94,14 +96,14 @@ class _TimetableFrameState extends State<TimetableFrame>
         .then((_) {
       refreshWeek().then((successfulOnlineRefresh) async {
         currentDay();
-        await Future.doWhile(() => !mounted);
         if (realWeekend) {
           selectedWeek = selectedWeek + 1;
           changeWeek(selectedWeek);
         }
-        setState(() {
-          ready = successfulOnlineRefresh;
-        });
+        if (mounted)
+          setState(() {
+            ready = successfulOnlineRefresh;
+          });
       });
     });
   }
