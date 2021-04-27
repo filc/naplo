@@ -250,6 +250,7 @@
     "halfYear": "Félév",
     "3qYear": "3. Negyedév",
     "4qYear": "4. Negyedév",
+    "levelExam": "Osztályozók",
     "endYear": "Év vége",
     "subjects": "Tárgyak",
     "statistics": "Statisztikák",
@@ -374,7 +375,7 @@
     "timetable": {
       "week": "Nem sikerült lekérni a kijelölt hetet"
     },
-    "report":{
+    "report": {
       "uhoh": "Ajajj!",
       "desc": "Hiba történt!",
       "submit": "Probléma Jelentése",
