@@ -45,6 +45,11 @@ class FinalCard extends BaseCard {
         break;
       case EvaluationType.midYear:
         break;
+      case EvaluationType.levelExam:
+        title += I18n.of(context).evaluationsLevelExam;
+        break;
+      case EvaluationType.unknown:
+        break;
     }
     title += (" " + I18n.of(context).evaluations);
 
