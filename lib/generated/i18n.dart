@@ -420,8 +420,8 @@ class I18n implements WidgetsLocalizations {
   String get evaluations3qYear => "3. Negyedév";
   /// "4. Negyedév"
   String get evaluations4qYear => "4. Negyedév";
-  /// "Osztályozók"
-  String get evaluationsLevelExam => "Osztályozók";
+  /// "Osztályozó"
+  String get evaluationsLevelExam => "Osztályozó";
   /// "Év vége"
   String get evaluationsEndYear => "Év vége";
   /// "Tárgyak"
@@ -1354,9 +1354,9 @@ class _I18n_en_US extends I18n {
   /// "4. Quarter"
   @override
   String get evaluations4qYear => "4. Quarter";
-  /// "Level Exams"
+  /// "Classifier"
   @override
-  String get evaluationsLevelExam => "Level Exams";
+  String get evaluationsLevelExam => "Classifier";
   /// "Report"
   @override
   String get evaluationsEndYear => "Report";
@@ -2454,6 +2454,9 @@ class _I18n_de_DE extends I18n {
   /// "4. Quartal"
   @override
   String get evaluations4qYear => "4. Quartal";
+  /// "Klassifikator"
+  @override
+  String get evaluationsLevelExam => "Klassifikator";
   /// "Zeugnis"
   @override
   String get evaluationsEndYear => "Zeugnis";
