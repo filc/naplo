@@ -135,8 +135,7 @@ class StudentDetail extends StatelessWidget {
           value,
           style: TextStyle(fontSize: 16.0),
           maxLines: 3,
-          softWrap: false,
-          overflow: TextOverflow.fade,
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     );
