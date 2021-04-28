@@ -145,7 +145,8 @@
     "uploadUser": "uploader",
     "uploadTime": "uploaded at",
     "past": "Past homework",
-    "upcoming": "Upcoming homeworks"
+    "upcoming": "Upcoming homeworks",
+    "more": "Load previous homeworks"
   },
   "planner": {
     "title": "Planner",

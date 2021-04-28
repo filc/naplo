@@ -272,6 +272,8 @@ class I18n implements WidgetsLocalizations {
   String get homeworkPast => "Korábbi házik";
   /// "Közelgő házik"
   String get homeworkUpcoming => "Közelgő házik";
+  /// "Régebbi házik"
+  String get homeworkMore => "Régebbi házik";
   /// "Tervező"
   String get plannerTitle => "Tervező";
   /// "órarend"
@@ -1132,6 +1134,9 @@ class _I18n_en_US extends I18n {
   /// "Upcoming homeworks"
   @override
   String get homeworkUpcoming => "Upcoming homeworks";
+  /// "Load previous homeworks"
+  @override
+  String get homeworkMore => "Load previous homeworks";
   /// "Planner"
   @override
   String get plannerTitle => "Planner";
@@ -2232,6 +2237,9 @@ class _I18n_de_DE extends I18n {
   /// "Kommende Hausaufgaben"
   @override
   String get homeworkUpcoming => "Kommende Hausaufgaben";
+  /// "Mehr laden"
+  @override
+  String get homeworkMore => "Mehr laden";
   /// "Planer"
   @override
   String get plannerTitle => "Planer";

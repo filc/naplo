@@ -7,11 +7,13 @@ import 'package:filcnaplo/data/models/dummy.dart';
 class HomeworkSync {
   List<Homework> homework = [];
   bool uiPending = true;
+  Duration currentDuration = Duration(days: 7);
 
-  Future<bool> sync() async {
+  Future<bool> sync({Duration duration = const Duration(days: 7)}) async {
+    currentDuration = duration;
     if (!app.debugUser) {
       List<Homework> _homework;
-      DateTime from = DateTime.now().subtract(Duration(days: 30));
+      DateTime from = DateTime.now().subtract(duration);
       _homework = await app.user.kreta.getHomeworks(from);
       if (_homework == null) {
         await app.user.kreta.refreshLogin();

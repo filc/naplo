@@ -1,6 +1,7 @@
 import 'package:filcnaplo/ui/common/label.dart';
 import 'package:filcnaplo/ui/pages/planner/homeworks/builder.dart';
 import 'package:filcnaplo/ui/pages/planner/exams/builder.dart';
+import 'package:filcnaplo/ui/pages/planner/homeworks/syncmore.dart';
 import 'package:flutter/material.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:filcnaplo/ui/common/account_button.dart';
@@ -179,8 +180,23 @@ class _PlannerPageState extends State<PlannerPage>
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 8.0, vertical: 4.0),
                                   child: Column(
-                                      children:
-                                          _homeworkBuilder.homeworkTiles[1]))
+                                    children: () {
+                                      List<Widget> widgets = <Widget>[];
+                                      widgets.addAll(
+                                        _homeworkBuilder.homeworkTiles[1],
+                                      );
+                                      widgets.add(
+                                        MoreHomework(
+                                          callback: () {
+                                            _homeworkBuilder.build();
+                                            setState(() {});
+                                          },
+                                        ),
+                                      );
+                                      return widgets;
+                                    }(),
+                                  ),
+                                )
                               : Container(),
                         ],
                       ),
