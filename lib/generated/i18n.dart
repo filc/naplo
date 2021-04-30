@@ -272,6 +272,8 @@ class I18n implements WidgetsLocalizations {
   String get homeworkPast => "Korábbi házik";
   /// "Közelgő házik"
   String get homeworkUpcoming => "Közelgő házik";
+  /// "Régebbi házik"
+  String get homeworkMore => "Régebbi házik";
   /// "Tervező"
   String get plannerTitle => "Tervező";
   /// "órarend"
@@ -420,6 +422,8 @@ class I18n implements WidgetsLocalizations {
   String get evaluations3qYear => "3. Negyedév";
   /// "4. Negyedév"
   String get evaluations4qYear => "4. Negyedév";
+  /// "Osztályozó"
+  String get evaluationsLevelExam => "Osztályozó";
   /// "Év vége"
   String get evaluationsEndYear => "Év vége";
   /// "Tárgyak"
@@ -1130,6 +1134,9 @@ class _I18n_en_US extends I18n {
   /// "Upcoming homeworks"
   @override
   String get homeworkUpcoming => "Upcoming homeworks";
+  /// "Load previous homeworks"
+  @override
+  String get homeworkMore => "Load previous homeworks";
   /// "Planner"
   @override
   String get plannerTitle => "Planner";
@@ -1352,6 +1359,9 @@ class _I18n_en_US extends I18n {
   /// "4. Quarter"
   @override
   String get evaluations4qYear => "4. Quarter";
+  /// "Classifier"
+  @override
+  String get evaluationsLevelExam => "Classifier";
   /// "Report"
   @override
   String get evaluationsEndYear => "Report";
@@ -2227,6 +2237,9 @@ class _I18n_de_DE extends I18n {
   /// "Kommende Hausaufgaben"
   @override
   String get homeworkUpcoming => "Kommende Hausaufgaben";
+  /// "Mehr laden"
+  @override
+  String get homeworkMore => "Mehr laden";
   /// "Planer"
   @override
   String get plannerTitle => "Planer";
@@ -2449,6 +2462,9 @@ class _I18n_de_DE extends I18n {
   /// "4. Quartal"
   @override
   String get evaluations4qYear => "4. Quartal";
+  /// "Klassifikator"
+  @override
+  String get evaluationsLevelExam => "Klassifikator";
   /// "Zeugnis"
   @override
   String get evaluationsEndYear => "Zeugnis";

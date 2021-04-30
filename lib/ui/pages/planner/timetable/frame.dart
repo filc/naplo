@@ -23,30 +23,34 @@ class _TimetableFrameState extends State<TimetableFrame>
   TimetableBuilder _timetableBuilder;
   Week currentWeek;
   bool ready = false;
+  bool realWeekend = false;
 
   changeWeek(int week) {
     //Start loading animation by making setting future to a constant false
-    setState(() {
-      ready = false;
-    });
+    if (mounted)
+      setState(() {
+        ready = false;
+      });
 
     // Start loading new week
     selectedWeek = week;
     refreshWeek().then((successful) {
       if (successful) {
         //After week is refreshed, stop animation, display week
-        setState(() {
-          ready = true;
+        if (mounted)
+          setState(() {
+            ready = true;
 
-          _timetableBuilder.build(selectedWeek);
-          int selectedDay = _tabController.index;
-          int length = _timetableBuilder.week.days.length;
-          _tabController = TabController(
-            vsync: this,
-            length: length.clamp(1, length),
-            initialIndex: selectedDay.clamp(0, length - 1),
-          );
-        });
+            _timetableBuilder.build(selectedWeek);
+            int selectedDay = _tabController.index;
+            int length = _timetableBuilder.week.days.length;
+            length = length == 0 ? 1 : length;
+            _tabController = TabController(
+              vsync: this,
+              length: length,
+              initialIndex: selectedDay.clamp(0, length - 1),
+            );
+          });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           CustomSnackBar(
@@ -60,14 +64,14 @@ class _TimetableFrameState extends State<TimetableFrame>
 
   /// Return the index of today's tab in the timetable.
   /// Returns 0 (first tab) if there are no more schooldays this week.
-  int todayIndex() {
-    for (int i = 1; i <= _timetableBuilder.week.days.length; i++) {
+  int currentDay() {
+    for (int i = 0; i < _timetableBuilder.week.days.length; i++) {
       Day element = _timetableBuilder.week.days[i];
       if (element.date.weekday >= DateTime.now().weekday) {
         return i;
       }
     }
-
+    realWeekend = _timetableBuilder.week.days.length != 0;
     return 0;
   }
 
@@ -76,40 +80,32 @@ class _TimetableFrameState extends State<TimetableFrame>
     super.initState();
 
     _timetableBuilder = TimetableBuilder();
-    _timetableBuilder.build(selectedWeek);
-
-    DateTime currentDay = _timetableBuilder.week.days.firstWhere((day) {
-      int dif = day.date.difference(DateTime.now()).inHours;
-
-      return dif > -24 && dif < 0;
-    }, orElse: () => Day()).date;
-
     selectedWeek = _timetableBuilder.getCurrentWeek();
+    _timetableBuilder.build(selectedWeek);
+    _tabController = TabController(
+      length: _timetableBuilder.week.days.length,
+      vsync: this,
+      initialIndex: currentDay(),
+    );
 
     refreshWeek(offline: true)
         .then((hasOfflineLessons) => setState(() {
-              ready = hasOfflineLessons;
+              currentDay();
+              ready = hasOfflineLessons && !realWeekend;
             }))
-        .then((_) => {
-              refreshWeek().then((successfulOnlineRefresh) => mounted
-                  ? setState(() {
-                      ready = successfulOnlineRefresh;
-                      _timetableBuilder.build(selectedWeek);
-                    })
-                  : null)
-            });
-
-    int dayIndex = currentDay != null ? todayIndex() : 0;
-
-    if (_timetableBuilder.week.days.length > 1) {
-      dayIndex = dayIndex.clamp(0, _timetableBuilder.week.days.length - 1);
-    }
-
-    _tabController = TabController(
-      vsync: this,
-      length: _timetableBuilder.week.days.length.clamp(1, 7),
-      initialIndex: dayIndex,
-    );
+        .then((_) {
+      refreshWeek().then((successfulOnlineRefresh) async {
+        currentDay();
+        if (realWeekend) {
+          selectedWeek = selectedWeek + 1;
+          changeWeek(selectedWeek);
+        }
+        if (mounted)
+          setState(() {
+            ready = successfulOnlineRefresh;
+          });
+      });
+    });
   }
 
   @override

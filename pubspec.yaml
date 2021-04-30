@@ -1,6 +1,6 @@
 name: filcnaplo
 description: "Nem hivatalos e-napló alkalmazás az e-Kréta rendszerhez"
-version: 2.1.5-pre2+73
+version: 2.1.5-beta1+77
 publish_to: none
 
 environment:

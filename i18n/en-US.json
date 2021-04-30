@@ -145,7 +145,8 @@
     "uploadUser": "uploader",
     "uploadTime": "uploaded at",
     "past": "Past homework",
-    "upcoming": "Upcoming homeworks"
+    "upcoming": "Upcoming homeworks",
+    "more": "Load previous homeworks"
   },
   "planner": {
     "title": "Planner",
@@ -250,6 +251,7 @@
     "halfYear": "Midterm",
     "3qYear": "3. Quarter",
     "4qYear": "4. Quarter",
+    "levelExam": "Classifier",
     "endYear": "Report",
     "subjects": "subjects",
     "statistics": "statistics",

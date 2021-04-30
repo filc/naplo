@@ -145,7 +145,8 @@
     "uploadUser": "feltöltő",
     "uploadTime": "feltöltés ideje",
     "past": "Korábbi házik",
-    "upcoming": "Közelgő házik"
+    "upcoming": "Közelgő házik",
+    "more": "Régebbi házik"
   },
   "planner": {
     "title": "Tervező",
@@ -250,6 +251,7 @@
     "halfYear": "Félév",
     "3qYear": "3. Negyedév",
     "4qYear": "4. Negyedév",
+    "levelExam": "Osztályozó",
     "endYear": "Év vége",
     "subjects": "Tárgyak",
     "statistics": "Statisztikák",
@@ -374,7 +376,7 @@
     "timetable": {
       "week": "Nem sikerült lekérni a kijelölt hetet"
     },
-    "report":{
+    "report": {
       "uhoh": "Ajajj!",
       "desc": "Hiba történt!",
       "submit": "Probléma Jelentése",

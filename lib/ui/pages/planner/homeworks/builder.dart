@@ -12,9 +12,7 @@ class HomeworkBuilder {
     homeworkTiles = [[], []];
     final DateTime now = DateTime.now();
 
-    List<Homework> homeworks = app.user.sync.homework.homework
-        .where((h) => h.date.isAfter(now.subtract(Duration(days: 31))))
-        .toList();
+    List<Homework> homeworks = app.user.sync.homework.homework.toList();
 
     homeworks.sort((a, b) => -a.date.compareTo(b.date));
 

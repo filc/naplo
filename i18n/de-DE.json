@@ -145,7 +145,8 @@
     "uploadUser": "Hochgeladen von",
     "uploadTime": "Hochladezeit",
     "past": "Vorherige Hausaufgaben",
-    "upcoming": "Kommende Hausaufgaben"
+    "upcoming": "Kommende Hausaufgaben",
+    "more": "Mehr laden"
   },
   "planner": {
     "title": "Planer",
@@ -250,6 +251,7 @@
     "halfYear": "Halbjährlich",
     "3qYear": "3. Quartal",
     "4qYear": "4. Quartal",
+    "levelExam": "Klassifikator",
     "endYear": "Zeugnis",
     "subjects": "Fächer",
     "statistics": "Statistiken",

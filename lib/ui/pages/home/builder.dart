@@ -33,7 +33,7 @@ class FeedBuilder {
           compare: note.date,
         )));
 
-    List<List<Evaluation>> finalEvals = [[], [], [], [], [], []];
+    List<List<Evaluation>> finalEvals = [[], [], [], [], [], [], [], []];
     app.user.sync.evaluation.evaluations.forEach((evaluation) {
       if (evaluation.type == EvaluationType.midYear) {
         cards.add(EvaluationCard(
