@@ -4,6 +4,7 @@ import 'package:filcnaplo/data/context/page.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/helpers/averages.dart';
 import 'package:filcnaplo/utils/colors.dart';
+import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/cards/base.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
@@ -51,7 +52,6 @@ class FinalCard extends BaseCard {
       case EvaluationType.unknown:
         break;
     }
-    title += (" " + I18n.of(context).evaluations);
 
     int dicseretesAmount =
         evals.where((e) => e.description == "Dicséret").length;
@@ -99,7 +99,10 @@ class FinalCard extends BaseCard {
                 title,
                 style: TextStyle(fontWeight: FontWeight.bold, color: color),
               ),
-              Text(" • " + evals.length.toString() + I18n.of(context).amount,
+              Text(
+                  " • " +
+                      amountPlural(I18n.of(context).grade,
+                          I18n.of(context).evaluations, evals.length),
                   style: TextStyle(
                       fontSize: Theme.of(context).textTheme.bodyText2.fontSize,
                       color: secondary),
