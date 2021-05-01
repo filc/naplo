@@ -3,17 +3,7 @@
     "title": "Filc Napló",
     "version": "verzió"
   },
-  "drawer": {
-    "home": "Főoldal",
-    "evaluations": "Jegyek",
-    "timetable": "Órarend",
-    "homework": "Házi feladatok",
-    "notes": "Feljegyzések",
-    "messages": "Üzenetek",
-    "exams": "Számonkérések",
-    "absences": "Mulasztások",
-    "settings": "Beállítások"
-  },
+  "homepage": "Főoldal",
   "exam": {
     "": "Dolgozat",
     "title": "Számonkérések",
@@ -21,7 +11,7 @@
     "upcoming": "Közelgő dolgozatok"
   },
   "grade": {
-    "": "osztályzat",
+    "": "jegy",
     "1": "1-es",
     "2": "2-es",
     "3": "3-as",

@@ -3,17 +3,7 @@
     "title": "Filc Napló",
     "version": "Ausgabe"
   },
-  "drawer": {
-    "home": "Hauptbildschirm",
-    "evaluations": "Noten",
-    "timetable": "Stundenplan",
-    "homework": "Hausaufgaben",
-    "notes": "Hinweise",
-    "messages": "Mitteilungen",
-    "exams": "Prüfungen",
-    "absences": "Abwesenheiten",
-    "settings": "Einstellungen"
-  },
+  "homepage": "Startseite",
   "exam": {
     "": "Prüfung",
     "title": "Prüfungen",

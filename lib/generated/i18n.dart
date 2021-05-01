@@ -37,23 +37,7 @@ class I18n implements WidgetsLocalizations {
   /// "verzió"
   String get appVersion => "verzió";
   /// "Főoldal"
-  String get drawerHome => "Főoldal";
-  /// "Jegyek"
-  String get drawerEvaluations => "Jegyek";
-  /// "Órarend"
-  String get drawerTimetable => "Órarend";
-  /// "Házi feladatok"
-  String get drawerHomework => "Házi feladatok";
-  /// "Feljegyzések"
-  String get drawerNotes => "Feljegyzések";
-  /// "Üzenetek"
-  String get drawerMessages => "Üzenetek";
-  /// "Számonkérések"
-  String get drawerExams => "Számonkérések";
-  /// "Mulasztások"
-  String get drawerAbsences => "Mulasztások";
-  /// "Beállítások"
-  String get drawerSettings => "Beállítások";
+  String get homepage => "Főoldal";
   /// "Dolgozat"
   String get exam => "Dolgozat";
   /// "Számonkérések"
@@ -72,8 +56,8 @@ class I18n implements WidgetsLocalizations {
   String get grade4 => "4-es";
   /// "5-ös"
   String get grade5 => "5-ös";
-  /// "osztályzat"
-  String get grade => "osztályzat";
+  /// "jegy"
+  String get grade => "jegy";
   /// " db"
   String get amount => " db";
   /// "Fiókok"
@@ -782,31 +766,7 @@ class _I18n_en_US extends I18n {
   String get appVersion => "version";
   /// "Home"
   @override
-  String get drawerHome => "Home";
-  /// "Evaluations"
-  @override
-  String get drawerEvaluations => "Evaluations";
-  /// "Timetable"
-  @override
-  String get drawerTimetable => "Timetable";
-  /// "Homework"
-  @override
-  String get drawerHomework => "Homework";
-  /// "Notes"
-  @override
-  String get drawerNotes => "Notes";
-  /// "Messages"
-  @override
-  String get drawerMessages => "Messages";
-  /// "Exams"
-  @override
-  String get drawerExams => "Exams";
-  /// "Absences"
-  @override
-  String get drawerAbsences => "Absences";
-  /// "Settings"
-  @override
-  String get drawerSettings => "Settings";
+  String get homepage => "Home";
   /// "Exam"
   @override
   String get exam => "Exam";
@@ -1883,33 +1843,9 @@ class _I18n_de_DE extends I18n {
   /// "Ausgabe"
   @override
   String get appVersion => "Ausgabe";
-  /// "Hauptbildschirm"
+  /// "Startseite"
   @override
-  String get drawerHome => "Hauptbildschirm";
-  /// "Noten"
-  @override
-  String get drawerEvaluations => "Noten";
-  /// "Stundenplan"
-  @override
-  String get drawerTimetable => "Stundenplan";
-  /// "Hausaufgaben"
-  @override
-  String get drawerHomework => "Hausaufgaben";
-  /// "Hinweise"
-  @override
-  String get drawerNotes => "Hinweise";
-  /// "Mitteilungen"
-  @override
-  String get drawerMessages => "Mitteilungen";
-  /// "Prüfungen"
-  @override
-  String get drawerExams => "Prüfungen";
-  /// "Abwesenheiten"
-  @override
-  String get drawerAbsences => "Abwesenheiten";
-  /// "Einstellungen"
-  @override
-  String get drawerSettings => "Einstellungen";
+  String get homepage => "Startseite";
   /// "Prüfung"
   @override
   String get exam => "Prüfung";

@@ -3,17 +3,7 @@
     "title": "Filc Napló",
     "version": "version"
   },
-  "drawer": {
-    "home": "Home",
-    "evaluations": "Evaluations",
-    "timetable": "Timetable",
-    "homework": "Homework",
-    "notes": "Notes",
-    "messages": "Messages",
-    "exams": "Exams",
-    "absences": "Absences",
-    "settings": "Settings"
-  },
+  "homepage": "Home",
   "exam": {
     "": "Exam",
     "title": "Exams",
