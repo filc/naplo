@@ -1076,9 +1076,9 @@ class _I18n_en_US extends I18n {
   /// "Homework"
   @override
   String get homeworkTitle => "Homework";
-  /// "deadline"
+  /// "due"
   @override
-  String get homeworkDeadline => "deadline";
+  String get homeworkDeadline => "due";
   /// "subject"
   @override
   String get homeworkSubject => "subject";

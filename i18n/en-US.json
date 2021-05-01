@@ -130,7 +130,7 @@
     "": "homework",
     "add": "add homework",
     "title": "Homework",
-    "deadline": "deadline",
+    "deadline": "due",
     "subject": "subject",
     "uploadUser": "uploader",
     "uploadTime": "uploaded at",
