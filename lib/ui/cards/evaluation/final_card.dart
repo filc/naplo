@@ -53,7 +53,7 @@ class FinalCard extends BaseCard {
         break;
     }
 
-    int dicseretesAmount =
+    int complimentedAmount =
         evals.where((e) => e.description == "Dicséret").length;
     int failedAmount = evals.where((e) => e.value.value == 1).length;
 
@@ -110,9 +110,9 @@ class FinalCard extends BaseCard {
                   overflow: TextOverflow.fade)
             ],
           ),
-          subtitle: (dicseretesAmount + failedAmount) > 0
+          subtitle: (complimentedAmount + failedAmount) > 0
               ? Text(
-                  (dicseretesAmount > 0
+                  (complimentedAmount > 0
                           ? (I18n.of(context).evaluationsCompliment +
                               ": " +
                               amountPlural(
@@ -120,7 +120,7 @@ class FinalCard extends BaseCard {
                                   I18n.of(context)
                                       .evaluationsSubjects
                                       .toLowerCase(),
-                                  dicseretesAmount) +
+                                  complimentedAmount) +
                               ((failedAmount > 0) ? ", " : ""))
                           : ("")) +
                       (failedAmount > 0
