@@ -115,15 +115,23 @@ class FinalCard extends BaseCard {
                   (dicseretesAmount > 0
                           ? (I18n.of(context).evaluationsCompliment +
                               ": " +
-                              dicseretesAmount.toString() +
-                              I18n.of(context).amount +
+                              amountPlural(
+                                  I18n.of(context).evaluationSubject,
+                                  I18n.of(context)
+                                      .evaluationsSubjects
+                                      .toLowerCase(),
+                                  dicseretesAmount) +
                               ((failedAmount > 0) ? ", " : ""))
                           : ("")) +
                       (failedAmount > 0
                           ? (I18n.of(context).evaluationsFailed +
                               ": " +
-                              failedAmount.toString() +
-                              I18n.of(context).amount)
+                              amountPlural(
+                                  I18n.of(context).evaluationSubject,
+                                  I18n.of(context)
+                                      .evaluationsSubjects
+                                      .toLowerCase(),
+                                  failedAmount))
                           : ("")),
                   style: TextStyle(color: secondary),
                 )
