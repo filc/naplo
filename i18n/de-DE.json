@@ -3,17 +3,7 @@
     "title": "Filc Napló",
     "version": "Ausgabe"
   },
-  "drawer": {
-    "home": "Hauptbildschirm",
-    "evaluations": "Noten",
-    "timetable": "Stundenplan",
-    "homework": "Hausaufgaben",
-    "notes": "Hinweise",
-    "messages": "Mitteilungen",
-    "exams": "Prüfungen",
-    "absences": "Abwesenheiten",
-    "settings": "Einstellungen"
-  },
+  "homepage": "Startseite",
   "exam": {
     "": "Prüfung",
     "title": "Prüfungen",
@@ -145,7 +135,8 @@
     "uploadUser": "Hochgeladen von",
     "uploadTime": "Hochladezeit",
     "past": "Vorherige Hausaufgaben",
-    "upcoming": "Kommende Hausaufgaben"
+    "upcoming": "Kommende Hausaufgaben",
+    "more": "Mehr laden"
   },
   "planner": {
     "title": "Planer",
@@ -250,6 +241,7 @@
     "halfYear": "Halbjährlich",
     "3qYear": "3. Quartal",
     "4qYear": "4. Quartal",
+    "levelExam": "Klassifikator",
     "endYear": "Zeugnis",
     "subjects": "Fächer",
     "statistics": "Statistiken",
@@ -354,7 +346,8 @@
       "exportTimetable": "Stundenplan drucken",
       "exportTimetableSuccess": "Stundenplan gedruckt",
       "timeTableOf": "s Stundenplan"
-    }
+    },
+    "notImplemented": "Diese Funktion ist noch nicht fertig. Komm wieder später!"
   },
   "success": {
     "": "Erfolg",
@@ -373,6 +366,17 @@
     "internet": "Keine Internetverbindung.",
     "timetable": {
       "week": "Beim Abrufen der Woche ist ein Fehler aufgetreten"
+    },
+    "report": {
+      "uhoh": "Oh Oh!",
+      "desc": "Ein Fehler ist aufgetreten!",
+      "submit": "Problem Melden",
+      "details": {
+        "": "Details",
+        "os": "Betriebssystem",
+        "version": "App Version",
+        "stacktrace": "Stacktrace"
+      }
     }
   },
   "download": {
@@ -389,7 +393,9 @@
     "currentVersion": "Aktuell",
     "available": "Neue Ausgabe!",
     "searchPre": "Suche nach experimentellen Versionen",
-    "foundPre": "Neueste (experimentelle) Version"
+    "foundPre": "Neueste experimentelle Version",
+    "foundRelease": "Neueste Version",
+    "noPre": "Neueste Version is nicht experimentell"
   },
   "rateLimit": {
     "alert": "Neue Daten können erst jede {minutes} Minuten abgerufen werden!"
@@ -431,7 +437,6 @@
     "homework": "Du hast keine Hausaufgaben",
     "pastHomework": "Du hast keine vorherigen Hausaufgaben"
   },
-  "notImplemented": "Diese Funktion ist noch nicht fertig. Komm wieder später!",
   "menu": {
     "view": "Sehen",
     "edit": "Bearbeiten",

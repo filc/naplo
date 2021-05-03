@@ -4,6 +4,7 @@ import 'package:filcnaplo/data/context/page.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/helpers/averages.dart';
 import 'package:filcnaplo/utils/colors.dart';
+import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/cards/base.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
@@ -45,10 +46,14 @@ class FinalCard extends BaseCard {
         break;
       case EvaluationType.midYear:
         break;
+      case EvaluationType.levelExam:
+        title += I18n.of(context).evaluationsLevelExam;
+        break;
+      case EvaluationType.unknown:
+        break;
     }
-    title += (" " + I18n.of(context).evaluations);
 
-    int dicseretesAmount =
+    int complimentedAmount =
         evals.where((e) => e.description == "Dicséret").length;
     int failedAmount = evals.where((e) => e.value.value == 1).length;
 
@@ -94,7 +99,10 @@ class FinalCard extends BaseCard {
                 title,
                 style: TextStyle(fontWeight: FontWeight.bold, color: color),
               ),
-              Text(" • " + evals.length.toString() + I18n.of(context).amount,
+              Text(
+                  " • " +
+                      amountPlural(I18n.of(context).grade,
+                          I18n.of(context).evaluations, evals.length),
                   style: TextStyle(
                       fontSize: Theme.of(context).textTheme.bodyText2.fontSize,
                       color: secondary),
@@ -102,20 +110,28 @@ class FinalCard extends BaseCard {
                   overflow: TextOverflow.fade)
             ],
           ),
-          subtitle: (dicseretesAmount + failedAmount) > 0
+          subtitle: (complimentedAmount + failedAmount) > 0
               ? Text(
-                  (dicseretesAmount > 0
+                  (complimentedAmount > 0
                           ? (I18n.of(context).evaluationsCompliment +
                               ": " +
-                              dicseretesAmount.toString() +
-                              I18n.of(context).amount +
+                              amountPlural(
+                                  I18n.of(context).evaluationSubject,
+                                  I18n.of(context)
+                                      .evaluationsSubjects
+                                      .toLowerCase(),
+                                  complimentedAmount) +
                               ((failedAmount > 0) ? ", " : ""))
                           : ("")) +
                       (failedAmount > 0
                           ? (I18n.of(context).evaluationsFailed +
                               ": " +
-                              failedAmount.toString() +
-                              I18n.of(context).amount)
+                              amountPlural(
+                                  I18n.of(context).evaluationSubject,
+                                  I18n.of(context)
+                                      .evaluationsSubjects
+                                      .toLowerCase(),
+                                  failedAmount))
                           : ("")),
                   style: TextStyle(color: secondary),
                 )

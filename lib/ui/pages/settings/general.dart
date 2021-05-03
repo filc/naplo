@@ -13,9 +13,9 @@ class GeneralSettings extends StatefulWidget {
 
 class _GeneralSettingsState extends State<GeneralSettings> {
   Map<String, String> languages = {
-    "en_US": "English",
-    "de_DE": "Deutsch",
-    "hu_HU": "Magyar",
+    "en_US": "🇬🇧  English",
+    "de_DE": "🇩🇪  Deutsch",
+    "hu_HU": "🇭🇺  Magyar",
   };
 
   @override

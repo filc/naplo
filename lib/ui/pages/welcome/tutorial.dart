@@ -74,7 +74,7 @@ class TutorialPage1 extends StatelessWidget {
           alignment: Alignment.center,
           child: ListTile(
             title: Text(
-              capital(I18n.of(context).drawerHome),
+              capital(I18n.of(context).homepage),
               style: TextStyle(
                 fontSize: 20.0,
                 height: 3.0,

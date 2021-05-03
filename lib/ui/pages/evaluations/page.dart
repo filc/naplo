@@ -149,6 +149,9 @@ class _EvaluationsPageState extends State<EvaluationsPage>
                                   I18n.of(context).evaluations4qYear,
                               EvaluationType.endYear:
                                   I18n.of(context).evaluationsEndYear,
+                              EvaluationType.levelExam:
+                                  I18n.of(context).evaluationsLevelExam,
+                              EvaluationType.unknown: I18n.of(context).unknown,
                             },
                             check: (EvaluationType type) {
                               return types.contains(type);

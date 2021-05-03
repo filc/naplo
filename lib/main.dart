@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:filcnaplo/data/models/config.dart';
 import 'package:filcnaplo/helpers/settings.dart';
+import 'package:filcnaplo/ui/common/error.dart';
 import 'package:filcnaplo/ui/pages/welcome/page.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:filcnaplo/utils/tools.dart';
@@ -20,6 +21,8 @@ import 'package:filcnaplo/ui/pages/frame.dart';
 import 'package:filcnaplo/ui/pages/login/page.dart';
 
 void main() async {
+  // Custom error page
+  ErrorWidget.builder = errorBuilder;
   WidgetsFlutterBinding.ensureInitialized();
 
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -38,7 +41,8 @@ void main() async {
       "config",
       "news_show",
       "news_len",
-      "round_up"
+      "round_up",
+      "pre_updates"
     ];
 
     migrationRequired = addedDBKeys.any((key) =>
@@ -54,6 +58,7 @@ void main() async {
       settingsCopy["news_len"] = checker.checkDBkey("news_len", 0);
       settingsCopy["news_show"] = checker.checkDBkey("news_show", 1);
       settingsCopy["round_up"] = checker.checkDBkey("round_up", 5);
+      settingsCopy["pre_updates"] = checker.checkDBkey("pre_updates", 0);
       await app.storage.storage.execute("drop table settings");
       try {
         await app.storage.storage.execute("drop table tabs");

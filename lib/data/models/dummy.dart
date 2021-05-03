@@ -134,6 +134,19 @@ class Dummy {
       ],
       [],
     ),
+    Message(
+      133,
+      12346,
+      true,
+      false,
+      DateTime.now(),
+      "Bad hacker",
+      "This is a bugged message",
+      "Error alert!",
+      MessageType.inbox,
+      null,
+      [],
+    ),
   ];
 
   static List<Note> notes = [

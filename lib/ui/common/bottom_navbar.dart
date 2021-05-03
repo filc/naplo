@@ -21,7 +21,7 @@ class BottomNavbar extends StatelessWidget {
               FeatherIcons.search,
             ),
           ),
-          label: I18n.of(context).drawerHome,
+          label: I18n.of(context).homepage,
         ),
 
         // Evaluations Page

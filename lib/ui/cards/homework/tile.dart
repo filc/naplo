@@ -48,7 +48,7 @@ class HomeworkTile extends StatelessWidget {
           escapeHtml(homework.content).replaceAll("\n", " "),
           softWrap: true,
           maxLines: 2,
-          overflow: TextOverflow.fade,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
     );

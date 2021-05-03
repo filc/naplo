@@ -48,8 +48,9 @@ class Evaluation {
     );
     String teacher = json["ErtekeloTanarNeve"] ?? "";
     String description = json["Tema"] ?? "";
-    EvaluationType type =
-        json["Tipus"] != null ? Type.getEvalType(json["Tipus"]["Nev"]) : null;
+    EvaluationType type = json["Tipus"] != null
+        ? Type.getEvalType(json["Tipus"]["Nev"])
+        : EvaluationType.unknown;
     String groupId = json["OsztalyCsoport"]["Uid"] ?? "";
     Subject subject =
         json["Tantargy"] != null ? Subject.fromJson(json["Tantargy"]) : null;
@@ -124,5 +125,7 @@ enum EvaluationType {
   halfYear,
   thirdQ,
   fourthQ,
-  endYear
+  endYear,
+  levelExam,
+  unknown
 }

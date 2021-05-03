@@ -45,26 +45,17 @@ class _NotificationSettingsState extends State<NotificationSettings> {
               title: Text(I18n.of(context).settingsNotificationsTitle),
               trailing: Switch(
                 activeColor: app.settings.appColor,
-                value: app.settings.enableNotifications,
-                onChanged: (bool value) {
-                  setState(() {
-                    app.settings.enableNotifications = value;
-                  });
-
-                  app.storage.storage.update("settings", {
-                    "notifications": (app.settings.enableNotifications ? 1 : 0)
-                  });
-                },
+                value: false,
+                onChanged: null, //Sorry for potential conflicts :))
               ),
             ),
-
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                I18n.of(context).notImplemented,
+                I18n.of(context).settingsNotImplemented,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.red[300],
+                  color: Colors.red,
                 ),
               ),
             ),

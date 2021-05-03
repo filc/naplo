@@ -1,9 +1,10 @@
 <img src=".github/assets/banhammer.png" width="10%">
 
-### A Filc Napló és minden más jelentős alternatív Kréta kliens **letiltásra került Google Play-en**.
+### A Filc alkalmazásboltokban nem elérhető, csak közvetlen letöltéssel.
 
-A Filc Napló és minden más jelentős alternatív Kréta kliens letiltásra került Google Play-en, azonban Galaxy Store-on, App Galleryn, AppStore-on és F-Droidon továbbra is elérhetők vagyunk.\
 **[További információ](https://filcnaplo.hu/dmca)**
+
+<hr>
 
 <img src=".github/assets/banner.png" width="100%">
 
@@ -13,6 +14,8 @@ A Filc Napló és minden más jelentős alternatív Kréta kliens letiltásra ke
 A népszerű Filc alkalmazás, alapoktól újraírva. Az eddiginél is gyorsabb és még könnyebben kezelhető.
 
 ### [Letöltés](https://filcnaplo.hu/dmca/#telepites)
+
+<hr>
 
 ### Miért írtátok újra?
 

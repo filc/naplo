@@ -136,7 +136,8 @@ class _AutoUpdaterState extends State<AutoUpdater> {
                                 styleSheet: MarkdownStyleSheet(
                                   p: TextStyle(
                                     fontSize: 15,
-                                    color: Colors.white,
+                                    color: app.settings.theme.textTheme
+                                        .bodyText1.color,
                                   ),
                                 ),
                               );
