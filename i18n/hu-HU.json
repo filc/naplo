@@ -346,7 +346,8 @@
       "lessonCount": "óra",
       "exportTimetableSuccess": "Órarend kinyomtatva",
       "timeTableOf": " órarendje"
-    }
+    },
+    "notImplemented": "Ez a funkció még nincs kész. Nézz vissza később!"
   },
   "success": {
     "": "Siker",
@@ -436,7 +437,6 @@
     "homework": "Nincsenek házik",
     "pastHomework": "Nincsenek korábbi házik"
   },
-  "notImplemented": "Ez a funkció még nincs kész. Nézz vissza később!",
   "menu": {
     "view": "Megtekintés",
     "edit": "Szerkesztés",

@@ -346,7 +346,8 @@
       "exportTimetable": "Stundenplan drucken",
       "exportTimetableSuccess": "Stundenplan gedruckt",
       "timeTableOf": "s Stundenplan"
-    }
+    },
+    "notImplemented": "Diese Funktion ist noch nicht fertig. Komm wieder später!"
   },
   "success": {
     "": "Erfolg",
@@ -436,7 +437,6 @@
     "homework": "Du hast keine Hausaufgaben",
     "pastHomework": "Du hast keine vorherigen Hausaufgaben"
   },
-  "notImplemented": "Diese Funktion ist noch nicht fertig. Komm wieder später!",
   "menu": {
     "view": "Sehen",
     "edit": "Bearbeiten",
