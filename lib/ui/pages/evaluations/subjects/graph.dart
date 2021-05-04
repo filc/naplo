@@ -19,20 +19,28 @@ class SubjectGraph extends StatefulWidget {
 class _SubjectGraphState extends State<SubjectGraph> {
   @override
   Widget build(BuildContext context) {
-    double average = widget.data
-            .map((e) => e.value.value * e.value.weight)
-            .fold(0, (p, e) => p + e) /
-        widget.data.map((e) => e.value.weight).fold(0, (p, e) => p + e);
-    Color averagecolor = ColorTween(
-            begin: app.theme.evalColors[average.floor() - 1],
-            end: app.theme.evalColors[average.ceil() - 1])
-        .transform(average - average.floor());
     List<FlSpot> subjectData = [];
     List<List<Evaluation>> sortedData = [[]];
 
     List<Evaluation> data = widget.data
         .where((evaluation) => evaluation.value.weight != 0)
+        .where((evaluation) => evaluation.type == EvaluationType.midYear)
+        .where((evaluation) => evaluation.evaluationType.name == "Osztalyzat")
         .toList();
+
+    double average = data
+                .map((e) => e.value.value * e.value.weight)
+                .reduce((a, b) => a + b) /
+            data.map((e) => e.value.weight).reduce((a, b) => a + b) ??
+        0;
+
+    Color averagecolor = average >= 1 && average <= 5
+        ? ColorTween(
+                begin: app.theme.evalColors[average.floor() - 1],
+                end: app.theme.evalColors[average.ceil() - 1])
+            .transform(average - average.floor())
+        : app.settings.theme.accentColor;
+
     data.sort((a, b) => a.writeDate.compareTo(b.writeDate));
 
     widget.data.forEach((element) {
