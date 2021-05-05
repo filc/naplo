@@ -41,7 +41,7 @@ class _SubjectGraphState extends State<SubjectGraph> {
             .transform(average - average.floor())
         : app.settings.theme.accentColor;
 
-    data.sort((a, b) => a.writeDate.compareTo(b.writeDate));
+    data.sort((a, b) => -a.writeDate.compareTo(b.writeDate));
 
     data.forEach((element) {
       if (sortedData.last.length != 0 &&
