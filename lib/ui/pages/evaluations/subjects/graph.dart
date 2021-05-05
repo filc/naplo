@@ -43,7 +43,7 @@ class _SubjectGraphState extends State<SubjectGraph> {
 
     data.sort((a, b) => a.writeDate.compareTo(b.writeDate));
 
-    widget.data.forEach((element) {
+    data.forEach((element) {
       if (sortedData.last.length != 0 &&
           sortedData.last.last.writeDate.difference(element.writeDate).inDays >
               widget.dayThreshold) sortedData.add([]);
