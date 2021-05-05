@@ -6,7 +6,7 @@ class SubjectBuilder {
 
   void build() {
     subjectTiles = [];
-    var averages = calculateSubjectsAverage();
+    var averages = calculateSubjectAverages();
     averages.forEach((el) {
       subjectTiles.add(SubjectTile(el.subject, el.average, el.classAverage));
     });

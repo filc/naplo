@@ -1,5 +1,6 @@
 import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/helpers/averages.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -22,18 +23,17 @@ class _SubjectGraphState extends State<SubjectGraph> {
     List<FlSpot> subjectData = [];
     List<List<Evaluation>> sortedData = [[]];
 
+    // Filter data
     List<Evaluation> data = widget.data
         .where((evaluation) => evaluation.value.weight != 0)
         .where((evaluation) => evaluation.type == EvaluationType.midYear)
         .where((evaluation) => evaluation.evaluationType.name == "Osztalyzat")
         .toList();
 
-    double average = data
-                .map((e) => e.value.value * e.value.weight)
-                .reduce((a, b) => a + b) /
-            data.map((e) => e.value.weight).reduce((a, b) => a + b) ??
-        0;
+    // Calculate average
+    double average = averageEvals(data);
 
+    // Calculate graph color
     Color averagecolor = average >= 1 && average <= 5
         ? ColorTween(
                 begin: app.theme.evalColors[average.floor() - 1],
@@ -41,8 +41,10 @@ class _SubjectGraphState extends State<SubjectGraph> {
             .transform(average - average.floor())
         : app.settings.theme.accentColor;
 
+    // Sort by date
     data.sort((a, b) => -a.writeDate.compareTo(b.writeDate));
 
+    // Sort data to points by treshold
     data.forEach((element) {
       if (sortedData.last.length != 0 &&
           sortedData.last.last.writeDate.difference(element.writeDate).inDays >
@@ -52,15 +54,9 @@ class _SubjectGraphState extends State<SubjectGraph> {
       });
     });
 
+    // Create FlSpots from points
     sortedData.forEach((dataList) {
-      double average = 0;
-
-      dataList.forEach((e) {
-        average += e.value.value * (e.value.weight / 100);
-      });
-
-      average = average /
-          dataList.map((e) => e.value.weight / 100).reduce((a, b) => a + b);
+      double average = averageEvals(dataList);
 
       subjectData.add(FlSpot(
         dataList[0].writeDate.month +
