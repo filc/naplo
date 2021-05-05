@@ -53,21 +53,27 @@ class _SubjectGraphState extends State<SubjectGraph> {
     });
 
     sortedData.forEach((dataList) {
+      double numerator = 0;
+      double denominator = 0;
       double average = 0;
 
+      dataList.removeWhere((e) => e.value.weight == 0);
+
       dataList.forEach((e) {
-        average += e.value.value * (e.value.weight / 100);
+        numerator += e.value.value * (e.value.weight / 100);
+        denominator += e.value.weight / 100;
       });
 
-      average = average /
-          dataList.map((e) => e.value.weight / 100).reduce((a, b) => a + b);
+      if (denominator != 0) {
+        average = numerator / denominator;
 
-      subjectData.add(FlSpot(
-        dataList[0].writeDate.month +
-            (dataList[0].writeDate.day / 31) +
-            ((dataList[0].writeDate.year - data.first.writeDate.year) * 12),
-        double.parse(average.toStringAsFixed(2)),
-      ));
+        subjectData.add(FlSpot(
+          dataList[0].writeDate.month +
+              (dataList[0].writeDate.day / 31) +
+              ((dataList[0].writeDate.year - data.first.writeDate.year) * 12),
+          double.parse(average.toStringAsFixed(2)),
+        ));
+      }
     });
 
     return Container(
