@@ -73,9 +73,9 @@ String formatTime(DateTime time) =>
 String escapeHtml(String htmlString) {
   if (htmlString == null) return null;
   htmlString = htmlString.replaceAll("\r", "");
-  htmlString = htmlString.replaceAll(RegExp(r'< *br */?>'), "\n");
-  htmlString = htmlString.replaceAll(RegExp(r'< *p *>'), "");
-  htmlString = htmlString.replaceAll(RegExp(r'</ *p *>'), "\n");
+  htmlString = htmlString.replaceAll(RegExp(r'<br ?/?>'), "\n");
+  htmlString = htmlString.replaceAll(RegExp(r'<p ?>'), "");
+  htmlString = htmlString.replaceAll(RegExp(r'</p ?>'), "\n");
   var document = parse(htmlString);
   String parsedString = parse(document.body.text).documentElement.text;
   return parsedString;
