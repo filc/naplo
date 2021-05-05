@@ -74,6 +74,7 @@ String escapeHtml(String htmlString) {
   if (htmlString == null) return null;
   htmlString = htmlString.replaceAll("\r", "");
   htmlString = htmlString.replaceAll("<br>", "\n");
+  htmlString = htmlString.replaceAll("<br />", "\n");
   htmlString = htmlString.replaceAll("<p>", "");
   htmlString = htmlString.replaceAll("</p>", "\n");
   var document = parse(htmlString);
