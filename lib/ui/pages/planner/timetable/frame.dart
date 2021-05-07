@@ -138,6 +138,7 @@ class _TimetableFrameState extends State<TimetableFrame>
                       changeWeek(selectedWeek - 1);
                     }
                   },
+                  tooltip: I18n.of(context).dateWeekPrev,
                 ),
                 Expanded(
                   child: Text(
@@ -163,6 +164,7 @@ class _TimetableFrameState extends State<TimetableFrame>
                       changeWeek(selectedWeek + 1);
                     }
                   },
+                  tooltip: I18n.of(context).dateWeekNext,
                 ),
               ],
             ),

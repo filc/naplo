@@ -15,6 +15,7 @@ class DebugButton extends StatelessWidget {
       icon: Icon(FeatherIcons.cpu, color: app.settings.appColor),
       onPressed: () => Navigator.of(context, rootNavigator: true).push(
           CupertinoPageRoute(builder: (context) => DebugView(type: type))),
+      tooltip: "DebugView",
     );
   }
 }
