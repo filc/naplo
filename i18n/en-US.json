@@ -4,6 +4,7 @@
     "version": "version"
   },
   "homepage": "Home",
+  "debugView": "View server requests",
   "exam": {
     "": "Exam",
     "title": "Exams",
