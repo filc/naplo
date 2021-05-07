@@ -27,6 +27,13 @@ class _GeneralSettingsState extends State<GeneralSettings> {
       FeatherIcons.messageSquare,
       FeatherIcons.clock,
     ];
+    List<String> pageNames = [
+      I18n.of(context).homepage,
+      I18n.of(context).evaluationTitle,
+      I18n.of(context).plannerTitle,
+      I18n.of(context).messageTitle,
+      I18n.of(context).aboutTitle,
+    ];
     return Scaffold(
       body: Container(
         child: Column(
@@ -86,6 +93,7 @@ class _GeneralSettingsState extends State<GeneralSettings> {
                           : null,
                       icon: Icon(pages[i]),
                       onPressed: () => _defaultPage(i),
+                      tooltip: pageNames[i],
                     ),
                   );
                 }
