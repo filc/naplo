@@ -150,7 +150,7 @@ class StorageController {
 
   static Future<bool> writeFile(String path, List<int> data) async {
     try {
-      if (await Permission.storage.request().isGranted) {
+      if (Platform.isLinux || Platform.isWindows || Platform.isMacOS || await Permission.storage.request().isGranted) {
         await File(path).writeAsBytes(data);
         return true;
       } else {
