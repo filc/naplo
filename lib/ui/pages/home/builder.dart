@@ -42,6 +42,7 @@ class FeedBuilder {
           compare: evaluation.date,
         ));
       } else {
+        //! Subtract one: type enum 0th index is midYear, for which no finalCard exists.
         finalEvals[evaluation.type.index - 1].add(evaluation);
       }
     });
