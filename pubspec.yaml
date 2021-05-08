@@ -19,7 +19,7 @@ dependencies:
   feather_icons_flutter: ^4.7.4
   flutter_typeahead: ^2.0.0
   file_picker: ^2.1.6
-  package_info: ^2.0.0
+  package_info_plus: ^1.0.1
   intl: ^0.17.0
   flutter_linkify: ^5.0.1
   url_launcher: ^5.4.10
@@ -40,7 +40,6 @@ dependencies:
   fl_chart: ^0.20.1
   flutter_material_color_picker: ^1.0.5
   flutter_swiper: ^1.1.6
-  in_app_review: ^1.0.4
   pdf: ^3.0.1
   printing: ^5.0.0
   photo_view: ^0.11.1
@@ -54,11 +53,13 @@ dependencies:
   sliding_sheet: ^0.5.0
   flutter_markdown: ^0.6.1
 
-#dev_dependencies:
-#  flutter_test:
+dev_dependencies:
+  sqflite_common_ffi:
+#  flutter_test:dev_dependencies:
 #    sdk: flutter
 
-#dependency_overrides:
+dependency_overrides:
+  plugin_platform_interface: ^2.0.0
 #  flutter_svg: 0.20.0-nullsafety.3
 #  path_drawing: ^0.5.0-nullsafety.0
 #  path_parsing: ^0.2.0-nullsafety
