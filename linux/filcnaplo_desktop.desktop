@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=2.1.5
+Type=Application
+Name=Filc Napló Desktop
+Comment=Egy nem hivatalos alkalmazás az E-Kréta rendszerhez
+Exec=~/.local/bin/filcnaplo_desktop
+Icon=~/.local/share/filcnaplo_desktop/desktop.png
+Terminal=false
+StartupNotify=false
+Categories=Utility;
