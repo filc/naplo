@@ -4,6 +4,7 @@
     "version": "Ausgabe"
   },
   "homepage": "Startseite",
+  "debugView": "Serveranfragen anzeigen",
   "exam": {
     "": "Prüfung",
     "title": "Prüfungen",

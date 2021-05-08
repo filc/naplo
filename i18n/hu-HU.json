@@ -4,6 +4,7 @@
     "version": "verzió"
   },
   "homepage": "Főoldal",
+  "debugView": "Lekérések megtekintése",
   "exam": {
     "": "Dolgozat",
     "title": "Számonkérések",

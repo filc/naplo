@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/common/notificationBadge.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 
-import '../../generated/i18n.dart';
-
 class AccountButton extends StatelessWidget {
   final EdgeInsetsGeometry padding;
 

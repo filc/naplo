@@ -38,6 +38,8 @@ class I18n implements WidgetsLocalizations {
   String get appVersion => "verzió";
   /// "Főoldal"
   String get homepage => "Főoldal";
+  /// "Lekérések megtekintése"
+  String get debugView => "Lekérések megtekintése";
   /// "Dolgozat"
   String get exam => "Dolgozat";
   /// "Számonkérések"
@@ -769,6 +771,9 @@ class _I18n_en_US extends I18n {
   /// "Home"
   @override
   String get homepage => "Home";
+  /// "View server requests"
+  @override
+  String get debugView => "View server requests";
   /// "Exam"
   @override
   String get exam => "Exam";
@@ -1851,6 +1856,9 @@ class _I18n_de_DE extends I18n {
   /// "Startseite"
   @override
   String get homepage => "Startseite";
+  /// "Serveranfragen anzeigen"
+  @override
+  String get debugView => "Serveranfragen anzeigen";
   /// "Prüfung"
   @override
   String get exam => "Prüfung";
