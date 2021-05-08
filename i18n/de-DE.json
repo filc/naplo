@@ -177,6 +177,7 @@
     "send": "schicken",
     "reply": "antworten",
     "share": "mitteilen",
+    "new": "Neue Nachricht",
     "shareFooter": "{sender}, {date}",
     "archived": "Mitteilung archiviert",
     "delete": "Dauerhaft löschen",

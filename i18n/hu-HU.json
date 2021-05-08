@@ -177,6 +177,7 @@
     "send": "küldés",
     "reply": "válasz",
     "share": "megosztás",
+    "new": "Levél írása",
     "shareFooter": "{sender}, {date}",
     "archived": "Üzenet archiválva",
     "delete": "Törlés véglegesen",

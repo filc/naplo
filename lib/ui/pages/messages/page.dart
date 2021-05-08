@@ -101,6 +101,7 @@ class _MessagesPageState extends State<MessagesPage>
                   );
                 }
               },
+              tooltip: I18n.of(context).messageNew,
             )
           : null,
       body: NestedScrollView(

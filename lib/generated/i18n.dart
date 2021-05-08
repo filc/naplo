@@ -306,6 +306,8 @@ class I18n implements WidgetsLocalizations {
   String get messageReply => "válasz";
   /// "megosztás"
   String get messageShare => "megosztás";
+  /// "Levél írása"
+  String get messageNew => "Levél írása";
   /// "${sender}, ${date}"
   String messageShareFooter(String sender, String date) => "${sender}, ${date}";
   /// "Üzenet archiválva"
@@ -1169,6 +1171,9 @@ class _I18n_en_US extends I18n {
   /// "share"
   @override
   String get messageShare => "share";
+  /// "New message"
+  @override
+  String get messageNew => "New message";
   /// "${sender}, ${date}"
   @override
   String messageShareFooter(String sender, String date) => "${sender}, ${date}";
@@ -2248,6 +2253,9 @@ class _I18n_de_DE extends I18n {
   /// "mitteilen"
   @override
   String get messageShare => "mitteilen";
+  /// "Neue Nachricht"
+  @override
+  String get messageNew => "Neue Nachricht";
   /// "${sender}, ${date}"
   @override
   String messageShareFooter(String sender, String date) => "${sender}, ${date}";

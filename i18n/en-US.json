@@ -177,6 +177,7 @@
     "send": "send",
     "reply": "reply",
     "share": "share",
+    "new": "New message",
     "shareFooter": "{sender}, {date}",
     "archived": "Message archived",
     "delete": "Delete permanently",
