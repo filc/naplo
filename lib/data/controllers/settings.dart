@@ -32,7 +32,8 @@ class SettingsController {
                 : "hu_HU"
             : language)
         .split("_");
-    return Locale(lang[0], lang[1]);
+    // iOS uses `hu` instead of `hu_HU`. See #162
+    return Locale(lang[0], lang.length > 1 ? lang[1] : null);
   }
 
   Color get appColor {
