@@ -29,10 +29,14 @@ class LessonTile extends StatelessWidget {
     }
 
     lesson.exams.forEach(
-      (exam) => exams.add(
-        app.user.sync.exam.exams
-            .firstWhere((t) => t.id == exam, orElse: () => null),
-      ),
+      (exam) {
+        var toAdd = app.user.sync.exam.exams.firstWhere((t) => t.id == exam);
+        if (toAdd != null)
+          exams.add(toAdd);
+        else
+          print("INFO: timetable/tile.dart: Couldn't find exam with id " +
+              exam.toString());
+      },
     );
 
     return Container(
@@ -144,9 +148,10 @@ class LessonTile extends StatelessWidget {
                               color:
                                   textColor(Theme.of(context).backgroundColor),
                               icon: FeatherIcons.edit2,
-                              text: exam.description != null
+                              text: exam.description !=
+                                      null //!NoSuchMethodError: The getter 'description' was called on null. Receiver: null Tried calling: description
                                   ? exam.description.replaceAll("\n", " ")
-                                  : exam.mode.description,
+                                  : exam.mode.description ?? "",
                               onTap: () => showModalBottomSheet(
                                 context: context,
                                 backgroundColor: Colors.transparent,
