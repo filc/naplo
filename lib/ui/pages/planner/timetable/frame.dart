@@ -138,21 +138,38 @@ class _TimetableFrameState extends State<TimetableFrame>
                       changeWeek(selectedWeek - 1);
                     }
                   },
+                  tooltip: capital(I18n.of(context).dateWeekPrev),
                 ),
                 Expanded(
-                  child: Text(
-                    (selectedWeek + 1).toString() +
-                        ". " +
-                        I18n.of(context).dateWeek +
-                        " (" +
-                        formatDate(context, currentWeek.start, weekday: false) +
-                        " - " +
-                        formatDate(context, currentWeek.end, weekday: false) +
-                        ")",
-                    textAlign: TextAlign.center,
-                    softWrap: false,
-                    overflow: TextOverflow.fade,
-                    maxLines: 1,
+                  child: TextButton(
+                    autofocus: false,
+                    clipBehavior: Clip.none,
+                    onPressed: () {
+                      changeWeek(_timetableBuilder.getCurrentWeek());
+                    },
+                    child: Tooltip(
+                      message: I18n.of(context).dateWeekCurrent,
+                      child: Text(
+                        (selectedWeek + 1).toString() +
+                            ". " +
+                            I18n.of(context).dateWeek +
+                            " (" +
+                            formatDate(context, currentWeek.start,
+                                weekday: false) +
+                            " - " +
+                            formatDate(context, currentWeek.end,
+                                weekday: false) +
+                            ")",
+                        textAlign: TextAlign.center,
+                        softWrap: false,
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 IconButton(
@@ -163,6 +180,7 @@ class _TimetableFrameState extends State<TimetableFrame>
                       changeWeek(selectedWeek + 1);
                     }
                   },
+                  tooltip: capital(I18n.of(context).dateWeekNext),
                 ),
               ],
             ),

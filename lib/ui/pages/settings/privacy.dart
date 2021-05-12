@@ -23,11 +23,19 @@ class PrivacySettings extends StatelessWidget {
               trailing: Switch(
                 activeColor: app.settings.appColor,
                 value: false,
-                onChanged: (bool value) {
-                  // magic
-                },
+                onChanged: null,
               ),
             ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                I18n.of(context).settingsNotImplemented,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            )
           ],
         ),
       ),

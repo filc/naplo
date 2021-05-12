@@ -3,17 +3,8 @@
     "title": "Filc Napló",
     "version": "Ausgabe"
   },
-  "drawer": {
-    "home": "Hauptbildschirm",
-    "evaluations": "Noten",
-    "timetable": "Stundenplan",
-    "homework": "Hausaufgaben",
-    "notes": "Hinweise",
-    "messages": "Mitteilungen",
-    "exams": "Prüfungen",
-    "absences": "Abwesenheiten",
-    "settings": "Einstellungen"
-  },
+  "homepage": "Startseite",
+  "debugView": "Serveranfragen anzeigen",
   "exam": {
     "": "Prüfung",
     "title": "Prüfungen",
@@ -87,6 +78,7 @@
     "month2": "Zwei Monaten",
     "weekPrev": "letzte Woche",
     "weekNext": "nächste Woche",
+    "weekCurrent": "Jetzige Woche",
     "jan": "jan",
     "feb": "feb",
     "mar": "mar",
@@ -187,6 +179,7 @@
     "send": "schicken",
     "reply": "antworten",
     "share": "mitteilen",
+    "new": "Neue Nachricht",
     "shareFooter": "{sender}, {date}",
     "archived": "Mitteilung archiviert",
     "delete": "Dauerhaft löschen",
@@ -356,7 +349,8 @@
       "exportTimetable": "Stundenplan drucken",
       "exportTimetableSuccess": "Stundenplan gedruckt",
       "timeTableOf": "s Stundenplan"
-    }
+    },
+    "notImplemented": "Diese Funktion ist noch nicht fertig. Komm wieder später!"
   },
   "success": {
     "": "Erfolg",
@@ -446,7 +440,6 @@
     "homework": "Du hast keine Hausaufgaben",
     "pastHomework": "Du hast keine vorherigen Hausaufgaben"
   },
-  "notImplemented": "Diese Funktion ist noch nicht fertig. Komm wieder später!",
   "menu": {
     "view": "Sehen",
     "edit": "Bearbeiten",

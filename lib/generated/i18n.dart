@@ -37,23 +37,9 @@ class I18n implements WidgetsLocalizations {
   /// "verzió"
   String get appVersion => "verzió";
   /// "Főoldal"
-  String get drawerHome => "Főoldal";
-  /// "Jegyek"
-  String get drawerEvaluations => "Jegyek";
-  /// "Órarend"
-  String get drawerTimetable => "Órarend";
-  /// "Házi feladatok"
-  String get drawerHomework => "Házi feladatok";
-  /// "Feljegyzések"
-  String get drawerNotes => "Feljegyzések";
-  /// "Üzenetek"
-  String get drawerMessages => "Üzenetek";
-  /// "Számonkérések"
-  String get drawerExams => "Számonkérések";
-  /// "Mulasztások"
-  String get drawerAbsences => "Mulasztások";
-  /// "Beállítások"
-  String get drawerSettings => "Beállítások";
+  String get homepage => "Főoldal";
+  /// "Lekérések megtekintése"
+  String get debugView => "Lekérések megtekintése";
   /// "Dolgozat"
   String get exam => "Dolgozat";
   /// "Számonkérések"
@@ -72,8 +58,8 @@ class I18n implements WidgetsLocalizations {
   String get grade4 => "4-es";
   /// "5-ös"
   String get grade5 => "5-ös";
-  /// "osztályzat"
-  String get grade => "osztályzat";
+  /// "jegy"
+  String get grade => "jegy";
   /// " db"
   String get amount => " db";
   /// "Fiókok"
@@ -174,6 +160,8 @@ class I18n implements WidgetsLocalizations {
   String get dateWeekPrev => "előző hét";
   /// "következő hét"
   String get dateWeekNext => "következő hét";
+  /// "Mostani hét"
+  String get dateWeekCurrent => "Mostani hét";
   /// "jan"
   String get dateJan => "jan";
   /// "feb"
@@ -322,6 +310,8 @@ class I18n implements WidgetsLocalizations {
   String get messageReply => "válasz";
   /// "megosztás"
   String get messageShare => "megosztás";
+  /// "Levél írása"
+  String get messageNew => "Levél írása";
   /// "${sender}, ${date}"
   String messageShareFooter(String sender, String date) => "${sender}, ${date}";
   /// "Üzenet archiválva"
@@ -574,6 +564,8 @@ class I18n implements WidgetsLocalizations {
   String get settingsExportExportTimetableSuccess => "Órarend kinyomtatva";
   /// " órarendje"
   String get settingsExportTimeTableOf => " órarendje";
+  /// "Ez a funkció még nincs kész. Nézz vissza később!"
+  String get settingsNotImplemented => "Ez a funkció még nincs kész. Nézz vissza később!";
   /// "Siker"
   String get success => "Siker";
   /// "Házi feladat feltöltve"
@@ -706,8 +698,6 @@ class I18n implements WidgetsLocalizations {
   String get emptyHomework => "Nincsenek házik";
   /// "Nincsenek korábbi házik"
   String get emptyPastHomework => "Nincsenek korábbi házik";
-  /// "Ez a funkció még nincs kész. Nézz vissza később!"
-  String get notImplemented => "Ez a funkció még nincs kész. Nézz vissza később!";
   /// "Megtekintés"
   String get menuView => "Megtekintés";
   /// "Szerkesztés"
@@ -782,31 +772,10 @@ class _I18n_en_US extends I18n {
   String get appVersion => "version";
   /// "Home"
   @override
-  String get drawerHome => "Home";
-  /// "Evaluations"
+  String get homepage => "Home";
+  /// "View server requests"
   @override
-  String get drawerEvaluations => "Evaluations";
-  /// "Timetable"
-  @override
-  String get drawerTimetable => "Timetable";
-  /// "Homework"
-  @override
-  String get drawerHomework => "Homework";
-  /// "Notes"
-  @override
-  String get drawerNotes => "Notes";
-  /// "Messages"
-  @override
-  String get drawerMessages => "Messages";
-  /// "Exams"
-  @override
-  String get drawerExams => "Exams";
-  /// "Absences"
-  @override
-  String get drawerAbsences => "Absences";
-  /// "Settings"
-  @override
-  String get drawerSettings => "Settings";
+  String get debugView => "View server requests";
   /// "Exam"
   @override
   String get exam => "Exam";
@@ -987,6 +956,9 @@ class _I18n_en_US extends I18n {
   /// "next week"
   @override
   String get dateWeekNext => "next week";
+  /// "Current week"
+  @override
+  String get dateWeekCurrent => "Current week";
   /// "jan"
   @override
   String get dateJan => "jan";
@@ -1116,9 +1088,9 @@ class _I18n_en_US extends I18n {
   /// "Homework"
   @override
   String get homeworkTitle => "Homework";
-  /// "deadline"
+  /// "due"
   @override
-  String get homeworkDeadline => "deadline";
+  String get homeworkDeadline => "due";
   /// "subject"
   @override
   String get homeworkSubject => "subject";
@@ -1170,9 +1142,9 @@ class _I18n_en_US extends I18n {
   /// "post"
   @override
   String get event => "post";
-  /// "Notice board"
+  /// "Notices"
   @override
-  String get eventTitle => "Notice board";
+  String get eventTitle => "Notices";
   /// "message"
   @override
   String get message => "message";
@@ -1209,6 +1181,9 @@ class _I18n_en_US extends I18n {
   /// "share"
   @override
   String get messageShare => "share";
+  /// "New message"
+  @override
+  String get messageNew => "New message";
   /// "${sender}, ${date}"
   @override
   String messageShareFooter(String sender, String date) => "${sender}, ${date}";
@@ -1587,6 +1562,9 @@ class _I18n_en_US extends I18n {
   /// "'s timetable"
   @override
   String get settingsExportTimeTableOf => "'s timetable";
+  /// "This feature is not done yet. Please check back later!"
+  @override
+  String get settingsNotImplemented => "This feature is not done yet. Please check back later!";
   /// "Success"
   @override
   String get success => "Success";
@@ -1701,9 +1679,9 @@ class _I18n_en_US extends I18n {
   /// "Syncing student..."
   @override
   String get syncStudent => "Syncing student...";
-  /// "Syncing notice board posts..."
+  /// "Syncing notices..."
   @override
-  String get syncEvent => "Syncing notice board posts...";
+  String get syncEvent => "Syncing notices...";
   /// "Syncing notes..."
   @override
   String get syncNote => "Syncing notes...";
@@ -1755,9 +1733,9 @@ class _I18n_en_US extends I18n {
   /// "You have no notes"
   @override
   String get emptyNotes => "You have no notes";
-  /// "There are no posts on the notice board."
+  /// "There are no notices."
   @override
-  String get emptyEvents => "There are no posts on the notice board.";
+  String get emptyEvents => "There are no notices.";
   /// "You have no absences"
   @override
   String get emptyAbsences => "You have no absences";
@@ -1785,9 +1763,6 @@ class _I18n_en_US extends I18n {
   /// "You have no past homework"
   @override
   String get emptyPastHomework => "You have no past homework";
-  /// "This function is not done yet. Please check back later!"
-  @override
-  String get notImplemented => "This function is not done yet. Please check back later!";
   /// "view"
   @override
   String get menuView => "view";
@@ -1830,9 +1805,9 @@ class _I18n_en_US extends I18n {
   /// "This is the Planner page.\nYou have the timetable here, as well as the homeworks, and scheduled exams. All the stuff you'll never have time for."
   @override
   String get tutorial3 => "This is the Planner page.\nYou have the timetable here, as well as the homeworks, and scheduled exams. All the stuff you'll never have time for.";
-  /// "On this page, you'll find your personal messages, and you can write a new one on the bottom right. You can switch between folders on the top-left.\nOn the second tab are memos and system messages,\nAnd on the third is the noticeboard."
+  /// "On this page, you'll find your personal messages, and you can write a new one on the bottom right. You can switch between folders on the top-left.\nOn the second tab are memos and system messages,\nAnd on the third are the notices."
   @override
-  String get tutorial4 => "On this page, you'll find your personal messages, and you can write a new one on the bottom right. You can switch between folders on the top-left.\nOn the second tab are memos and system messages,\nAnd on the third is the noticeboard.";
+  String get tutorial4 => "On this page, you'll find your personal messages, and you can write a new one on the bottom right. You can switch between folders on the top-left.\nOn the second tab are memos and system messages,\nAnd on the third are the notices.";
   /// "Someone's been a bad boy. That is, if this page is not empty.\nYou can see all your missed classes, delays, when the homework wasn't done or when you didn't have all the equipment for class."
   @override
   String get tutorial5 => "Someone's been a bad boy. That is, if this page is not empty.\nYou can see all your missed classes, delays, when the homework wasn't done or when you didn't have all the equipment for class.";
@@ -1883,33 +1858,12 @@ class _I18n_de_DE extends I18n {
   /// "Ausgabe"
   @override
   String get appVersion => "Ausgabe";
-  /// "Hauptbildschirm"
+  /// "Startseite"
   @override
-  String get drawerHome => "Hauptbildschirm";
-  /// "Noten"
+  String get homepage => "Startseite";
+  /// "Serveranfragen anzeigen"
   @override
-  String get drawerEvaluations => "Noten";
-  /// "Stundenplan"
-  @override
-  String get drawerTimetable => "Stundenplan";
-  /// "Hausaufgaben"
-  @override
-  String get drawerHomework => "Hausaufgaben";
-  /// "Hinweise"
-  @override
-  String get drawerNotes => "Hinweise";
-  /// "Mitteilungen"
-  @override
-  String get drawerMessages => "Mitteilungen";
-  /// "Prüfungen"
-  @override
-  String get drawerExams => "Prüfungen";
-  /// "Abwesenheiten"
-  @override
-  String get drawerAbsences => "Abwesenheiten";
-  /// "Einstellungen"
-  @override
-  String get drawerSettings => "Einstellungen";
+  String get debugView => "Serveranfragen anzeigen";
   /// "Prüfung"
   @override
   String get exam => "Prüfung";
@@ -2090,6 +2044,9 @@ class _I18n_de_DE extends I18n {
   /// "nächste Woche"
   @override
   String get dateWeekNext => "nächste Woche";
+  /// "Jetzige Woche"
+  @override
+  String get dateWeekCurrent => "Jetzige Woche";
   /// "jan"
   @override
   String get dateJan => "jan";
@@ -2312,6 +2269,9 @@ class _I18n_de_DE extends I18n {
   /// "mitteilen"
   @override
   String get messageShare => "mitteilen";
+  /// "Neue Nachricht"
+  @override
+  String get messageNew => "Neue Nachricht";
   /// "${sender}, ${date}"
   @override
   String messageShareFooter(String sender, String date) => "${sender}, ${date}";
@@ -2690,6 +2650,9 @@ class _I18n_de_DE extends I18n {
   /// "s Stundenplan"
   @override
   String get settingsExportTimeTableOf => "s Stundenplan";
+  /// "Diese Funktion ist noch nicht fertig. Komm wieder später!"
+  @override
+  String get settingsNotImplemented => "Diese Funktion ist noch nicht fertig. Komm wieder später!";
   /// "Erfolg"
   @override
   String get success => "Erfolg";
@@ -2888,9 +2851,6 @@ class _I18n_de_DE extends I18n {
   /// "Du hast keine vorherigen Hausaufgaben"
   @override
   String get emptyPastHomework => "Du hast keine vorherigen Hausaufgaben";
-  /// "Diese Funktion ist noch nicht fertig. Komm wieder später!"
-  @override
-  String get notImplemented => "Diese Funktion ist noch nicht fertig. Komm wieder später!";
   /// "Sehen"
   @override
   String get menuView => "Sehen";

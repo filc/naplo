@@ -1,5 +1,6 @@
 import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/helpers/averages.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -19,23 +20,32 @@ class SubjectGraph extends StatefulWidget {
 class _SubjectGraphState extends State<SubjectGraph> {
   @override
   Widget build(BuildContext context) {
-    double average = widget.data
-            .map((e) => e.value.value * e.value.weight)
-            .fold(0, (p, e) => p + e) /
-        widget.data.map((e) => e.value.weight).fold(0, (p, e) => p + e);
-    Color averagecolor = ColorTween(
-            begin: app.theme.evalColors[average.floor() - 1],
-            end: app.theme.evalColors[average.ceil() - 1])
-        .transform(average - average.floor());
     List<FlSpot> subjectData = [];
     List<List<Evaluation>> sortedData = [[]];
 
+    // Filter data
     List<Evaluation> data = widget.data
         .where((evaluation) => evaluation.value.weight != 0)
+        .where((evaluation) => evaluation.type == EvaluationType.midYear)
+        .where((evaluation) => evaluation.evaluationType.name == "Osztalyzat")
         .toList();
-    data.sort((a, b) => a.writeDate.compareTo(b.writeDate));
 
-    widget.data.forEach((element) {
+    // Calculate average
+    double average = averageEvals(data);
+
+    // Calculate graph color
+    Color averagecolor = average >= 1 && average <= 5
+        ? ColorTween(
+                begin: app.theme.evalColors[average.floor() - 1],
+                end: app.theme.evalColors[average.ceil() - 1])
+            .transform(average - average.floor())
+        : app.settings.theme.accentColor;
+
+    // Sort by date
+    data.sort((a, b) => -a.writeDate.compareTo(b.writeDate));
+
+    // Sort data to points by treshold
+    data.forEach((element) {
       if (sortedData.last.length != 0 &&
           sortedData.last.last.writeDate.difference(element.writeDate).inDays >
               widget.dayThreshold) sortedData.add([]);
@@ -44,15 +54,9 @@ class _SubjectGraphState extends State<SubjectGraph> {
       });
     });
 
+    // Create FlSpots from points
     sortedData.forEach((dataList) {
-      double average = 0;
-
-      dataList.forEach((e) {
-        average += e.value.value * (e.value.weight / 100);
-      });
-
-      average = average /
-          dataList.map((e) => e.value.weight / 100).reduce((a, b) => a + b);
+      double average = averageEvals(dataList);
 
       subjectData.add(FlSpot(
         dataList[0].writeDate.month +

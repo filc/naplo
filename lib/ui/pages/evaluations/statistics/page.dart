@@ -112,9 +112,7 @@ class StatisticsPage extends StatelessWidget {
       evaluations.where((e) => e.value.value == 4).length.toString(),
       evaluations.where((e) => e.value.value == 5).length.toString(),
     ];
-    var subjects = calculateSubjectsAverage();
-    /*!e.subject.category.id.contains("Magatartas") &&
-        !e.subject.category.id.contains("Szorgalom"));*/
+    var subjects = calculateSubjectAverages();
 
     count(int grade) =>
         subjects.where((e) => roundSubjAvg(e.average) == grade).length;

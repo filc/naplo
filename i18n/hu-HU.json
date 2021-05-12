@@ -3,17 +3,8 @@
     "title": "Filc Napló",
     "version": "verzió"
   },
-  "drawer": {
-    "home": "Főoldal",
-    "evaluations": "Jegyek",
-    "timetable": "Órarend",
-    "homework": "Házi feladatok",
-    "notes": "Feljegyzések",
-    "messages": "Üzenetek",
-    "exams": "Számonkérések",
-    "absences": "Mulasztások",
-    "settings": "Beállítások"
-  },
+  "homepage": "Főoldal",
+  "debugView": "Lekérések megtekintése",
   "exam": {
     "": "Dolgozat",
     "title": "Számonkérések",
@@ -21,7 +12,7 @@
     "upcoming": "Közelgő dolgozatok"
   },
   "grade": {
-    "": "osztályzat",
+    "": "jegy",
     "1": "1-es",
     "2": "2-es",
     "3": "3-as",
@@ -87,6 +78,7 @@
     "month2": "két hónap",
     "weekPrev": "előző hét",
     "weekNext": "következő hét",
+    "weekCurrent": "Mostani hét",
     "jan": "jan",
     "feb": "feb",
     "mar": "már",
@@ -187,6 +179,7 @@
     "send": "küldés",
     "reply": "válasz",
     "share": "megosztás",
+    "new": "Levél írása",
     "shareFooter": "{sender}, {date}",
     "archived": "Üzenet archiválva",
     "delete": "Törlés véglegesen",
@@ -356,7 +349,8 @@
       "lessonCount": "óra",
       "exportTimetableSuccess": "Órarend kinyomtatva",
       "timeTableOf": " órarendje"
-    }
+    },
+    "notImplemented": "Ez a funkció még nincs kész. Nézz vissza később!"
   },
   "success": {
     "": "Siker",
@@ -446,7 +440,6 @@
     "homework": "Nincsenek házik",
     "pastHomework": "Nincsenek korábbi házik"
   },
-  "notImplemented": "Ez a funkció még nincs kész. Nézz vissza később!",
   "menu": {
     "view": "Megtekintés",
     "edit": "Szerkesztés",

@@ -22,7 +22,7 @@ Color getAverageColor(double average) {
   return app.theme.evalColors[(roundSubjAvg(average) - 1).clamp(0, 4)];
 }
 
-List<SubjectAverage> calculateSubjectsAverage() {
+List<SubjectAverage> calculateSubjectAverages() {
   List<Evaluation> evaluations = app.user.sync.evaluation.evaluations
       .where((e) => e.type == EvaluationType.midYear)
       .toList();

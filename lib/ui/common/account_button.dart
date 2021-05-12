@@ -3,6 +3,7 @@ import 'package:filcnaplo/ui/common/page_transition.dart';
 import 'package:filcnaplo/ui/pages/accounts/page.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/common/notificationBadge.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 
 class AccountButton extends StatelessWidget {
   final EdgeInsetsGeometry padding;
@@ -22,6 +23,7 @@ class AccountButton extends StatelessWidget {
                 Navigator.of(context, rootNavigator: true)
                     .push(PageTransition.vertical(AccountPage()));
               },
+              tooltip: I18n.of(context).accountTitle,
             ),
           ),
         ),

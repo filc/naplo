@@ -13,9 +13,9 @@ class GeneralSettings extends StatefulWidget {
 
 class _GeneralSettingsState extends State<GeneralSettings> {
   Map<String, String> languages = {
-    "en_US": "English",
-    "de_DE": "Deutsch",
-    "hu_HU": "Magyar",
+    "en_US": "🇬🇧  English",
+    "de_DE": "🇩🇪  Deutsch",
+    "hu_HU": "🇭🇺  Magyar",
   };
 
   @override
@@ -26,6 +26,13 @@ class _GeneralSettingsState extends State<GeneralSettings> {
       FeatherIcons.calendar,
       FeatherIcons.messageSquare,
       FeatherIcons.clock,
+    ];
+    List<String> pageNames = [
+      I18n.of(context).homepage,
+      I18n.of(context).evaluationTitle,
+      I18n.of(context).plannerTitle,
+      I18n.of(context).messageTitle,
+      I18n.of(context).aboutTitle,
     ];
     return Scaffold(
       body: Container(
@@ -86,6 +93,7 @@ class _GeneralSettingsState extends State<GeneralSettings> {
                           : null,
                       icon: Icon(pages[i]),
                       onPressed: () => _defaultPage(i),
+                      tooltip: pageNames[i],
                     ),
                   );
                 }

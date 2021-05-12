@@ -101,6 +101,7 @@ class _MessagesPageState extends State<MessagesPage>
                   );
                 }
               },
+              tooltip: I18n.of(context).messageNew,
             )
           : null,
       body: NestedScrollView(
@@ -207,7 +208,7 @@ class _MessagesPageState extends State<MessagesPage>
                         children: [
                           Empty(
                             title: selectedMessageType == MessageType.draft
-                                ? I18n.of(context).notImplemented
+                                ? I18n.of(context).settingsNotImplemented
                                 : I18n.of(context).emptyMessages,
                           )
                         ],
