@@ -77,7 +77,9 @@ class LessonTile extends StatelessWidget {
                       softWrap: false,
                       overflow: TextOverflow.fade,
                       style: TextStyle(
-                        color: accentColor,
+                        color: lesson.isEmpty
+                            ? Colors.grey
+                            : textColor(Theme.of(context).backgroundColor),
                         fontSize: 16.0,
                       ),
                     ),
