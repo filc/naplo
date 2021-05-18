@@ -54,11 +54,13 @@ class FeedBuilder {
       ));
     });
 
-    app.user.sync.absence.absences.forEach((absence) => cards.add(AbsenceCard(
-          absence,
-          key: Key(absence.id.toString()),
-          compare: absence.submitDate,
-        )));
+    app.user.sync.absence.absences
+        .where((e) => e.state != "Igazolt")
+        .forEach((absence) => cards.add(AbsenceCard(
+              absence,
+              key: Key(absence.id.toString()),
+              compare: absence.submitDate,
+            )));
     app.user.sync.homework.homework
         .where((homework) => homework.deadline.isAfter(DateTime.now()))
         .forEach((homework) => cards.add(HomeworkCard(
