@@ -141,7 +141,7 @@ class _TimetableFrameState extends State<TimetableFrame>
                   tooltip: capital(I18n.of(context).dateWeekPrev),
                 ),
                 Expanded(
-                  child: TextButton(
+                  child: MaterialButton(
                     autofocus: false,
                     clipBehavior: Clip.none,
                     onPressed: () {
