@@ -212,7 +212,10 @@ class _TimetableFrameState extends State<TimetableFrame>
           if (!ready)
             Expanded(
               child: Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  valueColor:
+                      AlwaysStoppedAnimation<Color>(app.settings.appColor),
+                ),
               ),
             )
         ],
