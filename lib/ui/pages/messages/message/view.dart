@@ -279,7 +279,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
               child: app.settings.renderHtml
                   ? Html(
                       data: messageContent,
-                      onLinkTap: (url) async {
+                      onLinkTap: (url, ctx, attr, elem) async {
                         await FlutterWebBrowser.openWebPage(
                           url: url,
                           customTabsOptions: CustomTabsOptions(
@@ -326,7 +326,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
               child: app.settings.renderHtml
                   ? Html(
                       data: quotedMessage,
-                      onLinkTap: (url) async {
+                      onLinkTap: (url, ctx, attr, elem) async {
                         await FlutterWebBrowser.openWebPage(
                           url: url,
                           customTabsOptions: CustomTabsOptions(

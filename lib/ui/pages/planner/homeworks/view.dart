@@ -94,7 +94,7 @@ SlidingSheetDialog homeworkView(Homework homework, BuildContext context) {
               app.settings.renderHtml
                   ? Html(
                       data: homework.content,
-                      onLinkTap: (url) async {
+                      onLinkTap: (url, ctx, attr, elem) async {
                         await FlutterWebBrowser.openWebPage(
                           url: url,
                           customTabsOptions: CustomTabsOptions(

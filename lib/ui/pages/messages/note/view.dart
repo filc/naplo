@@ -71,7 +71,7 @@ SlidingSheetDialog noteView(Note note, BuildContext context) {
           child: app.settings.renderHtml
               ? Html(
                   data: note.content,
-                  onLinkTap: (url) async {
+                  onLinkTap: (url, ctx, attr, elem) async {
                     await FlutterWebBrowser.openWebPage(
                       url: url,
                       customTabsOptions: CustomTabsOptions(

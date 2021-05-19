@@ -68,7 +68,7 @@ SlidingSheetDialog eventView(Event event, BuildContext context) {
           child: app.settings.renderHtml
               ? Html(
                   data: event.content,
-                  onLinkTap: (url) async {
+                  onLinkTap: (url, ctx, attr, elem) async {
                     await FlutterWebBrowser.openWebPage(
                       url: url,
                       customTabsOptions: CustomTabsOptions(
