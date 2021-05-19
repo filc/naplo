@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/utils/colors.dart';
 import 'package:filcnaplo/data/context/app.dart';
@@ -53,7 +53,10 @@ class ProfileIcon extends StatelessWidget {
               : Icon(FeatherIcons.user, color: Colors.grey)
           : null,
       foregroundColor: textColor(color),
-      backgroundColor: (image == null || image == "") && name != null && text != "" ? color : Colors.transparent,
+      backgroundColor:
+          (image == null || image == "") && name != null && text != ""
+              ? color
+              : Colors.transparent,
       backgroundImage: image != null && image != ""
           ? FileImage(
               File(

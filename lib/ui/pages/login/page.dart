@@ -2,7 +2,7 @@ import 'package:filcnaplo/data/context/theme.dart';
 import 'package:filcnaplo/helpers/login.dart';
 import 'package:filcnaplo/ui/common/custom_snackbar.dart';
 import 'package:flutter/material.dart';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/context/login.dart';
@@ -52,11 +52,11 @@ class _LoginPageState extends State<LoginPage> {
     return InputDecoration(
       enabledBorder: UnderlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(width: 0, color: Colors.transparent),
+        borderSide: BorderSide.none,
       ),
       focusedBorder: UnderlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(width: 0, color: Colors.transparent),
+        borderSide: BorderSide.none,
       ),
       fillColor: Colors.black12,
       filled: true,

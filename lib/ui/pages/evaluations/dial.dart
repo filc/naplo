@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:filcnaplo/utils/format.dart';
 
 class EvaluationsDial extends StatelessWidget {
@@ -18,7 +18,7 @@ class EvaluationsDial extends StatelessWidget {
       animatedIcon: AnimatedIcons.menu_close,
       animatedIconTheme:
           IconThemeData(size: 22.0, color: app.settings.appColor),
-      marginRight: 14.0,
+      marginEnd: 14.0,
       overlayColor: Colors.black,
       overlayOpacity: 0.35,
       tooltip: I18n.of(context).sort,

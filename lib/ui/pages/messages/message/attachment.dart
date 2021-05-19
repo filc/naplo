@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/data/controllers/storage.dart';
 import 'package:filcnaplo/data/models/attachment.dart';

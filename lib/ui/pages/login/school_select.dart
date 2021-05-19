@@ -1,4 +1,4 @@
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:filcnaplo/data/models/school.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/data/models/message.dart';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:filcnaplo/ui/common/profile_icon.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:filcnaplo/ui/pages/messages/message/view.dart';

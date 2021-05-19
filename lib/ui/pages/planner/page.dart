@@ -3,7 +3,7 @@ import 'package:filcnaplo/ui/pages/planner/homeworks/builder.dart';
 import 'package:filcnaplo/ui/pages/planner/exams/builder.dart';
 import 'package:filcnaplo/ui/pages/planner/homeworks/syncmore.dart';
 import 'package:flutter/material.dart';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:filcnaplo/ui/common/account_button.dart';
 import 'package:filcnaplo/ui/common/custom_snackbar.dart';
 import 'package:filcnaplo/ui/common/custom_tabs.dart';

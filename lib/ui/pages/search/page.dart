@@ -3,7 +3,7 @@ import 'package:filcnaplo/data/models/searchable.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class SearchPage extends StatefulWidget {

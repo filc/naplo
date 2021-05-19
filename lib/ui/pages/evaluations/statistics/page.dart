@@ -6,7 +6,7 @@ import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tinycolor/tinycolor.dart';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:filcnaplo/ui/pages/evaluations/subjects/graph.dart';
 
 class StatsBlock extends StatelessWidget {

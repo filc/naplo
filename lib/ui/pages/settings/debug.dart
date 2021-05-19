@@ -9,7 +9,7 @@ import 'package:filcnaplo/ui/pages/login/page.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/builder.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/week.dart';
 import 'package:flutter/material.dart';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 
 class DebugSettings extends StatefulWidget {

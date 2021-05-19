@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:filcnaplo/ui/pages/accounts/tile.dart';
 import 'package:filcnaplo/ui/pages/login/page.dart';
 import 'package:filcnaplo/utils/format.dart';

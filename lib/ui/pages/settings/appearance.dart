@@ -7,7 +7,7 @@ import 'package:filcnaplo/utils/colors.dart';
 import 'package:filcnaplo/data/context/theme.dart';
 import 'package:filcnaplo/data/context/app.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:tinycolor/tinycolor.dart';
 
 class AppearanceSettings extends StatefulWidget {
