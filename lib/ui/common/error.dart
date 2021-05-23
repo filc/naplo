@@ -16,7 +16,7 @@ Widget errorBuilder(FlutterErrorDetails details) {
   return Builder(builder: (context) {
     if (Navigator.of(context).canPop()) Navigator.pop(context);
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       if (!errorShown && details.exceptionAsString() != lastException) {
         errorShown = true;
         lastException = details.exceptionAsString();
@@ -163,17 +163,19 @@ class ReleaseError extends StatelessWidget {
       ]
     });
 
-    var req = http.MultipartRequest(
-      'POST',
-      Uri.parse(app.settings.config.config.errorReport),
-    );
-    req.headers['Content-Type'] = 'multipart/form-data';
-    String traceLog = details.stack.toString().substring(0, 5000);
-    req.files.add(http.MultipartFile.fromString('file1', traceLog,
-        filename: 'stack_trace.log',
-        contentType: parser.MediaType('text', 'plain')));
-    req.fields.putIfAbsent('payload_json', () => content);
-    await (await req.send()).stream.bytesToString();
+    if (app.settings.config.config.errorReport != null) {
+      var req = http.MultipartRequest(
+        'POST',
+        Uri.parse(app.settings.config.config.errorReport!),
+      );
+      req.headers['Content-Type'] = 'multipart/form-data';
+      String traceLog = details.stack.toString().substring(0, 5000);
+      req.files.add(http.MultipartFile.fromString('file1', traceLog,
+          filename: 'stack_trace.log',
+          contentType: parser.MediaType('text', 'plain')));
+      req.fields.putIfAbsent('payload_json', () => content);
+      await (await req.send()).stream.bytesToString();
+    }
     Navigator.pop(context);
   }
 }

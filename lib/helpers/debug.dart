@@ -4,7 +4,7 @@ import 'package:filcnaplo/data/context/page.dart';
 
 class DebugHelper {
   Future<void> eraseData(context) async {
-    await Future.forEach(app.storage.users.keys, (user) async {
+    await Future.forEach(app.storage.users.keys, (String user) async {
       try {
         await app.storage.deleteUser(user);
       } catch (error) {
@@ -22,6 +22,6 @@ class DebugHelper {
     app.gotoPage(PageType.home);
 
     DynamicTheme.of(context)
-        .setThemeData(app.theme.light(app.settings.appColor));
+        ?.setThemeData(app.theme.light(app.settings.appColor));
   }
 }

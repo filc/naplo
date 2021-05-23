@@ -6,9 +6,9 @@ import 'package:filcnaplo/ui/common/account_button.dart';
 import 'package:filcnaplo/utils/format.dart';
 
 class SearchBar extends StatelessWidget {
-  final Function openSearch;
+  final Function() openSearch;
 
-  SearchBar({@required this.openSearch});
+  SearchBar({required this.openSearch});
 
   @override
   Widget build(context) {

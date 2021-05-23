@@ -2,13 +2,19 @@ import 'package:filcnaplo/data/context/app.dart';
 import 'package:flutter/material.dart';
 
 class CustomChip extends StatelessWidget {
-  final IconData icon;
+  final IconData? icon;
   final String text;
-  final Function onTap;
-  final Function onLongPress;
+  final Function()? onTap;
+  final Function()? onLongPress;
   final Color color;
 
-  CustomChip({this.icon, this.text, this.onTap, this.onLongPress, this.color});
+  CustomChip({
+    this.icon,
+    required this.text,
+    this.onTap,
+    this.onLongPress,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +22,7 @@ class CustomChip extends StatelessWidget {
       child: Container(
         decoration: ShapeDecoration(
           shape: StadiumBorder(
-            side: BorderSide(
-                color: color ?? app.settings.theme.accentColor, width: 1.2),
+            side: BorderSide(color: color, width: 1.2),
           ),
         ),
         margin: EdgeInsets.only(right: 5.0),
@@ -29,22 +34,20 @@ class CustomChip extends StatelessWidget {
                 ? Icon(
                     icon,
                     size: 14,
-                    color: color ?? app.settings.theme.accentColor,
+                    color: color,
                   )
                 : Container(),
-            (text != null && icon != null) ? SizedBox(width: 4) : Container(),
-            text != null
-                ? Flexible(
-                    child: Text(
-                      text,
-                      maxLines: 1,
-                      softWrap: false,
-                      overflow: TextOverflow.fade,
-                      style: TextStyle(
-                          color: color ?? app.settings.theme.accentColor),
-                    ),
-                  )
-                : Container(),
+            (icon != null) ? SizedBox(width: 4) : Container(),
+            Flexible(
+              child: Text(
+                text,
+                maxLines: 1,
+                softWrap: false,
+                overflow: TextOverflow.fade,
+                style:
+                    TextStyle(color: color),
+              ),
+            ),
           ],
         ),
       ),

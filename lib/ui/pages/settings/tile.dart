@@ -10,7 +10,13 @@ class SettingTile extends StatelessWidget {
   final IconData icon;
   final Widget page;
 
-  SettingTile({this.title, this.icon, this.page, this.color, this.description});
+  SettingTile({
+    required this.title,
+    required this.icon,
+    required this.page,
+    required this.color,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {

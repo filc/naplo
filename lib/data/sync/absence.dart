@@ -10,7 +10,7 @@ class AbsenceSync {
 
   Future<bool> sync() async {
     if (!app.debugUser) {
-      List<Absence> _absences;
+      List<Absence>? _absences;
       _absences = await app.user.kreta.getAbsences();
 
       if (_absences == null) {
@@ -23,7 +23,7 @@ class AbsenceSync {
 
         await app.user.storage.delete("kreta_absences");
 
-        await Future.forEach(_absences, (absence) async {
+        await Future.forEach(_absences, (Absence absence) async {
           if (absence.json != null) {
             await app.user.storage.insert("kreta_absences", {
               "json": jsonEncode(absence.json),

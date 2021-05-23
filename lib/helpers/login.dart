@@ -8,10 +8,6 @@ import 'package:filcnaplo/data/models/user.dart';
 import 'package:filcnaplo/utils/tools.dart';
 
 class LoginHelper {
-  final GlobalKey<ScaffoldState> key;
-
-  LoginHelper({this.key});
-
   Future<bool> submit(BuildContext context) async {
     bool error = false;
 
@@ -19,7 +15,7 @@ class LoginHelper {
     if (loginContext.username == "nobody" &&
         loginContext.password == "nobody" &&
         app.debugMode) {
-      app.users.add(User("debug", "nobody", "nobody", null));
+      app.users.add(User("debug", "nobody", "nobody", "nowhere"));
       app.user.name = "Test User";
       app.user.realName = "Test User";
       app.debugUser = true;
@@ -50,20 +46,20 @@ class LoginHelper {
     }
 
     String userID = generateUserId(
-        loginContext.username, loginContext.selectedSchool.instituteCode);
+        loginContext.username!, loginContext.selectedSchool!.instituteCode);
 
     if (app.debugMode) print("DEBUG: UserID: " + userID);
 
     User user = User(
       userID,
-      loginContext.username,
-      loginContext.password,
-      loginContext.selectedSchool.instituteCode,
+      loginContext.username!,
+      loginContext.password!,
+      loginContext.selectedSchool!.instituteCode,
     );
 
     app.kretaApi.users[userID] = KretaClient();
 
-    if (await app.kretaApi.users[userID].login(user)) {
+    if (await app.kretaApi.users[userID]!.login(user)) {
       await app.settings.update(login: false);
 
       app.selectedUser = app.users.length - 1;
@@ -72,7 +68,7 @@ class LoginHelper {
       return true;
     } else {
       if (loginContext.error == null) {
-        app.kretaApi.users[userID] = null;
+        app.kretaApi.users.remove(userID);
         ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(
           message: I18n.of(context).loginError,
           duration: Duration(seconds: 3),

@@ -273,7 +273,7 @@ class _PageFrameState extends State<PageFrame> {
           ),
         ),
         bottomNavigationBar:
-            BottomNavbar(this._navItemSelected, selectedPage: selectedPage),
+            BottomNavbar(onTap: this._navItemSelected, selectedPage: selectedPage),
       ),
     );
   }

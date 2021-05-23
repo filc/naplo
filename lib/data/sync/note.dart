@@ -10,7 +10,7 @@ class NoteSync {
 
   Future<bool> sync() async {
     if (!app.debugUser) {
-      List<Note> _notes;
+      List<Note>? _notes;
       _notes = await app.user.kreta.getNotes();
 
       if (_notes == null) {
@@ -23,7 +23,7 @@ class NoteSync {
 
         await app.user.storage.delete("kreta_notes");
 
-        await Future.forEach(_notes, (note) async {
+        await Future.forEach(_notes, (Note note) async {
           if (note.json != null) {
             await app.user.storage.insert("kreta_notes", {
               "json": jsonEncode(note.json),

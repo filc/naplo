@@ -14,19 +14,19 @@ import 'package:filcnaplo/ui/pages/login/page.dart';
 
 class AccountHelper {
   final User user;
-  final Function callback;
+  final Function()? callback;
 
-  AccountHelper({this.user, this.callback});
+  AccountHelper({required this.user, this.callback});
 
   void updateName(String name, BuildContext context) {
     String newName = name.trim();
 
     if (newName == user.name) return;
 
-    app.storage.users[user.id]
+    app.storage.users[user.id]!
         .update("settings", {"nickname": newName}).then((_) {
       if (newName.toLowerCase() == "rendszerüzenet" &&
-          newName.toLowerCase() != user.name.toLowerCase())
+          newName.toLowerCase() != user.name!.toLowerCase())
         Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
           builder: (context) => Scaffold(
             body: Container(
@@ -94,23 +94,23 @@ class AccountHelper {
       app.users.firstWhere((search) => search.id == user.id).name = newName;
 
       app.users.firstWhere((search) => search.id == user.id).profileIcon =
-          ProfileIcon(name: newName, size: 0.7, image: user.customProfileIcon);
+          ProfileIcon(name: newName, size: 0.7, image: user.customProfileIcon!);
 
       user.name = newName;
 
-      if (callback != null) callback();
-      app.sync.updateCallback();
+      callback!();
+      app.sync.updateCallback!();
     });
   }
 
-  Future<ProfileIcon> changeProfileI(BuildContext context) async {
-    PlatformFile newImage =
-        (await FilePicker.platform.pickFiles(type: FileType.image)).files[0];
+  Future<ProfileIcon?> changeProfileI(BuildContext context) async {
+    PlatformFile? newImage =
+        (await FilePicker.platform.pickFiles(type: FileType.image))?.files[0];
 
     if (newImage == null) return null;
 
-    File result = await ImageCropper.cropImage(
-      sourcePath: newImage.path,
+    File? result = await ImageCropper.cropImage(
+      sourcePath: newImage.path!,
       compressFormat: ImageCompressFormat.jpg,
       aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
       androidUiSettings: AndroidUiSettings(
@@ -136,18 +136,18 @@ class AccountHelper {
     String profileId = generateProfileId(user.id);
 
     String imagePath =
-        path.join(app.appDataPath + "profile_" + profileId + ".jpg");
+        path.join(app.appDataPath! + "profile_" + profileId + ".jpg");
 
     try {
       await File(path.join(
-              app.appDataPath + "profile_" + user.customProfileIcon + ".jpg"))
+              app.appDataPath! + "profile_" + user.customProfileIcon! + ".jpg"))
           .delete();
     } catch (e) {}
 
     await File(imagePath).writeAsBytes(data);
     await result.delete();
 
-    await app.storage.users[user.id]
+    await app.storage.users[user.id]!
         .update("settings", {"custom_profile_icon": profileId});
 
     app.users
@@ -155,7 +155,7 @@ class AccountHelper {
           (search) => search.id == user.id,
         )
         .profileIcon = ProfileIcon(
-      name: user.name,
+      name: user.name!,
       size: 0.7,
       image: profileId,
     );
@@ -165,10 +165,10 @@ class AccountHelper {
     app.users.firstWhere((search) => search.id == user.id).customProfileIcon =
         profileId;
 
-    if (callback != null) callback();
-    app.sync.updateCallback();
+    callback!();
+    app.sync.updateCallback!();
 
-    return ProfileIcon(name: user.name, size: 3.0, image: profileId);
+    return ProfileIcon(name: user.name!, size: 3.0, image: profileId);
   }
 
   void deleteAccount(BuildContext context) {
@@ -176,7 +176,7 @@ class AccountHelper {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: app.settings.theme.backgroundColor,
-        content: Text(I18n.of(context).accountDeleteConfirm(user.name)),
+        content: Text(I18n.of(context).accountDeleteConfirm(user.name!)),
         actions: [
           MaterialButton(
             elevation: 0,
@@ -194,7 +194,7 @@ class AccountHelper {
             child: Text(I18n.of(context).dialogYes),
             onPressed: () {
               app.users.removeWhere((search) => search.id == user.id);
-              app.sync.users[user.id] = null;
+              app.sync.users.remove(user.id);
 
               app.storage.deleteUser(user.id).then((_) {
                 if (app.users.length == 0) {
@@ -208,7 +208,7 @@ class AccountHelper {
                 } else {
                   if (app.selectedUser >= app.users.length)
                     app.selectedUser = app.users.length - 1;
-                  app.sync.updateCallback();
+                  app.sync.updateCallback!();
 
                   app.user.sync.allPending();
 
@@ -226,17 +226,17 @@ class AccountHelper {
 
   void deleteProfileI() {
     app.users.firstWhere((search) => search.id == user.id).profileIcon =
-        ProfileIcon(name: user.name, size: 0.7);
+        ProfileIcon(name: user.name!, size: 0.7);
 
     app.users.firstWhere((search) => search.id == user.id).customProfileIcon =
         "";
 
-    app.storage.users[user.id].update(
+    app.storage.users[user.id]?.update(
       "settings",
       {"custom_profile_icon": ""},
     );
 
-    if (callback != null) callback();
-    app.sync.updateCallback();
+    callback!();
+    app.sync.updateCallback!();
   }
 }

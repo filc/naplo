@@ -13,7 +13,7 @@ typedef LocaleChangeCallback = void Function(Locale locale);
 
 class I18n implements WidgetsLocalizations {
   const I18n();
-  static Locale _locale;
+  static Locale? _locale;
   static bool _shouldReload = false;
 
   static set locale(Locale newLocale) {
@@ -24,10 +24,10 @@ class I18n implements WidgetsLocalizations {
   static const GeneratedLocalizationsDelegate delegate = GeneratedLocalizationsDelegate();
 
   /// function to be invoked when changing the language
-  static LocaleChangeCallback onLocaleChanged;
+  static late LocaleChangeCallback onLocaleChanged;
 
   static I18n of(BuildContext context) =>
-    Localizations.of<I18n>(context, WidgetsLocalizations);
+    Localizations.of<I18n>(context, WidgetsLocalizations)!;
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -2947,8 +2947,8 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocali
     ];
   }
 
-  LocaleResolutionCallback resolution({Locale fallback}) {
-    return (Locale locale, Iterable<Locale> supported) {
+  LocaleResolutionCallback resolution({Locale? fallback}) {
+    return (Locale? locale, Iterable<Locale> supported) {
       if (isSupported(locale)) {
         return locale;
       }
@@ -2962,7 +2962,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocali
     I18n._locale ??= locale;
     I18n._shouldReload = false;
     final String lang = I18n._locale != null ? I18n._locale.toString() : "";
-    final String languageCode = I18n._locale != null ? I18n._locale.languageCode : "";
+    final String languageCode = I18n._locale != null ? I18n._locale!.languageCode : "";
     if ("hu_HU" == lang) {
       return SynchronousFuture<WidgetsLocalizations>(const _I18n_hu_HU());
     }
@@ -2986,7 +2986,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocali
   }
 
   @override
-  bool isSupported(Locale locale) {
+  bool isSupported(Locale? locale) {
     for (var i = 0; i < supportedLocales.length && locale != null; i++) {
       final l = supportedLocales[i];
       if (l.languageCode == locale.languageCode) {

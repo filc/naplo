@@ -31,20 +31,20 @@ List<SubjectAverage> calculateSubjectAverages() {
     if (!averages
         .map((SubjectAverage s) => s.subject.id)
         .toList()
-        .contains(evaluation.subject.id)) {
+        .contains(evaluation.subject!.id)) {
       double average = averageEvals(evaluations
-          .where((e) => e.subject.id == evaluation.subject.id)
+          .where((e) => e.subject!.id == evaluation.subject!.id)
           .toList());
 
       double classAverage = 0;
 
       classAverage = app.user.sync.evaluation.averages.firstWhere(
-          (a) => a[0].id == evaluation.subject.id,
+          (a) => a[0].id == evaluation.subject!.id,
           orElse: () => [null, 0.0])[1];
 
       if (average.isNaN) average = 0.0;
 
-      averages.add(SubjectAverage(evaluation.subject, average, classAverage));
+      averages.add(SubjectAverage(evaluation.subject!, average, classAverage));
     }
   });
   return averages;
@@ -58,7 +58,7 @@ double averageEvals(List<Evaluation> evals, {bool finalAvg = false}) {
   if (finalAvg)
     evals.removeWhere((element) =>
         (element.value.value == 0) ||
-        (ignoreInFinal.contains(element.evaluationType.id)));
+        (ignoreInFinal.contains(element.evaluationType!.id)));
 
   evals.forEach((e) {
     average += e.value.value * ((finalAvg ? 100 : e.value.weight) / 100);

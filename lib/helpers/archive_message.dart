@@ -27,12 +27,14 @@ class MessageArchiveHelper {
     bool showSnackbar = true,
   }) async {
     MessageType oldPlace, newPlace;
+    if (message.type == null) return;
+
     if (archiving) {
-      oldPlace = message.type;
+      oldPlace = message.type!;
       newPlace = MessageType.trash;
     } else {
       oldPlace = MessageType.trash;
-      newPlace = message.type;
+      newPlace = message.type!;
     }
 
     await app.user.kreta.trashMessage(archiving, message.id);
@@ -62,27 +64,23 @@ class MessageArchiveHelper {
   }
 
   void moveMessage(message, fromPlace, toPlace) {
-    localMessages(fromPlace).removeWhere((msg) => msg.id == message.id);
-    localMessages(toPlace).add(message);
-    localMessages(toPlace).sort((a, b) => a.date.compareTo(b.date));
+    localMessages(fromPlace)?.removeWhere((msg) => msg.id == message.id);
+    localMessages(toPlace)?.add(message);
+    localMessages(toPlace)?.sort((a, b) => a.date!.compareTo(b.date!));
     // Removing from old tab, adding to new tab and sorting to maintain time continuity.
   }
 
-  List<Message> localMessages(MessageType type) {
+  List<Message>? localMessages(MessageType type) {
     // Returns the list in which the wanted type of messages are stored in.
     switch (type) {
       case MessageType.inbox:
         return app.user.sync.messages.inbox;
-        break;
       case MessageType.sent:
         return app.user.sync.messages.sent;
-        break;
       case MessageType.trash:
         return app.user.sync.messages.trash;
-        break;
       case MessageType.draft:
         return [];
-        break;
       default:
         return null;
     }

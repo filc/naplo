@@ -9,38 +9,35 @@ import 'package:tinycolor/tinycolor.dart';
 class ProfileIcon extends StatelessWidget {
   final String name;
   final double size;
-  final Color color;
+  final Color? color;
   final String image;
 
-  ProfileIcon({this.name, this.color, this.size = 1, this.image = ""});
+  ProfileIcon({required this.name, this.color, this.size = 1, this.image = ""});
 
   @override
   Widget build(BuildContext context) {
-    Color color;
+    Color background;
     String text;
 
-    if (name != null) {
-      color = TinyColor(stringToColor(name))
-          .desaturate(12)
-          .brighten(5)
-          .lighten(10)
-          .spin(64)
-          .color;
-    } else {
-      color = Colors.grey;
-    }
+    background = color ??
+        TinyColor(stringToColor(name))
+            .desaturate(12)
+            .brighten(5)
+            .lighten(10)
+            .spin(64)
+            .color;
 
-    if ((name ?? "").toLowerCase() == "rendszerüzenet") {
+    if (name.toLowerCase() == "rendszerüzenet") {
       text = "!";
-      color = Colors.red;
+      background = Colors.red;
     } else {
-      text = name != null && name != "" ? name[0] : "";
+      text = name != "" ? name[0] : "";
     }
 
     return CircleAvatar(
       radius: size * 24,
-      child: image == null || image == ""
-          ? name != null && text != ""
+      child: image == ""
+          ? text != ""
               ? Text(
                   text.toUpperCase(),
                   textAlign: TextAlign.center,
@@ -52,15 +49,13 @@ class ProfileIcon extends StatelessWidget {
                 )
               : Icon(FeatherIcons.user, color: Colors.grey)
           : null,
-      foregroundColor: textColor(color),
+      foregroundColor: textColor(background),
       backgroundColor:
-          (image == null || image == "") && name != null && text != ""
-              ? color
-              : Colors.transparent,
-      backgroundImage: image != null && image != ""
+          (image == "") && text != "" ? background : Colors.transparent,
+      backgroundImage: image != ""
           ? FileImage(
               File(
-                path.join(app.appDataPath + "profile_" + image + ".jpg"),
+                path.join(app.appDataPath! + "profile_" + image + ".jpg"),
               ),
             )
           : null,

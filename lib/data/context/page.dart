@@ -4,8 +4,8 @@ import 'package:filcnaplo/data/models/message.dart';
 enum PageType { home, evaluations, planner, messages, absences }
 
 class PageContext {
-  PageContext({this.messageType, this.evaluationType});
+  const PageContext({this.messageType, this.evaluationType = EvaluationType.unknown});
 
-  MessageType messageType;
-  EvaluationType evaluationType;
+  final MessageType? messageType;
+  final EvaluationType evaluationType;
 }

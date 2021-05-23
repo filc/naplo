@@ -7,8 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 
 class SettingsHelper {
-  BuildContext context;
-  Map<String, dynamic> settings;
+  BuildContext? context;
+  Map<String, dynamic>? settings;
 
   SettingsHelper({this.context, this.settings});
 
@@ -20,16 +20,16 @@ class SettingsHelper {
           "#" + color.toString().substring(10, 16),
     });
 
-    DynamicTheme.of(context).setThemeData(app.settings.theme);
+    DynamicTheme.of(context!)!.setThemeData(app.settings.theme);
   }
 
-  void showColorPicker(int value, Function onChanged) {
+  void showColorPicker(int value, Function(Color, int)? onChanged) {
     showDialog(
-      context: context,
+      context: context!,
       builder: (context) => AlertDialog(
         title: Text(I18n.of(context).settingsAppearancePickColor),
         content: MaterialColorPicker(
-          onColorChange: (Color color) => onChanged(color, value - 1),
+          onColorChange: (Color color) => onChanged!(color, value - 1),
           selectedColor: app.theme.evalColors[value - 1],
           circleSize: 54,
           shrinkWrap: true,
@@ -69,7 +69,7 @@ class SettingsHelper {
           "theme": "tinted",
           "app_color": "default",
         };
-        app.settings.appColor = Colors.teal[600];
+        app.settings.appColor = Colors.teal.shade600;
         themeData = ThemeContext().tinted();
         break;
       case "dark":
@@ -92,11 +92,17 @@ class SettingsHelper {
         app.settings.backgroundColor = 0;
         themeData = ThemeContext().dark(app.settings.appColor, 0);
         break;
+      default:
+        systemNavigationBarColor = Colors.white;
+        systemNavigationBarIconBrightness = Brightness.dark;
+        settings = <String, dynamic>{"theme": "light"};
+        themeData = ThemeContext().light(app.settings.appColor);
+        break;
     }
 
     app.settings.theme = themeData;
 
-    DynamicTheme.of(context).setThemeData(themeData);
+    DynamicTheme.of(context!)!.setThemeData(themeData);
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarColor: systemNavigationBarColor,
@@ -107,25 +113,25 @@ class SettingsHelper {
   }
 
   void setSecondaryColor(Color color, int i) {
-    if (Theme.of(context).backgroundColor.value ==
+    if (Theme.of(context!).backgroundColor.value ==
         ThemeContext().tinted().backgroundColor.value) return;
 
     app.settings.appColor = color;
 
-    if (Theme.of(context).brightness == Brightness.light)
+    if (Theme.of(context!).brightness == Brightness.light)
       app.settings.theme = ThemeContext().light(app.settings.appColor);
     else
       app.settings.theme = ThemeContext()
           .dark(app.settings.appColor, app.settings.backgroundColor);
 
-    DynamicTheme.of(context).setThemeData(app.settings.theme);
+    DynamicTheme.of(context!)!.setThemeData(app.settings.theme);
     app.storage.storage.update("settings", {
       "app_color": ThemeContext.colors.keys.toList()[i],
     });
 
     app.storage.storage.update("settings", {
       "theme":
-          Theme.of(context).brightness == Brightness.light ? "light" : "dark",
+          Theme.of(context!).brightness == Brightness.light ? "light" : "dark",
     });
   }
 
@@ -133,15 +139,15 @@ class SettingsHelper {
     print("INFO: DB Migration: " +
         key +
         ": " +
-        settings[key].toString() +
+        settings![key].toString() +
         ", default: " +
         value.toString());
 
-    if (settings[key].toString() == 'null') {
+    if (settings![key].toString() == 'null') {
       print("INFO: DB Migration: Resetting " + key);
       return value;
     } else {
-      return settings[key];
+      return settings![key];
     }
   }
 }

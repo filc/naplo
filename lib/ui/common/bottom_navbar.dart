@@ -5,10 +5,10 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:filcnaplo/data/context/app.dart';
 
 class BottomNavbar extends StatelessWidget {
-  final Function onTap;
+  final Function(int)? onTap;
   final PageType selectedPage;
 
-  BottomNavbar(this.onTap, {@required this.selectedPage});
+  BottomNavbar({this.onTap, required this.selectedPage});
 
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -71,7 +71,7 @@ class BottomNavbar extends StatelessWidget {
       unselectedFontSize: 0,
       selectedIconTheme: IconThemeData(color: app.settings.appColor),
       unselectedIconTheme:
-          IconThemeData(color: app.settings.theme.textTheme.bodyText1.color),
+          IconThemeData(color: app.settings.theme.textTheme.bodyText1!.color),
       type: BottomNavigationBarType.fixed,
       onTap: this.onTap,
     );

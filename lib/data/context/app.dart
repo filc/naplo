@@ -30,17 +30,11 @@ class AppContext {
   List<User> users = [];
   int selectedUser = 0;
   CurrentUser get user {
-    try {
-      return CurrentUser(
-        app.kretaApi.users[users[selectedUser].id],
-        app.storage.users[users[selectedUser].id],
-        app.sync.users[users[selectedUser].id],
-      );
-    } catch (error) {
-      if (debugMode)
-        print("[ERROR] data.context.app.AppContext: " + error.toString());
-      return null;
-    }
+    return CurrentUser(
+      app.kretaApi.users[users[selectedUser].id]!,
+      app.storage.users[users[selectedUser].id]!,
+      app.sync.users[users[selectedUser].id]!,
+    );
   }
 
   // Kreta API
@@ -54,24 +48,24 @@ class AppContext {
 
   PageContext _pageContext = PageContext();
 
-  void gotoPage(PageType page, {PageContext pageContext}) {
-    _pageContext = pageContext ?? PageContext();
+  void gotoPage(PageType page, {PageContext pageContext = const PageContext()}) {
+    _pageContext = pageContext;
 
     switch (page) {
       case PageType.home:
-        frame.currentState.pushReplacementNamed("home");
+        frame.currentState!.pushReplacementNamed("home");
         break;
       case PageType.evaluations:
-        frame.currentState.pushReplacementNamed("evaluations");
+        frame.currentState!.pushReplacementNamed("evaluations");
         break;
       case PageType.planner:
-        frame.currentState.pushReplacementNamed("planner");
+        frame.currentState!.pushReplacementNamed("planner");
         break;
       case PageType.messages:
-        frame.currentState.pushReplacementNamed("messages");
+        frame.currentState!.pushReplacementNamed("messages");
         break;
       case PageType.absences:
-        frame.currentState.pushReplacementNamed("absences");
+        frame.currentState!.pushReplacementNamed("absences");
         break;
     }
   }

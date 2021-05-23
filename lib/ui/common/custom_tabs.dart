@@ -6,7 +6,7 @@ class CustomTabButton extends StatelessWidget {
   final Color color;
   final bool dropdown;
 
-  CustomTabButton(this.title, {this.color, this.dropdown});
+  CustomTabButton(this.title, {required this.color, required this.dropdown});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class CustomTabButton extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              title ?? "",
+              title,
               maxLines: 1,
               softWrap: false,
               overflow: TextOverflow.fade,
@@ -39,7 +39,7 @@ class CustomTabButton extends StatelessWidget {
 }
 
 double _indexChangeProgress(TabController controller) {
-  final double controllerValue = controller.animation.value;
+  final double controllerValue = controller.animation!.value;
   final double previousIndex = controller.previousIndex.toDouble();
   final double currentIndex = controller.index.toDouble();
 
@@ -52,18 +52,14 @@ double _indexChangeProgress(TabController controller) {
 
 class CustomTabIndicator extends StatelessWidget {
   const CustomTabIndicator({
-    Key key,
-    @required this.backgroundColor,
-    @required this.borderColor,
-    @required this.size,
-    @required this.label,
-    @required this.controller,
-    @required this.index,
-    @required this.onTap,
-  })  : assert(backgroundColor != null),
-        assert(borderColor != null),
-        assert(size != null),
-        super(key: key);
+    required this.backgroundColor,
+    required this.borderColor,
+    required this.size,
+    required this.label,
+    required this.controller,
+    required this.index,
+    required this.onTap,
+  });
 
   final Color backgroundColor;
   final TabController controller;
@@ -71,7 +67,7 @@ class CustomTabIndicator extends StatelessWidget {
   final Color borderColor;
   final double size;
   final int index;
-  final onTap;
+  final Function(int)? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -79,13 +75,13 @@ class CustomTabIndicator extends StatelessWidget {
 
     List<PopupMenuItem> items = [];
     if (label.dropdown != null) {
-      for (int i = 0; i < label.dropdown.values.keys.length; i++) {
-        dynamic type = label.dropdown.values.keys.toList()[i];
-        if (label.dropdown.check != null && !label.dropdown.check(type))
+      for (int i = 0; i < label.dropdown!.values.keys.length; i++) {
+        dynamic type = label.dropdown!.values.keys.toList()[i];
+        if (label.dropdown!.check != null && !label.dropdown!.check(type))
           continue;
         items.add(PopupMenuItem(
           value: i,
-          child: Text(label.dropdown.values[type]),
+          child: Text(label.dropdown!.values[type]!),
         ));
       }
     }
@@ -100,10 +96,9 @@ class CustomTabIndicator extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 4.0),
             child: CustomTabButton(
                 label.dropdown != null
-                    ? label.dropdown.values.values
-                        .elementAt(label.dropdown.initialValue ??
-                            0.clamp(0, label.dropdown.values.values.length))
-                        .replaceAll(". ", ".")
+                    ? label.dropdown!.values.values
+                        .elementAt(label.dropdown!.initialValue)
+                        .replaceAll(". ", ".") // ?? 0.clamp(0, label.dropdown!.values.values.length
                     : label.title,
                 dropdown: label.dropdown != null && items.length > 1,
                 color: backgroundColor),
@@ -120,10 +115,10 @@ class CustomTabIndicator extends StatelessWidget {
                 }(),
                 items: items,
               ).then((value) {
-                if (value != null) label.dropdown.callback(value);
+                if (value != null) label.dropdown!.callback!(value);
               });
           }
-          onTap(index);
+          onTap!(index);
         },
       ),
     );
@@ -132,22 +127,20 @@ class CustomTabIndicator extends StatelessWidget {
 
 class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
   CustomTabBar({
-    Key key,
-    this.controller,
-    this.labels,
+    required this.controller,
+    required this.labels,
     this.indicatorSize = 12.0,
-    this.color,
-    this.selectedColor,
+    required this.color,
+    required this.selectedColor,
     this.onTap,
-  })  : assert(indicatorSize != null && indicatorSize > 0.0),
-        super(key: key);
+  }) : assert(indicatorSize > 0.0);
 
   final TabController controller;
   final double indicatorSize;
   final List<CustomLabel> labels;
   final Color color;
   final Color selectedColor;
-  final onTap;
+  final Function(int)? onTap;
 
   final Size preferredSize = Size.fromHeight(48.0);
 
@@ -157,8 +150,8 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
       ColorTween selectedColorTween,
       ColorTween previousColorTween,
       BuildContext context) {
-    Color background;
-    Color borderColor = selectedColorTween.end;
+    Color? background;
+    Color borderColor = selectedColorTween.end!;
 
     if (tabController.indexIsChanging) {
       final double t = 1.0 - _indexChangeProgress(tabController);
@@ -183,7 +176,7 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return CustomTabIndicator(
-      backgroundColor: background,
+      backgroundColor: background!,
       borderColor: borderColor,
       size: indicatorSize,
       label: labels[tabIndex],
@@ -197,7 +190,7 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final TabController tabController = controller;
     final Animation<double> animation = CurvedAnimation(
-      parent: tabController.animation,
+      parent: tabController.animation!,
       curve: Curves.fastOutSlowIn,
     );
 
@@ -205,12 +198,11 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
 
     return AnimatedBuilder(
       animation: animation,
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return Row(
           children: List<Widget>.generate(labels.length, (int tabIndex) {
             final Color fixColor = color;
-            final Color fixSelectedColor =
-                selectedColor ?? app.settings.appColor;
+            final Color fixSelectedColor = selectedColor;
             final ColorTween selectedColorTween =
                 ColorTween(begin: fixColor, end: fixSelectedColor);
             final ColorTween previousColorTween =
@@ -231,23 +223,29 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class CustomLabel {
-  CustomLabel({this.title, this.dropdown});
+  CustomLabel({required this.title, this.dropdown});
 
   final String title;
-  final CustomDropdown dropdown;
+  final CustomDropdown? dropdown;
 }
 
 class CustomDropdown {
-  CustomDropdown({this.values, this.callback, this.initialValue, this.check});
+  CustomDropdown({
+    required this.values,
+    this.callback,
+    required this.initialValue,
+    this.check,
+  });
 
   final Map<dynamic, String> values;
-  final callback;
+  final Function(dynamic)? callback;
   final int initialValue;
   final check;
 }
 
 Offset _getPosition(GlobalKey key) {
-  final RenderBox renderBox = key.currentContext.findRenderObject();
-  final position = renderBox.localToGlobal(Offset.zero);
+  final RenderBox? renderBox =
+      key.currentContext!.findRenderObject() as RenderBox;
+  final position = renderBox!.localToGlobal(Offset.zero);
   return position;
 }

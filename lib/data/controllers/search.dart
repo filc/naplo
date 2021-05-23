@@ -77,7 +77,8 @@ class SearchController {
     return results;
   }
 
-  static List<Searchable> searchableResults(List all, String pattern) {
+  static List<Searchable> searchableResults(
+      List<Searchable> all, String pattern) {
     pattern = specialChars(pattern.toLowerCase());
     if (pattern == "") return [];
 
@@ -104,7 +105,7 @@ class SearchController {
     messages.forEach(
       (message) => searchables.add(
         Searchable(
-          date: message.date,
+          date: message.date ?? DateTime(0),
           text: searchString([escapeHtml(message.content), message.subject]),
           child: GestureDetector(
             child: MessageTile(message),
@@ -122,7 +123,7 @@ class SearchController {
     app.user.sync.note.notes.forEach(
       (note) => searchables.add(
         Searchable(
-          date: note.date,
+          date: note.date ?? DateTime(0),
           text: searchString([note.teacher, note.title, note.content]),
           child: GestureDetector(
             child: NoteTile(note),
@@ -141,12 +142,12 @@ class SearchController {
     app.user.sync.absence.absences.forEach(
       (absence) => searchables.add(
         Searchable(
-          date: absence.date,
+          date: absence.date ?? DateTime(0),
           text: searchString([
             absence.teacher,
-            absence.subject.name,
-            absence.type.description,
-            absence.mode.description
+            absence.subject!.name,
+            absence.type!.description,
+            absence.mode!.description
           ]),
           child: GestureDetector(
             child: AbsenceTile(absence),
@@ -166,7 +167,7 @@ class SearchController {
     app.user.sync.homework.homework.forEach(
       (homework) => searchables.add(
         Searchable(
-          date: homework.date,
+          date: homework.date ?? DateTime(0),
           text: searchString(
               [homework.teacher, homework.subjectName, homework.content]),
           child: GestureDetector(
@@ -186,7 +187,7 @@ class SearchController {
     app.user.sync.exam.exams.forEach(
       (exam) => searchables.add(
         Searchable(
-          date: exam.date,
+          date: exam.date ?? DateTime(0),
           text:
               searchString([exam.teacher, exam.subjectName, exam.description]),
           child: GestureDetector(
@@ -207,10 +208,10 @@ class SearchController {
     app.user.sync.evaluation.evaluations.forEach(
       (evaluation) => searchables.add(
         Searchable(
-          date: evaluation.date,
+          date: evaluation.date ?? DateTime(0),
           text: searchString([
             evaluation.description,
-            evaluation.subject.name,
+            evaluation.subject!.name,
             evaluation.value.weight != 0
                 ? "${evaluation.value.weight}%"
                 : "100%"

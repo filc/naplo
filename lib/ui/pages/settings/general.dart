@@ -58,22 +58,24 @@ class _GeneralSettingsState extends State<GeneralSettings> {
                 items: ['hu_HU', 'en_US', 'de_DE']
                     .map((String value) => DropdownMenuItem(
                           value: value,
-                          child: Text(languages[value],
+                          child: Text(languages[value]!,
                               textAlign: TextAlign.right),
                         ))
                     .toList(),
-                onChanged: (String language) {
-                  setState(() {
-                    app.settings.language = language;
-                    I18n.onLocaleChanged(Locale(
-                      language.split("_")[0],
-                      language.split("_")[1],
-                    ));
-                  });
+                onChanged: (String? language) {
+                  if (language != null) {
+                    setState(() {
+                      app.settings.language = language;
+                      I18n.onLocaleChanged(Locale(
+                        language.split("_")[0],
+                        language.split("_")[1],
+                      ));
+                    });
 
-                  app.storage.storage.update("settings", {
-                    "language": language,
-                  });
+                    app.storage.storage.update("settings", {
+                      "language": language,
+                    });
+                  }
                 },
               ),
             ),

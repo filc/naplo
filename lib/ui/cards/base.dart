@@ -3,19 +3,18 @@ import 'package:tinycolor/tinycolor.dart';
 
 class BaseCard extends StatelessWidget {
   final Widget child;
-  final Key key;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
   final DateTime compare;
   final Color color;
   final bool gradient;
 
-  BaseCard(
-      {this.child,
-      this.key,
-      this.padding,
-      this.compare,
-      this.color,
-      this.gradient = false});
+  BaseCard({
+    required this.child,
+    this.padding,
+    required this.compare,
+    required this.color,
+    this.gradient = false,
+  });
 
   @override
   Widget build(BuildContext context) {

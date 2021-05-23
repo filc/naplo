@@ -55,10 +55,12 @@ class SettingsController {
     return Color(int.parse(hexColor, radix: 16));
   }
 
-  Future update({bool login = true, Map<String, dynamic> settings = const {}}) async {
+  Future update(
+      {bool login = true, Map<String, dynamic> settings = const {}}) async {
     settings = (await app.storage.storage.query("settings"))[0];
     language = settings["language"];
-    _appColor = ThemeContext.colors[settings["app_color"]] ?? ThemeContext.colors["default"];
+    _appColor =
+        ThemeContext.colors[settings["app_color"]] ?? ThemeContext.colorDefault;
     backgroundColor = settings["background_color"];
     defaultPage = settings["default_page"];
     _isDark = settings["theme"] != "light";
@@ -67,8 +69,7 @@ class SettingsController {
       "tinted": ThemeContext().tinted(),
       "dark": ThemeContext()
           .dark(app.settings.appColor, app.settings.backgroundColor)
-    }[settings["theme"]];
-    _isDark = null;
+    }[settings["theme"] ?? "light"]!;
     app.debugMode = settings["debug_mode"] == 1;
 
     List evalColorsI = await app.storage.storage.query("eval_colors");
@@ -103,7 +104,7 @@ class SettingsController {
 
         try {
           kretaInstance =
-              await app.storage.users[instance["id"]].query("kreta");
+              await app.storage.users[instance["id"]]!.query("kreta");
         } catch (error) {
           print("ERROR: SettingsController.update: " + error.toString());
           await app.storage.deleteUser(instance["id"]);
@@ -127,14 +128,15 @@ class SettingsController {
         await offlineLoad(user);
 
         if (app.debugMode)
-          print("DEBUG: User loaded " + user.name + "<" + user.id + ">");
+          print(
+              "DEBUG: User loaded " + (user.name ?? "") + "<" + user.id + ">");
       }
     }
 
     if (login && !app.debugUser) {
       await Future.forEach(
         app.users.where((user) => user.loginState == false),
-        (user) async {
+        (User user) async {
           await apiLogin(user);
         },
       );
@@ -146,7 +148,7 @@ class SettingsController {
 
 Future apiLogin(User user) async {
   if (!app.debugUser) {
-    if (await app.kretaApi.users[user.id].login(user))
+    if (await app.kretaApi.users[user.id]!.login(user))
       app.users.firstWhere((search) => search.id == user.id).loginState = true;
     else
       app.users.firstWhere((search) => search.id == user.id).loginState = false;

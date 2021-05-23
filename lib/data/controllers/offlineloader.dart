@@ -13,12 +13,13 @@ import 'package:filcnaplo/data/models/note.dart';
 import 'package:filcnaplo/data/models/student.dart';
 import 'package:filcnaplo/data/models/user.dart';
 import 'package:filcnaplo/ui/common/profile_icon.dart';
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
 Future offlineLoad(User user) async {
-  Database userStorage = app.storage.users[user.id];
+  Database userStorage = app.storage.users[user.id]!;
   User globalUser = app.users.firstWhere((search) => search.id == user.id);
-  SyncUser globalSync = app.sync.users[user.id];
+  SyncUser globalSync = app.sync.users[user.id]!;
 
   List student = await userStorage.query("student");
   List settings = await userStorage.query("settings");
@@ -28,12 +29,16 @@ Future offlineLoad(User user) async {
   globalUser.customProfileIcon = settings[0]["custom_profile_icon"];
   if (globalUser.customProfileIcon != "") {
     if (app.debugMode)
-      print("DEBUG: User profileIcon: " + globalUser.customProfileIcon);
+      print("DEBUG: User profileIcon: " + globalUser.customProfileIcon!);
 
     globalUser.profileIcon = ProfileIcon(
-        name: globalUser.name, size: 0.7, image: globalUser.customProfileIcon);
+      name: globalUser.name ?? "",
+      size: 0.7,
+      image: globalUser.customProfileIcon!,
+      color: Colors.grey,
+    );
   } else {
-    globalUser.profileIcon = ProfileIcon(name: globalUser.name, size: 0.7);
+    globalUser.profileIcon = ProfileIcon(name: globalUser.name ?? "?", size: 0.7, color: Colors.grey,);
   }
 
   if (student.length > 0) {

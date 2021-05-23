@@ -12,7 +12,7 @@ class User {
   String password;
   String instituteCode;
   bool loginState = false;
-  ProfileIcon profileIcon = ProfileIcon();
+  ProfileIcon profileIcon = ProfileIcon(name: "?");
   String? customProfileIcon;
 
   User(this.id, this.username, this.password, this.instituteCode);

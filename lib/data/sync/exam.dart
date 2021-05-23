@@ -11,7 +11,7 @@ class ExamSync {
 
   Future<bool> sync() async {
     if (!app.debugUser) {
-      List<Exam> _exams;
+      List<Exam>? _exams;
       _exams = await app.user.kreta.getExams();
 
       if (_exams == null) {
@@ -24,7 +24,7 @@ class ExamSync {
 
         await app.user.storage.delete("kreta_exams");
 
-        await Future.forEach(_exams, (exam) async {
+        await Future.forEach(_exams, (Exam exam) async {
           if (exam.json != null) {
             await app.user.storage.insert("kreta_exams", {
               "json": jsonEncode(exam.json),

@@ -23,14 +23,14 @@ current week.
 class TimetablePrinter {
   pw.Document build(
       BuildContext context, pw.Document pdf, List<Day> days, int min, int max) {
-    List rows = <pw.TableRow>[];
+    List<pw.TableRow> rows = [];
 
     // build header row
     List<pw.Widget> headerChildren = <pw.Widget>[pw.Container()];
     days.forEach((day) => headerChildren.add(pw.Padding(
         padding: pw.EdgeInsets.all(5),
-        child:
-            pw.Center(child: pw.Text(weekdayStringShort(context, day.date.weekday))))));
+        child: pw.Center(
+            child: pw.Text(weekdayStringShort(context, day.date.weekday))))));
     pw.TableRow headerRow = pw.TableRow(
         children: headerChildren,
         verticalAlignment: pw.TableCellVerticalAlignment.middle);
@@ -45,22 +45,20 @@ class TimetablePrinter {
           padding: pw.EdgeInsets.all(5),
           child: pw.Center(child: pw.Text('$i. '))));
       days.forEach((Day day) {
-        var lesson = day.lessons.firstWhere(
-            (element) => element.lessonIndex != '+'
+        Lesson lesson = day.lessons.firstWhere((Lesson element) =>
+            element.lessonIndex != '+'
                 ? int.parse(element.lessonIndex) == i
-                : false,
-            orElse: () => null);
+                : false);
 
-        children.add(lesson != null
-            ? pw.Padding(
+        children.add(pw.Padding(
                 padding: pw.EdgeInsets.fromLTRB(5, 10, 5, 5),
                 child: pw.Column(children: [
-                  pw.Text(lesson.name ?? lesson.subject.name),
+                  pw.Text(lesson.name),
                   pw.Footer(
                       leading: pw.Text(lesson.room),
                       trailing: pw.Text(monogram(lesson.teacher))),
-                ]))
-            : pw.Padding(padding: pw.EdgeInsets.all(5)));
+                ])));
+            // : pw.Padding(padding: pw.EdgeInsets.all(5)));
       });
       rows.add(row);
     }
@@ -77,11 +75,11 @@ class TimetablePrinter {
       trailing: pw.Text('filcnaplo.hu'),
       margin: pw.EdgeInsets.only(top: 12.0),
     );
-    String className = app.user.sync.student.student.className;
+    String? className = app.user.sync.student.student.className;
 
     pw.Footer header = pw.Footer(
       margin: pw.EdgeInsets.all(5),
-      title: pw.Text(className, style: pw.TextStyle(fontSize: 30)),
+      title: pw.Text(className ?? capital(I18n.of(context).timetable), style: pw.TextStyle(fontSize: 30)),
     );
 
     pdf.addPage(pw.Page(

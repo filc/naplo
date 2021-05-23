@@ -25,12 +25,15 @@ class AutoUpdater extends StatefulWidget {
 
 class _AutoUpdaterState extends State<AutoUpdater> {
   bool buttonPressed = false;
-  double progress;
+  late double progress;
   bool displayProgress = false;
-  InstallState installState;
+  late InstallState installState;
 
-  void downloadCallback(
-      double progress, bool displayProgress, InstallState installState) {
+  void downloadCallback({
+    required double progress,
+    required bool displayProgress,
+    required InstallState installState,
+  }) {
     if (mounted) {
       setState(() {
         this.progress = progress;
@@ -137,7 +140,7 @@ class _AutoUpdaterState extends State<AutoUpdater> {
                                   p: TextStyle(
                                     fontSize: 15,
                                     color: app.settings.theme.textTheme
-                                        .bodyText1.color,
+                                        .bodyText1!.color,
                                   ),
                                 ),
                               );
@@ -205,7 +208,9 @@ class _AutoUpdaterState extends State<AutoUpdater> {
                       ),
                       onPressed: () {
                         if (!buttonPressed)
-                          installUpdate(context, downloadCallback);
+                          installUpdate(
+                              context: context,
+                              updateDisplay: downloadCallback);
                         buttonPressed = true;
                       },
                     ),
@@ -217,8 +222,19 @@ class _AutoUpdaterState extends State<AutoUpdater> {
     );
   }
 
-  Future installUpdate(BuildContext context, Function updateDisplay) async {
-    updateDisplay(null, true, InstallState.downloading);
+  Future installUpdate({
+    required BuildContext context,
+    required Function({
+      required bool displayProgress,
+      required InstallState installState,
+      required double progress,
+    })
+        updateDisplay,
+  }) async {
+    updateDisplay(
+        displayProgress: true,
+        installState: InstallState.downloading,
+        progress: 0);
 
     String dir = (await getApplicationDocumentsDirectory()).path;
     String latestVersion = app.user.sync.release.latestRelease.version;
@@ -237,16 +253,21 @@ class _AutoUpdaterState extends State<AutoUpdater> {
       r.stream.listen((List<int> chunk) {
         // Display percentage of completion
         updateDisplay(
-            downloaded / r.contentLength, true, InstallState.downloading);
+            progress: downloaded / r.contentLength!,
+            displayProgress: true,
+            installState: InstallState.downloading);
 
         chunks.add(chunk);
         downloaded += chunk.length;
       }, onDone: () async {
         // Display percentage of completion
-        updateDisplay(null, true, InstallState.saving);
+        updateDisplay(
+            displayProgress: true,
+            installState: InstallState.saving,
+            progress: 0);
 
         // Save the file
-        final Uint8List bytes = Uint8List(r.contentLength);
+        final Uint8List bytes = Uint8List(r.contentLength!);
         int offset = 0;
         for (List<int> chunk in chunks) {
           bytes.setRange(offset, offset + chunk.length, chunk);
@@ -254,7 +275,10 @@ class _AutoUpdaterState extends State<AutoUpdater> {
         }
         await apk.writeAsBytes(bytes);
 
-        updateDisplay(null, true, InstallState.installing);
+        updateDisplay(
+            progress: 0,
+            displayProgress: true,
+            installState: InstallState.installing);
         if (mounted) {
           OpenFile.open(apk.path).then((result) {
             if (result.type != ResultType.done) {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class BottomCard extends StatelessWidget {
   final Widget child;
 
-  BottomCard({this.child});
+  BottomCard({required this.child});
 
   @override
   Widget build(BuildContext context) {

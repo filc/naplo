@@ -91,7 +91,8 @@ class _PlannerPageState extends State<PlannerPage>
               ],
               bottom: CustomTabBar(
                 controller: _tabController,
-                color: app.settings.theme.textTheme.bodyText1.color,
+                selectedColor: app.settings.appColor,
+                color: app.settings.theme.textTheme.bodyText1!.color!,
                 onTap: (value) {
                   _tabController.animateTo(value);
                   app.sync.updateCallback!();

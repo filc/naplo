@@ -6,22 +6,22 @@ import 'package:filcnaplo/ui/common/profile_icon.dart';
 import 'package:filcnaplo/data/models/dummy.dart';
 
 class StudentSync {
-  Student student;
+  late Student student;
 
   Future<bool> sync() async {
     if (!app.debugUser) {
-      Student _student;
+      Student? _student;
       _student = await app.user.kreta.getStudent();
-      Map group = await app.user.kreta.getGroup();
-      _student.groupId = group['uid'];
-      _student.className = group['className'];
+      Map? group = await app.user.kreta.getGroup();
+      _student?.groupId = group!['uid'];
+      _student?.className = group!['className'];
 
       if (_student == null) {
         await app.user.kreta.refreshLogin();
         _student = await app.user.kreta.getStudent();
-        Map group = await app.user.kreta.getGroup();
-        _student.groupId = group['uid'];
-        _student.className = group['className'];
+        group = await app.user.kreta.getGroup();
+        _student?.groupId = group!['uid'];
+        _student?.className = group!['className'];
       }
 
       if (_student != null) {
@@ -35,9 +35,9 @@ class StudentSync {
         if (app.user.customProfileIcon != null &&
             app.user.customProfileIcon != null) {
           app.user.profileIcon = ProfileIcon(
-              name: app.user.name,
+              name: app.user.name ?? "?",
               size: 0.7,
-              image: app.user.customProfileIcon);
+              image: app.user.customProfileIcon!);
         }
 
         if (_student.json != null) {
@@ -58,7 +58,5 @@ class StudentSync {
     }
   }
 
-  delete() {
-    student = null;
-  }
+  delete() {}
 }

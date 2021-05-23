@@ -10,7 +10,7 @@ class EventSync {
 
   Future<bool> sync() async {
     if (!app.debugUser) {
-      List<Event> _events;
+      List<Event>? _events;
       _events = await app.user.kreta.getEvents();
 
       if (_events == null) {
@@ -23,7 +23,7 @@ class EventSync {
 
         await app.user.storage.delete("kreta_events");
 
-        await Future.forEach(_events, (event) async {
+        await Future.forEach(_events, (Event event) async {
           if (event.json != null) {
             await app.user.storage.insert("kreta_events", {
               "json": jsonEncode(event.json),

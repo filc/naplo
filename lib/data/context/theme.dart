@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 
-const Color _ = Color(0);
-
 class ThemeContext {
   static final Map<String, Color> colors = {
-    "blue": Colors.blue[200] ?? _,
+    "blue": Colors.blue.shade200,
     "default": Color(0xFF6bc2b9),
-    "green": Colors.green[200] ?? _,
-    "lime": Colors.lime[200] ?? _,
-    "yellow": Colors.yellow[200] ?? _,
-    "orange": Colors.deepOrange[200] ?? _,
-    "red": Colors.red[200] ?? _,
-    "pink": Colors.pink[200] ?? _,
-    "purple": Colors.purple[200] ?? _,
+    "green": Colors.green.shade200,
+    "lime": Colors.lime.shade200,
+    "yellow": Colors.yellow.shade200,
+    "orange": Colors.deepOrange.shade200,
+    "red": Colors.red.shade200,
+    "pink": Colors.pink.shade200,
+    "purple": Colors.purple.shade200,
   };
+
+  static Color get colorDefault => colors["default"]!;
 
   static const Color filcGreen = Color(0xFF236A5B);
 
   List<Color> evalColors = [
     Colors.red,
-    Colors.amber[700] ?? _,
-    Colors.yellow[600] ?? _,
+    Colors.amber.shade700,
+    Colors.yellow.shade600,
     Colors.lightGreen,
-    Colors.green[600] ?? _,
+    Colors.green.shade600,
   ];
 
-  static Color lightTextColor = Colors.grey[700] ?? _;
+  static Color lightTextColor = Colors.grey.shade700;
   static TextTheme lightText = TextTheme(
     headline6: TextStyle(
       fontFamily: "GoogleSans",
@@ -97,7 +97,7 @@ class ThemeContext {
             BottomNavigationBarThemeData(backgroundColor: Color(0xFF1c2d2a)),
       );
 
-  static Color darkTextColor = Colors.grey[100] ?? _;
+  static Color darkTextColor = Colors.grey.shade100;
   static TextTheme darkText = TextTheme(
       headline6: TextStyle(
           fontFamily: "GoogleSans", color: darkTextColor, fontSize: 20.0),

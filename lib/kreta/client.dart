@@ -31,13 +31,13 @@ enum OfflineState { maintenance, network }
 class KretaClient {
   var client = http.Client();
   final String clientId = "kreta-ellenorzo-mobile";
-  String userAgent;
-  String accessToken;
-  String refreshToken;
-  String instituteCode;
-  String userId;
+  late String userAgent;
+  late String accessToken;
+  late String refreshToken;
+  late String instituteCode;
+  late String userId;
   bool kretaOffline = false;
-  OfflineState offlineState;
+  late OfflineState offlineState;
 
   Future<bool> networkCheck() async {
     bool result = await NetworkUtils.checkConnectivity();
@@ -52,15 +52,15 @@ class KretaClient {
   }
 
   Future checkResponse(http.Response response, {bool retry = true}) async {
-    if (instituteCode != null) {
-      if (accessToken == null)
-        print("WARNING: accessToken is null. How did this happen?");
-      if (refreshToken == null)
-        print("WARNING: refreshToken is null. How did this happen?");
-    }
+    // if (instituteCode != null) {
+    //   if (accessToken == null)
+    //     print("WARNING: accessToken is null. How did this happen?");
+    //   if (refreshToken == null)
+    //     print("WARNING: refreshToken is null. How did this happen?");
+    // }
 
     if (response.statusCode == 401) {
-      if (refreshToken != null && retry == true && userId != null)
+      if (retry)
         await refreshLogin();
       else
         throw "Authorization failed";
@@ -72,7 +72,7 @@ class KretaClient {
       throw "Invalid response: " + response.statusCode.toString();
 
     bool result = response.headers.containsKey("x-maintenance-mode") &&
-        response.request.url.host.contains(instituteCode);
+        response.request!.url.host.contains(instituteCode);
     kretaOffline = result;
     if (result) offlineState = OfflineState.maintenance;
   }
@@ -184,7 +184,8 @@ class KretaClient {
 
   Future<List> getReleases() async {
     try {
-      var response = await http.get(Uri.parse(BaseURL.FILC_REPO + FilcEndpoints.releases));
+      var response =
+          await http.get(Uri.parse(BaseURL.FILC_REPO + FilcEndpoints.releases));
       var responseJson = json.decode(response.body);
       return responseJson;
     } catch (error) {
@@ -254,7 +255,7 @@ class KretaClient {
         if (app.storage.users[user.id] == null)
           await app.storage.createUser(user.id);
 
-        await app.storage.users[user.id].update("kreta", {
+        await app.storage.users[user.id]!.update("kreta", {
           "username": user.username,
           "password": user.password,
           "institute_code": user.instituteCode,
@@ -272,10 +273,7 @@ class KretaClient {
   }
 
   Future<bool> refreshLogin() async => await login(
-        app.users.firstWhere(
-          (search) => search.id == userId,
-          orElse: () => null,
-        ),
+        app.users.firstWhere((search) => search.id == userId),
       );
 
   // currently buggy, do not use
@@ -306,7 +304,7 @@ class KretaClient {
   //   }
   // }
 
-  Future<List<Message>> getMessages(String type) async {
+  Future<List<Message>?> getMessages(String type) async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.messages(type)),
@@ -318,12 +316,13 @@ class KretaClient {
 
       await checkResponse(response);
 
-      List responseJson = jsonDecode(response.body);
+      List<Map> responseJson = jsonDecode(response.body);
       List<Message> messages = [];
 
-      await Future.forEach(responseJson, (message) async {
-        Map msg = await getMessage(message["azonosito"]);
-        if (msg != null) messages.add(Message.fromJson(msg));
+      await Future.forEach(responseJson, (Map message) async {
+        if (message["azonosito"] == null) return;
+        Map? msg = await getMessage(message["azonosito"]);
+        messages.add(Message.fromJson(msg!));
       });
 
       return messages;
@@ -334,7 +333,7 @@ class KretaClient {
     }
   }
 
-  Future<Map> getMessage(int id) async {
+  Future<Map?> getMessage(int id) async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.message(id.toString())),
@@ -356,7 +355,7 @@ class KretaClient {
     }
   }
 
-  Future<List<Recipient>> getRecipients() async {
+  Future<List<Recipient>?> getRecipients() async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.KRETA_ADMIN + AdminEndpoints.recipientsTeacher),
@@ -391,7 +390,7 @@ class KretaClient {
       List recipientsJson = [];
       List attachmentsJson = [];
 
-      messageContext.recipients.where((r) => r.id != null).forEach((recipient) {
+      messageContext.recipients.forEach((recipient) {
         recipientsJson.add({
           "azonosito": recipient.id,
           "kretaAzonosito": recipient.kretaId,
@@ -410,14 +409,14 @@ class KretaClient {
 
       for (int i = 0; i < messageContext.attachments.length; i++) {
         //messageContext.attachments[i].id = i;
-        Attachment attachment =
+        Attachment? attachment =
             await uploadAttachment(messageContext.attachments[i]);
         if (attachment == null) throw "Failed to upload attachment";
         attachments.add(attachment);
       }
 
       attachments
-          .where((a) => a.fileId != null && a.kretaFilePath != null)
+          .where((a) => a.fileId != null)
           .forEach((attachment) {
         attachmentsJson.add({
           "fajlNev": attachment.name,
@@ -465,7 +464,9 @@ class KretaClient {
     }
   }
 
-  Future<Attachment> uploadAttachment(Attachment attachment) async {
+  Future<Attachment?> uploadAttachment(Attachment attachment) async {
+    if (attachment.file == null) return null;
+
     try {
       var request = http.MultipartRequest(
         'POST',
@@ -473,8 +474,8 @@ class KretaClient {
       );
       request.headers["Authorization"] = "Bearer $accessToken";
       request.headers["User-Agent"] = userAgent;
-      request.files
-          .add(await http.MultipartFile.fromPath('fajl', attachment.file.path));
+      request.files.add(
+          await http.MultipartFile.fromPath('fajl', attachment.file!.path!));
       var response = await request.send();
 
       Map responseJson = jsonDecode(await response.stream.bytesToString());
@@ -490,7 +491,7 @@ class KretaClient {
     }
   }
 
-  Future<Uint8List> downloadAttachment(Attachment attachment) async {
+  Future<Uint8List?> downloadAttachment(Attachment attachment) async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.KRETA_ADMIN +
@@ -511,7 +512,7 @@ class KretaClient {
     }
   }
 
-  Future<List<Note>> getNotes() async {
+  Future<List<Note>?> getNotes() async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.notes),
@@ -536,7 +537,7 @@ class KretaClient {
     }
   }
 
-  Future<List<Event>> getEvents() async {
+  Future<List<Event>?> getEvents() async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.events),
@@ -561,7 +562,7 @@ class KretaClient {
     }
   }
 
-  Future<Student> getStudent() async {
+  Future<Student?> getStudent() async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.student),
@@ -584,7 +585,7 @@ class KretaClient {
     }
   }
 
-  Future<List<Evaluation>> getEvaluations() async {
+  Future<List<Evaluation>?> getEvaluations() async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.evaluations),
@@ -610,7 +611,7 @@ class KretaClient {
     }
   }
 
-  Future<List<Absence>> getAbsences() async {
+  Future<List<Absence>?> getAbsences() async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.absences),
@@ -636,7 +637,7 @@ class KretaClient {
     }
   }
 
-  Future<Map<String, dynamic>> getGroup() async {
+  Future<Map<String, dynamic>?> getGroup() async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.groups),
@@ -660,7 +661,7 @@ class KretaClient {
     }
   }
 
-  Future<List> getAverages(String groupId) async {
+  Future<List?> getAverages(String groupId) async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.kreta(instituteCode) +
@@ -693,7 +694,7 @@ class KretaClient {
     }
   }
 
-  Future<List<Exam>> getExams() async {
+  Future<List<Exam>?> getExams() async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.kreta(instituteCode) + KretaEndpoints.exams),
@@ -718,7 +719,7 @@ class KretaClient {
     }
   }
 
-  Future<List<Homework>> getHomeworks(DateTime from) async {
+  Future<List<Homework>?> getHomeworks(DateTime from) async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.kreta(instituteCode) +
@@ -733,9 +734,11 @@ class KretaClient {
 
       await checkResponse(response);
 
-      List responseJson = jsonDecode(response.body);
+      List<Map> responseJson = jsonDecode(response.body);
       List<Homework> homework = [];
-      await Future.forEach(responseJson, (hw) async {
+      await Future.forEach(responseJson, (Map hw) async {
+        if (hw["Uid"] == null) return;
+
         var response2 = await client.get(
           Uri.parse(BaseURL.kreta(instituteCode) +
               KretaEndpoints.homework +
@@ -761,7 +764,7 @@ class KretaClient {
     }
   }
 
-  Future<Uint8List> downloadHomeworkAttachment(
+  Future<Uint8List?> downloadHomeworkAttachment(
       HomeworkAttachment attachment) async {
     try {
       var response = await client.get(
@@ -784,9 +787,7 @@ class KretaClient {
     }
   }
 
-  Future<List<Lesson>> getLessons(DateTime from, DateTime to) async {
-    if (from == null || to == null) return [];
-
+  Future<List<Lesson>?> getLessons(DateTime from, DateTime to) async {
     try {
       var response = await client.get(
         Uri.parse(BaseURL.kreta(instituteCode) +

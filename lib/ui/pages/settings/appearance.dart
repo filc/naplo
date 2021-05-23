@@ -290,7 +290,7 @@ class _AppearanceSettingsState extends State<AppearanceSettings>
 
 class EvaluationColor extends StatelessWidget {
   final int value;
-  final Function onChanged;
+  final Function(Color, int)? onChanged;
 
   EvaluationColor(this.value, {this.onChanged});
 

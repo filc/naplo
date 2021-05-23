@@ -70,7 +70,7 @@ class SettingsPage extends StatelessWidget {
                 icon: FeatherIcons.bell,
                 page: NotificationSettings()),
             SettingTile(
-                color: Colors.red[400],
+                color: Colors.red.shade400,
                 description: capital(I18n.of(context).settingsDebugDelete),
                 title: I18n.of(context).settingsDebugTitle,
                 icon: FeatherIcons.terminal,

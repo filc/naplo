@@ -12,7 +12,7 @@ class HomeworkSync {
   Future<bool> sync({Duration duration = const Duration(days: 7)}) async {
     currentDuration = duration;
     if (!app.debugUser) {
-      List<Homework> _homework;
+      List<Homework>? _homework;
       DateTime from = DateTime.now().subtract(duration);
       _homework = await app.user.kreta.getHomeworks(from);
       if (_homework == null) {
@@ -25,10 +25,10 @@ class HomeworkSync {
 
         await app.user.storage.delete("kreta_homeworks");
 
-        await Future.forEach(homework, (h) async {
-          if (h.json != null) {
+        await Future.forEach(homework, (Homework hw) async {
+          if (hw.json != null) {
             await app.user.storage.insert("kreta_homeworks", {
-              "json": jsonEncode(h.json),
+              "json": jsonEncode(hw.json),
             });
           }
         });

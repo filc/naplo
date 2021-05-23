@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:filcnaplo/data/context/app.dart';
 
 class ReleaseSync {
-  Release latestRelease;
+  late Release latestRelease;
   bool isNew = false;
 
   Future sync() async {

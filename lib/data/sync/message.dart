@@ -10,9 +10,9 @@ class MessageSync {
   bool uiPending = true;
 
   Future<bool> sync() async {
-    List<Message> _inbox = [];
-    List<Message> _sent = [];
-    List<Message> _trash = [];
+    List<Message>? _inbox = [];
+    List<Message>? _sent = [];
+    List<Message>? _trash = [];
 
     if (!app.debugUser) {
       // Fetch messages from Kréta by type and store them in their own lists.
@@ -45,20 +45,18 @@ class MessageSync {
 
         Future saveLocally(List<Message> messages, String type) async {
           // Save given messages to database
-          await Future.forEach(messages, (message) async {
-            if (message.json != []) {
-              await app.user.storage.insert("messages_" + type, {
-                "json": jsonEncode(message.json),
-              });
-            }
+          await Future.forEach(messages, (Message message) async {
+            await app.user.storage.insert("messages_" + type, {
+              "json": jsonEncode(message.json),
+            });
           });
         }
 
-        if (_inbox != null) inbox = _inbox;
+        if (_inbox != null) inbox = _inbox!;
         await saveLocally(inbox, types[0]);
-        if (_sent != null) sent = _sent;
+        if (_sent != null) sent = _sent!;
         await saveLocally(sent, types[1]);
-        if (_trash != null) trash = _trash;
+        if (_trash != null) trash = _trash!;
         await saveLocally(trash, types[2]);
       }
 

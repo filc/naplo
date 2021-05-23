@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 // ignore: non_constant_identifier_names
 SnackBar CustomSnackBar({
-  String message,
-  Color color,
-  SnackBarAction action,
+  required String message,
+  Color? color,
+  SnackBarAction? action,
   Duration duration = const Duration(seconds: 4),
 }) {
   return SnackBar(
@@ -25,22 +25,20 @@ SnackBar CustomSnackBar({
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          if (message != null)
-            Flexible(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.0),
-                child: Text(
-                  message,
-                  overflow: TextOverflow.fade,
-                  maxLines: 2,
-                  style: TextStyle(
+          Flexible(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
+              child: Text(
+                message,
+                overflow: TextOverflow.fade,
+                maxLines: 2,
+                style: TextStyle(
                     color:
-                        textColor(color ?? app.settings.theme.backgroundColor),
-                  ),
-                ),
+                        textColor(color ?? app.settings.theme.backgroundColor)),
               ),
             ),
-          if (action != null) action
+          ),
+          action!
         ],
       ),
     ),
