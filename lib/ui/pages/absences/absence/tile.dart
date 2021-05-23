@@ -46,15 +46,16 @@ class AbsenceTileGroup extends StatelessWidget {
                           alignment: Alignment.center,
                           child: Icon(
                               absences.any((absence) =>
-                                      absence.state == "Igazolatlan" ||
-                                      absence.state == "Igazolando")
+                                      absence.state != Justification.Justified)
                                   ? FeatherIcons.slash
                                   : FeatherIcons.checkCircle,
                               color: absences.any((absence) =>
-                                      absence.state == "Igazolatlan")
+                                      absence.state ==
+                                      Justification.Unjustified)
                                   ? Colors.red
                                   : absences.any((absence) =>
-                                          absence.state == "Igazolando")
+                                          absence.state ==
+                                          Justification.Pending)
                                       ? Colors.yellow[600]
                                       : Colors.green,
                               size: 30),
@@ -92,12 +93,12 @@ class AbsenceTileSmall extends StatelessWidget {
         child: Row(
           children: [
             Icon(
-              absence.state == "Igazolt"
+              absence.state == Justification.Justified
                   ? FeatherIcons.check
                   : FeatherIcons.slash,
-              color: absence.state == "Igazolt"
+              color: absence.state == Justification.Justified
                   ? Colors.green
-                  : absence.state == "Igazolando"
+                  : absence.state == Justification.Pending
                       ? Colors.yellow[600]
                       : Colors.red,
             ),

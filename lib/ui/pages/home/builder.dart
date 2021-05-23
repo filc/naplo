@@ -1,4 +1,5 @@
 import 'package:filcnaplo/data/context/app.dart';
+import 'package:filcnaplo/data/models/absence.dart';
 import 'package:filcnaplo/data/models/evaluation.dart';
 import 'package:filcnaplo/ui/cards/absence/card.dart';
 import 'package:filcnaplo/ui/cards/base.dart';
@@ -55,7 +56,7 @@ class FeedBuilder {
     });
 
     app.user.sync.absence.absences
-        .where((e) => e.state != "Igazolt")
+        .where((e) => e.state != Justification.Justified)
         .forEach((absence) => cards.add(AbsenceCard(
               absence,
               key: Key(absence.id.toString()),

@@ -75,7 +75,7 @@ class DelayView extends StatelessWidget {
               delay.state != null
                   ? DelayDetail(
                       I18n.of(context).delayState,
-                      delay.state,
+                      delay.stateString,
                     )
                   : Container(),
               delay.submitDate != null

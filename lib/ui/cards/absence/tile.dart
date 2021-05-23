@@ -21,12 +21,14 @@ class AbsenceTile extends StatelessWidget {
           height: 46.0,
           alignment: Alignment.center,
           child: Icon(
-            absence.state == "Igazolando"
-                ? FeatherIcons.slash
-                : FeatherIcons.check,
-            color: absence.state == "Igazolando"
-                ? Colors.yellow[600]
-                : Colors.green,
+            absence.state == Justification.Justified
+                ? FeatherIcons.check
+                : FeatherIcons.slash,
+            color: absence.state == Justification.Justified
+                ? Colors.green
+                : absence.state == Justification.Pending
+                    ? Colors.yellow[600]
+                    : Colors.red,
             size: 30,
           ),
         ),

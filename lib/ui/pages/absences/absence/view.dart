@@ -75,7 +75,7 @@ class AbsenceView extends StatelessWidget {
               absence.state != null
                   ? AbsenceDetail(
                       I18n.of(context).delayState,
-                      absence.state,
+                      absence.stateString,
                     )
                   : Container(),
               absence.submitDate != null

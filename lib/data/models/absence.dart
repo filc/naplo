@@ -8,7 +8,7 @@ class Absence {
   int delay;
   DateTime submitDate;
   String teacher;
-  String state;
+  Justification state;
   Type justification;
   Type type;
   Type mode;
@@ -36,6 +36,11 @@ class Absence {
     this.json,
   });
 
+  String get stateString => state == Justification.Justified
+      ? "Igazolt"
+      : state == Justification.Pending
+          ? "Igazolandó"
+          : "Igazolatlan";
   factory Absence.fromJson(Map json) {
     String id = json["Uid"];
     DateTime date =
@@ -45,7 +50,11 @@ class Absence {
         ? DateTime.parse(json["KeszitesDatuma"]).toLocal()
         : null;
     String teacher = json["RogzitoTanarNeve"] ?? "";
-    String state = json["IgazolasAllapota"] ?? "";
+    Justification state = json["IgazolasAllapota"] == "Igazolt"
+        ? Justification.Justified
+        : json["IgazolasAllapota"] == "Igazolando"
+            ? Justification.Pending
+            : Justification.Unjustified;
     Type justification = json["IgazolasTipusa"] != null
         ? Type.fromJson(json["IgazolasTipusa"])
         : null;
@@ -66,7 +75,7 @@ class Absence {
           : null;
       lessonIndex = json["Ora"]["Oraszam"];
     }
-    
+
     String group =
         json["OsztalyCsoport"] != null ? json["OsztalyCsoport"]["Uid"] : null;
 
@@ -89,3 +98,5 @@ class Absence {
     );
   }
 }
+
+enum Justification { Justified, Unjustified, Pending }

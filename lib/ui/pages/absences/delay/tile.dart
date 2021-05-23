@@ -24,12 +24,12 @@ class DelayTile extends StatelessWidget {
               height: 46.0,
               alignment: Alignment.center,
               child: Icon(
-                  delay.state == "Igazolt"
+                  delay.state == Justification.Justified
                       ? FeatherIcons.checkCircle
                       : FeatherIcons.clock,
-                  color: delay.state == "Igazolt"
+                  color: delay.state == Justification.Justified
                       ? Colors.green
-                      : delay.state == "Igazolando"
+                      : delay.state == Justification.Pending
                           ? Colors.yellow[600]
                           : Colors.red,
                   size: 30),
