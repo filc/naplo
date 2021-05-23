@@ -67,7 +67,7 @@ double averageEvals(List<Evaluation> evals, {bool finalAvg = false}) {
   average = average /
       evals
           .map((e) => (finalAvg ? 100 : e.value.weight) / 100)
-          .reduce((a, b) => a + b);
+          .fold(0.0, (a, b) => a + b);
 
   return average.isNaN ? 0.0 : average;
 }
