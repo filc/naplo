@@ -25,6 +25,6 @@ class Type {
       "IV_ne_jegy_ertekeles": EvaluationType.fourthQ,
       "evvegi_jegy_ertekeles": EvaluationType.endYear,
       "osztalyozo_vizsga": EvaluationType.levelExam
-    }[string];
+    }[string] ?? EvaluationType.unknown;
   }
 }

@@ -25,9 +25,9 @@ class PlannerPage extends StatefulWidget {
 
 class _PlannerPageState extends State<PlannerPage>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
-  HomeworkBuilder _homeworkBuilder;
-  ExamBuilder _examBuilder;
+  late TabController _tabController;
+  late HomeworkBuilder _homeworkBuilder;
+  late ExamBuilder _examBuilder;
 
   final _refreshKeyTimetable = GlobalKey<RefreshIndicatorState>();
   final _refreshKeyHomeworks = GlobalKey<RefreshIndicatorState>();
@@ -94,7 +94,7 @@ class _PlannerPageState extends State<PlannerPage>
                 color: app.settings.theme.textTheme.bodyText1.color,
                 onTap: (value) {
                   _tabController.animateTo(value);
-                  app.sync.updateCallback();
+                  app.sync.updateCallback!();
                 },
                 labels: [
                   CustomLabel(

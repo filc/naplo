@@ -16,13 +16,22 @@ import 'package:filcnaplo/ui/pages/planner/timetable/builder.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/week.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+
+class Task {
+  final String? name;
+  final Future Function()? task;
+
+  Task({this.name, @required this.task});
+}
+
 class SyncController {
   // Users
   Map<String, SyncUser> users = {};
 
   // Progress Tracking
-  List<Map<String, dynamic>> tasks = [];
-  Function updateCallback;
+  List<Task> tasks = [];
+  Function? updateCallback;
   int currentTask = 0;
   Future<void> fullSyncFinished = Completer().future;
   void addUser(String userID) {
@@ -34,67 +43,67 @@ class SyncController {
 
     tasks = [];
 
-    createTask(
+    createTask(Task(
       name: "student",
-      task: app.user.sync.student.sync(),
-    );
+      task: app.user.sync.student.sync,
+    ));
 
-    createTask(
+    createTask(Task(
       name: "evaluation",
-      task: app.user.sync.evaluation.sync(),
-    );
+      task: app.user.sync.evaluation.sync,
+    ));
 
-    createTask(
+    createTask(Task(
       name: "timetable",
-      task: app.user.sync.timetable.sync(),
-    );
+      task: app.user.sync.timetable.sync,
+    ));
 
-    createTask(
+    createTask(Task(
       name: "homework",
-      task: app.user.sync.homework.sync(),
-    );
+      task: app.user.sync.homework.sync,
+    ));
 
-    createTask(
+    createTask(Task(
       name: "exam",
-      task: app.user.sync.exam.sync(),
-    );
+      task: app.user.sync.exam.sync,
+    ));
 
-    createTask(
+    createTask(Task(
       name: "message",
-      task: app.user.sync.messages.sync(),
-    );
+      task: app.user.sync.messages.sync,
+    ));
 
-    createTask(
+    createTask(Task(
       name: "note",
-      task: app.user.sync.note.sync(),
-    );
+      task: app.user.sync.note.sync,
+    ));
 
-    createTask(
+    createTask(Task(
       name: "event",
-      task: app.user.sync.event.sync(),
-    );
+      task: app.user.sync.event.sync,
+    ));
 
-    createTask(
+    createTask(Task(
       name: "absence",
-      task: app.user.sync.absence.sync(),
-    );
+      task: app.user.sync.absence.sync,
+    ));
 
     app.user.sync.news.sync();
     app.user.sync.release.sync();
 
     currentTask = 0;
-    await Future.forEach(tasks, (task) async {
+    await Future.forEach(tasks, (Task task) async {
       try {
         await finishTask(task);
         if (app.debugMode)
           print("DEBUG: Task completed: " +
-              task["name"] +
+              (task.name ?? "null") +
               " (" +
               currentTask.toString() +
               ")");
       } catch (error) {
         print("ERROR: Task " +
-            task["name"] +
+            (task.name ?? "null") +
             " (" +
             currentTask.toString() +
             ")" +
@@ -107,22 +116,21 @@ class SyncController {
     print("INFO: Full sync completed.");
   }
 
-  createTask({String name, Future task}) {
-    tasks.add({"name": name, "task": task});
+  createTask(Task task) {
+    tasks.add(task);
   }
 
-  Future finishTask(Map task) async {
+  Future finishTask(Task task) async {
     if (currentTask >= tasks.length) currentTask = 0;
     currentTask += 1;
 
-    if (updateCallback != null)
-      updateCallback(
-        task: task["name"],
-        current: currentTask,
-        max: tasks.length,
-      );
+    updateCallback!(
+      task: task.name,
+      current: currentTask,
+      max: tasks.length,
+    );
 
-    await task["task"];
+    await (task.task ?? () async {})();
   }
 
   void delete() {

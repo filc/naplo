@@ -26,8 +26,7 @@ Future offlineLoad(User user) async {
   if (settings[0]["nickname"] != "") globalUser.name = settings[0]["nickname"];
 
   globalUser.customProfileIcon = settings[0]["custom_profile_icon"];
-  if (globalUser.customProfileIcon != null &&
-      globalUser.customProfileIcon != "") {
+  if (globalUser.customProfileIcon != "") {
     if (app.debugMode)
       print("DEBUG: User profileIcon: " + globalUser.customProfileIcon);
 

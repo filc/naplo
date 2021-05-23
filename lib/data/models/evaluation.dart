@@ -3,19 +3,19 @@ import 'package:filcnaplo/data/models/type.dart';
 import 'package:filcnaplo/data/models/subject.dart';
 
 class Evaluation {
-  Map json;
+  Map? json;
   String id;
-  DateTime date;
+  DateTime? date;
   EvaluationValue value;
   String teacher;
   String description;
   EvaluationType type;
   String groupId;
-  Subject subject;
-  Type evaluationType;
-  Type mode;
-  DateTime writeDate;
-  DateTime seenDate;
+  Subject? subject;
+  Type? evaluationType;
+  Type? mode;
+  DateTime? writeDate;
+  DateTime? seenDate;
   String form;
 
   Evaluation(
@@ -37,7 +37,7 @@ class Evaluation {
 
   factory Evaluation.fromJson(Map json) {
     String id = json["Uid"];
-    DateTime writeDate = json["RogzitesDatuma"] != null
+    DateTime? writeDate = json["RogzitesDatuma"] != null
         ? DateTime.parse(json["RogzitesDatuma"]).toLocal()
         : null;
     EvaluationValue value = EvaluationValue(
@@ -52,15 +52,15 @@ class Evaluation {
         ? Type.getEvalType(json["Tipus"]["Nev"])
         : EvaluationType.unknown;
     String groupId = json["OsztalyCsoport"]["Uid"] ?? "";
-    Subject subject =
+    Subject? subject =
         json["Tantargy"] != null ? Subject.fromJson(json["Tantargy"]) : null;
-    Type evaluationType =
+    Type? evaluationType =
         json["ErtekFajta"] != null ? Type.fromJson(json["ErtekFajta"]) : null;
-    Type mode = json["Mod"] != null ? Type.fromJson(json["Mod"]) : null;
-    DateTime date = json["KeszitesDatuma"] != null
+    Type? mode = json["Mod"] != null ? Type.fromJson(json["Mod"]) : null;
+    DateTime? date = json["KeszitesDatuma"] != null
         ? DateTime.parse(json["KeszitesDatuma"]).toLocal()
         : null;
-    DateTime seenDate = json["LattamozasDatuma"] != null
+    DateTime? seenDate = json["LattamozasDatuma"] != null
         ? DateTime.parse(json["LattamozasDatuma"]).toLocal()
         : null;
     String form = json["Jelleg"] != "Na" ? json["Jelleg"] : null;
@@ -113,7 +113,7 @@ class EvaluationValue {
         "valtozo": 3,
         "rossz": 2,
         "hanyag": 2
-      }[_valueName];
+      }[_valueName] ?? 0;
     }
   }
 }

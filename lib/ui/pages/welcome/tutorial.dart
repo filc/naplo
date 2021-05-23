@@ -5,7 +5,7 @@ import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 
 class TutorialView extends StatefulWidget {
-  final Function callback;
+  final Function? callback;
 
   TutorialView({this.callback});
 
@@ -45,9 +45,9 @@ class _TutorialViewState extends State<TutorialView> {
                 Navigator.pop(context);
 
               if (currentPage < 5)
-                widget.callback(currentPage);
+                widget.callback!(currentPage);
               else
-                widget.callback(0);
+                widget.callback!(0);
             },
           ),
           Container(

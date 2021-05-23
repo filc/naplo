@@ -1,11 +1,11 @@
 import 'package:file_picker/file_picker.dart';
 
 class Attachment {
+  Map? json;
   int id;
-  PlatformFile file;
+  PlatformFile? file;
   String name;
-  String fileId;
-  Map json;
+  String? fileId;
   String kretaFilePath;
 
   Attachment(
@@ -19,9 +19,9 @@ class Attachment {
 
   factory Attachment.fromJson(Map json) {
     int id = json["azonosito"];
-    PlatformFile file;
+    PlatformFile? file;
     String name = json["fajlNev"];
-    String fileId;
+    String? fileId;
     String kretaFilePath = json["utvonal"] ?? "";
 
     return Attachment(

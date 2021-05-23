@@ -25,8 +25,8 @@ class PageFrame extends StatefulWidget {
 }
 
 class _PageFrameState extends State<PageFrame> {
-  PageType selectedPage;
-  Tween<double> offlineAnimation;
+  late PageType selectedPage;
+  late Tween<double> offlineAnimation;
 
   @override
   void initState() {
@@ -37,9 +37,7 @@ class _PageFrameState extends State<PageFrame> {
     // Sync at startup
 
     if (Platform.isAndroid) {
-      app.user.sync.release
-          .sync()
-          .then((_) {
+      app.user.sync.release.sync().then((_) {
         getApplicationDocumentsDirectory().then((dir) {
           dir
               .listSync()
@@ -138,8 +136,8 @@ class _PageFrameState extends State<PageFrame> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      app.sync.updateCallback = ({String task, int current, int max}) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      app.sync.updateCallback = ({String? task, int? current, int? max}) {
         Map tasks = {
           "message": I18n.of(context).syncMessage,
           "student": I18n.of(context).syncStudent,
@@ -156,8 +154,8 @@ class _PageFrameState extends State<PageFrame> {
           if (task != null) {
             syncState = SyncState(
               text: tasks[task] ?? "",
-              current: current,
-              max: max,
+              current: current ?? 0,
+              max: max ?? 0,
             );
           }
         });
@@ -202,7 +200,7 @@ class _PageFrameState extends State<PageFrame> {
 
     return WillPopScope(
       onWillPop: () async {
-        if (app.frame.currentState.canPop()) app.frame.currentState.pop();
+        if (app.frame.currentState!.canPop()) app.frame.currentState!.pop();
         return false;
       },
       child: Scaffold(
@@ -214,7 +212,7 @@ class _PageFrameState extends State<PageFrame> {
                 tween: offlineAnimation,
                 curve: Curves.ease,
                 duration: Duration(milliseconds: 500),
-                builder: (context, value, _) => Padding(
+                builder: (context, double value, _) => Padding(
                   padding: EdgeInsets.only(top: value / (100.0 / 42.0)),
                   child:
                       Navigator(key: app.frame, onGenerateRoute: handleRoute),
@@ -225,11 +223,11 @@ class _PageFrameState extends State<PageFrame> {
                   tween: offlineAnimation,
                   duration: Duration(milliseconds: 500),
                   curve: Curves.ease,
-                  builder: (context, value, _) {
+                  builder: (context, double value, _) {
                     if (offlineAnimation.begin == 0.0 &&
                         offlineAnimation.end == 0.0) value = 100;
                     return Opacity(
-                      opacity: 1 - value / 100.0,
+                      opacity: 1.0 - value / 100.0,
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         color: app.user.kreta.offlineState ==

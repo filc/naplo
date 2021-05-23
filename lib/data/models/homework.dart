@@ -1,8 +1,8 @@
 class Homework {
-  Map json;
-  DateTime date;
-  DateTime lessonDate;
-  DateTime deadline;
+  Map? json;
+  DateTime? date;
+  DateTime? lessonDate;
+  DateTime? deadline;
   bool byTeacher;
   bool homeworkEnabled;
   String teacher;
@@ -28,13 +28,13 @@ class Homework {
   });
 
   factory Homework.fromJson(Map json) {
-    DateTime date = json["RogzitesIdopontja"] != null
+    DateTime? date = json["RogzitesIdopontja"] != null
         ? DateTime.parse(json["RogzitesIdopontja"]).toLocal()
         : null;
-    DateTime lessonDate = json["FeladasDatuma"] != null
+    DateTime? lessonDate = json["FeladasDatuma"] != null
         ? DateTime.parse(json["FeladasDatuma"]).toLocal()
         : null;
-    DateTime deadline = json["HataridoDatuma"] != null
+    DateTime? deadline = json["HataridoDatuma"] != null
         ? DateTime.parse(json["HataridoDatuma"]).toLocal()
         : null;
     bool byTeacher = json["IsTanarRogzitette"] ?? true;

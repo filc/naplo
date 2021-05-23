@@ -32,7 +32,7 @@ void main() async {
   Map<String, dynamic> settings;
 
   bool migrationRequired = false;
-  Map<String, dynamic> settingsCopy;
+  Map<String, dynamic>? settingsCopy;
 
   try {
     settings = (await app.storage.storage.query("settings"))[0];
@@ -67,13 +67,15 @@ void main() async {
       await app.storage.storage.insert("settings", settingsCopy);
       print("INFO: Database migrated");
     }
+
+    await app.settings.update(
+    login: false, settings: settingsCopy != null ? settingsCopy : settings);
   } catch (error) {
     print("[WARN] main: (probably normal) " + error.toString());
     await app.storage.create();
     app.firstStart = true;
   }
-  await app.settings.update(
-      login: false, settings: migrationRequired ? settingsCopy : settings);
+
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
@@ -109,7 +111,7 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    I18n.onLocaleChanged(languages[app.settings.language]);
+    I18n.onLocaleChanged(languages[app.settings.language] ?? Locale("hu", "HU"));
 
     app.platform = getPlatform(context);
 

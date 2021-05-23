@@ -1,10 +1,10 @@
 class Event {
+  Map? json;
   String id;
-  DateTime start;
-  DateTime end;
+  DateTime? start;
+  DateTime? end;
   String title;
   String content;
-  Map json;
 
   Event(
     this.id,
@@ -17,10 +17,10 @@ class Event {
 
   factory Event.fromJson(Map json) {
     String id = json["Uid"] ?? "";
-    DateTime start = json["ErvenyessegKezdete"] != null
+    DateTime? start = json["ErvenyessegKezdete"] != null
         ? DateTime.parse(json["ErvenyessegKezdete"]).toLocal()
         : null;
-    DateTime end = json["ErvenyessegVege"] != null
+    DateTime? end = json["ErvenyessegVege"] != null
         ? DateTime.parse(json["ErvenyessegVege"]).toLocal()
         : null;
     String title = json["Cim"] ?? "";

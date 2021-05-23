@@ -4,14 +4,14 @@ import 'package:filcnaplo/utils/format.dart';
 class Student {
   String id;
   String name;
-  Map json;
+  Map? json;
   School school;
-  DateTime birth;
+  DateTime? birth;
   String yearId;
   String address;
-  String groupId;
+  String? groupId;
   List<String> parents;
-  String className;
+  String? className;
 
   Student(
     this.id,
@@ -32,7 +32,7 @@ class Student {
       "",
     );
     String id = json["Uid"];
-    DateTime birth = json["SzuletesiDatum"] != null
+    DateTime? birth = json["SzuletesiDatum"] != null
         ? DateTime.parse(json["SzuletesiDatum"]).toLocal()
         : null;
     String yearId = json["TanevUid"] ?? "";

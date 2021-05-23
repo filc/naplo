@@ -4,7 +4,7 @@ class Recipient {
   int kretaId;
   String name;
   RecipientCategory category;
-  Map json;
+  Map? json;
 
   Recipient(
     this.id,
@@ -38,7 +38,7 @@ class RecipientCategory {
   String shortName;
   String name;
   String description;
-  Map json;
+  Map? json;
 
   RecipientCategory(
     this.id,

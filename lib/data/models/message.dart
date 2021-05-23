@@ -2,20 +2,20 @@ import 'package:filcnaplo/data/models/recipient.dart';
 import 'package:filcnaplo/data/models/attachment.dart';
 
 class Message {
+  Map? json;
   int id;
-  int replyId;
+  int? replyId;
   int messageId;
-  int conversationId;
+  int? conversationId;
   bool seen;
   bool deleted;
-  DateTime date;
+  DateTime? date;
   String sender;
   String content;
   String subject;
-  MessageType type;
+  MessageType? type;
   List<Recipient> recipients;
   List<Attachment> attachments;
-  Map json;
 
   Message(
     this.id,
@@ -42,7 +42,7 @@ class Message {
     int conversationId = message["beszelgetesAzonosito"];
     bool seen = json["isElolvasva"] ?? false;
     bool deleted = json["isToroltElem"] ?? false;
-    DateTime date = message["kuldesDatum"] != null
+    DateTime? date = message["kuldesDatum"] != null
         ? DateTime.parse(message["kuldesDatum"]).toLocal()
         : null;
     String sender = message["feladoNev"] ?? "";
@@ -52,7 +52,7 @@ class Message {
     List<Recipient> recipients = [];
     List<Attachment> attachments = [];
 
-    MessageType type = () {
+    MessageType? type = () {
       switch (json["tipus"]["kod"]) {
         case "BEERKEZETT":
           return MessageType.inbox;

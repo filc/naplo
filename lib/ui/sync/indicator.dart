@@ -3,9 +3,9 @@ import 'package:filcnaplo/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class SyncProgressIndicator extends StatelessWidget {
-  final String text;
-  final String current;
-  final String max;
+  final String? text;
+  final String? current;
+  final String? max;
 
   SyncProgressIndicator({this.text, this.current, this.max});
 
@@ -36,7 +36,7 @@ class SyncProgressIndicator extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 14.0),
               child: Row(children: [
-                Text(text),
+                Text(text ?? "..."),
                 Spacer(),
                 app.debugMode ? Text("$current/$max") : Container(),
               ]),

@@ -2,22 +2,22 @@ import 'package:filcnaplo/data/models/subject.dart';
 import 'package:filcnaplo/data/models/type.dart';
 
 class Lesson {
-  Map json;
-  Type status;
-  DateTime date;
-  Subject subject;
+  Map? json;
+  Type? status;
+  DateTime? date;
+  Subject? subject;
   String lessonIndex;
   int lessonYearIndex;
   String substituteTeacher;
   String teacher;
   bool homeworkEnabled;
-  DateTime start;
-  DateTime end;
-  Type studentPresence;
+  DateTime? start;
+  DateTime? end;
+  Type? studentPresence;
   String homeworkId;
   List exams;
   String id;
-  Type type;
+  Type? type;
   String description;
   String room;
   String groupName;
@@ -49,31 +49,31 @@ class Lesson {
   });
 
   factory Lesson.fromJson(Map json) {
-    Type status =
+    Type? status =
         json["Allapot"] != null ? Type.fromJson(json["Allapot"]) : null;
-    DateTime date =
+    DateTime? date =
         json["Datum"] != null ? DateTime.parse(json["Datum"]).toLocal() : null;
-    Subject subject =
+    Subject? subject =
         json["Tantargy"] != null ? Subject.fromJson(json["Tantargy"]) : null;
-    String lessonIndex =
+    String? lessonIndex =
         json["Oraszam"] != null ? json["Oraszam"].toString() : "+";
     int lessonYearIndex = json["OraEvesSorszama"];
     String substituteTeacher = json["HelyettesTanarNeve"] ?? "";
     String teacher = json["TanarNeve"] ?? "";
     bool homeworkEnabled = json["IsTanuloHaziFeladatEnabled"] ?? false;
-    DateTime start = json["KezdetIdopont"] != null
+    DateTime? start = json["KezdetIdopont"] != null
         ? DateTime.parse(json["KezdetIdopont"]).toLocal()
         : null;
-    DateTime end = json["VegIdopont"] != null
+    DateTime? end = json["VegIdopont"] != null
         ? DateTime.parse(json["VegIdopont"]).toLocal()
         : null;
-    Type studentPresence;
+    Type? studentPresence;
     String homeworkId = json["HaziFeladatUid"];
     List exams = json["BejelentettSzamonkeresUids"] != null
         ? json["BejelentettSzamonkeresUids"]
         : [];
     String id = json["Uid"];
-    Type type = json["Tipus"] != null ? Type.fromJson(json["Tipus"]) : null;
+    Type? type = json["Tipus"] != null ? Type.fromJson(json["Tipus"]) : null;
     String description = json["Tema"] ?? "";
     String room = json["TeremNeve"] ?? "";
     String groupName =

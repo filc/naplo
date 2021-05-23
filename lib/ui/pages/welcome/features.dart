@@ -10,7 +10,7 @@ class FeaturesPage extends StatefulWidget {
 }
 
 class _FeaturesPageState extends State<FeaturesPage> {
-  SwiperController _swiper;
+  late SwiperController _swiper;
   int index = 0;
 
   @override

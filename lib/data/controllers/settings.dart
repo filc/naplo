@@ -10,34 +10,30 @@ import 'dart:convert';
 import 'package:tinycolor/tinycolor.dart';
 
 class SettingsController {
-  String language;
-  String deviceLanguage;
-  ThemeData theme;
-  Color _appColor;
-  bool _isDark;
-  int backgroundColor;
-  bool enableNotifications;
-  bool renderHtml;
-  int defaultPage;
-  int eveningStartHour;
-  bool enableNews;
+  late String language;
+  late String deviceLanguage;
+  late ThemeData theme;
+  late Color _appColor;
+  late bool _isDark;
+  late int backgroundColor;
+  late bool enableNotifications;
+  late bool renderHtml;
+  late int defaultPage;
+  late int eveningStartHour;
+  late bool enableNews;
   ConfigSync config = ConfigSync();
-  int roundUp;
-  bool preUpdates;
+  late int roundUp;
+  late bool preUpdates;
 
   get locale {
-    List<String> lang = (language == "auto"
-            ? deviceLanguage != null
-                ? deviceLanguage
-                : "hu_HU"
-            : language)
-        .split("_");
+    List<String> lang =
+        (language == "auto" ? deviceLanguage : "hu_HU").split("_");
     // iOS uses `hu` instead of `hu_HU`. See #162
     return Locale(lang[0], lang.length > 1 ? lang[1] : null);
   }
 
   Color get appColor {
-    if (!(_isDark ?? app.settings.theme.brightness == Brightness.dark))
+    if (!_isDark)
       return TinyColor(_appColor).darken(10).color;
     else
       return _appColor;
@@ -59,10 +55,10 @@ class SettingsController {
     return Color(int.parse(hexColor, radix: 16));
   }
 
-  Future update({bool login = true, Map<String, dynamic> settings}) async {
-    settings = settings ?? (await app.storage.storage.query("settings"))[0];
+  Future update({bool login = true, Map<String, dynamic> settings = const {}}) async {
+    settings = (await app.storage.storage.query("settings"))[0];
     language = settings["language"];
-    _appColor = ThemeContext.colors[settings["app_color"]];
+    _appColor = ThemeContext.colors[settings["app_color"]] ?? ThemeContext.colors["default"];
     backgroundColor = settings["background_color"];
     defaultPage = settings["default_page"];
     _isDark = settings["theme"] != "light";

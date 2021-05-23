@@ -11,8 +11,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class StorageController {
-  String appPath;
-  Database storage;
+  late String appPath;
+  late Database storage;
   Map<String, Database> users = {};
   Future createSettingsTable(Database db) async {
     await db.execute(
@@ -41,7 +41,7 @@ class StorageController {
         await db.insert("settings", {
           "language": "auto",
           "app_color": "default",
-          "theme": SchedulerBinding.instance.window.platformBrightness ==
+          "theme": SchedulerBinding.instance!.window.platformBrightness ==
                   Brightness.dark
               ? 'dark'
               : 'light',
@@ -130,7 +130,8 @@ class StorageController {
   }
 
   Future deleteUser(String userID) async {
-    users[userID] = null;
+    await users[userID]!.close();
+    users.remove(userID);
     String databasesPath = await getDatabasesPath();
     await destroy(join(databasesPath, userID + ".db"));
     await storage.delete("users", where: "id='" + userID + "'");

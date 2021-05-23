@@ -1,10 +1,10 @@
 import 'package:filcnaplo/data/models/type.dart';
 
 class Exam {
-  Map json;
-  DateTime date;
-  DateTime writeDate;
-  Type mode;
+  Map? json;
+  DateTime? date;
+  DateTime? writeDate;
+  Type? mode;
   int subjectIndex;
   String subjectName;
   String teacher;
@@ -26,12 +26,12 @@ class Exam {
   });
 
   factory Exam.fromJson(Map json) {
-    DateTime date = json["BejelentesDatuma"] != null
+    DateTime? date = json["BejelentesDatuma"] != null
         ? DateTime.parse(json["BejelentesDatuma"]).toLocal()
         : null;
-    DateTime writeDate =
+    DateTime? writeDate =
         json["Datum"] != null ? DateTime.parse(json["Datum"]).toLocal() : null;
-    Type mode = json["Modja"] != null ? Type.fromJson(json["Modja"]) : null;
+    Type? mode = json["Modja"] != null ? Type.fromJson(json["Modja"]) : null;
     int subjectIndex = json["OrarendiOraOraszama"];
     String subjectName = json["TantargyNeve"] ?? "";
     String teacher = json["RogzitoTanarNeve"] ?? "";

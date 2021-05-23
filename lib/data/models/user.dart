@@ -6,14 +6,14 @@ import 'package:sqflite/sqflite.dart';
 
 class User {
   String id;
-  String name;
-  String realName;
+  String? name;
+  String? realName;
   String username;
   String password;
   String instituteCode;
   bool loginState = false;
   ProfileIcon profileIcon = ProfileIcon();
-  String customProfileIcon;
+  String? customProfileIcon;
 
   User(this.id, this.username, this.password, this.instituteCode);
 }
@@ -31,19 +31,19 @@ class CurrentUser {
     return app.users[app.selectedUser].id;
   }
 
-  set name(String value) {
+  set name(String? value) {
     app.users[app.selectedUser].name = value;
   }
 
-  String get name {
+  String? get name {
     return app.users[app.selectedUser].name;
   }
 
-  set realName(String value) {
+  set realName(String? value) {
     app.users[app.selectedUser].realName = value;
   }
 
-  String get realName {
+  String? get realName {
     return app.users[app.selectedUser].realName;
   }
 
@@ -87,16 +87,16 @@ class CurrentUser {
     return app.users[app.selectedUser].profileIcon;
   }
 
-  set customProfileIcon(String value) {
+  set customProfileIcon(String? value) {
     app.users[app.selectedUser].customProfileIcon = value;
   }
 
-  String get customProfileIcon {
+  String? get customProfileIcon {
     return app.users[app.selectedUser].customProfileIcon;
   }
 
   set storage(Database value) {
-    _storage = null; // chill dart we're safe
+    _storage = value;
     _storage = value;
   }
 
@@ -105,7 +105,7 @@ class CurrentUser {
   }
 
   set sync(SyncUser value) {
-    _sync = null; // chill dart we're safe
+    _sync = value;
     _sync = value;
   }
 
@@ -114,7 +114,7 @@ class CurrentUser {
   }
 
   set kreta(KretaClient value) {
-    _kreta = null; // chill dart we're safe
+    _kreta = value;
     _kreta = value;
   }
 

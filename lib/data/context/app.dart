@@ -18,7 +18,7 @@ class AppContext {
   bool debugUser = false;
   bool firstStart = false;
 
-  String appDataPath;
+  String? appDataPath;
   final GlobalKey<NavigatorState> frame = GlobalKey<NavigatorState>();
 
   String currentAppVersion = "unknown";

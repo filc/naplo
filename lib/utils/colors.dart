@@ -6,12 +6,10 @@ import 'package:crypto/crypto.dart';
 //import 'package:filcnaplo/ui/theme.dart';
 
 Color textColor(Color color) {
-  if (color == null) return null;
   return color.computeLuminance() >= 0.5 ? Colors.black : Colors.white;
 }
 
 Color stringToColor(String str) {
-  if (str == null) return null;
   int hash = 0;
 
   str = md5.convert(utf8.encode(str)).toString();

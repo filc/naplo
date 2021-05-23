@@ -14,16 +14,12 @@ Map<String, Locale> languages = {
   "hu_HU": hu_HU
 };
 
-String capital(String s) => s != null
-    ? s.length > 0
-        ? s[0].toUpperCase() + s.substring(1)
-        : ""
-    : null;
+String capital(String s) =>
+    s.length > 0 ? s[0].toUpperCase() + s.substring(1) : "";
 
-String capitalize(String s) =>
-    s != null ? s.split(" ").map((w) => capital(w)).join(" ") : null;
+String capitalize(String s) => s.split(" ").map((w) => capital(w)).join(" ");
 
-String formatDate(BuildContext context, DateTime date,
+String? formatDate(BuildContext? context, DateTime? date,
     {bool showTime = false, bool weekday = true}) {
   if (date == null || context == null) return null;
 
@@ -38,7 +34,7 @@ String formatDate(BuildContext context, DateTime date,
     }
 
     if (day == currentDay) {
-      if (date.hour != null)
+      if (date.hour != 0)
         return DateFormat.Hm().format(date);
       else
         return I18n.of(context).dateToday;
@@ -53,14 +49,14 @@ String formatDate(BuildContext context, DateTime date,
       else
         return DateFormat("E", app.settings.locale.toString()).format(date);
     } else {
-      if (date.hour != null && showTime == true)
+      if (date.hour != 0 && showTime == true)
         return DateFormat("MMM d, HH:mm", app.settings.locale.toString())
             .format(date);
       else
         return DateFormat("MMM d", app.settings.locale.toString()).format(date);
     }
   } else {
-    if (date.hour != null && showTime == true)
+    if (date.hour != 0 && showTime == true)
       return DateFormat("yyyy. MM. dd. HH:mm").format(date);
     else
       return DateFormat("yyyy. MM. dd.").format(date);
@@ -71,13 +67,12 @@ String formatTime(DateTime time) =>
     time.hour.toString() + ":" + time.minute.toString().padLeft(2, "0");
 
 String escapeHtml(String htmlString) {
-  if (htmlString == null) return null;
   htmlString = htmlString.replaceAll("\r", "");
   htmlString = htmlString.replaceAll(RegExp(r'<br ?/?>'), "\n");
   htmlString = htmlString.replaceAll(RegExp(r'<p ?>'), "");
   htmlString = htmlString.replaceAll(RegExp(r'</p ?>'), "\n");
   var document = parse(htmlString);
-  String parsedString = parse(document.body.text).documentElement.text;
+  String parsedString = parse(document.body!.text).documentElement!.text;
   return parsedString;
 }
 

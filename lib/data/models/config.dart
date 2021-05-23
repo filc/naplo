@@ -1,9 +1,9 @@
 import 'package:filcnaplo/data/context/app.dart';
 
 class Config {
-  Map json;
+  Map? json;
   String userAgent;
-  String errorReport;
+  String? errorReport;
 
   Config(
     this.userAgent,
