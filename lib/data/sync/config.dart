@@ -9,18 +9,13 @@ class ConfigSync {
 
   Future<bool> sync() async {
     if (!app.debugUser) {
-      Config _config;
-      _config = await app.kretaApi.client.getConfig();
+      config = await app.kretaApi.client.getConfig();
 
-      if (_config != null) {
-        config = _config;
+      await app.storage.storage.update("settings", {
+        "config": jsonEncode(config.json),
+      });
 
-        await app.storage.storage.update("settings", {
-          "config": jsonEncode(_config.json),
-        });
-      }
-
-      return _config != null;
+      return true;
     } else {
       return true;
     }

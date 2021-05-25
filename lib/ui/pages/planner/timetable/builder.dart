@@ -18,12 +18,12 @@ class TimetableBuilder {
       lessons = Dummy.lessons;
     }
 
-    lessons.sort((a, b) => a.start.compareTo(b.start));
+    lessons.sort((a, b) => a.start!.compareTo(b.start!));
 
     lessons.forEach((lesson) {
       if (!days.any(
-          (d) => d.lessons.any((l) => l.date.weekday == lesson.date.weekday))) {
-        days.add(Day(date: lesson.date, lessons: []));
+          (d) => d.lessons.any((l) => l.date!.weekday == lesson.date!.weekday))) {
+        days.add(Day(date: lesson.date!, lessons: []));
       }
 
       if (!days.last.lessons.map((l) => l.id).contains(lesson.id))

@@ -9,12 +9,12 @@ class NoteBuilder {
     noteTiles = [];
     List<Note> notes = app.user.sync.note.notes
         .where((miss) =>
-            miss.type.name != "HaziFeladatHiany" &&
-            miss.type.name != "Felszereleshiany")
+            miss.type!.name != "HaziFeladatHiany" &&
+            miss.type!.name != "Felszereleshiany")
         .toList();
 
     notes.sort(
-      (a, b) => -a.date.compareTo(b.date),
+      (a, b) => -a.date!.compareTo(b.date!),
     );
 
     notes.forEach((note) => noteTiles.add(NoteTile(note)));

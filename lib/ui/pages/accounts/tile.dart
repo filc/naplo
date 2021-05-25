@@ -16,7 +16,7 @@ class AccountTile extends StatefulWidget {
   final Function onSelect;
   final Function onDelete;
 
-  AccountTile(this.user, {this.onSelect, this.onDelete});
+  AccountTile(this.user, {required this.onSelect, required this.onDelete});
 
   @override
   _AccountTileState createState() => _AccountTileState();
@@ -47,9 +47,9 @@ class _AccountTileState extends State<AccountTile> {
               if (!isSelectedUser)
                 ListTile(
                   leading: ProfileIcon(
-                      name: widget.user.name,
+                      name: widget.user.name ?? "?",
                       size: 0.85,
-                      image: widget.user.customProfileIcon),
+                      image: widget.user.customProfileIcon!),
                   // cannot reuse the default profile icon because of size differences
                   title: Text(
                     widget.user.name ?? I18n.of(context).unknown,
@@ -62,9 +62,9 @@ class _AccountTileState extends State<AccountTile> {
                 Column(
                   children: [
                     ProfileIcon(
-                      name: widget.user.name,
+                      name: widget.user.name ?? "?",
                       size: 1.2,
-                      image: widget.user.customProfileIcon,
+                      image: widget.user.customProfileIcon!,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -114,7 +114,7 @@ class _AccountTileState extends State<AccountTile> {
                       onPressed: () {
                         if (!app.debugUser) {
                           String accessToken =
-                              app.kretaApi.users[widget.user.id].accessToken;
+                              app.kretaApi.users[widget.user.id]!.accessToken;
                           String dkturl =
                               "https://dkttanulo.e-kreta.hu/sso?accessToken=$accessToken";
 
@@ -174,11 +174,12 @@ class _AccountTileState extends State<AccountTile> {
 }
 
 class AccountTileButton extends StatelessWidget {
-  final Function onPressed;
+  final Function() onPressed;
   final IconData icon;
   final String title;
 
-  AccountTileButton({this.onPressed, this.icon, this.title = ""});
+  AccountTileButton(
+      {required this.onPressed, required this.icon, this.title = ""});
 
   @override
   Widget build(BuildContext context) {
@@ -196,13 +197,12 @@ class AccountTileButton extends StatelessWidget {
           color: app.settings.appColor.withOpacity(0.2),
           child: Column(
             children: [
-              if (icon != null)
-                Icon(
-                  icon,
-                  size: 20.0,
-                  color: app.settings.appColor,
-                ),
-              if (icon != null) SizedBox(height: 3.0),
+              Icon(
+                icon,
+                size: 20.0,
+                color: app.settings.appColor,
+              ),
+              SizedBox(height: 3.0),
               if (title != "")
                 Text(
                   capitalize(title),

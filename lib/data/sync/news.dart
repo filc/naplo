@@ -1,5 +1,5 @@
 import 'package:filcnaplo/data/context/app.dart';
-import 'package:filcnaplo/data/models/new.dart';
+import 'package:filcnaplo/data/models/news.dart';
 
 class NewsSync {
   List<News> news = [];

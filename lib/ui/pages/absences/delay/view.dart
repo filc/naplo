@@ -30,12 +30,12 @@ class DelayView extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 12.0),
-                  child: Text(formatDate(context, delay.date)),
+                  child: Text(formatDate(context, delay.date)!),
                 ),
               ],
             ),
             subtitle: Text(
-              capital(delay.subject.name),
+              capital(delay.subject!.name),
               maxLines: 2,
               softWrap: false,
               overflow: TextOverflow.fade,
@@ -52,36 +52,36 @@ class DelayView extends StatelessWidget {
                         ? (delay.lessonIndex.toString() + ". (")
                         : "") +
                     (delay.lessonStart != null
-                        ? DateFormat("HH:mm").format(delay.lessonStart)
+                        ? DateFormat("HH:mm").format(delay.lessonStart!)
                         : I18n.of(context).unknown) +
                     " - " +
                     (delay.lessonEnd != null
-                        ? DateFormat("HH:mm").format(delay.lessonEnd)
+                        ? DateFormat("HH:mm").format(delay.lessonEnd!)
                         : I18n.of(context).unknown) +
                     (delay.lessonIndex != null ? ")" : ""),
               ),
               delay.mode != null
                   ? DelayDetail(
                       I18n.of(context).delayMode,
-                      delay.mode.description,
+                      delay.mode!.description,
                     )
                   : Container(),
               delay.justification != null
                   ? DelayDetail(
                       I18n.of(context).absenceJustification,
-                      delay.justification.description,
+                      delay.justification!.description,
                     )
                   : Container(),
               delay.state != null
                   ? DelayDetail(
                       I18n.of(context).delayState,
-                      delay.state,
+                      delay.state!,
                     )
                   : Container(),
               delay.submitDate != null
                   ? DelayDetail(
                       I18n.of(context).administrationTime,
-                      formatDate(context, delay.submitDate, showTime: true),
+                      formatDate(context, delay.submitDate, showTime: true)!,
                     )
                   : Container(),
             ],

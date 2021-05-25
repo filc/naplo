@@ -4,7 +4,7 @@ class Attachment {
   Map? json;
   int id;
   PlatformFile? file;
-  String name;
+  String? name;
   String? fileId;
   String kretaFilePath;
 
@@ -20,7 +20,7 @@ class Attachment {
   factory Attachment.fromJson(Map json) {
     int id = json["azonosito"];
     PlatformFile? file;
-    String name = json["fajlNev"];
+    String? name = json["fajlNev"];
     String? fileId;
     String kretaFilePath = json["utvonal"] ?? "";
 

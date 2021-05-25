@@ -16,7 +16,7 @@ class Evaluation {
   Type? mode;
   DateTime? writeDate;
   DateTime? seenDate;
-  String form;
+  String? form;
 
   Evaluation(
     this.id,
@@ -63,7 +63,7 @@ class Evaluation {
     DateTime? seenDate = json["LattamozasDatuma"] != null
         ? DateTime.parse(json["LattamozasDatuma"]).toLocal()
         : null;
-    String form = json["Jelleg"] != "Na" ? json["Jelleg"] : null;
+    String? form = json["Jelleg"] != "Na" ? json["Jelleg"] : null;
 
     return Evaluation(
       id,

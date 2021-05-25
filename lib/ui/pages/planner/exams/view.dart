@@ -24,15 +24,13 @@ class ExamView extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    exam.teacher != null
-                        ? capitalize(exam.teacher)
-                        : I18n.of(context).unknown,
+                    capitalize(exam.teacher),
                     softWrap: false,
                     overflow: TextOverflow.fade,
                     maxLines: 1,
                   ),
                 ),
-                Text(formatDate(context, exam.date))
+                Text(formatDate(context, exam.date)!)
               ],
             ),
             subtitle: Text(capital(exam.subjectName)),
@@ -51,13 +49,13 @@ class ExamView extends StatelessWidget {
               exam.writeDate != null
                   ? TestDetail(
                       I18n.of(context).evaluationWriteDate,
-                      formatDate(context, exam.writeDate),
+                      formatDate(context, exam.writeDate)!,
                     )
                   : Container(),
               exam.mode != null
                   ? TestDetail(
                       I18n.of(context).evaluationType,
-                      exam.mode.description,
+                      exam.mode!.description,
                     )
                   : Container(),
             ],

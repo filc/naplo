@@ -8,24 +8,24 @@ import 'package:flutter/material.dart';
 
 class EditAccountTile extends StatefulWidget {
   final User user;
-  final Function callback;
-  final Function updateCallback;
+  final Function()? callback;
+  final Function()? updateCallback;
 
-  EditAccountTile({@required this.user, this.callback, this.updateCallback});
+  EditAccountTile({required this.user, this.callback, this.updateCallback});
 
   @override
   _EditAccountTileState createState() => _EditAccountTileState();
 }
 
 class _EditAccountTileState extends State<EditAccountTile> {
-  TextEditingController _userNameController;
+  late TextEditingController _userNameController;
   bool editProfileI = false;
 
   @override
   void initState() {
     super.initState();
     _userNameController = TextEditingController();
-    _userNameController.text = widget.user.name;
+    _userNameController.text = widget.user.name??"?";
   }
 
   @override
@@ -49,14 +49,14 @@ class _EditAccountTileState extends State<EditAccountTile> {
                   children: [
                     if (editProfileI)
                       ProfileIcon(
-                          name: widget.user.name,
+                          name: widget.user.name ?? "?",
                           size: 1.7,
-                          image: widget.user.customProfileIcon)
+                          image: widget.user.customProfileIcon!)
                     else
                       ProfileIcon(
-                          name: widget.user.name,
+                          name: widget.user.name ?? "?",
                           size: 1.3,
-                          image: widget.user.customProfileIcon),
+                          image: widget.user.customProfileIcon!),
                     Container(
                       width: 48 * 1.3,
                       height: 48 * 1.3,
@@ -150,7 +150,7 @@ class _EditAccountTileState extends State<EditAccountTile> {
                 user: widget.user,
                 callback: widget.updateCallback,
               ).updateName(_userNameController.text, context);
-              if (widget.callback != null) widget.callback();
+              widget.callback!();
             },
             child: Text(
               I18n.of(context).dialogDone,

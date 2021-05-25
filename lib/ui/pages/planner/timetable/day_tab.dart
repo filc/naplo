@@ -37,7 +37,7 @@ class DayTabButton extends StatelessWidget {
   final Day day;
   final Color color;
 
-  DayTabButton(this.day, {this.color});
+  DayTabButton(this.day, {required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class DayTabButton extends StatelessWidget {
 }
 
 double _indexChangeProgress(TabController controller) {
-  final double controllerValue = controller.animation.value;
+  final double controllerValue = controller.animation!.value;
   final double previousIndex = controller.previousIndex.toDouble();
   final double currentIndex = controller.index.toDouble();
 
@@ -69,17 +69,13 @@ double _indexChangeProgress(TabController controller) {
 
 class TimetableTabIndicator extends StatelessWidget {
   const TimetableTabIndicator({
-    Key key,
-    @required this.backgroundColor,
-    @required this.borderColor,
-    @required this.size,
-    @required this.day,
-    @required this.controller,
-    @required this.index,
-  })  : assert(backgroundColor != null),
-        assert(borderColor != null),
-        assert(size != null),
-        super(key: key);
+    required this.backgroundColor,
+    required this.borderColor,
+    required this.size,
+    required this.day,
+    required this.controller,
+    required this.index,
+  });
 
   final Color backgroundColor;
   final TabController controller;
@@ -114,15 +110,13 @@ class TimetableTabIndicator extends StatelessWidget {
 
 class TimetableTabBar extends StatelessWidget {
   const TimetableTabBar({
-    Key key,
-    this.controller,
-    this.days,
+    required this.controller,
+    required this.days,
     this.indicatorSize = 12.0,
-    this.color,
-    this.currentDayColor,
-    this.selectedColor,
-  })  : assert(indicatorSize != null && indicatorSize > 0.0),
-        super(key: key);
+    required this.color,
+    required this.currentDayColor,
+    required this.selectedColor,
+  }) : assert(indicatorSize > 0.0);
 
   final TabController controller;
   final double indicatorSize;
@@ -138,27 +132,27 @@ class TimetableTabBar extends StatelessWidget {
       ColorTween previousColorTween,
       BuildContext context) {
     Color background;
-    Color borderColor = selectedColorTween.end;
+    Color borderColor = selectedColorTween.end!;
 
     if (tabController.indexIsChanging) {
       final double t = 1.0 - _indexChangeProgress(tabController);
       if (tabController.index == tabIndex)
-        background = selectedColorTween.lerp(t);
+        background = selectedColorTween.lerp(t)!;
       else if (tabController.previousIndex == tabIndex)
-        background = previousColorTween.lerp(t);
+        background = previousColorTween.lerp(t)!;
       else
-        background = selectedColorTween.begin;
+        background = selectedColorTween.begin!;
     } else {
       final double offset = tabController.offset;
       if (tabController.index == tabIndex) {
-        background = selectedColorTween.lerp(1.0 - offset.abs());
+        background = selectedColorTween.lerp(1.0 - offset.abs())!;
         borderColor = app.settings.appColor;
       } else if (tabController.index == tabIndex - 1 && offset > 0.0) {
-        background = selectedColorTween.lerp(offset);
+        background = selectedColorTween.lerp(offset)!;
       } else if (tabController.index == tabIndex + 1 && offset < 0.0) {
-        background = selectedColorTween.lerp(-offset);
+        background = selectedColorTween.lerp(-offset)!;
       } else {
-        background = selectedColorTween.begin;
+        background = selectedColorTween.begin!;
       }
     }
 
@@ -176,7 +170,7 @@ class TimetableTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final TabController tabController = controller;
     final Animation<double> animation = CurvedAnimation(
-      parent: tabController.animation,
+      parent: tabController.animation!,
       curve: Curves.fastOutSlowIn,
     );
 
@@ -184,7 +178,7 @@ class TimetableTabBar extends StatelessWidget {
 
     return AnimatedBuilder(
       animation: animation,
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return Semantics(
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -194,7 +188,7 @@ class TimetableTabBar extends StatelessWidget {
               final Color fixColor =
                   dif > -24 && dif < 0 ? currentDayColor : color;
               final Color fixSelectedColor =
-                  selectedColor ?? app.settings.appColor;
+                  selectedColor;
               final ColorTween selectedColorTween =
                   ColorTween(begin: fixColor, end: fixSelectedColor);
               final ColorTween previousColorTween =

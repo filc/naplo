@@ -17,11 +17,11 @@ class TimetableFrame extends StatefulWidget {
 
 class _TimetableFrameState extends State<TimetableFrame>
     with TickerProviderStateMixin {
-  TabController _tabController;
+  late TabController _tabController;
   int currentUser = app.selectedUser;
   int selectedWeek = 0;
-  TimetableBuilder _timetableBuilder;
-  Week currentWeek;
+  late TimetableBuilder _timetableBuilder;
+  late Week currentWeek;
   bool ready = false;
   bool realWeekend = false;
 
@@ -155,10 +155,10 @@ class _TimetableFrameState extends State<TimetableFrame>
                             I18n.of(context).dateWeek +
                             " (" +
                             formatDate(context, currentWeek.start,
-                                weekday: false) +
+                                weekday: false)! +
                             " - " +
                             formatDate(context, currentWeek.end,
-                                weekday: false) +
+                                weekday: false)! +
                             ")",
                         textAlign: TextAlign.center,
                         softWrap: false,
@@ -201,7 +201,8 @@ class _TimetableFrameState extends State<TimetableFrame>
           if (ready)
             Container(
               child: TimetableTabBar(
-                color: app.settings.theme.textTheme.bodyText1.color,
+                selectedColor: app.settings.appColor,
+                color: app.settings.theme.textTheme.bodyText1!.color!,
                 currentDayColor: Colors.grey,
                 controller: _tabController,
                 days: _timetableBuilder.week.days.length > 0

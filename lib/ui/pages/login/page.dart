@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  InputDecoration inputDecoration({int type}) {
+  InputDecoration inputDecoration({int? type}) {
     return InputDecoration(
       enabledBorder: UnderlineInputBorder(
         borderRadius: BorderRadius.circular(8),
@@ -222,7 +222,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: Text(
                               loginContext.selectedSchool == null
                                   ? I18n.of(context).loginChooseSchool
-                                  : loginContext.selectedSchool.name,
+                                  : loginContext.selectedSchool!.name,
                               softWrap: false,
                               overflow: TextOverflow.clip,
                               style: TextStyle(color: Colors.white),
@@ -255,7 +255,7 @@ class _LoginPageState extends State<LoginPage> {
                       loginContext.loginError = {};
                       loginContext.username = loginUsernameController.text;
                       loginContext.password = loginPasswordController.text;
-                      LoginHelper(key: _scaffoldKey)
+                      LoginHelper()
                           .submit(context)
                           .then((bool success) {
                         setState(() => loading = false);

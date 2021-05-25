@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Empty extends StatelessWidget {
-  final String title;
+  final String? title;
 
-  Empty({required this.title});
+  Empty({this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class Empty extends StatelessWidget {
                 ? Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      title,
+                      title!,
                       style: TextStyle(fontSize: 16.0, color: Colors.grey),
                       textAlign: TextAlign.center,
                     ),

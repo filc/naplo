@@ -13,7 +13,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
 
 class AttachmentTile extends StatefulWidget {
-  AttachmentTile(this.attachment, {Key key}) : super(key: key);
+  AttachmentTile(this.attachment);
 
   final Attachment attachment;
 
@@ -22,12 +22,12 @@ class AttachmentTile extends StatefulWidget {
 }
 
 class _AttachmentTileState extends State<AttachmentTile> {
-  Uint8List data;
+  Uint8List? data;
 
   isImage(Attachment attachment) {
-    return attachment.name.endsWith(".jpg") ||
-        attachment.name.endsWith(".png") ||
-        attachment.name.endsWith(".jpeg");
+    return attachment.name!.endsWith(".jpg") ||
+        attachment.name!.endsWith(".png") ||
+        attachment.name!.endsWith(".jpeg");
     /* todo: check if it's an image by mime type */
   }
 
@@ -51,21 +51,21 @@ class _AttachmentTileState extends State<AttachmentTile> {
     handleShare() async {
       String dir = (await getTemporaryDirectory()).path;
       print(dir);
-      File temp = new File('$dir/temp.file.' + attachment.name);
-      await temp.writeAsBytes(data);
-      await Share.shareFiles(['$dir/temp.file.' + attachment.name]);
+      File temp = new File('$dir/temp.file.' + attachment.name!);
+      await temp.writeAsBytes(data!);
+      await Share.shareFiles(['$dir/temp.file.' + attachment.name!]);
       temp.delete();
     }
 
     handleSave() async {
-      saveAttachment(attachment, data, context: context)
-          .then((String f) => OpenFile.open(f));
+      saveAttachment(attachment, data!, context: context)
+          .then((String? f) => OpenFile.open(f));
     }
 
     openImage() {
       Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
           builder: (context) => ImageViewer(
-              imageProvider: MemoryImage(data),
+              imageProvider: MemoryImage(data!),
               shareHandler: handleShare,
               downloadHandler: handleSave)));
     }
@@ -82,8 +82,8 @@ class _AttachmentTileState extends State<AttachmentTile> {
         ),
         onPressed: () {
           if (data != null) {
-            saveAttachment(attachment, data, context: context)
-                .then((String f) => OpenFile.open(f));
+            saveAttachment(attachment, data!, context: context)
+                .then((String? f) => OpenFile.open(f));
           } else {
             downloadAttachment(attachment, context: context);
           }
@@ -103,7 +103,7 @@ class _AttachmentTileState extends State<AttachmentTile> {
                                   child: Material(
                                     child: InkWell(
                                       child: Ink.image(
-                                        image: MemoryImage(data),
+                                        image: MemoryImage(data!),
                                         fit: BoxFit.cover,
                                       ),
                                       borderRadius: BorderRadius.circular(12.0),
@@ -132,7 +132,7 @@ class _AttachmentTileState extends State<AttachmentTile> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 12.0),
                       child: Text(
-                        attachment.name,
+                        attachment.name!,
                         softWrap: false,
                         overflow: TextOverflow.fade,
                       ),
@@ -152,11 +152,10 @@ class _AttachmentTileState extends State<AttachmentTile> {
   }
 }
 
-// todo: error handling (snackbar)
-Future<String> saveAttachment(
+Future<String?> saveAttachment(
   Attachment attachment,
   Uint8List data, {
-  @required BuildContext context,
+  required BuildContext context,
 }) async {
   try {
     String downloads;
@@ -167,42 +166,36 @@ Future<String> saveAttachment(
       downloads = (await getTemporaryDirectory()).path;
     }
 
-    if (data != null) {
-      var filePath = downloads + "/" + attachment.name;
-      if (app.debugMode) print("INFO: Saved file: " + filePath);
-      if (await StorageController.writeFile(filePath, data)) {
-        print("INFO: Downloaded " + attachment.name);
-        return filePath;
-      } else {
-        throw "Storage Permission denied";
-      }
+    var filePath = downloads + "/" + attachment.name!;
+    if (app.debugMode) print("INFO: Saved file: " + filePath);
+    if (await StorageController.writeFile(filePath, data)) {
+      print("INFO: Downloaded " + attachment.name!);
+      return filePath;
     } else {
-      throw "Cannot write null to file";
+      throw "Storage Permission denied";
     }
   } catch (error) {
     print("ERROR: MessageView.downloadAttachment: " + error.toString());
-    if (context != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            I18n.of(context).messageAttachmentOpenFailed,
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.red,
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          I18n.of(context).messageAttachmentOpenFailed,
+          style: TextStyle(color: Colors.white),
         ),
-      );
-    }
+        backgroundColor: Colors.red,
+      ),
+    );
     return null;
   }
 }
 
 Future downloadAttachment(
   Attachment attachment, {
-  @required BuildContext context,
+  required BuildContext context,
 }) async {
   var data = await app.user.kreta.downloadAttachment(attachment);
-  saveAttachment(attachment, data, context: context).then(
-    (String f) => OpenFile.open(f).then((result) {
+  saveAttachment(attachment, data!, context: context).then(
+    (String? f) => OpenFile.open(f).then((result) {
       if (result.type != ResultType.done) {
         print("ERROR: HomeworkView.downloadAttachment: " + result.message);
         Navigator.pop(context);

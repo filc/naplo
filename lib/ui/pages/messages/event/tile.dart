@@ -18,7 +18,7 @@ class EventTile extends StatelessWidget {
             child:
                 Text(event.title, softWrap: false, overflow: TextOverflow.fade),
           ),
-          Text(formatDate(context, event.start)),
+          Text(formatDate(context, event.start)!),
         ]),
         subtitle: Text(
           escapeHtml(event.content),

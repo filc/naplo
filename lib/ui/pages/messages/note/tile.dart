@@ -24,7 +24,7 @@ class NoteTile extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(left: 8.0),
-              child: Text(formatDate(context, note.date)),
+              child: Text(formatDate(context, note.date)!),
             ),
           ],
         ),

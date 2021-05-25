@@ -184,11 +184,11 @@ class StatisticsPage extends StatelessWidget {
 }
 
 class EvaluationBlock extends StatelessWidget {
-  final String title;
+  final String? title;
   final String value;
   final Color color;
 
-  EvaluationBlock({this.title, this.value, this.color});
+  EvaluationBlock({this.title, required this.value, this.color = Colors.grey});
 
   @override
   Widget build(BuildContext context) {
@@ -217,7 +217,7 @@ class EvaluationBlock extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
                   child: Text(
-                    title,
+                    title!,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: "GoogleSans",

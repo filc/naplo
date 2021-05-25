@@ -31,11 +31,6 @@ class _SchoolSelectState extends State<SchoolSelect> {
       getSchoolList();
     }
 
-    if (schoolList == null) {
-      schoolList = [];
-      getSchoolList();
-    }
-
     return Scaffold(
       body: Column(
         children: [

@@ -92,7 +92,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
   Widget build(BuildContext context) {
     String messageContent = widget.message.content;
     List messageReplys = messageContent.split("-" * 20);
-    String quotedMessage;
+    String? quotedMessage;
     if (messageReplys.length > 1) {
       quotedMessage = messageReplys.sublist(1).join("-" * 20);
       messageContent = messageReplys[0];
@@ -160,7 +160,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                     ),
                     SizedBox(width: 4.0),
                     Text(
-                      formatDate(context, widget.message.date),
+                      formatDate(context, widget.message.date)!,
                       style: TextStyle(fontSize: 14.0, color: Colors.grey),
                     ),
                   ],
@@ -250,7 +250,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                                 I18n.of(context).messageShareFooter(
                                     widget.message.sender,
                                     DateFormat("yyyy. MM. dd.")
-                                        .format(widget.message.date)),
+                                        .format(widget.message.date!)),
                           );
                         },
                       ),
@@ -281,7 +281,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                       data: messageContent,
                       onLinkTap: (url, ctx, attr, elem) async {
                         await FlutterWebBrowser.openWebPage(
-                          url: url,
+                          url: url!,
                           customTabsOptions: CustomTabsOptions(
                             toolbarColor: app.settings.theme.backgroundColor,
                             showTitle: true,
@@ -328,7 +328,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                       data: quotedMessage,
                       onLinkTap: (url, ctx, attr, elem) async {
                         await FlutterWebBrowser.openWebPage(
-                          url: url,
+                          url: url!,
                           customTabsOptions: CustomTabsOptions(
                             toolbarColor: app.settings.theme.backgroundColor,
                             showTitle: true,
@@ -341,7 +341,7 @@ class _MessageViewTileState extends State<MessageViewTile> {
                       },
                     )
                   : SelectableLinkify(
-                      text: escapeHtml(quotedMessage),
+                      text: escapeHtml(quotedMessage!),
                       onOpen: (url) async {
                         await FlutterWebBrowser.openWebPage(
                           url: url.url,

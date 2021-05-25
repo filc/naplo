@@ -7,8 +7,8 @@ class SubjectBuilder {
   void build() {
     subjectTiles = [];
     var averages = calculateSubjectAverages();
-    averages.forEach((el) {
-      subjectTiles.add(SubjectTile(el.subject, el.average, el.classAverage));
+    averages.forEach((SubjectAverage s) {
+      subjectTiles.add(SubjectTile(s.subject, s.average, s.classAverage));
     });
 
     subjectTiles.sort((a, b) => a.subject.name.compareTo(b.subject.name));

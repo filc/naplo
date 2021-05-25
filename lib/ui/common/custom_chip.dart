@@ -1,4 +1,3 @@
-import 'package:filcnaplo/data/context/app.dart';
 import 'package:flutter/material.dart';
 
 class CustomChip extends StatelessWidget {

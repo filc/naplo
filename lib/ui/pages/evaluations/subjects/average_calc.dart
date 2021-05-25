@@ -114,13 +114,13 @@ class AverageCalculatorState extends State<AverageCalculator> {
       "", //teacher
       "", //description
       EvaluationType.midYear, //type
-      null, //groupid
+      "", //groupid
       widget.subject,
       Type("", "", ""), //evaluationtype
       Type("", "", ""), //mode
       date, //date
       date, //seen-date
-      null,
+      "",
     );
 
     Navigator.of(context).pop(tempEval);
@@ -137,9 +137,9 @@ class AverageCalculatorState extends State<AverageCalculator> {
           value: value,
           groupValue: evaluation,
           activeColor: app.settings.appColor,
-          onChanged: (int value) {
+          onChanged: (int? value) {
             setState(() {
-              evaluation = value;
+              evaluation = value!;
             });
           },
         ),

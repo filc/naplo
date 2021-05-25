@@ -16,7 +16,7 @@ class Event {
   });
 
   factory Event.fromJson(Map json) {
-    String id = json["Uid"] ?? "";
+    String id = json["Uid"];
     DateTime? start = json["ErvenyessegKezdete"] != null
         ? DateTime.parse(json["ErvenyessegKezdete"]).toLocal()
         : null;

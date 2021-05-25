@@ -19,13 +19,9 @@ class AccountView extends StatefulWidget {
 }
 
 class _AccountViewState extends State<AccountView> {
-  ProfileIcon profileIcon;
-
   @override
   Widget build(BuildContext context) {
-    Student student = app.sync.users[widget.user.id] != null
-        ? app.sync.users[widget.user.id].student.student
-        : null;
+    Student student = app.sync.users[widget.user.id]!.student.student;
 
     return BottomCard(
       child: Container(
@@ -45,23 +41,23 @@ class _AccountViewState extends State<AccountView> {
               contentPadding: EdgeInsets.only(top: 6.0, bottom: 4.0),
               leading: GestureDetector(
                 child: ProfileIcon(
-                    name: widget.user.name,
+                    name: widget.user.name ?? "?",
                     size: 1.1,
-                    image: widget.user.customProfileIcon),
+                    image: widget.user.customProfileIcon!),
                 onTap: () {
                   showDialog(
                     context: context,
                     builder: (context) => Center(
                       child: ProfileIcon(
-                          name: widget.user.name,
+                          name: widget.user.name ?? "?",
                           size: 4.2,
-                          image: widget.user.customProfileIcon),
+                          image: widget.user.customProfileIcon!),
                     ),
                   );
                 },
               ),
               title: Text(
-                widget.user.name,
+                widget.user.name ?? "?",
                 style: TextStyle(fontSize: 18.0),
                 softWrap: false,
                 overflow: TextOverflow.fade,
@@ -74,38 +70,32 @@ class _AccountViewState extends State<AccountView> {
             ),
 
             // User Details
-            student != null
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      widget.user.name != widget.user.realName
-                          ? StudentDetail(I18n.of(context).studentRealName,
-                              widget.user.realName)
-                          : Container(),
-                      student.school.name != ""
-                          ? StudentDetail(I18n.of(context).studentSchool,
-                              student.school.name)
-                          : Container(),
-                      student.birth != null
-                          ? StudentDetail(I18n.of(context).studentBirth,
-                              DateFormat("yyyy. MM. dd.").format(student.birth))
-                          : Container(),
-                      student.address != null
-                          ? StudentDetail(
-                              I18n.of(context).studentAddress, student.address)
-                          : Container(),
-                      student.parents != null
-                          ? student.parents.length > 0
-                              ? StudentDetail(I18n.of(context).studentParents,
-                                  student.parents.join(", "))
-                              : Container()
-                          : Container(),
-                    ],
-                  )
-                : app.debugMode
-                    ? StudentDetail("UserID", widget.user.id)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                widget.user.name != widget.user.realName
+                    ? StudentDetail(I18n.of(context).studentRealName,
+                        widget.user.realName ?? "?")
                     : Container(),
+                student.school.name != ""
+                    ? StudentDetail(
+                        I18n.of(context).studentSchool, student.school.name)
+                    : Container(),
+                student.birth != null
+                    ? StudentDetail(I18n.of(context).studentBirth,
+                        DateFormat("yyyy. MM. dd.").format(student.birth!))
+                    : Container(),
+                student.address != null
+                    ? StudentDetail(
+                        I18n.of(context).studentAddress, student.address!)
+                    : Container(),
+                student.parents.length > 0
+                    ? StudentDetail(I18n.of(context).studentParents,
+                        student.parents.join(", "))
+                    : Container(),
+              ],
+            ),
           ],
         ),
       ),

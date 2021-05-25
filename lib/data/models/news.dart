@@ -1,8 +1,8 @@
 class News {
-  String title;
-  String content;
-  String image;
-  String link;
+  String? title;
+  String? content;
+  String? image;
+  String? link;
 
   News(this.title, this.content, this.image, this.link);
 

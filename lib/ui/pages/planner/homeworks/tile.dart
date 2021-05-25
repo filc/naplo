@@ -32,7 +32,7 @@ class HomeworkTile extends StatelessWidget {
               child: Text(capital(homework.subjectName)),
             ),
             Text(formatDate(context,
-                homework.deadline ?? homework.lessonDate ?? homework.date)),
+                homework.deadline ?? homework.lessonDate ?? homework.date)!),
           ],
         ),
         subtitle: homework.content != ""

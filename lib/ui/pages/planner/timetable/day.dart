@@ -7,7 +7,7 @@ class Day {
   DateTime date;
   List<LessonTile> tiles = [];
 
-  Day({this.lessons = const [], this.date});
+  Day({this.lessons = const [], required this.date});
 
   void buildTiles() {
     tiles = [];

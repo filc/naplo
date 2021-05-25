@@ -34,7 +34,7 @@ class TimetableView extends StatelessWidget {
             ),
             title: Text(
               lesson.subject != null
-                  ? capital(lesson.subject.name)
+                  ? capital(lesson.subject!.name)
                   : I18n.of(context).unknown,
             ),
             subtitle: Text(
@@ -47,9 +47,9 @@ class TimetableView extends StatelessWidget {
             trailing: Padding(
               padding: EdgeInsets.only(left: 8.0),
               child: Text(
-                DateFormat("HH:mm").format(lesson.start) +
+                DateFormat("HH:mm").format(lesson.start!) +
                     "\n" +
-                    DateFormat("HH:mm").format(lesson.end),
+                    DateFormat("HH:mm").format(lesson.end!),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -65,7 +65,7 @@ class TimetableView extends StatelessWidget {
                   : Container(),
               lesson.groupName != null
                   ? TimetableDetail(
-                      I18n.of(context).lessonGroup, lesson.groupName)
+                      I18n.of(context).lessonGroup, lesson.groupName ?? "")
                   : Container(),
               lesson.description != ""
                   ? TimetableDetail(
@@ -79,10 +79,10 @@ class TimetableView extends StatelessWidget {
                       lesson.lessonYearIndex.toString() + ".",
                     )
                   : Container(),
-              lesson.status.name != "Naplozott"
+              lesson.status!.name != "Naplozott"
                   ? TimetableDetail(
                       I18n.of(context).state,
-                      lesson.status.description,
+                      lesson.status!.description,
                     )
                   : Container(),
               lesson.substituteTeacher != ""

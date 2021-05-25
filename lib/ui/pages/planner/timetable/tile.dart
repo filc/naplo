@@ -20,22 +20,18 @@ class LessonTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Homework homework;
+    Homework? homework;
     List<Exam> exams = [];
 
     if (lesson.homeworkId != null) {
       homework = app.user.sync.homework.homework
-          .firstWhere((h) => h.id == lesson.homeworkId, orElse: () => null);
+          .firstWhere((h) => h.id == lesson.homeworkId);
     }
 
     lesson.exams.forEach(
       (exam) {
         var toAdd = app.user.sync.exam.exams.firstWhere((t) => t.id == exam);
-        if (toAdd != null)
-          exams.add(toAdd);
-        else
-          print("INFO: timetable/tile.dart: Couldn't find exam with id " +
-              exam.toString());
+        exams.add(toAdd);
       },
     );
 
@@ -68,7 +64,7 @@ class LessonTile extends StatelessWidget {
                     child: Text(
                       capital(
                         lesson.subject != null
-                            ? lesson.subject.name
+                            ? lesson.subject!.name
                             : lesson.isEmpty
                                 ? I18n.of(context).lessonEmpty
                                 : I18n.of(context).unknown,
@@ -112,8 +108,8 @@ class LessonTile extends StatelessWidget {
               trailing: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(formatTime(lesson.start)),
-                  Text(formatTime(lesson.end)),
+                  Text(formatTime(lesson.start!)),
+                  Text(formatTime(lesson.end!)),
                 ],
               ),
             ),
@@ -132,12 +128,14 @@ class LessonTile extends StatelessWidget {
                                 icon: FeatherIcons.home,
                                 text: escapeHtml(homework.content)
                                     .replaceAll("\n", " "),
-                                onTap: () => showSlidingBottomSheet(
-                                  context,
-                                  useRootNavigator: true,
-                                  builder: (context) =>
-                                      homeworkView(homework, context),
-                                ),
+                                onTap: () => homework != null
+                                    ? showSlidingBottomSheet(
+                                        context,
+                                        useRootNavigator: true,
+                                        builder: (context) =>
+                                            homeworkView(homework!, context),
+                                      )
+                                    : null,
                               )
                             : Container(),
                         Container(), // DON'T DELETE, IT BREAKS ALIGNMENT SOMEHOW
@@ -148,10 +146,7 @@ class LessonTile extends StatelessWidget {
                               color:
                                   textColor(Theme.of(context).backgroundColor),
                               icon: FeatherIcons.edit2,
-                              text: exam.description !=
-                                      null //!NoSuchMethodError: The getter 'description' was called on null. Receiver: null Tried calling: description
-                                  ? exam.description.replaceAll("\n", " ")
-                                  : exam.mode.description ?? "",
+                              text: exam.description.replaceAll("\n", " "),
                               onTap: () => showModalBottomSheet(
                                 context: context,
                                 backgroundColor: Colors.transparent,
@@ -182,9 +177,8 @@ class LessonTile extends StatelessWidget {
     return null;
   }
 
-  String formatTime(DateTime time) => time != null
-      ? time.hour.toString() + ":" + time.minute.toString().padLeft(2, "0")
-      : '';
+  String formatTime(DateTime time) =>
+      time.hour.toString() + ":" + time.minute.toString().padLeft(2, "0");
 }
 
 class SpecialDateTile extends LessonTile {

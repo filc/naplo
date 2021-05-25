@@ -26,7 +26,7 @@ class EvaluationView extends StatelessWidget {
                               evaluation.description == "Dicséret"
                           ? "*"
                           : "")))
-                  : evaluation.value.shortName ?? "?",
+                  : evaluation.value.shortName,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 38.0,
@@ -34,7 +34,7 @@ class EvaluationView extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 color: evaluation.value.value != 0 &&
                         evaluation.evaluationType != null &&
-                        evaluation.evaluationType.name == "Szazalekos"
+                        evaluation.evaluationType!.name == "Szazalekos"
                     ? null
                     : app.theme
                         .evalColors[(evaluation.value.value - 1).clamp(0, 4)],
@@ -44,13 +44,13 @@ class EvaluationView extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    capital(evaluation.subject.name),
+                    capital(evaluation.subject!.name),
                     softWrap: false,
                     overflow: TextOverflow.fade,
                   ),
                 ),
                 Text(
-                  formatDate(context, evaluation.date),
+                  formatDate(context, evaluation.date)!,
                   style: TextStyle(fontSize: 14.0, color: Colors.grey),
                 ),
               ],
@@ -84,7 +84,7 @@ class EvaluationView extends StatelessWidget {
               evaluation.mode != null
                   ? EvaluationDetail(
                       I18n.of(context).evaluationType,
-                      evaluation.mode.description,
+                      evaluation.mode!.description,
                     )
                   : Container(),
               // Basically useless info
@@ -103,7 +103,7 @@ class EvaluationView extends StatelessWidget {
               evaluation.writeDate != null
                   ? EvaluationDetail(
                       I18n.of(context).evaluationWriteDate,
-                      formatDate(context, evaluation.writeDate),
+                      formatDate(context, evaluation.writeDate)!,
                     )
                   : Container(),
             ],

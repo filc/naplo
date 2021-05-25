@@ -1,4 +1,4 @@
-import 'package:filcnaplo/data/models/new.dart';
+import 'package:filcnaplo/data/models/news.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class _NewsViewState extends State<NewsView> {
                 physics: BouncingScrollPhysics(),
                 children: [
                   Text(
-                    widget.news.title ?? "",
+                    widget.news.title!,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: FontSize.large.size,
@@ -47,7 +47,7 @@ class _NewsViewState extends State<NewsView> {
                       ? Container(
                           margin: EdgeInsets.only(top: 10, bottom: 20),
                           child: SelectableLinkify(
-                            text: escapeHtml(widget.news.content),
+                            text: escapeHtml(widget.news.content!),
                             onOpen: (url) async {
                               await FlutterWebBrowser.openWebPage(
                                 url: url.url,
@@ -70,7 +70,7 @@ class _NewsViewState extends State<NewsView> {
                       ? ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(12)),
                           child: Image.network(
-                            widget.news.image,
+                            widget.news.image!,
                           ),
                         )
                       : Container(),
@@ -89,7 +89,7 @@ class _NewsViewState extends State<NewsView> {
                         ),
                         onPressed: () async {
                           await FlutterWebBrowser.openWebPage(
-                            url: widget.news.link,
+                            url: widget.news.link!,
                             customTabsOptions: CustomTabsOptions(
                               toolbarColor: app.settings.theme.backgroundColor,
                               showTitle: true,

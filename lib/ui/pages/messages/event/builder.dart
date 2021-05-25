@@ -10,7 +10,7 @@ class EventBuilder {
     List<Event> events = app.user.sync.event.events;
 
     events.sort(
-      (a, b) => -a.start.compareTo(b.start),
+      (a, b) => -a.start!.compareTo(b.start!),
     );
 
     events.forEach((event) => eventTiles.add(EventTile(event)));

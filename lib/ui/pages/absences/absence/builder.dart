@@ -8,11 +8,11 @@ class AbsenceBuilder {
   void build() {
     absenceTiles = [];
     List<Absence> absences = app.user.sync.absence.absences
-        .where((absence) => absence.type.name == "hianyzas")
+        .where((absence) => absence.type!.name == "hianyzas")
         .toList();
 
     absences.sort(
-      (a, b) => -a.date.compareTo(b.date),
+      (a, b) => -a.date!.compareTo(b.date!),
     );
 
     Map<String, List<Absence>> absenceDays = {};
@@ -21,12 +21,12 @@ class AbsenceBuilder {
         absenceDays[absence.date.toString()] = [];
       }
 
-      absenceDays[absence.date.toString()].add(absence);
+      absenceDays[absence.date.toString()]!.add(absence);
     });
 
     absenceDays.keys.forEach((day) {
-      List<Absence> absences = absenceDays[day];
-      absences.sort((a, b) => a.lessonStart.compareTo(b.lessonStart));
+      List<Absence>? absences = absenceDays[day];
+      absences!.sort((a, b) => a.lessonStart!.compareTo(b.lessonStart!));
       absenceTiles.add(AbsenceTileGroup(absences));
     });
   }

@@ -8,7 +8,7 @@ class Student {
   School school;
   DateTime? birth;
   String yearId;
-  String address;
+  String? address;
   String? groupId;
   List<String> parents;
   String? className;
@@ -25,18 +25,18 @@ class Student {
   });
 
   factory Student.fromJson(Map json) {
+    String id = json["Uid"];
     String name = json["Nev"] ?? json["SzuletesiNev"] ?? "";
     School school = School(
       json["IntezmenyAzonosito"] ?? "",
       json["IntezmenyNev"] ?? "",
       "",
     );
-    String id = json["Uid"];
     DateTime? birth = json["SzuletesiDatum"] != null
         ? DateTime.parse(json["SzuletesiDatum"]).toLocal()
         : null;
     String yearId = json["TanevUid"] ?? "";
-    String address = json["Cimek"] != null
+    String? address = json["Cimek"] != null
         ? json["Cimek"].length > 0 ? json["Cimek"][0] : null
         : null;
     List<String> parents = [];

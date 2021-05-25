@@ -34,7 +34,7 @@ class MessageBuilder {
         List<Message> messages,
         List<MessageTile> messageTileList) {
       messages.sort(
-        (a, b) => -a.date.compareTo(b.date),
+        (a, b) => -a.date!.compareTo(b.date!),
       );
 
       messages.forEach((Message message) {
@@ -47,8 +47,8 @@ class MessageBuilder {
           ));
         } else {
           if (conversations[message.conversationId] == null)
-            conversations[message.conversationId] = [];
-          conversations[message.conversationId].add(message);
+            conversations[message.conversationId!] = [];
+          conversations[message.conversationId]!.add(message);
         }
       });
     }
@@ -57,49 +57,40 @@ class MessageBuilder {
     buildConversations(archived, messageTiles.archived);
 
     conversations.keys.forEach((conversationId) {
-      Message firstMessage = received.firstWhere(
+      Message? firstMessage = received.firstWhere(
           (message) => message.messageId == conversationId,
-          orElse: () => null);
+          orElse: null);
 
-      if (firstMessage == null)
-        firstMessage = archived.firstWhere(
-            (message) => message.messageId == conversationId,
-            orElse: () => null);
-
-      if (firstMessage == null)
-        firstMessage = app.user.sync.messages.sent.firstWhere(
-            (message) => message.messageId == conversationId,
-            orElse: () => null);
-
-      if (firstMessage != null) conversations[conversationId].add(firstMessage);
+      conversations[conversationId]!.add(firstMessage);
       List<MessageTile> messageTileListOfFirst = () {
-        // Returns the list of messageTiles for the specific type
-        if (conversations[conversationId].first.deleted) {
-          return messageTiles.archived;
-        } else if (conversations[conversationId].first.type ==
-            MessageType.inbox) {
-          return messageTiles.received;
-        }
-      }();
+            // Returns the list of messageTiles for the specific type
+            if (conversations[conversationId]!.first.deleted) {
+              return messageTiles.archived;
+            } else if (conversations[conversationId]!.first.type ==
+                MessageType.inbox) {
+              return messageTiles.received;
+            }
+          }() ??
+          [];
 
       // Display the newest message of the conversation
       messageTileListOfFirst.add(MessageTile(
-        conversations[conversationId].first,
-        conversations[conversationId],
+        conversations[conversationId]!.first,
+        conversations[conversationId]!,
         updateCallback,
-        key: Key(conversations[conversationId][0].id.toString()),
+        key: Key(conversations[conversationId]![0].id.toString()),
       ));
 
       // The oldest message is not replying to anything, so it was displayed like a single message. Now we remove it from the list to make sure that only the newest message is displayed from every conversation.
       messageTileListOfFirst.removeWhere((messageTile) =>
-          messageTile.message.id == conversations[conversationId].last.id);
+          messageTile.message.id == conversations[conversationId]!.last.id);
     });
 
     messageTiles.received
-        .sort((a, b) => -a.message.date.compareTo(b.message.date));
+        .sort((a, b) => -a.message.date!.compareTo(b.message.date!));
 
     messageTiles.archived
-        .sort((a, b) => -a.message.date.compareTo(b.message.date));
+        .sort((a, b) => -a.message.date!.compareTo(b.message.date!));
   }
 }
 
@@ -121,7 +112,7 @@ class MessageTiles {
       case 3:
         return drafted;
       default:
-        return null;
+        return [];
     }
   }
 

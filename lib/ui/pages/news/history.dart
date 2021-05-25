@@ -12,7 +12,7 @@ class NewsHistoryView extends StatefulWidget {
 }
 
 class _NewsHistoryViewState extends State<NewsHistoryView> {
-  NewsBuilder newsBuilder;
+  late NewsBuilder newsBuilder;
 
   _NewsHistoryViewState() {
     this.newsBuilder = NewsBuilder();

@@ -30,12 +30,12 @@ class AbsenceView extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 12.0),
-                  child: Text(formatDate(context, absence.date)),
+                  child: Text(formatDate(context, absence.date)!),
                 ),
               ],
             ),
             subtitle: Text(
-              capital(absence.subject.name),
+              capital(absence.subject!.name),
               maxLines: 2,
               softWrap: false,
               overflow: TextOverflow.fade,
@@ -52,36 +52,36 @@ class AbsenceView extends StatelessWidget {
                         ? (absence.lessonIndex.toString() + ". (")
                         : "") +
                     (absence.lessonStart != null
-                        ? DateFormat("HH:mm").format(absence.lessonStart)
+                        ? DateFormat("HH:mm").format(absence.lessonStart!)
                         : I18n.of(context).unknown) +
                     " - " +
                     (absence.lessonEnd != null
-                        ? DateFormat("HH:mm").format(absence.lessonEnd)
+                        ? DateFormat("HH:mm").format(absence.lessonEnd!)
                         : I18n.of(context).unknown) +
                     (absence.lessonIndex != null ? ")" : ""),
               ),
               absence.mode != null
                   ? AbsenceDetail(
                       I18n.of(context).delayMode,
-                      absence.mode.description,
+                      absence.mode!.description,
                     )
                   : Container(),
               absence.justification != null
                   ? AbsenceDetail(
                       I18n.of(context).absenceJustification,
-                      absence.justification.description,
+                      absence.justification!.description,
                     )
                   : Container(),
               absence.state != null
                   ? AbsenceDetail(
                       I18n.of(context).delayState,
-                      absence.state,
+                      absence.state!,
                     )
                   : Container(),
               absence.submitDate != null
                   ? AbsenceDetail(
                       I18n.of(context).administrationTime,
-                      formatDate(context, absence.submitDate, showTime: true),
+                      formatDate(context, absence.submitDate, showTime: true)!,
                     )
                   : Container(),
             ],

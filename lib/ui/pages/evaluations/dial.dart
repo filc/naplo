@@ -8,9 +8,9 @@ import 'package:filcnaplo/utils/format.dart';
 class EvaluationsDial extends StatelessWidget {
   final int selectedOption;
   final bool inverted;
-  final Function onSelect;
+  final Function(int) onSelect;
 
-  EvaluationsDial(this.selectedOption, this.inverted, {this.onSelect});
+  EvaluationsDial(this.selectedOption, this.inverted, {required this.onSelect});
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +55,11 @@ class EvaluationsDial extends StatelessWidget {
 
 SpeedDialChild speedDialButton(
   BuildContext context, {
-  bool sortInverted,
-  IconData icon,
-  String text,
-  bool selected,
-  Function onTap,
+  required bool sortInverted,
+  required IconData icon,
+  required String text,
+  required bool selected,
+  required Function() onTap,
 }) {
   return SpeedDialChild(
     child: Row(
@@ -79,7 +79,7 @@ SpeedDialChild speedDialButton(
                       ? FeatherIcons.chevronDown
                       : FeatherIcons.chevronUp,
                   size: 16.0,
-                  color: app.settings.theme.textTheme.bodyText1.color,
+                  color: app.settings.theme.textTheme.bodyText1!.color,
                 ),
               )
             : Container(),
@@ -87,7 +87,7 @@ SpeedDialChild speedDialButton(
           icon,
           color: selected
               ? app.settings.appColor
-              : app.settings.theme.textTheme.bodyText1.color,
+              : app.settings.theme.textTheme.bodyText1!.color,
         ),
       ],
     ),

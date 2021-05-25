@@ -33,9 +33,9 @@ class AbsenceTileGroup extends StatelessWidget {
                           splashColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           accentColor:
-                              Theme.of(context).textTheme.bodyText1.color),
+                              Theme.of(context).textTheme.bodyText1!.color),
                       child: ExpansionTile(
-                        initiallyExpanded: absences.first.date.isAfter(
+                        initiallyExpanded: absences.first.date!.isAfter(
                             DateTime.now().subtract(Duration(days: 10))),
                         tilePadding: EdgeInsets.zero,
                         childrenPadding: EdgeInsets.only(bottom: 9),
@@ -63,12 +63,12 @@ class AbsenceTileGroup extends StatelessWidget {
                             I18n.of(context).absenceAbsences, absences.length)),
                         subtitle: Text(capital(DateFormat(
                                     "EEEE", app.settings.locale.toString())
-                                .format(absences[0].date)) +
-                            (absences[0].date.isAfter(
+                                .format(absences[0].date!)) +
+                            (absences[0].date!.isAfter(
                                     DateTime.now().subtract(Duration(days: 6)))
                                 ? ""
                                 : (" " +
-                                    formatDate(context, absences[0].date)))),
+                                    formatDate(context, absences[0].date)!))),
                         children:
                             absences.map((a) => AbsenceTileSmall(a)).toList(),
                       ),
@@ -107,7 +107,7 @@ class AbsenceTileSmall extends StatelessWidget {
                   ? Text(
                       absence.lessonIndex.toString() + ".",
                       style: TextStyle(
-                          color: Theme.of(context).textTheme.caption.color),
+                          color: Theme.of(context).textTheme.caption!.color),
                     )
                   : Container(),
             ),
@@ -115,7 +115,7 @@ class AbsenceTileSmall extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(left: 6.0),
                 child: Text(
-                  capital(absence.subject.name),
+                  capital(absence.subject!.name),
                   softWrap: false,
                   overflow: TextOverflow.fade,
                 ),

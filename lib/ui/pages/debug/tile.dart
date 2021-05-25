@@ -44,13 +44,13 @@ class DebugTile extends StatelessWidget {
           List<Color> statusColors = [
             Colors.green,
             Colors.grey,
-            Colors.yellow[600],
+            Colors.yellow.shade600,
             Colors.red,
           ];
-          Color statusColor = snapshot.data != null
+          Color statusColor = snapshot.hasData
               ? statusColors[
-                  ((snapshot.data.statusCode / 100).floor() - 2).clamp(0, 3)]
-              : null;
+                  ((snapshot.data!.statusCode / 100).floor() - 2).clamp(0, 3)]
+              : Colors.grey;
 
           return GestureDetector(
             onTap: () => Navigator.push(
@@ -58,9 +58,9 @@ class DebugTile extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => ResponseView(
                   uri: endpoint.uri,
-                  response: snapshot.data.response,
-                  statusCode: snapshot.data.statusCode,
-                  headers: snapshot.data.headers,
+                  response: snapshot.data!.response,
+                  statusCode: snapshot.data!.statusCode,
+                  headers: snapshot.data!.headers,
                 ),
               ),
             ),
@@ -83,7 +83,7 @@ class DebugTile extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               child: Text(
-                                snapshot.data.statusCode.toString(),
+                                snapshot.data!.statusCode.toString(),
                                 style: TextStyle(
                                   color: textColor(statusColor),
                                   fontSize: 18.0,
@@ -121,7 +121,7 @@ class DebugTile extends StatelessWidget {
                             borderRadius: BorderRadius.all(Radius.circular(5)),
                           ),
                           child: Text(
-                            snapshot.data.response
+                            snapshot.data!.response
                                 .replaceAll(RegExp(r'[\n\t\s]+'), " "),
                             maxLines: 5,
                             softWrap: false,

@@ -51,7 +51,7 @@ SlidingSheetDialog noteView(Note note, BuildContext context) {
             ListTile(
               leading: ProfileIcon(name: note.teacher),
               title: Text(note.teacher),
-              subtitle: Text(formatDate(context, note.date)),
+              subtitle: Text(formatDate(context, note.date)!),
               trailing: IconButton(
                 icon: Icon(FeatherIcons.share2, color: app.settings.appColor),
                 onPressed: () {
@@ -73,7 +73,7 @@ SlidingSheetDialog noteView(Note note, BuildContext context) {
                   data: note.content,
                   onLinkTap: (url, ctx, attr, elem) async {
                     await FlutterWebBrowser.openWebPage(
-                      url: url,
+                      url: url!,
                       customTabsOptions: CustomTabsOptions(
                         toolbarColor: app.settings.theme.backgroundColor,
                         showTitle: true,

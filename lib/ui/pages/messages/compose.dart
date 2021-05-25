@@ -33,7 +33,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
     }
   }
 
-  InputDecoration inputDecoration({String hint}) => InputDecoration(
+  InputDecoration inputDecoration({String hint = ""}) => InputDecoration(
         contentPadding: EdgeInsets.all(8.0),
         isDense: true,
         hintText: hint,
@@ -52,16 +52,16 @@ class _NewMessagePageState extends State<NewMessagePage> {
       suggestionsCallback: (pattern) {
         return SearchController.recipientResults(recipientsAll, pattern);
       },
-      itemBuilder: (context, suggestion) {
+      itemBuilder: (context, Recipient suggestion) {
         return ListTile(
           leading: ProfileIcon(name: suggestion.name, size: 0.7),
-          title: Text(suggestion.name ?? "", style: TextStyle(fontSize: 14)),
+          title: Text(suggestion.name, style: TextStyle(fontSize: 14)),
         );
       },
       transitionBuilder: (context, suggestionsBox, controller) {
         return suggestionsBox;
       },
-      onSuggestionSelected: (suggestion) {
+      onSuggestionSelected: (Recipient suggestion) {
         _typeAheadController.text = "";
         setState(() {
           if (!messageContext.recipients.contains(suggestion))
@@ -74,7 +74,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
     );
   }
 
-  Widget attachmentTile(PlatformFile file) {
+  Widget attachmentTile(PlatformFile? file) {
     return Container(
       padding: EdgeInsets.only(bottom: 12.0),
       decoration: BoxDecoration(
@@ -87,7 +87,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
             child: Padding(
               padding: EdgeInsets.only(left: 12.0),
               child: Text(
-                file.path.split("/").last,
+                file!.path!.split("/").last,
                 softWrap: false,
                 overflow: TextOverflow.fade,
               ),
@@ -109,29 +109,27 @@ class _NewMessagePageState extends State<NewMessagePage> {
   List<Widget> getRecipients() {
     List<Widget> recipients = [];
 
-    if (messageContext.recipients != null) {
-      messageContext.recipients.forEach((Recipient recipient) {
-        recipients.add(
-          Padding(
-            padding: EdgeInsets.only(left: 4.0),
-            child: Chip(
-              avatar: ProfileIcon(name: recipient.name, size: 0.5),
-              label: Text(
-                recipient.name,
-                softWrap: false,
-                overflow: TextOverflow.fade,
-              ),
-              onDeleted: () {
-                setState(() {
-                  messageContext.recipients
-                      .removeWhere((Recipient i) => i.name == recipient.name);
-                });
-              },
+    messageContext.recipients.forEach((Recipient recipient) {
+      recipients.add(
+        Padding(
+          padding: EdgeInsets.only(left: 4.0),
+          child: Chip(
+            avatar: ProfileIcon(name: recipient.name, size: 0.5),
+            label: Text(
+              recipient.name,
+              softWrap: false,
+              overflow: TextOverflow.fade,
             ),
+            onDeleted: () {
+              setState(() {
+                messageContext.recipients
+                    .removeWhere((Recipient i) => i.name == recipient.name);
+              });
+            },
           ),
-        );
-      });
-    }
+        ),
+      );
+    });
 
     return recipients;
   }
@@ -165,7 +163,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
 
     if (messageContext.subject != null) {
       setState(() {
-        subjectController.text = messageContext.subject;
+        subjectController.text = messageContext.subject!;
       });
       messageContext.subject = null;
     }
@@ -203,13 +201,13 @@ class _NewMessagePageState extends State<NewMessagePage> {
                       onPressed: () async {
                         try {
                           List<PlatformFile> files =
-                              (await FilePicker.platform.pickFiles()).files;
+                              (await FilePicker.platform.pickFiles())!.files;
                           setState(() {
                             for (var i = 0; i < files.length; i++) {
                               PlatformFile f = files[i];
                               messageContext.attachments.add(
-                                Attachment(null, f, f.path.split("/").last,
-                                    null, null),
+                                Attachment(
+                                    0, f, f.path!.split("/").last, null, ""),
                               );
                             }
                           });

@@ -9,12 +9,12 @@ class MissBuilder {
     missTiles = [];
     List<Note> misses = app.user.sync.note.notes
         .where((miss) =>
-            miss.type.name == "HaziFeladatHiany" ||
-            miss.type.name == "Felszereleshiany")
+            miss.type!.name == "HaziFeladatHiany" ||
+            miss.type!.name == "Felszereleshiany")
         .toList();
 
     misses.sort(
-      (a, b) => -a.date.compareTo(b.date),
+      (a, b) => -a.date!.compareTo(b.date!),
     );
 
     misses.forEach((miss) => missTiles.add(Padding(

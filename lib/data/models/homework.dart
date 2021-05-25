@@ -8,7 +8,7 @@ class Homework {
   String teacher;
   String content;
   String subjectName;
-  String group;
+  String? group;
   List<HomeworkAttachment> attachments;
   String id;
 
@@ -42,7 +42,7 @@ class Homework {
     String teacher = json["RogzitoTanarNeve"] ?? "";
     String content = (json["Szoveg"] ?? "").trim();
     String subjectName = json["TantargyNeve"] ?? "";
-    String group =
+    String? group =
         json["OsztalyCsoport"] != null ? json["OsztalyCsoport"]["Uid"] : null;
     List<HomeworkAttachment> attachments = [];
     // Elvileg nem kéne nullnak lennie, de just in case

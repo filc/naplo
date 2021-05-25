@@ -4,15 +4,14 @@ import 'package:photo_view/photo_view.dart';
 
 class ImageViewer extends StatelessWidget {
   const ImageViewer({
-    Key key,
-    this.imageProvider,
-    this.downloadHandler,
-    this.shareHandler,
-  }) : super(key: key);
+    required this.imageProvider,
+    required this.downloadHandler,
+    required this.shareHandler,
+  });
 
   final ImageProvider<Object> imageProvider;
-  final Function downloadHandler;
-  final Function shareHandler;
+  final Function() downloadHandler;
+  final Function() shareHandler;
 
   @override
   Widget build(BuildContext context) {

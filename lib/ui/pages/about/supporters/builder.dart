@@ -19,7 +19,7 @@ class SupporterBuilder {
             SizedBox(width: 6.0),
             Text("Patreon"),
             Spacer(),
-            Dot(color: Colors.yellow[600]),
+            Dot(color: Colors.yellow.shade600),
             SizedBox(width: 6.0),
             Text("Donate"),
             Spacer(),

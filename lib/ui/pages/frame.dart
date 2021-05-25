@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:filcnaplo/data/context/page.dart';
-import 'package:filcnaplo/data/models/new.dart';
+import 'package:filcnaplo/data/models/news.dart';
 import 'package:filcnaplo/data/sync/state.dart';
 import 'package:filcnaplo/kreta/client.dart';
 import 'package:filcnaplo/ui/pages/news/view.dart';

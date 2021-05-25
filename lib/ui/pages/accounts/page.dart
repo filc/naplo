@@ -22,7 +22,7 @@ class _AccountPageState extends State<AccountPage> {
     setState(() {
       app.selectedUser = id;
     });
-    app.sync.updateCallback();
+    app.sync.updateCallback!();
     app.sync.fullSync();
     app.user.kreta.userAgent = app.settings.config.config.userAgent;
 

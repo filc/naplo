@@ -5,7 +5,7 @@ import 'package:filcnaplo/ui/pages/evaluations/grades/view.dart';
 
 class GradeTile extends StatelessWidget {
   final Evaluation evaluation;
-  final Function deleteCallback;
+  final Function(Evaluation)? deleteCallback;
   final EdgeInsetsGeometry padding;
 
   GradeTile(

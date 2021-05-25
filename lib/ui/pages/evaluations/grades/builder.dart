@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class GradeBuilder {
   List<GradeTile> gradeTiles = [];
 
-  void build({EvaluationType type, int sortBy}) {
+  void build({EvaluationType type = EvaluationType.unknown, int? sortBy}) {
     // sortBy
     // 0 date
     // 1 date R
@@ -24,12 +24,12 @@ class GradeBuilder {
       switch (sortBy) {
         case 0: //Date forward
           evaluations.sort(
-            (a, b) => -a.date.compareTo(b.date),
+            (a, b) => -a.date!.compareTo(b.date!),
           );
           break;
         case 1: //Date backward
           evaluations.sort(
-            (a, b) => a.date.compareTo(b.date),
+            (a, b) => a.date!.compareTo(b.date!),
           );
           break;
         case 2: //WriteDate forward
@@ -53,7 +53,7 @@ class GradeBuilder {
           evaluations.removeWhere((element) => dicseretesek.contains(element));
 
           evaluations.sort(
-            (a, b) => -(a.value.value ?? 0).compareTo(b.value.value ?? 0),
+            (a, b) => -(a.value.value).compareTo(b.value.value),
           );
 
           evaluations.insertAll(0, dicseretesek);
@@ -65,7 +65,7 @@ class GradeBuilder {
           evaluations.removeWhere((element) => dicseretesek.contains(element));
 
           evaluations.sort(
-            (a, b) => (a.value.value ?? 0).compareTo(b.value.value ?? 0),
+            (a, b) => (a.value.value).compareTo(b.value.value),
           );
 
           evaluations.addAll(dicseretesek);
@@ -73,7 +73,7 @@ class GradeBuilder {
       }
     } else {
       evaluations.sort(
-        (a, b) => -a.date.compareTo(b.date),
+        (a, b) => -a.date!.compareTo(b.date!),
       );
     }
 

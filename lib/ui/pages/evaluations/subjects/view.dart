@@ -25,7 +25,7 @@ class SubjectView extends StatefulWidget {
 }
 
 class _SubjectViewState extends State<SubjectView> {
-  double studentAvg;
+  late double studentAvg;
   List<Evaluation> tempEvals = [];
 
   @override
@@ -35,16 +35,14 @@ class _SubjectViewState extends State<SubjectView> {
     List<Evaluation> evaluations = app.user.sync.evaluation.evaluations;
 
     List<Evaluation> subjectEvals =
-        evaluations.where((e) => e.subject.id == widget.subject.id).toList();
+        evaluations.where((e) => e.subject!.id == widget.subject.id).toList();
     subjectEvals.insertAll(0, tempEvals);
 
     List<Widget> evaluationTiles = [];
 
     subjectEvals.forEach((evaluation) {
       if (evaluation.type == EvaluationType.midYear) {
-        if (evaluation.date != null &&
-            evaluation.value.value !=
-                null) if (evaluation.id.startsWith("temp_")) {
+        if (evaluation.date != null) if (evaluation.id.startsWith("temp_")) {
           evaluationTiles.add(GradeTile(
             evaluation,
             padding: EdgeInsets.only(bottom: 6.0),
@@ -57,7 +55,7 @@ class _SubjectViewState extends State<SubjectView> {
           ));
         }
       } else {
-        String yearTitle;
+        String? yearTitle;
 
         switch (evaluation.type) {
           case EvaluationType.firstQ:
@@ -89,7 +87,7 @@ class _SubjectViewState extends State<SubjectView> {
         }
 
         evaluationTiles.add(YearDivider(
-          text: yearTitle,
+          text: yearTitle ?? "-",
           evaluation: evaluation,
         ));
       }
@@ -110,7 +108,7 @@ class _SubjectViewState extends State<SubjectView> {
         shadowColor: Colors.transparent,
         backgroundColor: app.settings.theme.scaffoldBackgroundColor,
         actions: [
-          widget.classAvg != null && roundSubjAvg(widget.classAvg) != 0
+          widget.classAvg != 0 && roundSubjAvg(widget.classAvg) != 0
               ? Padding(
                   padding: EdgeInsets.fromLTRB(0, 12.0, 8.0, 12.0),
                   child: Row(
@@ -237,11 +235,9 @@ class _SubjectViewState extends State<SubjectView> {
               multiplier: tempEvals.length + 1,
             ),
           );
-          if (tempEval != null) {
-            setState(() {
-              tempEvals.insert(0, tempEval);
-            });
-          }
+          setState(() {
+            tempEvals.insert(0, tempEval);
+          });
         },
       ),
     );
@@ -255,48 +251,45 @@ class _SubjectViewState extends State<SubjectView> {
 }
 
 class YearDivider extends StatelessWidget {
-  const YearDivider({Key key, @required this.text, @required this.evaluation})
-      : super(key: key);
+  const YearDivider({required this.text, required this.evaluation});
 
   final String text;
   final Evaluation evaluation;
 
   @override
   Widget build(BuildContext context) {
-    return text != null
-        ? Padding(
-            padding: EdgeInsets.only(bottom: 4.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(.7),
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  height: 3.0,
-                  width: 100.0,
-                  margin: EdgeInsets.all(6.0),
-                ),
-                Text(
-                  text,
-                  style: TextStyle(
-                    color: app.settings.appColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(.7),
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  height: 3.0,
-                  width: 100.0,
-                  margin: EdgeInsets.all(6.0),
-                ),
-              ],
+    return Padding(
+      padding: EdgeInsets.only(bottom: 4.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(.7),
+              borderRadius: BorderRadius.circular(12.0),
             ),
-          )
-        : Container();
+            height: 3.0,
+            width: 100.0,
+            margin: EdgeInsets.all(6.0),
+          ),
+          Text(
+            text,
+            style: TextStyle(
+              color: app.settings.appColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(.7),
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            height: 3.0,
+            width: 100.0,
+            margin: EdgeInsets.all(6.0),
+          ),
+        ],
+      ),
+    );
   }
 }

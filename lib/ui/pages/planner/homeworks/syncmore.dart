@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 
 class MoreHomework extends StatefulWidget {
-  final Function callback;
+  final Function()? callback;
 
-  const MoreHomework({Key key, this.callback}) : super(key: key);
+  const MoreHomework({this.callback});
   @override
   _MoreHomeworkState createState() => _MoreHomeworkState();
 }
@@ -53,6 +53,6 @@ class _MoreHomeworkState extends State<MoreHomework> {
       setState(() {
         ready = true;
       });
-    widget.callback();
+    widget.callback!();
   }
 }

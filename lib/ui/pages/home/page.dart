@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _refreshHome = GlobalKey<RefreshIndicatorState>();
 
-  FeedBuilder _feedBuilder;
+  late FeedBuilder _feedBuilder;
 
   @override
   void initState() {

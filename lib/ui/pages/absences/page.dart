@@ -21,9 +21,9 @@ class AbsencesPage extends StatefulWidget {
 
 class _AbsencesPageState extends State<AbsencesPage>
     with SingleTickerProviderStateMixin {
-  AbsenceBuilder _absenceBuilder;
-  DelayBuilder _delayBuilder;
-  MissBuilder _missBuilder;
+  late AbsenceBuilder _absenceBuilder;
+  late DelayBuilder _delayBuilder;
+  late MissBuilder _missBuilder;
 
   _AbsencesPageState() {
     this._absenceBuilder = AbsenceBuilder();
@@ -41,8 +41,8 @@ class _AbsencesPageState extends State<AbsencesPage>
   final _refreshKeyDelays = GlobalKey<RefreshIndicatorState>();
   final _refreshKeyMisses = GlobalKey<RefreshIndicatorState>();
 
-  TabController _tabController;
-  bool didPageChange;
+  late TabController _tabController;
+  late bool didPageChange;
 
   @override
   void initState() {
@@ -98,7 +98,8 @@ class _AbsencesPageState extends State<AbsencesPage>
               bottom: CustomTabBar(
                 controller: _tabController,
                 onTap: (value) => _tabController.animateTo(value),
-                color: app.settings.theme.textTheme.bodyText1.color,
+                selectedColor: app.settings.appColor,
+                color: app.settings.theme.textTheme.bodyText1!.color!,
                 labels: [
                   CustomLabel(title: capital(I18n.of(context).absenceAbsences)),
                   CustomLabel(title: capital(I18n.of(context).absenceDelays)),

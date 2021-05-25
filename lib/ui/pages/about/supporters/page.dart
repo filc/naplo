@@ -18,7 +18,7 @@ class _AboutSupportersState extends State<AboutSupporters> {
     return Scaffold(
       body: FutureBuilder(
         future: _supporterBuilder.build(context),
-        builder: (BuildContext context, snapshot) => Container(
+        builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) => Container(
           padding: EdgeInsets.only(top: 28.0),
           child: Column(
             children: [
@@ -42,7 +42,7 @@ class _AboutSupportersState extends State<AboutSupporters> {
                       physics: BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),
                       children: snapshot.hasData
-                          ? snapshot.data
+                          ? snapshot.data!
                           : [
                               Container(
                                 height: 200.0,

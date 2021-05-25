@@ -14,15 +14,15 @@ class HomeworkBuilder {
 
     List<Homework> homeworks = app.user.sync.homework.homework.toList();
 
-    homeworks.sort((a, b) => -a.date.compareTo(b.date));
+    homeworks.sort((a, b) => -a.date!.compareTo(b.date!));
 
     homeworkTiles[0] = homeworks
-        .where((h) => h.date.isBefore(now) && h.deadline.isAfter(now))
+        .where((h) => h.date!.isBefore(now) && h.deadline!.isAfter(now))
         .map((h) => HomeworkTile(h, false, updateTiles))
         .toList();
 
     homeworkTiles[1] = homeworks
-        .where((h) => h.deadline.isBefore(now))
+        .where((h) => h.deadline!.isBefore(now))
         .map((h) => HomeworkTile(h, true, updateTiles))
         .toList();
   }

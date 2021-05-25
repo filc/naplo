@@ -1,6 +1,6 @@
 import 'package:filcnaplo/ui/pages/news/view.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:filcnaplo/data/models/new.dart';
+import 'package:filcnaplo/data/models/news.dart';
 import 'package:flutter/material.dart';
 
 class NewsTile extends StatelessWidget {
@@ -19,9 +19,9 @@ class NewsTile extends StatelessWidget {
       child: ListTile(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-        title: Text(news.title),
+        title: Text(news.title!),
         subtitle: Text(
-          news.content.replaceAll("\n", " "),
+          news.content!.replaceAll("\n", " "),
           maxLines: 1,
           softWrap: false,
           overflow: TextOverflow.fade,

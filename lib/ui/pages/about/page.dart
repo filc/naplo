@@ -174,9 +174,9 @@ class AboutPage extends StatelessWidget {
 class AboutButton extends StatelessWidget {
   final String text;
   final IconData icon;
-  final Function onPressed;
+  final Function()? onPressed;
 
-  AboutButton({this.text, this.icon, this.onPressed});
+  AboutButton({required this.text, required this.icon, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -185,11 +185,9 @@ class AboutButton extends StatelessWidget {
       child: MaterialButton(
         shape: StadiumBorder(),
         child: ListTile(
-            leading: icon != null
-                ? Padding(
-                    padding: EdgeInsets.only(right: 8.0),
-                    child: Icon(icon, color: Colors.white))
-                : Container(),
+            leading: Padding(
+                padding: EdgeInsets.only(right: 8.0),
+                child: Icon(icon, color: Colors.white)),
             title: Text(text,
                 style: TextStyle(fontSize: 18.0, color: Colors.white))),
         onPressed: onPressed,
@@ -199,17 +197,18 @@ class AboutButton extends StatelessWidget {
 }
 
 class SocialButton extends StatelessWidget {
-  final Color color;
+  final Color? color;
   final Widget icon;
-  final Function onPressed;
-  final String label;
+  final Function() onPressed;
+  final String? label;
 
-  SocialButton({this.color, this.icon, this.onPressed, this.label});
+  SocialButton(
+      {this.color, required this.icon, required this.onPressed, this.label});
 
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: label,
+      message: label!,
       child: SizedBox(
         width: 100.0,
         height: 64.0,

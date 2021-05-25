@@ -38,8 +38,8 @@ class Message {
     Map message = json["uzenet"];
     int id = json["azonosito"];
     int messageId = message["azonosito"];
-    int replyId = message["elozoUzenetAzonosito"];
-    int conversationId = message["beszelgetesAzonosito"];
+    int? replyId = message["elozoUzenetAzonosito"];
+    int? conversationId = message["beszelgetesAzonosito"];
     bool seen = json["isElolvasva"] ?? false;
     bool deleted = json["isToroltElem"] ?? false;
     DateTime? date = message["kuldesDatum"] != null

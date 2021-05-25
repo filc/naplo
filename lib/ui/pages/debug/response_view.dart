@@ -11,9 +11,9 @@ class ResponseView extends StatelessWidget {
   final Map<String, String> headers;
 
   ResponseView({
-    this.uri,
-    this.response,
-    this.statusCode,
+    required this.uri,
+    this.response = "",
+    this.statusCode = 0,
     this.headers = const {},
   });
 
@@ -39,11 +39,12 @@ class ResponseView extends StatelessWidget {
     lineNumbers = lineNumbers.join('\n');
 
     Color statusColor = [
-      Colors.green,
-      Colors.grey,
-      Colors.yellow[600],
-      Colors.red,
-    ][((statusCode / 100).floor() - 2).clamp(0, 3)];
+          Colors.green,
+          Colors.grey,
+          Colors.yellow[600],
+          Colors.red,
+        ][((statusCode / 100).floor() - 2).clamp(0, 3)] ??
+        Colors.grey;
 
     return Scaffold(
       appBar: AppBar(

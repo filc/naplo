@@ -7,20 +7,20 @@ class Lesson {
   DateTime? date;
   Subject? subject;
   String lessonIndex;
-  int lessonYearIndex;
+  int? lessonYearIndex;
   String substituteTeacher;
   String teacher;
   bool homeworkEnabled;
   DateTime? start;
   DateTime? end;
   Type? studentPresence;
-  String homeworkId;
+  String? homeworkId;
   List exams;
   String id;
   Type? type;
   String description;
   String room;
-  String groupName;
+  String? groupName;
   String name;
   bool isEmpty;
 
@@ -57,7 +57,7 @@ class Lesson {
         json["Tantargy"] != null ? Subject.fromJson(json["Tantargy"]) : null;
     String? lessonIndex =
         json["Oraszam"] != null ? json["Oraszam"].toString() : "+";
-    int lessonYearIndex = json["OraEvesSorszama"];
+    int? lessonYearIndex = json["OraEvesSorszama"];
     String substituteTeacher = json["HelyettesTanarNeve"] ?? "";
     String teacher = json["TanarNeve"] ?? "";
     bool homeworkEnabled = json["IsTanuloHaziFeladatEnabled"] ?? false;
@@ -68,7 +68,7 @@ class Lesson {
         ? DateTime.parse(json["VegIdopont"]).toLocal()
         : null;
     Type? studentPresence;
-    String homeworkId = json["HaziFeladatUid"];
+    String? homeworkId = json["HaziFeladatUid"];
     List exams = json["BejelentettSzamonkeresUids"] != null
         ? json["BejelentettSzamonkeresUids"]
         : [];
@@ -76,7 +76,7 @@ class Lesson {
     Type? type = json["Tipus"] != null ? Type.fromJson(json["Tipus"]) : null;
     String description = json["Tema"] ?? "";
     String room = json["TeremNeve"] ?? "";
-    String groupName =
+    String? groupName =
         json["OsztalyCsoport"] != null ? json["OsztalyCsoport"]["Nev"] : null;
     String name = json["Nev"] ?? "";
     bool isEmpty =

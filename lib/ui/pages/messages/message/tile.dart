@@ -13,7 +13,7 @@ class MessageTile extends StatelessWidget {
   final updateCallback;
   final Key key;
 
-  MessageTile(this.message, this.children, this.updateCallback, {this.key});
+  MessageTile(this.message, this.children, this.updateCallback, {required this.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class MessageTile extends StatelessWidget {
                       child: Icon(FeatherIcons.paperclip, size: 20.0))
                   : Container(),
               Text(
-                formatDate(context, message.date),
+                formatDate(context, message.date)!,
                 textAlign: TextAlign.right,
               )
             ]),

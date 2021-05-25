@@ -8,7 +8,7 @@ class Absence {
   int delay;
   DateTime? submitDate;
   String teacher;
-  String state;
+  String? state;
   Type? justification;
   Type? type;
   Type? mode;
@@ -16,7 +16,7 @@ class Absence {
   DateTime? lessonStart;
   DateTime? lessonEnd;
   int? lessonIndex;
-  String group;
+  String? group;
 
   Absence(
     this.id,
@@ -45,7 +45,7 @@ class Absence {
         ? DateTime.parse(json["KeszitesDatuma"]).toLocal()
         : null;
     String teacher = json["RogzitoTanarNeve"] ?? "";
-    String state = json["IgazolasAllapota"] ?? "";
+    String? state = json["IgazolasAllapota"];
     Type? justification = json["IgazolasTipusa"] != null
         ? Type.fromJson(json["IgazolasTipusa"])
         : null;
@@ -67,7 +67,7 @@ class Absence {
       lessonIndex = json["Ora"]["Oraszam"];
     }
 
-    String group =
+    String? group =
         json["OsztalyCsoport"] != null ? json["OsztalyCsoport"]["Uid"] : null;
 
     return Absence(

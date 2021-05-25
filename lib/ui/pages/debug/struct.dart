@@ -7,7 +7,7 @@ class DebugEndpoint {
   String host;
   String uri;
   String name;
-  DebugEndpoint({this.host, this.uri, this.name});
+  DebugEndpoint({required this.host, required this.uri, required this.name});
 }
 
 class DebugError {
@@ -15,8 +15,8 @@ class DebugError {
   String parent;
 
   DebugError({
-    this.details,
-    this.parent,
+    required this.details,
+    required this.parent,
   });
 }
 
@@ -24,13 +24,13 @@ class DebugResponse {
   String response = "";
   List<DebugError> errors = [];
   int statusCode = 0;
-  Map<String, String> headers;
+  Map<String, String> headers = {};
 }
 
 class DebugViewStruct {
   final DebugViewClass type;
-  String title;
-  List<DebugEndpoint> endpoints;
+  String? title;
+  List<DebugEndpoint> endpoints = [];
 
   DebugViewStruct(this.type) {
     switch (this.type) {

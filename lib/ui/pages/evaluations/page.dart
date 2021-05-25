@@ -25,8 +25,8 @@ class EvaluationsPage extends StatefulWidget {
 
 class _EvaluationsPageState extends State<EvaluationsPage>
     with SingleTickerProviderStateMixin {
-  GradeBuilder _gradeBuilder;
-  SubjectBuilder _subjectBuilder;
+  late GradeBuilder _gradeBuilder;
+  late SubjectBuilder _subjectBuilder;
   int evalSortBy = 0;
   List<EvaluationType> types = [];
 
@@ -48,8 +48,8 @@ class _EvaluationsPageState extends State<EvaluationsPage>
 
   EvaluationType selectedEvalType =
       app.pageContext.evaluationType ?? EvaluationType.midYear;
-  TabController _tabController;
-  bool didPageChange;
+  late TabController _tabController;
+  late bool didPageChange;
 
   final _refreshKeyGrades = GlobalKey<RefreshIndicatorState>();
   final _refreshKeySubjects = GlobalKey<RefreshIndicatorState>();
@@ -121,7 +121,8 @@ class _EvaluationsPageState extends State<EvaluationsPage>
               ],
               bottom: CustomTabBar(
                 controller: _tabController,
-                color: app.settings.theme.textTheme.bodyText1.color,
+                selectedColor: app.settings.appColor,
+                color: app.settings.theme.textTheme.bodyText1!.color!,
                 onTap: (value) {
                   setState(() {
                     _tabController.animateTo(value);
@@ -131,7 +132,7 @@ class _EvaluationsPageState extends State<EvaluationsPage>
                   CustomLabel(
                     title: types.length == 1
                         ? capital(I18n.of(context).evaluationsMidYear)
-                        : null,
+                        : "",
                     dropdown: types.length > 1
                         ? CustomDropdown(
                             values: {

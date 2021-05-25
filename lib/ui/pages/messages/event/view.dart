@@ -48,7 +48,7 @@ SlidingSheetDialog eventView(Event event, BuildContext context) {
               ),
             ),
             ListTile(
-              title: Text(formatDate(context, event.start)),
+              title: Text(formatDate(context, event.start)!),
               trailing: IconButton(
                 icon: Icon(FeatherIcons.share2, color: app.settings.appColor),
                 onPressed: () {
@@ -70,7 +70,7 @@ SlidingSheetDialog eventView(Event event, BuildContext context) {
                   data: event.content,
                   onLinkTap: (url, ctx, attr, elem) async {
                     await FlutterWebBrowser.openWebPage(
-                      url: url,
+                      url: url!,
                       customTabsOptions: CustomTabsOptions(
                         toolbarColor: app.settings.theme.backgroundColor,
                         showTitle: true,

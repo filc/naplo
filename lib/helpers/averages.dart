@@ -7,7 +7,7 @@ class SubjectAverage {
   SubjectAverage(this.subject, this.average, this.classAverage);
   final Subject subject;
   final double average;
-  final double classAverage;
+  final double? classAverage;
 }
 
 int roundSubjAvg(double average) {
@@ -36,7 +36,7 @@ List<SubjectAverage> calculateSubjectAverages() {
           .where((e) => e.subject!.id == evaluation.subject!.id)
           .toList());
 
-      double classAverage = 0;
+      double? classAverage = 0;
 
       classAverage = app.user.sync.evaluation.averages.firstWhere(
           (a) => a[0].id == evaluation.subject!.id,

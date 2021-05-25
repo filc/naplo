@@ -42,7 +42,7 @@ class EvaluationTile extends StatelessWidget {
                         (evaluation.value.weight != 100
                             ? evaluation.value.weight.toString() + "%"
                             : "")
-                    : "\n" + evaluation.form)
+                    : "\n" + evaluation.form!)
                 : "")
         : evaluation.value.valueName.split("(")[0];
 

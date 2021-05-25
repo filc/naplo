@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 class SubjectTile extends StatelessWidget {
   final Subject subject;
   final double studentAvg;
-  final double classAvg;
+  final double? classAvg;
 
   SubjectTile(this.subject, this.studentAvg, this.classAvg);
 
@@ -51,7 +51,7 @@ class SubjectTile extends StatelessWidget {
                       ),
                     )
                   : Container(),
-              classAvg != null && roundSubjAvg(classAvg) != 0
+              classAvg != null && classAvg != 0 && roundSubjAvg(classAvg!) != 0
                   ? Tooltip(
                       message:
                           capitalize(I18n.of(context).evaluationAverageClass),
@@ -64,7 +64,7 @@ class SubjectTile extends StatelessWidget {
                                   BorderRadius.all(Radius.circular(45.0)),
                               border: Border.all(
                                 width: 3.0,
-                                color: getAverageColor(classAvg),
+                                color: getAverageColor(classAvg!),
                               ),
                             ),
                             padding: EdgeInsets.all(5.0),
@@ -78,8 +78,8 @@ class SubjectTile extends StatelessWidget {
                           ),
                           Text(
                             app.settings.language.split("_")[0] == "en"
-                                ? classAvg.toStringAsFixed(2)
-                                : classAvg
+                                ? classAvg!.toStringAsFixed(2)
+                                : classAvg!
                                     .toStringAsFixed(2)
                                     .split(".")
                                     .join(","),
@@ -138,7 +138,7 @@ class SubjectTile extends StatelessWidget {
         ),
         onPressed: () {
           Navigator.of(context, rootNavigator: true).push(CupertinoPageRoute(
-              builder: (context) => SubjectView(subject, classAvg)));
+              builder: (context) => SubjectView(subject, classAvg!)));
         },
       ),
     );

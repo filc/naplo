@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:filcnaplo/data/models/config.dart';
-import 'package:filcnaplo/data/models/new.dart';
+import 'package:filcnaplo/data/models/news.dart';
 import 'package:filcnaplo/utils/network.dart';
 import 'package:http/http.dart' as http;
 import 'package:filcnaplo/kreta/api.dart';

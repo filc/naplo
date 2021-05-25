@@ -27,7 +27,7 @@ class _SubjectGraphState extends State<SubjectGraph> {
     List<Evaluation> data = widget.data
         .where((evaluation) => evaluation.value.weight != 0)
         .where((evaluation) => evaluation.type == EvaluationType.midYear)
-        .where((evaluation) => evaluation.evaluationType.name == "Osztalyzat")
+        .where((evaluation) => evaluation.evaluationType!.name == "Osztalyzat")
         .toList();
 
     // Calculate average
@@ -36,18 +36,21 @@ class _SubjectGraphState extends State<SubjectGraph> {
     // Calculate graph color
     Color averagecolor = average >= 1 && average <= 5
         ? ColorTween(
-                begin: app.theme.evalColors[average.floor() - 1],
-                end: app.theme.evalColors[average.ceil() - 1])
-            .transform(average - average.floor())
+                    begin: app.theme.evalColors[average.floor() - 1],
+                    end: app.theme.evalColors[average.ceil() - 1])
+                .transform(average - average.floor()) ??
+            app.settings.theme.accentColor
         : app.settings.theme.accentColor;
 
     // Sort by date
-    data.sort((a, b) => -a.writeDate.compareTo(b.writeDate));
+    data.sort((a, b) => -a.writeDate!.compareTo(b.writeDate!));
 
     // Sort data to points by treshold
     data.forEach((element) {
       if (sortedData.last.length != 0 &&
-          sortedData.last.last.writeDate.difference(element.writeDate).inDays >
+          sortedData.last.last.writeDate!
+                  .difference(element.writeDate!)
+                  .inDays >
               widget.dayThreshold) sortedData.add([]);
       sortedData.forEach((dataList) {
         dataList.add(element);
@@ -59,9 +62,9 @@ class _SubjectGraphState extends State<SubjectGraph> {
       double average = averageEvals(dataList);
 
       subjectData.add(FlSpot(
-        dataList[0].writeDate.month +
-            (dataList[0].writeDate.day / 31) +
-            ((dataList[0].writeDate.year - data.first.writeDate.year) * 12),
+        dataList[0].writeDate!.month +
+            (dataList[0].writeDate!.day / 31) +
+            ((dataList[0].writeDate!.year - data.first.writeDate!.year) * 12),
         double.parse(average.toStringAsFixed(2)),
       ));
     });
@@ -142,7 +145,7 @@ class _SubjectGraphState extends State<SubjectGraph> {
             show: true,
             border: Border.all(
               color: Theme.of(context).brightness == Brightness.light
-                  ? Colors.grey[400]
+                  ? Colors.grey.shade400
                   : app.settings.theme.backgroundColor,
               width: 4,
             ),

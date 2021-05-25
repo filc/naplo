@@ -24,9 +24,9 @@ class MessagesPage extends StatefulWidget {
 
 class _MessagesPageState extends State<MessagesPage>
     with SingleTickerProviderStateMixin {
-  MessageBuilder _messageBuilder;
-  NoteBuilder _noteBuilder;
-  EventBuilder _eventBuilder;
+  late MessageBuilder _messageBuilder;
+  late NoteBuilder _noteBuilder;
+  late EventBuilder _eventBuilder;
 
   _MessagesPageState() {
     this._messageBuilder = MessageBuilder(() => setState(() {
@@ -40,9 +40,9 @@ class _MessagesPageState extends State<MessagesPage>
   final _refreshKeyNotes = GlobalKey<RefreshIndicatorState>();
   final _refreshKeyEvents = GlobalKey<RefreshIndicatorState>();
 
-  TabController _tabController;
+  late TabController _tabController;
   MessageType selectedMessageType = MessageType.inbox;
-  bool didPageChange;
+  late bool didPageChange;
   List<Widget> messageTiles = [];
 
   @override
@@ -129,7 +129,8 @@ class _MessagesPageState extends State<MessagesPage>
               ],
               bottom: CustomTabBar(
                 controller: _tabController,
-                color: app.settings.theme.textTheme.bodyText1.color,
+                selectedColor: app.settings.appColor,
+                color: app.settings.theme.textTheme.bodyText1!.color!,
                 onTap: (value) {
                   _tabController.animateTo(value);
                   setState(() {
@@ -138,6 +139,7 @@ class _MessagesPageState extends State<MessagesPage>
                 },
                 labels: [
                   CustomLabel(
+                    title: "",
                     dropdown: CustomDropdown(
                         initialValue: selectedMessageType.index,
                         callback: (value) {

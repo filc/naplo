@@ -53,15 +53,13 @@ SlidingSheetDialog homeworkView(Homework homework, BuildContext context) {
                         children: [
                           Expanded(
                             child: Text(
-                              homework.teacher != null
-                                  ? capitalize(homework.teacher)
-                                  : I18n.of(context).unknown,
+                              capitalize(homework.teacher),
                               softWrap: false,
                               overflow: TextOverflow.fade,
                               maxLines: 1,
                             ),
                           ),
-                          Text(formatDate(context, homework.date))
+                          Text(formatDate(context, homework.date)!)
                         ],
                       ),
                       subtitle: Text(capital(homework.subjectName)),
@@ -75,7 +73,7 @@ SlidingSheetDialog homeworkView(Homework homework, BuildContext context) {
                 children: [
                   HomeworkDetail(
                     I18n.of(context).homeworkDeadline,
-                    formatDate(context, homework.deadline),
+                    formatDate(context, homework.deadline)!,
                   ),
                 ],
               ),
@@ -96,7 +94,7 @@ SlidingSheetDialog homeworkView(Homework homework, BuildContext context) {
                       data: homework.content,
                       onLinkTap: (url, ctx, attr, elem) async {
                         await FlutterWebBrowser.openWebPage(
-                          url: url,
+                          url: url!,
                           customTabsOptions: CustomTabsOptions(
                             toolbarColor: app.settings.theme.backgroundColor,
                             showTitle: true,

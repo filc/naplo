@@ -14,7 +14,7 @@ import 'package:share/share.dart';
 
 // Copied from message/view, rewritten to work with homework attachments.
 class AttachmentTile extends StatefulWidget {
-  AttachmentTile(this.attachment, {Key key}) : super(key: key);
+  AttachmentTile(this.attachment);
 
   final HomeworkAttachment attachment;
 
@@ -23,7 +23,7 @@ class AttachmentTile extends StatefulWidget {
 }
 
 class _AttachmentTileState extends State<AttachmentTile> {
-  Uint8List data;
+  Uint8List? data;
 
   isImage(HomeworkAttachment attachment) {
     return attachment.name.endsWith(".jpg") ||
@@ -39,7 +39,7 @@ class _AttachmentTileState extends State<AttachmentTile> {
     if (isImage(attachment)) {
       app.user.kreta
           .downloadHomeworkAttachment(this.widget.attachment)
-          .then((var d) {
+          .then((d) {
         setState(() {
           data = d;
         });
@@ -55,20 +55,20 @@ class _AttachmentTileState extends State<AttachmentTile> {
       String dir = (await getTemporaryDirectory()).path;
       print(dir);
       File temp = new File('$dir/temp.file.' + attachment.name);
-      await temp.writeAsBytes(data);
+      await temp.writeAsBytes(data!);
       await Share.shareFiles(['$dir/temp.file.' + attachment.name]);
       temp.delete();
     }
 
     handleSave() async {
-      saveAttachment(attachment, data, context: context)
-          .then((String f) => OpenFile.open(f));
+      saveAttachment(attachment, data!, context: context)
+          .then((String? f) => OpenFile.open(f));
     }
 
     openImage() {
       Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
           builder: (context) => ImageViewer(
-              imageProvider: MemoryImage(data),
+              imageProvider: MemoryImage(data!),
               shareHandler: handleShare,
               downloadHandler: handleSave)));
     }
@@ -85,8 +85,8 @@ class _AttachmentTileState extends State<AttachmentTile> {
         ),
         onPressed: () {
           if (data != null) {
-            saveAttachment(attachment, data, context: context)
-                .then((String f) => OpenFile.open(f));
+            saveAttachment(attachment, data!, context: context)
+                .then((String? f) => OpenFile.open(f));
           } else {
             downloadAttachment(attachment, context: context);
           }
@@ -106,7 +106,7 @@ class _AttachmentTileState extends State<AttachmentTile> {
                                   child: Material(
                                     child: InkWell(
                                       child: Ink.image(
-                                        image: MemoryImage(data),
+                                        image: MemoryImage(data!),
                                         fit: BoxFit.cover,
                                       ),
                                       borderRadius: BorderRadius.circular(12.0),
@@ -155,10 +155,10 @@ class _AttachmentTileState extends State<AttachmentTile> {
   }
 }
 
-Future<String> saveAttachment(
+Future<String?> saveAttachment(
   HomeworkAttachment attachment,
   Uint8List data, {
-  @required BuildContext context,
+  required BuildContext context,
 }) async {
   try {
     String downloads;
@@ -169,42 +169,36 @@ Future<String> saveAttachment(
       downloads = (await getTemporaryDirectory()).path;
     }
 
-    if (data != null) {
-      var filePath = downloads + "/" + attachment.name;
-      if (app.debugMode) print("INFO: Saved file: " + filePath);
-      if (await StorageController.writeFile(filePath, data)) {
-        print("INFO: Downloaded " + attachment.name);
-        return filePath;
-      } else {
-        throw "Storage Permission denied";
-      }
+    var filePath = downloads + "/" + attachment.name;
+    if (app.debugMode) print("INFO: Saved file: " + filePath);
+    if (await StorageController.writeFile(filePath, data)) {
+      print("INFO: Downloaded " + attachment.name);
+      return filePath;
     } else {
-      throw "Cannot write null to file";
+      throw "Storage Permission denied";
     }
   } catch (error) {
     print("ERROR: HomeworkView.downloadAttachment: " + error.toString());
-    if (context != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            I18n.of(context).messageAttachmentFailed,
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.red,
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          I18n.of(context).messageAttachmentFailed,
+          style: TextStyle(color: Colors.white),
         ),
-      );
-    }
+        backgroundColor: Colors.red,
+      ),
+    );
     return null;
   }
 }
 
 Future downloadAttachment(
   HomeworkAttachment attachment, {
-  @required BuildContext context,
+  required BuildContext context,
 }) async {
   var data = await app.user.kreta.downloadHomeworkAttachment(attachment);
-  saveAttachment(attachment, data, context: context).then(
-    (String f) => OpenFile.open(f).then((result) {
+  saveAttachment(attachment, data!, context: context).then(
+    (String? f) => OpenFile.open(f).then((result) {
       if (result.type != ResultType.done) {
         print("ERROR: HomeworkView.downloadAttachment: " + result.message);
         Navigator.pop(context);
