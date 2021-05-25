@@ -7,17 +7,15 @@ import 'package:filcnaplo/ui/pages/messages/message/view.dart';
 
 class MessageCard extends BaseCard {
   final Message message;
-  final Key key;
   final DateTime compare;
-  final updateCallback;
+  final Function()? updateCallback;
 
-  MessageCard(this.message, this.updateCallback, {this.compare, this.key});
+  MessageCard(this.message, this.updateCallback, {required this.compare})
+      : super(compare: compare);
 
   @override
   Widget build(BuildContext context) {
-    return BaseCard(
-      key: key,
-      compare: compare,
+    return BaseCardWidget(
       child: GestureDetector(
         child: Container(
           child: MessageTile(message),

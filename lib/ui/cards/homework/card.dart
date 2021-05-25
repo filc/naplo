@@ -5,16 +5,13 @@ import 'package:filcnaplo/data/models/homework.dart';
 
 class HomeworkCard extends BaseCard {
   final Homework homework;
-  final Key key;
   final DateTime compare;
 
-  HomeworkCard(this.homework, {this.compare, this.key});
+  HomeworkCard(this.homework, {required this.compare}) : super(compare: compare);
 
   @override
   Widget build(BuildContext context) {
-    return BaseCard(
-      key: key,
-      compare: compare,
+    return BaseCardWidget(
       child: HomeworkTile(homework),
     );
   }

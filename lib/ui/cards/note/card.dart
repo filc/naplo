@@ -3,19 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:filcnaplo/ui/cards/base.dart';
 import 'package:filcnaplo/data/models/note.dart';
 
-
 class NoteCard extends BaseCard {
   final Note note;
-  final Key key;
   final DateTime compare;
 
-  NoteCard(this.note, {this.compare, this.key});
+  NoteCard(this.note, {required this.compare}) : super(compare: compare);
 
   @override
   Widget build(BuildContext context) {
-    return BaseCard(
-      key: key,
-      compare: compare,
+    return BaseCardWidget(
       child: NoteTile(note),
     );
   }

@@ -28,7 +28,7 @@ class MessageTile extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(left: 8.0),
-            child: Text(formatDate(context, message.date)),
+            child: Text(formatDate(context, message.date)!),
           ),
         ],
       ),

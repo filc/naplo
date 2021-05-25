@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:tinycolor/tinycolor.dart';
 
-class BaseCard extends StatelessWidget {
+abstract class BaseCard extends StatelessWidget {
+  final DateTime compare;
+
+  BaseCard({required this.compare});
+}
+
+class BaseCardWidget extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry? padding;
-  final DateTime compare;
   final Color color;
   final bool gradient;
 
-  BaseCard({
+  BaseCardWidget({
     required this.child,
     this.padding,
-    required this.compare,
-    required this.color,
+    this.color = Colors.transparent,
     this.gradient = false,
   });
 

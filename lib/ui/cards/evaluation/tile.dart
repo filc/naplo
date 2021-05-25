@@ -8,7 +8,7 @@ import 'package:filcnaplo/ui/pages/evaluations/grades/view.dart';
 
 class EvaluationTile extends StatelessWidget {
   final Evaluation evaluation;
-  final Function deleteCallback;
+  final Function(Evaluation)? deleteCallback;
 
   EvaluationTile(this.evaluation, {this.deleteCallback});
 
@@ -20,31 +20,29 @@ class EvaluationTile extends StatelessWidget {
         ? evaluation.description != ""
             ? capital(evaluation.description)
             : capital(evaluation.mode != null
-                    ? evaluation.mode.description
+                    ? evaluation.mode!.description
                     : evaluation.value.valueName.split("(")[0]) +
                 " " +
                 (evaluation.value.weight != 100
                     ? evaluation.value.weight.toString() + "%"
                     : "")
         : capital(evaluation.subject != null
-            ? evaluation.subject.name
+            ? evaluation.subject!.name
             : I18n.of(context).unknown);
 
     String subtitle = evaluation.type == EvaluationType.midYear
         ? capital(evaluation.subject != null
-                ? evaluation.subject.name
+                ? evaluation.subject!.name
                 : I18n.of(context).unknown) +
             (evaluation.description != ""
                 ? (evaluation.mode != null
                     ? "\n" +
-                        evaluation.mode.description +
+                        evaluation.mode!.description +
                         " " +
                         (evaluation.value.weight != 100
                             ? evaluation.value.weight.toString() + "%"
                             : "")
-                    : evaluation.form != null
-                        ? "\n" + evaluation.form
-                        : "")
+                    : "\n" + evaluation.form)
                 : "")
         : evaluation.value.valueName.split("(")[0];
 
@@ -80,7 +78,7 @@ class EvaluationTile extends StatelessWidget {
                                       evaluation.description == "Dicséret"
                                   ? "*"
                                   : "")))
-                          : evaluation.value.shortName ?? "?",
+                          : evaluation.value.shortName,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 38.0,
@@ -90,7 +88,7 @@ class EvaluationTile extends StatelessWidget {
                             ? app.settings.appColor
                             : evaluation.value.value != 0 &&
                                     evaluation.evaluationType != null &&
-                                    evaluation.evaluationType.name ==
+                                    evaluation.evaluationType!.name ==
                                         "Szazalekos"
                                 ? null
                                 : app.theme.evalColors[
@@ -98,7 +96,7 @@ class EvaluationTile extends StatelessWidget {
                       ),
                     ),
                     evaluation.evaluationType != null &&
-                            evaluation.evaluationType.name == "Szazalekos"
+                            evaluation.evaluationType!.name == "Szazalekos"
                         ? Text("%",
                             style: TextStyle(
                               fontFamily: "GoogleSans",
@@ -133,7 +131,7 @@ class EvaluationTile extends StatelessWidget {
                   : evaluation.date != null
                       ? Padding(
                           padding: EdgeInsets.only(left: 8.0),
-                          child: Text(formatDate(context, evaluation.date)),
+                          child: Text(formatDate(context, evaluation.date)!),
                         )
                       : Container(),
             ],
@@ -152,7 +150,7 @@ class EvaluationTile extends StatelessWidget {
                   color: Colors.red,
                   tooltip: I18n.of(context).tooltipGhostRemove,
                   onPressed: () {
-                    if (deleteCallback != null) deleteCallback(evaluation);
+                    deleteCallback!(evaluation);
                   })
               : null,
         ),

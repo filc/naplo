@@ -36,18 +36,18 @@ class AbsenceTile extends StatelessWidget {
                 child: Row(
               children: [
                 Text(
-                  absence.type.description,
+                  absence.type!.description,
                 ),
                 Flexible(
                   child: Container(
-                    child: Text(" • " + absence.mode.description,
+                    child: Text(" • " + absence.mode!.description,
                         maxLines: 1,
                         softWrap: false,
                         style: TextStyle(
                             //Copied directly from ListTile source code, same as subtitle
                             fontSize:
-                                Theme.of(context).textTheme.bodyText2.fontSize,
-                            color: Theme.of(context).textTheme.caption.color),
+                                Theme.of(context).textTheme.bodyText2!.fontSize,
+                            color: Theme.of(context).textTheme.caption!.color),
                         overflow: TextOverflow.fade),
                   ),
                 ),
@@ -55,7 +55,7 @@ class AbsenceTile extends StatelessWidget {
             )),
             Padding(
               padding: EdgeInsets.only(left: 8.0),
-              child: Text(formatDate(context, absence.submitDate)),
+              child: Text(formatDate(context, absence.submitDate)!),
             ),
           ],
         ),
@@ -70,13 +70,13 @@ class AbsenceTile extends StatelessWidget {
                         child: Text(
                           absence.lessonIndex.toString() + ".",
                           style: TextStyle(
-                              color: Theme.of(context).textTheme.caption.color,
+                              color: Theme.of(context).textTheme.caption!.color,
                               fontWeight: FontWeight.bold),
                         ),
                       )
                     : Container(),
                 Text(
-                  capital(absence.subject.name),
+                  capital(absence.subject!.name),
                   maxLines: 2,
                   softWrap: false,
                   overflow: TextOverflow.fade,
@@ -84,11 +84,11 @@ class AbsenceTile extends StatelessWidget {
               ],
             ),
             Text(capital(DateFormat("EEEE", app.settings.locale.toString())
-                    .format(absence.date)) +
-                (absence.date
+                    .format(absence.date!)) +
+                (absence.date!
                         .isAfter(DateTime.now().subtract(Duration(days: 6)))
                     ? ""
-                    : (" " + formatDate(context, absence.date)))),
+                    : (" " + formatDate(context, absence.date)!))),
           ],
         ),
       ),

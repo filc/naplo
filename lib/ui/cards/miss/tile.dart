@@ -18,7 +18,7 @@ class MissTile extends StatelessWidget {
         height: 46.0,
         alignment: Alignment.center,
         child: Icon(
-            miss.type.name == "HaziFeladatHiany"
+            miss.type!.name == "HaziFeladatHiany"
                 ? FeatherIcons.home
                 : FeatherIcons.bookOpen,
             color: app.settings.appColor,
@@ -28,14 +28,14 @@ class MissTile extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              miss.type.description,
+              miss.type!.description,
               softWrap: false,
               overflow: TextOverflow.fade,
             ),
           ),
           Padding(
             padding: EdgeInsets.only(left: 8.0),
-            child: Text(formatDate(context, miss.submitDate)),
+            child: Text(formatDate(context, miss.submitDate)!),
           ),
         ],
       ),

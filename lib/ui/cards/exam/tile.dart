@@ -27,10 +27,10 @@ class ExamTile extends StatelessWidget {
           height: 46.0,
           alignment: Alignment.center,
           child: Icon(
-            exam.writeDate.isAfter(DateTime.now())
+            exam.writeDate!.isAfter(DateTime.now())
                 ? FeatherIcons.edit
                 : FeatherIcons.checkSquare,
-            color: exam.writeDate.isAfter(DateTime.now())
+            color: exam.writeDate!.isAfter(DateTime.now())
                 ? app.settings.appColor
                 : Colors.green,
           ),
@@ -39,14 +39,14 @@ class ExamTile extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                exam.mode.description,
+                exam.mode!.description,
                 softWrap: false,
                 overflow: TextOverflow.fade,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 8.0),
-              child: Text(formatDate(context, exam.date)),
+              child: Text(formatDate(context, exam.date)!),
             ),
           ],
         ),

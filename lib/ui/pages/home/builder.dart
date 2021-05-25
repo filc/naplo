@@ -11,9 +11,9 @@ import 'package:filcnaplo/ui/cards/note/card.dart';
 import 'package:flutter/material.dart';
 
 class FeedBuilder {
-  final Function callback;
+  final Function()? callback;
 
-  FeedBuilder({@required this.callback});
+  FeedBuilder({this.callback});
 
   List<Widget> elements = [];
 
@@ -24,13 +24,11 @@ class FeedBuilder {
     app.user.sync.messages.inbox.forEach((message) => cards.add(MessageCard(
           message,
           callback,
-          key: Key(message.messageId.toString()),
-          compare: message.date,
+          compare: message.date ?? DateTime(0),
         )));
     app.user.sync.note.notes.forEach((note) => cards.add(NoteCard(
           note,
-          key: Key(note.id),
-          compare: note.date,
+          compare: note.date ?? DateTime(0),
         )));
 
     List<List<Evaluation>> finalEvals = [[], [], [], [], [], [], [], []];
@@ -38,8 +36,7 @@ class FeedBuilder {
       if (evaluation.type == EvaluationType.midYear) {
         cards.add(EvaluationCard(
           evaluation,
-          key: Key(evaluation.id),
-          compare: evaluation.date,
+          compare: evaluation.date ?? DateTime(0),
         ));
       } else {
         //! Subtract one: type enum 0th index is midYear, for which no finalCard exists.
@@ -49,8 +46,7 @@ class FeedBuilder {
     finalEvals.where((element) => element.isNotEmpty).forEach((list) {
       cards.add(FinalCard(
         list,
-        key: Key(list.first.id),
-        compare: list.first.date,
+        compare: list.first.date ?? DateTime(0),
       ));
     });
 
@@ -58,22 +54,19 @@ class FeedBuilder {
         .where((e) => e.state != "Igazolt")
         .forEach((absence) => cards.add(AbsenceCard(
               absence,
-              key: Key(absence.id.toString()),
-              compare: absence.submitDate,
+              compare: absence.submitDate ?? DateTime(0),
             )));
     app.user.sync.homework.homework
-        .where((homework) => homework.deadline.isAfter(DateTime.now()))
+        .where((homework) => homework.deadline!.isAfter(DateTime.now()))
         .forEach((homework) => cards.add(HomeworkCard(
               homework,
-              key: Key(homework.id.toString()),
-              compare: homework.date,
+              compare: homework.date ?? DateTime(0),
             )));
     app.user.sync.exam.exams
-        .where((exam) => exam.writeDate.isAfter(DateTime.now()))
+        .where((exam) => exam.writeDate!.isAfter(DateTime.now()))
         .forEach((exam) => cards.add(ExamCard(
               exam,
-              key: Key(exam.id.toString()),
-              compare: exam.date,
+              compare: exam.date ?? DateTime(0),
             )));
 
     cards.sort((a, b) => -a.compare.compareTo(b.compare));

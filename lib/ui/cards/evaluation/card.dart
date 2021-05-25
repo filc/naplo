@@ -5,19 +5,16 @@ import 'package:filcnaplo/data/models/evaluation.dart';
 
 class EvaluationCard extends BaseCard {
   final Evaluation evaluation;
-  final Key key;
   final DateTime compare;
 
-  EvaluationCard(this.evaluation, {this.key, this.compare});
+  EvaluationCard(this.evaluation, {required this.compare}) : super(compare: compare);
 
   @override
   Widget build(BuildContext context) {
-    return BaseCard(
-      key: key,
-      compare: compare,
+    return BaseCardWidget(
       padding: evaluation.description != "" &&
               evaluation.mode != null &&
-              evaluation.mode.description != ""
+              evaluation.mode!.description != ""
           ? EdgeInsets.all(12)
           : EdgeInsets.symmetric(horizontal: 12.0),
       child: EvaluationTile(evaluation),

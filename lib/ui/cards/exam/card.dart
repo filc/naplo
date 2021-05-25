@@ -5,16 +5,13 @@ import 'package:filcnaplo/data/models/exam.dart';
 
 class ExamCard extends BaseCard {
   final Exam exam;
-  final Key key;
   final DateTime compare;
 
-  ExamCard(this.exam, {this.compare, this.key});
+  ExamCard(this.exam, {required this.compare}) : super(compare: compare);
 
   @override
   Widget build(BuildContext context) {
-    return BaseCard(
-      key: key,
-      compare: compare,
+    return BaseCardWidget(
       child: ExamTile(exam),
     );
   }

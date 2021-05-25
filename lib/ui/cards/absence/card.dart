@@ -5,16 +5,13 @@ import 'package:filcnaplo/data/models/absence.dart';
 
 class AbsenceCard extends BaseCard {
   final Absence absence;
-  final Key key;
   final DateTime compare;
 
-  AbsenceCard(this.absence, {this.compare, this.key});
+  AbsenceCard(this.absence, {required this.compare}) : super(compare: compare);
 
   @override
   Widget build(BuildContext context) {
-    return BaseCard(
-      key: key,
-      compare: compare,
+    return BaseCardWidget(
       child: Container(
         child: AbsenceTile(absence),
       ),

@@ -40,7 +40,7 @@ class HomeworkTile extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(left: 8.0),
-              child: Text(formatDate(context, homework.date)),
+              child: Text(formatDate(context, homework.date)!),
             ),
           ],
         ),

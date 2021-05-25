@@ -14,8 +14,8 @@ class NoteTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: (note.type.name == "HaziFeladatHiany" ||
-              note.type.name == "Felszereleshiany")
+      child: (note.type!.name == "HaziFeladatHiany" ||
+              note.type!.name == "Felszereleshiany")
           ? MissTile(note)
           : ListTile(
               contentPadding: EdgeInsets.zero,
@@ -35,7 +35,7 @@ class NoteTile extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 8.0),
-                    child: Text(formatDate(context, note.date)),
+                    child: Text(formatDate(context, note.date)!),
                   ),
                 ],
               ),

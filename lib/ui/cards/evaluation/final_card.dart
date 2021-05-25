@@ -11,14 +11,12 @@ import 'package:filcnaplo/data/models/evaluation.dart';
 
 class FinalCard extends BaseCard {
   final List<Evaluation> evals;
-  final Key key;
   final DateTime compare;
 
   FinalCard(
     this.evals, {
-    this.key,
-    this.compare,
-  });
+    required this.compare,
+  }) : super(compare: compare);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +65,7 @@ class FinalCard extends BaseCard {
 
     return GestureDetector(
       onTap: onTap,
-      child: BaseCard(
+      child: BaseCardWidget(
         color: getAverageColor(finalAvg),
         gradient: true,
         padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
@@ -104,7 +102,7 @@ class FinalCard extends BaseCard {
                       amountPlural(I18n.of(context).grade,
                           I18n.of(context).evaluations, evals.length),
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.bodyText2.fontSize,
+                      fontSize: Theme.of(context).textTheme.bodyText2!.fontSize,
                       color: secondary),
                   softWrap: false,
                   overflow: TextOverflow.fade)
