@@ -66,19 +66,8 @@ dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/icon.png
-    - assets/logo.png
-    - assets/page1.png
-    - assets/page2.png
-    - assets/page3.png
-    - assets/page4.png
-    - assets/wave1.png
-    - assets/wave2.png
-    - assets/wave3.png
-    - assets/wave4.png
-    - assets/Roboto-Regular.ttf
-    - assets/discord-simple-logo.png
-
+    - assets/
+    
   fonts:
     - family: GoogleSans
       fonts:

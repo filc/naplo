@@ -79,8 +79,7 @@ class Lesson {
     String groupName =
         json["OsztalyCsoport"] != null ? json["OsztalyCsoport"]["Nev"] : null;
     String name = json["Nev"] ?? "";
-    bool isEmpty =
-        type != null ? type.name == 'UresOra' : json['isEmpty'] ?? false;
+    bool isEmpty = json['isEmpty'] ?? false;
 
     return Lesson(
       status,
