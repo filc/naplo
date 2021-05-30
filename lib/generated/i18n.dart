@@ -160,8 +160,8 @@ class I18n implements WidgetsLocalizations {
   String get dateWeekPrev => "előző hét";
   /// "következő hét"
   String get dateWeekNext => "következő hét";
-  /// "Mostani hét"
-  String get dateWeekCurrent => "Mostani hét";
+  /// "Ugrás a jelenlegi hétre"
+  String get dateJumpToCurrent => "Ugrás a jelenlegi hétre";
   /// "jan"
   String get dateJan => "jan";
   /// "feb"
@@ -956,9 +956,9 @@ class _I18n_en_US extends I18n {
   /// "next week"
   @override
   String get dateWeekNext => "next week";
-  /// "Current week"
+  /// "Jump to current week"
   @override
-  String get dateWeekCurrent => "Current week";
+  String get dateJumpToCurrent => "Jump to current week";
   /// "jan"
   @override
   String get dateJan => "jan";
@@ -2044,9 +2044,6 @@ class _I18n_de_DE extends I18n {
   /// "nächste Woche"
   @override
   String get dateWeekNext => "nächste Woche";
-  /// "Jetzige Woche"
-  @override
-  String get dateWeekCurrent => "Jetzige Woche";
   /// "jan"
   @override
   String get dateJan => "jan";

@@ -7,6 +7,7 @@ import 'package:filcnaplo/ui/pages/planner/timetable/builder.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/day.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/day_tab.dart';
 import 'package:filcnaplo/ui/pages/planner/timetable/week.dart';
+import 'package:filcnaplo/utils/colors.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:flutter/material.dart';
 
@@ -148,7 +149,7 @@ class _TimetableFrameState extends State<TimetableFrame>
                       changeWeek(_timetableBuilder.getCurrentWeek());
                     },
                     child: Tooltip(
-                      message: I18n.of(context).dateWeekCurrent,
+                      message: I18n.of(context).dateJumpToCurrent,
                       child: Text(
                         (selectedWeek + 1).toString() +
                             ". " +
@@ -165,7 +166,7 @@ class _TimetableFrameState extends State<TimetableFrame>
                         overflow: TextOverflow.fade,
                         maxLines: 1,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: textColor(Theme.of(context).backgroundColor),
                           fontWeight: FontWeight.normal,
                         ),
                       ),
