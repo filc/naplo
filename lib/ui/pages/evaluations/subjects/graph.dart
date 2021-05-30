@@ -27,7 +27,11 @@ class _SubjectGraphState extends State<SubjectGraph> {
     List<Evaluation> data = widget.data
         .where((evaluation) => evaluation.value.weight != 0)
         .where((evaluation) => evaluation.type == EvaluationType.midYear)
-        .where((evaluation) => evaluation.evaluationType.name == "Osztalyzat")
+        .where(
+          (evaluation) =>
+              evaluation.evaluationType.name == "Osztalyzat" ||
+              evaluation.id.contains("temp"),
+        )
         .toList();
 
     // Calculate average
