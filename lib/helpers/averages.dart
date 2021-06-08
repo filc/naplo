@@ -50,7 +50,8 @@ List<SubjectAverage> calculateSubjectAverages() {
   return averages;
 }
 
-double averageEvals(List<Evaluation> evals, {bool finalAvg = false}) {
+double averageEvals(List<Evaluation> evals,
+    {bool finalAvg = false, bool weightless = false}) {
   double average = 0.0;
 
   List<String> ignoreInFinal = ["5,SzorgalomErtek", "4,MagatartasErtek"];
@@ -61,12 +62,13 @@ double averageEvals(List<Evaluation> evals, {bool finalAvg = false}) {
         (ignoreInFinal.contains(element.evaluationType.id)));
 
   evals.forEach((e) {
-    average += e.value.value * ((finalAvg ? 100 : e.value.weight) / 100);
+    average +=
+        e.value.value * ((finalAvg || weightless ? 100 : e.value.weight) / 100);
   });
 
   average = average /
       evals
-          .map((e) => (finalAvg ? 100 : e.value.weight) / 100)
+          .map((e) => (finalAvg || weightless ? 100 : e.value.weight) / 100)
           .fold(0.0, (a, b) => a + b);
 
   return average.isNaN ? 0.0 : average;

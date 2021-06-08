@@ -42,7 +42,8 @@ class _SubjectGraphState extends State<SubjectGraph> {
         .toList();
 
     // Calculate average
-    double average = averageEvals(data);
+    double average = averageEvals(data,
+        weightless: data.every((element) => element.value.weight == 0));
 
     // Calculate graph color
     Color averagecolor = average >= 1 && average <= 5
