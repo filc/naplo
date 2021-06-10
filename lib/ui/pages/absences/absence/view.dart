@@ -26,7 +26,9 @@ class AbsenceView extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(absence.teacher,
-                      softWrap: false, overflow: TextOverflow.fade),
+                      softWrap: true,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis),
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 12.0),

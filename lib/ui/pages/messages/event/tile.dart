@@ -15,8 +15,8 @@ class EventTile extends StatelessWidget {
       child: ListTile(
         title: Row(children: [
           Expanded(
-            child:
-                Text(event.title, softWrap: false, overflow: TextOverflow.fade),
+            child: Text(event.title,
+                softWrap: true, overflow: TextOverflow.ellipsis),
           ),
           Text(formatDate(context, event.start)),
         ]),
